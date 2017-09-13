@@ -1,7 +1,8 @@
 package tdk.technion.spanlib;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.*;
 
 /**
  * Created by omishali on 30/04/2017.
@@ -10,21 +11,10 @@ public class SpannedDocument {
     private Word[] words;
     private int minimalSpanSize = 1;
     private int maximalSpanSize = 1;
-    private List<List<Span>> allSpans = new ArrayList<List<Span>>(); // position 0 holds all getSpans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
+    private List<List<Span>> allSpans = new ArrayList<List<Span>>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
+    private List<List<Span>> spansByWords; // position 0 holds all spans that contain word 0, position 1 holds all spans that contain word 1, etc. Why? for efficient implementation of getSpans(int wordIndex)
     private List<SpanTagger> taggers = new ArrayList<SpanTagger>();
     private List<SpanManipulation> manipulations = new ArrayList<SpanManipulation>();
-
-    /**
-     * This constructor creates all spans of 1-word size. For
-     * setting other span sizes
-     * use a different constructor.
-     * O(N)
-     * @param text textual content of the document
-     */
-    public SpannedDocument(String text) {
-        breakTextToWords(text);
-        createAllSpans();
-    }
 
     /**
      * This constructor creates all spans from minimalSpanSize size
@@ -36,7 +26,9 @@ public class SpannedDocument {
         this.minimalSpanSize = minimalSpanSize;
         this.maximalSpanSize = maximalSpanSize;
         breakTextToWords(text);
+        spansByWords = new ArrayList<>(words.length);
         createAllSpans();
+        createSpansByWords();
     }
 
     /**
@@ -64,6 +56,10 @@ public class SpannedDocument {
             throw new DocumentException("Word index " + i + " out of range");
 
         return words[i];
+    }
+
+    public List<Word> getWords() {
+        return Arrays.asList(words);
     }
 
     /**
@@ -185,6 +181,44 @@ public class SpannedDocument {
         for (int i = 0; i < words.length - spanLength + 1; i++) {
             result.add(createSpan(i, i + spanLength - 1));
         }
+        return result;
+    }
+
+    private void createSpansByWords() {
+        // first fill-in spansByWords with an empty list for each word
+        for (Word w : getWords())
+            spansByWords.add(new ArrayList<>());
+
+        for (Span s : getAllSpans()) {
+            int curr = s.getStart();
+            int end = s.getEnd();
+            while (curr <= end) {
+                spansByWords.get(curr).add(s);
+                curr++;
+            }
+        }
+    }
+
+    /**
+     * Return spans that contain s.
+     * Note: Span s itself will not be in the returned set.
+     * @param s
+     * @return
+     */
+    public List<Span> getContainingSpans(Span s) {
+        List<Span> result = new ArrayList<>();
+        int curr = s.getStart();
+        int end = s.getEnd();
+
+        result.addAll(spansByWords.get(curr));
+        curr++;
+
+        while (curr <= end) {
+            result = (List<Span>) CollectionUtils.intersection(result, spansByWords.get(curr));
+            curr++;
+        }
+
+        result.remove(s);
         return result;
     }
 }

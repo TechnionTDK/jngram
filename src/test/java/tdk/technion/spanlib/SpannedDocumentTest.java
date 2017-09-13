@@ -138,6 +138,17 @@ public class SpannedDocumentTest {
         assertEquals(getList("jbr:person-rabbi"), s.getTags());
     }
 
+    @Test
+    public void testGetContainingSpans() {
+        Span s = doc.getSpan(0, 1);
+        assertEquals(4, doc.getContainingSpans(s).size());
+
+        //System.out.println(doc.getContainingSpans(s));
+
+        s = doc.getSpan(1, 2);
+        assertEquals(7, doc.getContainingSpans(s).size());
+    }
+
     private List<String> getList(String... args) {
         return Arrays.asList(args);
     }

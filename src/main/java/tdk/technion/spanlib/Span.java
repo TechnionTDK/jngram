@@ -52,8 +52,20 @@ public class Span {
         return result.toString().trim();
     }
 
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
     public List<String> getTags() {
         return tags;
+    }
+
+    public void clearTags() {
+        tags.clear();
     }
 
     public void addTags(List<String> tags) {
@@ -62,5 +74,10 @@ public class Span {
 
     public void removeTags(List<String> tags) {
         this.tags.removeAll(tags);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStart() + ", " + getEnd() + "]";
     }
 }
