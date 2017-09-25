@@ -2,7 +2,7 @@ package spanlib;
 
 import org.junit.Before;
 import org.junit.Test;
-import tdk.technion.spanlib.manipulations.MergeSiblingSpans;
+import spanlib.manipulations.MergeSiblingSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;

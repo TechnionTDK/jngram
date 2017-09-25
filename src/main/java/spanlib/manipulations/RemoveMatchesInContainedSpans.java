@@ -1,4 +1,4 @@
-package tdk.technion.spanlib.manipulations;
+package spanlib.manipulations;
 
 import spanlib.Span;
 import spanlib.SpanManipulation;

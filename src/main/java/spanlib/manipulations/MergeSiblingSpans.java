@@ -1,4 +1,4 @@
-package tdk.technion.spanlib.manipulations;
+package spanlib.manipulations;
 
 import org.apache.commons.collections4.CollectionUtils;
 import spanlib.Span;
