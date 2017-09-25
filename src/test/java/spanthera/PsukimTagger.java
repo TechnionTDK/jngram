@@ -1,7 +1,4 @@
-package spanlib;
-
-import spanlib.Span;
-import spanlib.SpanTagger;
+package spanthera;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package spanlib;
+package spanthera;
 
 import org.junit.Before;
 import org.junit.Test;
-import spanlib.manipulations.MergeSiblingSpans;
-import spanlib.manipulations.RemoveMatchesInContainedSpans;
+import spanthera.manipulations.MergeSiblingSpans;
+import spanthera.manipulations.RemoveMatchesInContainedSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;

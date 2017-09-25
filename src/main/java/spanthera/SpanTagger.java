@@ -1,4 +1,4 @@
-package spanlib;
+package spanthera;
 
 import java.util.List;
 

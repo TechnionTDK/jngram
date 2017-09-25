@@ -1,9 +1,9 @@
-package spanlib.manipulations;
+package spanthera.manipulations;
 
 import org.apache.commons.collections4.CollectionUtils;
-import spanlib.Span;
-import spanlib.SpanManipulation;
-import spanlib.SpannedDocument;
+import spanthera.Span;
+import spanthera.SpanManipulation;
+import spanthera.SpannedDocument;
 
 import java.util.HashMap;
 import java.util.List;

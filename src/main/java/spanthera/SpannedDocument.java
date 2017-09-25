@@ -1,4 +1,4 @@
-package spanlib;
+package spanthera;
 
 import org.apache.commons.collections4.CollectionUtils;
 

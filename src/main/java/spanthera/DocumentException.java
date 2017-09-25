@@ -1,4 +1,4 @@
-package spanlib;
+package spanthera;
 
 /**
  * Created by omishali on 30/04/2017.

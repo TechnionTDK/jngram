@@ -1,8 +1,8 @@
-package spanlib.manipulations;
+package spanthera.manipulations;
 
-import spanlib.Span;
-import spanlib.SpanManipulation;
-import spanlib.SpannedDocument;
+import spanthera.Span;
+import spanthera.SpanManipulation;
+import spanthera.SpannedDocument;
 
 import java.util.List;
 

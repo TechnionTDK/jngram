@@ -1,8 +1,8 @@
-package spanlib;
+package spanthera;
 
 import org.junit.Before;
 import org.junit.Test;
-import spanlib.manipulations.MergeSiblingSpans;
+import spanthera.manipulations.MergeSiblingSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
