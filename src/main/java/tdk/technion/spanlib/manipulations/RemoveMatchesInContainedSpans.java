@@ -1,8 +1,8 @@
 package tdk.technion.spanlib.manipulations;
 
-import tdk.technion.spanlib.Span;
-import tdk.technion.spanlib.SpanManipulation;
-import tdk.technion.spanlib.SpannedDocument;
+import spanlib.Span;
+import spanlib.SpanManipulation;
+import spanlib.SpannedDocument;
 
 import java.util.List;
 

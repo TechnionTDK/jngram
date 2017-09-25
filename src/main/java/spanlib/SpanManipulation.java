@@ -1,4 +1,4 @@
-package tdk.technion.spanlib;
+package spanlib;
 
 /**
  * Created by omishali on 04/09/2017.

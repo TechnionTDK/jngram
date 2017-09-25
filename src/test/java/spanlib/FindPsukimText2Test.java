@@ -1,4 +1,4 @@
-package tdk.technion.spanlib;
+package spanlib;
 
 import org.junit.Before;
 import org.junit.Test;

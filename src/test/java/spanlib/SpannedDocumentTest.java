@@ -1,7 +1,10 @@
-package tdk.technion.spanlib;
+package spanlib;
 
 import org.junit.Before;
 import org.junit.Test;
+import spanlib.Span;
+import spanlib.SpanTagger;
+import spanlib.SpannedDocument;
 
 import java.util.ArrayList;
 import java.util.Arrays;

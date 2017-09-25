@@ -1,4 +1,4 @@
-package tdk.technion.spanlib;
+package spanlib;
 
 import org.apache.commons.collections4.CollectionUtils;
 

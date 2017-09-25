@@ -1,7 +1,9 @@
-package tdk.technion.spanlib;
+package spanlib;
+
+import spanlib.Span;
+import spanlib.SpanTagger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
