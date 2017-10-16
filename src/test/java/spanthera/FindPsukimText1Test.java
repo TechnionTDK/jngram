@@ -1,5 +1,6 @@
 package spanthera;
 
+import apps.jbsmekorot.PsukimTagger;
 import org.junit.Before;
 import org.junit.Test;
 import spanthera.manipulations.MergeSiblingSpans;
@@ -14,8 +15,8 @@ import static org.junit.Assert.*;
  */
 public class FindPsukimText1Test {
     SpannedDocument doc;
-    private String text = "קוץ ודרדר לא נאמר אלא קוץ ודרדר תצמיח לך ולא עוד אלא תצמיח לך ואכלת את עשב השדה";
-    private String uri = "jbr:tanach-1-3-18";
+    private String text = "וקוץ ודרדר לא נאמר אלא וקוץ ודרדר תצמיח לך ולא עוד אלא תצמיח לך ואכלת את עשב השדה";
+    private String uri = "jbr:text-tanach-1-3-18";
 
     @Before
     public void before() {
@@ -33,18 +34,16 @@ public class FindPsukimText1Test {
         assertEquals(getList(uri), doc.getSpan(6, 7).getTags());
         assertEquals(getList(uri), doc.getSpan(7, 8).getTags());
         assertEquals(getList(uri), doc.getSpan(12, 13).getTags());
-        assertEquals(getList(uri), doc.getSpan(13, 14).getTags());
-        assertEquals(getList(uri), doc.getSpan(14, 15).getTags());
-        assertEquals(getList(uri), doc.getSpan(15, 16).getTags());
-        assertEquals(getList(uri), doc.getSpan(16, 17).getTags());
+        assertTrue(doc.getSpan(13, 14).getTags().contains(uri));
+        assertTrue(doc.getSpan(14, 15).getTags().contains(uri));
+        assertTrue(doc.getSpan(15, 16).getTags().contains(uri));
+        assertTrue(doc.getSpan(16, 17).getTags().contains(uri));
 
         // check that irrelevant spans of size 2 are not tagged
         assertEquals(getEmptyList(), doc.getSpan(1, 2).getTags());
         assertEquals(getEmptyList(), doc.getSpan(2, 3).getTags());
         assertEquals(getEmptyList(), doc.getSpan(3, 4).getTags());
         assertEquals(getEmptyList(), doc.getSpan(4, 5).getTags());
-        assertEquals(getEmptyList(), doc.getSpan(8, 9).getTags());
-        assertEquals(getEmptyList(), doc.getSpan(9, 10).getTags());
         assertEquals(getEmptyList(), doc.getSpan(10, 11).getTags());
         assertEquals(getEmptyList(), doc.getSpan(11, 12).getTags());
     }

@@ -221,4 +221,16 @@ public class SpannedDocument {
         result.remove(s);
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer result = new StringBuffer();
+        for (List<Span> spans : allSpans) {
+            result.append("LENGTH: " + spans.get(0).size() + "\n");
+            for (Span s : spans)
+                if(s.getTags().size() > 0)
+                    result.append(s.toString() + "\n");
+        }
+        return result.toString();
+    }
 }

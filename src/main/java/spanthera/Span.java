@@ -1,6 +1,7 @@
 package spanthera;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,6 +65,11 @@ public class Span {
         return tags;
     }
 
+    public List<String> getSortedTags() {
+        Collections.sort(tags);
+        return tags;
+    }
+
     public void clearTags() {
         tags.clear();
     }
@@ -78,6 +84,14 @@ public class Span {
 
     @Override
     public String toString() {
-        return "[" + getStart() + ", " + getEnd() + "]";
+        StringBuffer result = new StringBuffer();
+        result.append("[" + getStart() + ", " + getEnd() + "]" + " ");
+        if (tags.size() > 0) {
+            result.append("tags: ");
+            for (String tag : tags) {
+                result.append(tag + ", ");
+            }
+        }
+        return result.toString();
     }
 }
