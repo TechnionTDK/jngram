@@ -1,7 +1,5 @@
 package apps.jbsmekorot;
 
-import apps.jbsmekorot.FilterTagsFromSmallSpans;
-import apps.jbsmekorot.PsukimTagger;
 import org.junit.Before;
 import org.junit.Test;
 import spanthera.SpannedDocument;
@@ -59,7 +57,8 @@ public class FindPsukimRabaEster7_9 {
     public void testFinal() {
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveMatchesInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSmallSpans()).manipulate();
+        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
+        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
 
         // span3
         assertEquals(getList("jbr:text-tanach-1-22-13"), doc.getSpan(115, 117).getSortedTags());
@@ -82,17 +81,6 @@ public class FindPsukimRabaEster7_9 {
 
         // span9
         assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 76).getSortedTags());
-    }
-
-    @Test
-    public void testRemoveTagsFromSmallSpans() {
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveMatchesInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSmallSpans()).manipulate();
-
-        // test that span-2 are all empty
-        //assertEquals(getEmptyList(), doc.getSpan(58, 59).getSortedTags());
-
     }
 
     /**

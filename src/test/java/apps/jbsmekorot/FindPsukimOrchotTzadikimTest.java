@@ -1,7 +1,5 @@
 package apps.jbsmekorot;
 
-import apps.jbsmekorot.PsukimTagger;
-import apps.jbsmekorot.FilterTagsFromSmallSpans;
 import org.junit.*;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
@@ -155,7 +153,8 @@ public class FindPsukimOrchotTzadikimTest {
     public void testRemoveTagsFromSmallSpans() {
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveMatchesInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSmallSpans()).manipulate();
+        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
+        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
 
         // test that span-2 are all empty
         assertEquals(getEmptyList(), doc.getSpan(58, 59).getSortedTags());

@@ -82,6 +82,10 @@ public class Span {
         this.tags.removeAll(tags);
     }
 
+    public void removeTag(String tag) {
+        this.tags.remove(tag);
+    }
+
     @Override
     public String toString() {
         StringBuffer result = new StringBuffer();

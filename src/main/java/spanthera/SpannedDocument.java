@@ -13,6 +13,7 @@ public class SpannedDocument {
     private int maximalSpanSize = 1;
     private List<List<Span>> allSpans = new ArrayList<List<Span>>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
     private List<List<Span>> spansByWords; // position 0 holds all spans that contain word 0, position 1 holds all spans that contain word 1, etc. Why? for efficient implementation of getSpans(int wordIndex)
+    private Map<String, List<Span>> tagSpanIndex = new HashMap<>(); // holds mappings from tag to spans. For boosting method getSpans(tag). Note: is created by demand!
     private List<SpanTagger> taggers = new ArrayList<SpanTagger>();
     private List<SpanManipulation> manipulations = new ArrayList<SpanManipulation>();
 
@@ -29,6 +30,40 @@ public class SpannedDocument {
         spansByWords = new ArrayList<>(words.length);
         createAllSpans();
         createSpansByWords();
+    }
+
+    /**
+     * Returns the spans having the given tag.
+     * ~O(1) - based on tagSpanIndex.
+     * Note: createTagSpanIndex() should be called before.
+     * @param tag
+     * @return
+     */
+    public List<Span> getSpans(String tag) {
+        return tagSpanIndex.get(tag);
+    }
+
+    /**
+     * Note: tagSpanIndex is created only once upon the first call to
+     * this method. More importantly, this data structure is not further updated, i.e.,
+     * if tags are removed from spans, it is not reflected in the data
+     * structure. In case you want to make sure that tagSpanIndex is refreshed, you should call
+     * clearTagSpanIndex and then createTagSpanIndex.
+     */
+    public void createTagSpanIndex() {
+        if (!tagSpanIndex.isEmpty())
+            return;
+
+        // see https://stackoverflow.com/questions/3019376/shortcut-for-adding-to-list-in-a-hashmap
+        for (Span s : getAllSpans()) {
+            for (String tag : s.getTags()) {
+                tagSpanIndex.computeIfAbsent(tag, v -> new ArrayList<>()).add(s); // JAVA 8!
+            }
+        }
+    }
+
+    public void clearTagsSpanIndex() {
+        tagSpanIndex.clear();
     }
 
     /**
