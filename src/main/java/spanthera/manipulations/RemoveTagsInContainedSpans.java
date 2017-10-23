@@ -11,7 +11,7 @@ import java.util.List;
  * For spans s1 s2, if s1 is contained in s2 AND s2 has any tags, then remove all tags
  * from s1.
  */
-public class RemoveMatchesInContainedSpans implements SpanManipulation {
+public class RemoveTagsInContainedSpans implements SpanManipulation {
     @Override
     public void manipulate(SpannedDocument doc) {
         for (Span s1 : doc.getAllSpans()) {

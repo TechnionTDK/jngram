@@ -3,7 +3,7 @@ package apps.jbsmekorot;
 import org.junit.*;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveMatchesInContainedSpans;
+import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,7 +103,7 @@ public class FindPsukimOrchotTzadikimTest {
     @Test
     public void testRemoveMatchesInContainedSpans() {
         doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveMatchesInContainedSpans()).manipulate();
+        doc.add(new RemoveTagsInContainedSpans()).manipulate();
 
         // after applying the Remove manipulation we expext the URIs matched
         // for span [51,52] [52,53] to be totally removed!
@@ -152,7 +152,7 @@ public class FindPsukimOrchotTzadikimTest {
     @Test
     public void testRemoveTagsFromSmallSpans() {
         doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveMatchesInContainedSpans()).manipulate();
+        doc.add(new RemoveTagsInContainedSpans()).manipulate();
         doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
         doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
 

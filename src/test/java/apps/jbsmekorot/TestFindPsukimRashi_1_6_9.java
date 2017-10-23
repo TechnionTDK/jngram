@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveMatchesInContainedSpans;
+import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class TestFindPsukimRashi_1_6_9 {
     @Test
     public void testFinal() {
         doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveMatchesInContainedSpans()).manipulate();
+        doc.add(new RemoveTagsInContainedSpans()).manipulate();
         doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
         doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
 

@@ -4,7 +4,7 @@ import org.apache.lucene.document.Document;
 import org.junit.*;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveMatchesInContainedSpans;
+import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class JbsIndexShell {
         doc = new SpannedDocument(textRaba_39_9, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveMatchesInContainedSpans()).manipulate();
+        doc.add(new RemoveTagsInContainedSpans()).manipulate();
         doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
         doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
 
