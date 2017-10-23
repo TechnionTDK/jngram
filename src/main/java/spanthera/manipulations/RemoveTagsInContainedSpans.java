@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by omishali on 12/09/2017.
- * For spans s1 s2, if s1 containedIn s2 && s2 has any matches, then remove all matches
+ * For spans s1 s2, if s1 is contained in s2 AND s2 has any tags, then remove all tags
  * from s1.
  */
 public class RemoveMatchesInContainedSpans implements SpanManipulation {
