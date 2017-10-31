@@ -36,7 +36,7 @@ public class PsukimTagger implements SpanTagger {
         return s.size() == 2;
     }
 
-    private String format(String s) {
+    public String format(String s) {
         // note the difference between replace and replaceAll https://stackoverflow.com/questions/10827872/difference-between-string-replace-and-replaceall\// should use replaceAll for entire words!!
         // see https://stackoverflow.com/questions/3223791/how-to-replace-all-occurences-of-a-word-in-a-string-with-another-word-in-java
         String result = s.replace("\"", "").

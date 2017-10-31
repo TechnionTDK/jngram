@@ -23,8 +23,6 @@ public class FindPsukimOrchotTzadikimTest {
     public void before() {
         // we create a document with spans of size 2-8
         doc = new SpannedDocument(text, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
-        // we tag the uri "jbr:text-tanach-1-3-18" to spans of size 2 (that's how PsukimTagger is implemented)
-        doc.add(new PsukimTagger()).tag();
     }
 
     @Test
@@ -34,6 +32,8 @@ public class FindPsukimOrchotTzadikimTest {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.add(new PsukimTagger()).tag();
+
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(10, 11).getSortedTags());
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(11, 12).getSortedTags());
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(12, 13).getSortedTags());
@@ -63,6 +63,7 @@ public class FindPsukimOrchotTzadikimTest {
 
     @Test
     public void testTagsAfterMerge() {
+        doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(10, 13).getSortedTags());
@@ -102,6 +103,7 @@ public class FindPsukimOrchotTzadikimTest {
 
     @Test
     public void testRemoveMatchesInContainedSpans() {
+        doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveTagsInContainedSpans()).manipulate();
 
@@ -150,11 +152,8 @@ public class FindPsukimOrchotTzadikimTest {
     }
 
     @Test
-    public void testRemoveTagsFromSmallSpans() {
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveTagsInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
-        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
+    public void testFinal() {
+        JbsMekorot.findPsukim(doc);
 
         // test that span-2 are all empty
         assertEquals(getEmptyList(), doc.getSpan(58, 59).getSortedTags());

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FilterTagsFromSpansSize2 extends FilterTagsManipulation {
     private static final int MANY_TAGS = 2;
-    private static final int CERTAIN_LENGTH = 3;
+    private static final int CERTAIN_LENGTH = 4;
 
     public FilterTagsFromSpansSize2(SpannedDocument doc) {
         doc.clearTagsSpanIndex();

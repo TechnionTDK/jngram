@@ -23,7 +23,6 @@ public class TestFindPsukimMitzvot_1_1 {
     @Before
     public void before() {
         doc = new SpannedDocument(text, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
-        doc.add(new PsukimTagger()).tag();
     }
 
     @Test
@@ -33,11 +32,13 @@ public class TestFindPsukimMitzvot_1_1 {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.add(new PsukimTagger()).tag();
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 69).getSortedTags());
     }
 
     @Test
     public void testTagsAfterMerge() {
+        doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 76).getSortedTags());
@@ -45,13 +46,11 @@ public class TestFindPsukimMitzvot_1_1 {
 
     @Test
     public void testFinal() {
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveTagsInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
-        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
+        JbsMekorot.findPsukim(doc);
 
         // span3
-        assertEquals(getList("jbr:text-tanach-27-81-11", "jbr:text-tanach-2-20-2", "jbr:text-tanach-5-5-6"), doc.getSpan(20, 22).getSortedTags());
+        assertEquals(getList("jbr:text-tanach-27-81-11", "jbr:text-tanach-2-20-2", "jbr:text-tanach-5-5-6",
+               "jbr:text-tanach-2-20-5", "jbr:text-tanach-5-5-9"), doc.getSpan(20, 22).getSortedTags());
 
         // span4
         assertEquals(getList("jbr:text-tanach-5-33-4"), doc.getSpan(39, 42).getSortedTags());

@@ -89,7 +89,8 @@ public class Span {
     @Override
     public String toString() {
         StringBuffer result = new StringBuffer();
-        result.append("[" + getStart() + ", " + getEnd() + "]" + " ");
+        result.append("[" + getStart() + ", " + getEnd() + "]" + "\n");
+        result.append("(" + text() + ")" + "\n");
         if (tags.size() > 0) {
             result.append("tags: ");
             for (String tag : tags) {

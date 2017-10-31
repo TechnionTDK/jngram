@@ -25,8 +25,6 @@ public class FindPsukimRabaEster7_9 {
     public void before() {
         // we create a document with spans of size 2-8
         doc = new SpannedDocument(text, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
-        // we tag the uri "jbr:text-tanach-1-3-18" to spans of size 2 (that's how PsukimTagger is implemented)
-        doc.add(new PsukimTagger()).tag();
     }
 
     @Test
@@ -36,6 +34,8 @@ public class FindPsukimRabaEster7_9 {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.add(new PsukimTagger()).tag();
+
         assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 69).getSortedTags());
         assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(69, 70).getSortedTags());
         assertTrue(doc.getSpan(70, 71).getSortedTags().contains("jbr:text-tanach-4-24-1"));
@@ -48,6 +48,7 @@ public class FindPsukimRabaEster7_9 {
 
     @Test
     public void testTagsAfterMerge() {
+        doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 
         assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 76).getSortedTags());
@@ -55,10 +56,7 @@ public class FindPsukimRabaEster7_9 {
 
     @Test
     public void testFinal() {
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveTagsInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
-        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
+        JbsMekorot.findPsukim(doc);
 
         // span3
         assertEquals(getList("jbr:text-tanach-1-22-13"), doc.getSpan(115, 117).getSortedTags());

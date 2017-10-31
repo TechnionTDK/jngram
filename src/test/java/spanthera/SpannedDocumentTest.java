@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 public class SpannedDocumentTest {
     private SpannedDocument doc;
     private String text = "ויאמר משה אל רבי יהודה הנשיא";
+    private String textMitzva_1_1 = "היא הצווי אשר צונו בהאמנת האלהות, והוא שנאמין שיש שם עלה וסבה הוא פועל לכל הנמצאים, והוא אמרו (שמות כ-ב) ''אנכי ה' אלהיך''. ובסוף גמרא מכות (גמרא מכות כג-ב) אמרו תרי''ג מצות נאמרו למשה בסיני, מאי קראה (דברים לג-ד) ''תורה צוה לנו משה'', ר''ל מנין תור''ה. והקשו על זה ואמרו תורת בגימטריא תרי''א הוי, והיה המענה אנכי ולא יהיה מפי הגבורה שמענום. הנה נתבאר לך שאנכי ה' מכלל תרי''ג מצות, והוא צווי באמונת האלהות כמו שבארנו.";
+
     @Before
     public void before() {
         doc = new SpannedDocument(text, 1, 6);
@@ -147,6 +149,11 @@ public class SpannedDocumentTest {
 
         s = doc.getSpan(1, 2);
         assertEquals(7, doc.getContainingSpans(s).size());
+    }
+
+    @Test
+    public void testToJbsJson() {
+
     }
 
     private List<String> getList(String... args) {
