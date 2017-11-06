@@ -3,8 +3,6 @@ package apps.jbsmekorot;
 import org.apache.lucene.document.Document;
 import org.junit.*;
 import spanthera.SpannedDocument;
-import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
  * we will have a real shell...
  * Created by omishali on 03/10/2017.
  */
-public class JbsIndexShell {
+public class JbsShell {
     private JbsTanachIndex index;
     SpannedDocument doc;
     private String textOrchotTzadikim = "האמת. הנשמה נבראת ממקום רוח הקודש, שנאמר (בראשית ב ד): \"ויפח באפיו נשמת חיים\"; ונחצבה ממקום טהרה, ונבראת מזוהר העליון מכסא הכבוד. ואין למעלה במקום קודשי הקודשים שקר, אלא הכל אמת, שנאמר (ירמיהו י י): \"ויי אלהים אמת\". ומצאתי כי כתיב: \"אהיה אשר אהיה\" (שמות ג יד), וכתיב: \"ויי אלהים אמת, הוא אלהים חיים ומלך עולם\" (ירמיהו שם). ועתה יש להודיעך שהקדוש ברוך הוא אלהים אמת: כי תמצא עשרים ואחת פעמים \"אהיה\" שהוא בגימטריא \"אמת\", וגם כן \"אהיה\" בגימטריא עשרים ואחת.";
@@ -34,7 +32,7 @@ public class JbsIndexShell {
 
     @Test
     public void getDocumentByURI() {
-        List<Document> result = index.searchExactInUri("jbr:text-tanach-3-2-8");
+        List<Document> result = index.searchExactInUri("jbr:text-tanach-27-109-14");
         index.printDocs(result);
     }
 
@@ -47,11 +45,14 @@ public class JbsIndexShell {
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(textGevurot_8_long, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textGevurot_8_long, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
         System.out.println(doc.toString());
     }
 
-
+    @Test
+    public void testFindMekorotInDirectory() {
+        //JbsMekorot.findPsukimInDirectory("likuteymoharan");
+    }
 }

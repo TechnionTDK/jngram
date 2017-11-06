@@ -27,6 +27,12 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
 
     @Override
     protected void filterTags(SpannedDocument doc, Span s) {
+        // if the span contains the dot char "." IN THE MIDDLE of it, we clear all tags - we assume that a quotation may not include a dot
+        if (s.text().matches("\\D+\\.\\D+")) {
+            s.clearTags();
+            return;
+        }
+
         List<String> tagsToBeRemoved = new ArrayList<>();
 
         if (s.getTags().size() <= 1) // we keep the tags in case of uniqueness

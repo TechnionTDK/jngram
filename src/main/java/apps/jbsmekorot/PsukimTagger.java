@@ -12,8 +12,6 @@ import java.util.List;
  * Created by omishali on 10/09/2017.
  */
 public class PsukimTagger implements SpanTagger {
-    public static final int MINIMAL_PASUK_LENGTH = 2;
-    public static final int MAXIMAL_PASUK_LENGTH = 14;
 
     private JbsTanachIndex index;
 
@@ -44,7 +42,9 @@ public class PsukimTagger implements SpanTagger {
                 replace(".", "").
                 replace(",", "").
                 replace(":", "").
-                replace("-", "").
+                replace("-", "dash"). // in some texts dash appears as a whole "word" so we want to replace these cases with a special character. If we eliminate it it causes a 3-span to act like a 2-span.
+                replaceAll("\\bdash\\b", "@"). // replace "dash words" with a @ character
+                replace("dash", ""). // remove the rest occurrences.
                 replace("׳", "tag").
                 replace("'", "tag"). // we do this for using \b - word boundaries expectes only word chars and not symbols!
                 replaceAll("\\bיי\\b", "יהוה").
@@ -67,30 +67,5 @@ public class PsukimTagger implements SpanTagger {
 
         //System.out.println(result);
         return result;
-    }
-
-    /**
-     * method format is also based on this method taken from mekorot.lucene project
-     * @param text
-     * @return
-     */
-    private String cleanText(String text) {
-        //text = text.replaceAll("'", "' ");
-        text = text.replaceAll(" אדני | אדוני", " יהוה "); // not correct.
-        text = text.replaceAll(" ואדני | ואדוני", " ויהוה "); // not correct
-        text = text.replaceAll(" כאדני | כאדוני", " כיהוה "); // not correct
-        text = text.replaceAll("אלוהים", " אלהים "); // not sure
-        text = text.replaceAll("ואלוהים", " ואלהים "); // not sure
-        text = text.replaceAll("כאלוהים", " כאלהים "); // not sure
-        text = text.replaceAll("[.]", " * ");
-        text = text.replaceAll("[()]", " & ");
-        text = text.replaceAll("''", "");
-
-        text = text.replaceAll("[^&\\*\\p{InHebrew}\\s]+", " ");
-        text = text.replaceAll("\\p{M}", ""); // Removes Nikkud
-        text = text.trim().replaceAll(" +", " "); // Removes spaces
-
-    //        text = text.replaceAll("\\s*\\([^\\)]*\\)\\s*", "*");// Remove parentheses and their content
-        return text;
     }
 }

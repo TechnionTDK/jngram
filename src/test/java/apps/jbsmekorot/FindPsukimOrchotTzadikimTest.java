@@ -22,7 +22,7 @@ public class FindPsukimOrchotTzadikimTest {
     @Before
     public void before() {
         // we create a document with spans of size 2-8
-        doc = new SpannedDocument(text, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
     }
 
     @Test

@@ -2,6 +2,7 @@ package spanthera;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ public class SpannedDocument {
     private Word[] words;
     private int minimalSpanSize = 1;
     private int maximalSpanSize = 1;
-    private List<List<Span>> allSpans = new ArrayList<List<Span>>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
+    private List<List<Span>> allSpans = new ArrayList<>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
     private List<List<Span>> spansByWords; // position 0 holds all spans that contain word 0, position 1 holds all spans that contain word 1, etc. Why? for efficient implementation of getSpans(int wordIndex)
     private Map<String, List<Span>> tagSpanIndex = new HashMap<>(); // holds mappings from tag to spans. For boosting method getSpans(tag). Note: is created by demand!
     private List<SpanTagger> taggers = new ArrayList<SpanTagger>();
@@ -31,6 +32,7 @@ public class SpannedDocument {
         createAllSpans();
         createSpansByWords();
     }
+
 
     /**
      * Returns the spans having the given tag.
@@ -261,6 +263,9 @@ public class SpannedDocument {
     public String toString() {
         StringBuffer result = new StringBuffer();
         for (List<Span> spans : allSpans) {
+            if (spans.size() == 0) // for short text we may have List<Span> of size 0 so we must skip or we get an exception.
+                continue;
+
             result.append("LENGTH: " + spans.get(0).size() + "\n");
             for (Span s : spans)
                 if(s.getTags().size() > 0)

@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +23,7 @@ public class FindPsukimRabaEster7_9 {
     @Before
     public void before() {
         // we create a document with spans of size 2-8
-        doc = new SpannedDocument(text, PsukimTagger.MINIMAL_PASUK_LENGTH, PsukimTagger.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
     }
 
     @Test

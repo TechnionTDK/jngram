@@ -1,25 +1,15 @@
-package tools;
+package spanthera;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.*;
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
 import org.apache.lucene.search.spans.SpanNearQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -33,23 +23,29 @@ public abstract class LuceneIndex {
     private IndexWriter writer;
     private static final String ROOT_DIRECTORY = "./tools/luceneIndex/";
 
-    abstract protected String getIndexDirectory();
+    abstract protected String getOutputIndexDirectory();
     abstract protected void createIndex() throws Exception;
     /**
      * To clean the index, just remove its directory. If the directory
      * exists, the index is not recreated.
      * @throws Exception
      */
-    public LuceneIndex() throws Exception {
-        index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getIndexDirectory()));
-        IndexReader reader;
+    public LuceneIndex() {
+
+        IndexReader reader = null;
         try {
+            index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
             reader = DirectoryReader.open(index);
         } catch (IOException e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
-            writer = new IndexWriter(index, config);
-            createIndex();
-            reader = DirectoryReader.open(index);
+            try {
+                writer = new IndexWriter(index, config);
+                createIndex();
+                reader = DirectoryReader.open(index);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+
         }
         indexSearcher = new IndexSearcher(reader);
     }
