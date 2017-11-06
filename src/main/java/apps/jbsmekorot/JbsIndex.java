@@ -59,7 +59,7 @@ public abstract class JbsIndex extends LuceneIndex {
     }
 
     private void insertJsonToIndex(IndexWriter w, String json) throws Exception {
-        String jsonPath = getInputJsonDirectory() + json;
+        String jsonPath = getInputJsonDirectory() + "/" + json;
         JSONObject jsonObject = getJsonObject(jsonPath);
         JSONArray book = (JSONArray) jsonObject.get("subjects");
         for (Object aBook : book) {

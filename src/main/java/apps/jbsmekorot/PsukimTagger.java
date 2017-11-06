@@ -4,7 +4,6 @@ import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanTagger;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,18 +12,16 @@ import java.util.List;
  */
 public class PsukimTagger implements SpanTagger {
 
-    private JbsTanachIndex index;
+    private JbsTanachIndex tanach;
+    private JbsTanachMaleIndex tanachMale;
 
     public PsukimTagger() {
-        try {
-            index = new JbsTanachIndex();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        tanach = new JbsTanachIndex();
+        tanachMale = new JbsTanachMaleIndex();
     }
 
     public List<String> tag(Span s) {
-        List<Document> documents = index.searchExactInText(format(s.text()));
+        List<Document> documents = tanach.searchExactInText(format(s.text()));
         List<String> result = new ArrayList<>();
         for (Document doc : documents)
             result.add(doc.get("uri"));
