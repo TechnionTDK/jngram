@@ -21,6 +21,5 @@ public class TestSpantheraIO {
     public void testReadAllInputJsonsFromFolder() {
         String[] in = SpantheraIO.getJsonsInDir("jbs-text/mishnetorah");
         assertEquals(14, in.length);
-        assertEquals("mishnetorah-1.json", in[0]);
     }
 }
