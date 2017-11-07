@@ -53,6 +53,6 @@ public class JbsShell {
 
     @Test
     public void testFindMekorotInDirectory() {
-        JbsMekorot.findPsukimInDirectory("likuteymoharan");
+        //bsMekorot.findPsukimInDirectory("midbarshur");
     }
 }
