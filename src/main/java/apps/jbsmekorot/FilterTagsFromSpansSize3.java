@@ -14,6 +14,7 @@ import java.util.List;
  * Created by omishali on 15/10/2017.
  */
 public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
+    private static final int CERTAIN_LENGTH = 4;
 
     public FilterTagsFromSpansSize3(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
@@ -48,12 +49,25 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
 
             if (spansWithSameTag.size() == 1)  // only s, no other spans with same tag => remove tag
                 tagsToBeRemoved.add(tag); // if we use s.removeTag(tag) we get a java.util.ConcurrentModificationException
+
+                // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
+            // In other words, we keep the tag only if it also appears in a CERTAIN span
+            else if (!hasTagInCertainLength(spansWithSameTag))
+                tagsToBeRemoved.add(tag);
         }
 
         if (!isSurroundedWithQuotes(s)) // we use "hint". See e.g. test Mitzvot_1_1 span [20,22] that we miss otherwise.
             s.removeTags(tagsToBeRemoved);
 
         // here we may check whether s contains "many" tags (MANY_TAGS)
+    }
+
+    private boolean hasTagInCertainLength(List<Span> spansWithSameTag) {
+        for (Span s : spansWithSameTag)
+            if (s.size() >= CERTAIN_LENGTH)
+                return true;
+
+        return false;
     }
 
     /**

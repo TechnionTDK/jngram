@@ -32,7 +32,7 @@ public class JbsShell {
 
     @Test
     public void getDocumentByURI() {
-        List<Document> result = index.searchExactInUri("jbr:text-tanach-27-109-14");
+        List<Document> result = index.searchExactInUri("jbr:text-tanach-28-1-1");
         index.printDocs(result);
     }
 
@@ -53,6 +53,6 @@ public class JbsShell {
 
     @Test
     public void testFindMekorotInDirectory() {
-        //JbsMekorot.findPsukimInDirectory("likuteymoharan");
+        JbsMekorot.findPsukimInDirectory("likuteymoharan");
     }
 }
