@@ -1,5 +1,6 @@
 package apps.jbsmekorot;
 
+import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
 import spanthera.io.*;
@@ -22,9 +23,8 @@ import static java.lang.System.out;
 public class JbsMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
-    private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git"}));
-    private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{
-            "mesilatyesharim", "mishnetorah"})); // if non-empty, only these directories will be analyzed.
+    private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git", "manual", "tanach"}));
+    private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{})); // if non-empty, only these directories will be analyzed.
     /**
      *
      * @param args arg1: path to input directory, basically it should be a path to "jbs-text"
@@ -36,10 +36,16 @@ public class JbsMekorot {
             exit(0);
         }
 
+        StopWatch timerPerDir = new StopWatch();
+        StopWatch timerTotal = new StopWatch();
+
+        String rootDirPath = args[0];
         String outputDirPath = args[1];
         createFolderIfNotExists(outputDirPath);
 
-        File rootDir = new File(args[0]);
+        timerTotal.start();
+
+        File rootDir = new File(rootDirPath);
         for (File subDir : rootDir.listFiles()) {
             if (!subDir.isDirectory() || ignoreDirs.contains(subDir.getName()))
                 continue;
@@ -53,7 +59,11 @@ public class JbsMekorot {
 
             // we iterate each Json in subdir, search for psukim in it,
             // and get the result as TaggerOutput
-            TaggerOutput output = findPsukimInDirectory(subDir.getName(), args[0]);
+            System.out.println("Analyze " + subDir.getName() + "...");
+            timerPerDir.reset(); timerPerDir.start();
+            TaggerOutput output = findPsukimInDirectory(subDir.getName(), rootDirPath);
+            timerPerDir.stop();
+            System.out.println("TOTAL: " + timerPerDir.toString());
 
             // now we write the result to the output folder
             try {
@@ -64,6 +74,7 @@ public class JbsMekorot {
                 e.printStackTrace();
             }
         }
+        System.out.println("TOTAL TIME: " + timerTotal.toString());
     }
 
     private static void createFolderIfNotExists(String outputDirPath) {
@@ -102,6 +113,12 @@ public class JbsMekorot {
                 TaggedSubject taggedSubject = new TaggedSubject();
                 String text = s.getText();
                 String uri = s.getUri();
+
+                if (text == null || uri == null) {
+                    System.out.println("Subject " + s.getUri() + " has not text or uri " + "(" + name + ")");
+                    continue;
+                }
+
                 SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
                 findPsukim(sd);
                 //System.out.println("===== " + uri + " =====");
@@ -117,7 +134,7 @@ public class JbsMekorot {
                     }
                 }
 
-                System.out.println(taggedSubject.getUri() + "...");
+                //System.out.println(taggedSubject.getUri() + "...");
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
