@@ -7,11 +7,14 @@ import spanthera.manipulations.MergeSiblingSpans;
 import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.exit;
+import static java.lang.System.out;
 
 /**
  * Created by omishali on 23/10/2017.
@@ -20,23 +23,54 @@ public class JbsMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
     private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git"}));
+    private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{
+            "mesilatyesharim", "mishnetorah"})); // if non-empty, only these directories will be analyzed.
     /**
      *
-     * @param args arg1: path to input directory, arg2: path to output directory.
+     * @param args arg1: path to input directory, basically it should be a path to "jbs-text"
+     *             arg2: path to output directory.
      */
     public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("Wrong arguments, should provide 2 arguments.");
             exit(0);
         }
+
         String outputDirPath = args[1];
+        createFolderIfNotExists(outputDirPath);
 
         File rootDir = new File(args[0]);
         for (File subDir : rootDir.listFiles()) {
             if (!subDir.isDirectory() || ignoreDirs.contains(subDir.getName()))
                 continue;
-            System.out.println(subDir.getName());
+            if (includeDirs.size() != 0)
+                if (!includeDirs.contains(subDir.getName()))
+                    continue;
+
+            // now we have a directory that should be analyzed.
+            // First, we create the appropriate output folder
+            createFolderIfNotExists(outputDirPath + "/" + subDir.getName());
+
+            // we iterate each Json in subdir, search for psukim in it,
+            // and get the result as TaggerOutput
+            TaggerOutput output = findPsukimInDirectory(subDir.getName(), args[0]);
+
+            // now we write the result to the output folder
+            try {
+                PrintWriter writer = new PrintWriter(outputDirPath + "/" + subDir.getName() + "/" + subDir.getName() + ".json");
+                writer.println(output.toString());
+                writer.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    private static void createFolderIfNotExists(String outputDirPath) {
+        File dir = new File(outputDirPath);
+        if (dir.isDirectory())
+            return;
+        dir.mkdir();
     }
 
     public static void findPsukim(SpannedDocument doc) {
@@ -54,13 +88,13 @@ public class JbsMekorot {
       * The output jsons go to outputDir/dirName
      * @param dirName
      */
-    public static void findPsukimInDirectory(String dirName, String inputDir, String outputDir) {
+    public static TaggerOutput findPsukimInDirectory(String dirName, String rootDir) {
 
         TaggerOutput outputJson = new TaggerOutput();
-        String[] jsonNames = SpantheraIO.getJsonsInDir(inputDir + dirName);
+        String[] jsonNames = SpantheraIO.getJsonsInDir(rootDir + "/" + dirName);
 
         for (String name : jsonNames) {
-            TaggerInput inputJson = SpantheraIO.readInputJson(inputDir + dirName + "/" + name);
+            TaggerInput inputJson = SpantheraIO.readInputJson(rootDir + "/" + dirName + "/" + name);
             List<Subject> subjects = inputJson.getSubjects();
 
             // a subject denotes a specific text element within the json file
@@ -87,11 +121,11 @@ public class JbsMekorot {
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
-            System.out.println(outputJson.toString());
-
+            //System.out.println(outputJson.toString());
             //System.out.println(subjects.get(0).getUri());
             //System.out.println(subjects.get(0).getText());
         }
+        return outputJson;
     }
 
     public static String format(String s) {
