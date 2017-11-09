@@ -36,11 +36,13 @@ public class JbsMekorot {
             exit(0);
         }
 
+        // init timers to take time measurements
         StopWatch timerPerDir = new StopWatch();
         StopWatch timerTotal = new StopWatch();
 
         String rootDirPath = args[0];
         String outputDirPath = args[1];
+
         createFolderIfNotExists(outputDirPath);
 
         timerTotal.start();
@@ -53,15 +55,18 @@ public class JbsMekorot {
                 if (!includeDirs.contains(subDir.getName()))
                     continue;
 
-            // now we have a directory that should be analyzed.
+            // Now we have a directory that should be analyzed.
+
             // First, we create the appropriate output folder
+            // In this folder we will output a single json file,
+            // regardless of how many jsons the input folder contains.
             createFolderIfNotExists(outputDirPath + "/" + subDir.getName());
 
-            // we iterate each Json in subdir, search for psukim in it,
-            // and get the result as TaggerOutput
             System.out.println("Analyze " + subDir.getName() + "...");
             timerPerDir.reset(); timerPerDir.start();
+
             TaggerOutput output = findPsukimInDirectory(subDir.getName(), rootDirPath);
+
             timerPerDir.stop();
             System.out.println("TOTAL: " + timerPerDir.toString());
 
@@ -74,6 +79,8 @@ public class JbsMekorot {
                 e.printStackTrace();
             }
         }
+
+        // and eventually we print the total execution time
         System.out.println("TOTAL TIME: " + timerTotal.toString());
     }
 
@@ -96,7 +103,8 @@ public class JbsMekorot {
      /**
       * Find psukim in all json files under dirName.
       * dirName is assumed to be the name of a directory right under INPUT_DIR.
-      * The output jsons go to outputDir/dirName
+      * A single json result holds the entire result, no matter hoe many
+      * different jsons the directory contains.
      * @param dirName
      */
     public static TaggerOutput findPsukimInDirectory(String dirName, String rootDir) {

@@ -50,9 +50,4 @@ public class JbsShell {
 
         System.out.println(doc.toString());
     }
-
-    @Test
-    public void testFindMekorotInDirectory() {
-        //bsMekorot.findPsukimInDirectory("midbarshur");
-    }
 }
