@@ -101,6 +101,18 @@ public abstract class LuceneIndex {
         return result;
     }
 
+    protected List<Document> searchFuzzy(String field, String phrase, int maxEdits) throws IOException {
+        String[] terms = phrase.split(" ");
+        SpanQuery[] clauses = new SpanQuery[terms.length];
+        for (int i = 0; i < terms.length; i++) {
+            clauses[i] = new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(field, terms[i]), maxEdits));
+        }
+
+        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
+        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
+        ScoreDoc[] hits = docs.scoreDocs;
+        return getTextList(hits);
+    }
     protected void searchFuzzy(String field, String phrase) throws IOException {
         String[] terms = phrase.split(" ");
         SpanQuery[] clauses = new SpanQuery[terms.length];
@@ -113,7 +125,6 @@ public abstract class LuceneIndex {
         ScoreDoc[] hits = docs.scoreDocs;
         printHits(hits);
     }
-
 
     private void printHits(ScoreDoc[] hits) throws IOException {
         for (int k = 0; k < hits.length; ++k) {

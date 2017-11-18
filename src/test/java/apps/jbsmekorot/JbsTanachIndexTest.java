@@ -26,7 +26,44 @@ public class JbsTanachIndexTest {
 
     @Test
     public void testSearchExact() throws IOException {
-        index.searchExactInText("את ידו");
+        index.searchExactInText("ואת ידו");
+
+    }
+    @Test
+    public void testSearchExactNoEdits() throws IOException {
+        List<Document> res= index.searchExactInText("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל");
+        assertEquals(1, res.size());
+        assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
+        assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
+
+
+    }
+    @Test
+    public void testSearchExactOneEdit() throws IOException {
+        List<Document> res= index.searchExactInText("ואני קרבת אלהים לי טוב שתי באדני יהווה מחסי לספר כל");
+        assertEquals(0, res.size());
+    }
+    @Test
+    public void  testFuzzySearchNoEdit() throws IOException {
+        List<Document> res=index.searchFuzzyInText("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל", 2);
+        assertEquals(1, res.size());
+        assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
+        assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
+    }
+    @Test
+    public void  testFuzzySearchOneEdit() throws IOException {
+        List<Document> res=index.searchFuzzyInText("ואני קרבת אלהים לי טוב שתי באדני יהווה מחסי לספר כל", 2);
+        assertEquals(1, res.size());
+        assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
+        assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
+    }
+    @Test
+    public void  testFuzzySearchTwoEdit() throws IOException {
+        List<Document> res=
+        index.searchFuzzyInText("ואני קרבת אלוהים לי", 1);
+        assertEquals(1, res.size());
+        assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
+        assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
     }
 
     @Test

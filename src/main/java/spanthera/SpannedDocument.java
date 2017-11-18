@@ -2,7 +2,6 @@ package spanthera;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -12,7 +11,7 @@ public class SpannedDocument {
     private Word[] words;
     private int minimalSpanSize = 1;
     private int maximalSpanSize = 1;
-    private List<List<Span>> allSpans = new ArrayList<>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
+    private List<List<Span>> allSpans = new ArrayList<List<Span>>(); // position 0 holds all spans of size minimalSpanSize, position 1 of size minimalSpanSize+1, etc.
     private List<List<Span>> spansByWords; // position 0 holds all spans that contain word 0, position 1 holds all spans that contain word 1, etc. Why? for efficient implementation of getSpans(int wordIndex)
     private Map<String, List<Span>> tagSpanIndex = new HashMap<>(); // holds mappings from tag to spans. For boosting method getSpans(tag). Note: is created by demand!
     private List<SpanTagger> taggers = new ArrayList<SpanTagger>();
@@ -272,5 +271,23 @@ public class SpannedDocument {
                     result.append(s.toString() + "\n");
         }
         return result.toString();
+    }
+
+
+    // this tag is a version that only tags the spans with size  @spanSize
+    // @param  spanSize : the size of the Spans that are going to be tagged. IE SpannedDocument(4) will tag all the spans with size 4
+
+   public SpannedDocument tag(int spanSize) {
+        List<Span> spans= getSpans(spanSize);
+        for (Span s : spans) {
+            for (SpanTagger m : taggers) {
+                if (m.isCandidate(s)) {
+                    List<String> result = m.tag(s);
+                    if (result != null  && result.size()!=0)
+                        s.addTags(result);
+                }
+            }
+        }
+        return this;
     }
 }
