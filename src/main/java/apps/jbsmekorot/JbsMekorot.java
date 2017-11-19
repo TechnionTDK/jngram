@@ -24,7 +24,7 @@ public class JbsMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
     private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git", "manual", "tanach"}));
-    private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{})); // if non-empty, only these directories will be analyzed.
+    private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{"likuteymoharan"})); // if non-empty, only these directories will be analyzed.
     /**
      *
      * @param args arg1: path to input directory, basically it should be a path to "jbs-text"
@@ -118,7 +118,6 @@ public class JbsMekorot {
 
             // a subject denotes a specific text element within the json file
             for(Subject s : subjects) {
-                TaggedSubject taggedSubject = new TaggedSubject();
                 String text = s.getText();
                 String uri = s.getUri();
 
@@ -129,20 +128,7 @@ public class JbsMekorot {
 
                 SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
                 findPsukim(sd);
-                //System.out.println("===== " + uri + " =====");
-                //System.out.println(sd.toString());
-                // now we should output the result to a file & directory...
-                taggedSubject.setUri(uri);
-                for (Span span : sd.getAllSpans()) {
-                    if (span.getTags().size() == 0)
-                        continue;
-                    for (String tag : span.getTags()) {
-                        Tag t = new Tag(span.getStart(), span.getEnd(), tag);
-                        taggedSubject.addTag(t);
-                    }
-                }
-
-                //System.out.println(taggedSubject.getUri() + "...");
+                TaggedSubject taggedSubject = getTaggedSubject(sd, uri);
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
@@ -151,6 +137,21 @@ public class JbsMekorot {
             //System.out.println(subjects.get(0).getText());
         }
         return outputJson;
+    }
+
+    public static TaggedSubject getTaggedSubject(SpannedDocument sd, String uri) {
+        TaggedSubject taggedSubject = new TaggedSubject();
+        taggedSubject.setUri(uri);
+        for (Span span : sd.getAllSpans()) {
+            if (span.getTags().size() == 0)
+                continue;
+            for (String tag : span.getTags()) {
+                Tag t = new Tag(span.getStart(), span.getEnd(), tag);
+                taggedSubject.addTag(t);
+            }
+        }
+
+        return taggedSubject;
     }
 
     public static String format(String s) {
@@ -181,6 +182,7 @@ public class JbsMekorot {
                 replaceAll("\\bאלקים\\b", "אלהים").
                 replaceAll("\\bואלקים\\b", "ואלהים").
                 replaceAll("\\bואלוקים\\b", "ואלהים").
+                replaceAll("\\bאלקיך\\b", "אלהיך").
                 replaceAll("\\bכאלוקים\\b", "כאלהים").
                 replaceAll("\\bכאלקים\\b", "כאלהים").
                 replaceAll("\\bאלקיכם\\b", "אלהיכם").
