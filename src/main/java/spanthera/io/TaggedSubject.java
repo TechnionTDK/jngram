@@ -115,8 +115,11 @@ public class TaggedSubject {
 
     @Override
     public String toString() {
-        return "TaggedSubject{" +
-                "uri='" + uri + '\'' +
-                '}';
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("uri= " + uri + "\n");
+        for (Tag tag : getTags())
+            buffer.append("tag= " + tag + " ");
+
+        return buffer.toString();
     }
 }
