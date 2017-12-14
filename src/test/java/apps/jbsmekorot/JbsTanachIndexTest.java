@@ -67,6 +67,16 @@ public class JbsTanachIndexTest {
     }
 
     @Test
+    public void  testFuzzySearch5() throws IOException {
+        List<Document> res=
+                index.searchFuzzyInText("אל משה", 1);
+        //assertEquals(1, res.size());
+        //assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
+        //assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
+        index.printDocs(res);
+    }
+
+    @Test
     public void testPasuk1() throws IOException {
         List<Document> result = index.searchExactInText("ואני קרבת אלהים לי טוב");
         assertEquals(1, result.size());
