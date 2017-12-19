@@ -6,13 +6,16 @@ import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanTagger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static apps.jbsmekorot.JbsMekorot.format;
 
 public class PsukimTaggerTopDown implements SpanTagger {
 
 
+    private static final int MAXIMUM_PHRASE_LENGHT = 20 ;
     private JbsTanachIndex tanach;
     private JbsTanachMaleIndex tanachMale;
     private Boolean[] textCoveredBySpans;
@@ -34,51 +37,54 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
     @Override
     public List<String> tag(Span s) {
-        List<String> resOfBigSpans= new ArrayList<>();
-        List<String> resOfSmallSpans= new ArrayList<>();
-        if(s.size()>=CERTAIN_LENGTH) tagBigSpan(s, resOfBigSpans);
-        else tagSmallSpan(s, resOfSmallSpans);
-        resOfBigSpans.addAll(resOfSmallSpans);
-        return resOfBigSpans;
+        List<String> res;
+        if(s.size()>=CERTAIN_LENGTH) res= tagBigSpan(s);
+        else res=tagSmallSpan(s);
+        return res;
     }
 
-    private void tagSmallSpan(Span s, List<String> resOfSmallSpans ) {
+    private List<String> tagSmallSpan(Span s ) {
         //we check only 3 and 2 lengths
-        if(s.size()<2) return;
+        if(s.size()<2) return null;
         //now we search in tanach and if we didn't find we search in tanachMale
         String text= format(s.text());
         List<Document> docs= tanach.searchExactInText(text);
         if(docs.size()==0)
             docs= tanachMale.searchExactInText(text);
-        Set<String> result = new HashSet<>();
+        List<String> result = new ArrayList<>();
         for (Document doc : docs)
             result.add(doc.get("uri"));
         //intersecting spans will not be candidates .
         if(result.size() > 0 )
             markSpanSegment(s.getStart(),s.size());
-        resOfSmallSpans.addAll(result);
-
+        return result;
     }
 
-    private void tagBigSpan(Span s,  List<String> resOfBigSpans) {
+    private List<String> tagBigSpan(Span s) {
         String text= format(s.text());
-        List<Document>  docs= tanach.searchExactInText(text);
-        if(docs.size()==0)
-        {
-            docs= tanachMale.searchExactInText(text);
-        }
-        if(docs.size()==0) {
+        List<String> res= new ArrayList<>();
+        List<Document>  docs= new ArrayList<>();//tanach.searchExactInText(text);
+//        if(docs.size()==0)
+//        {
+//            docs= tanachMale.searchExactInText(text);
+//        }
+       // if(docs.size()==0) {
             //we search with Levinstein distance
-            int maxEdits= (int) Math.ceil(0.1*s.size()); // span of size 1-10 1 edit allowed. more that size 10 : 2 edits allowed
-            docs= tanach.searchFuzzyInText(format(s.text()), maxEdits);
-        }
-        Set<String> result = new HashSet<>();
+            int numOfSubs= calculateNumOfSubPhrases(s.text());//(int) Math.ceil(0.1*s.size()); // span of size 1-10 1 edit allowed. more that size 10 : 2 edits allowed
+            docs= tanach.searchFuzzyWholePhraseInText(text, numOfSubs);
+      // }
         for (Document doc : docs)
-            result.add(doc.get("uri"));
+            res.add(doc.get("uri"));
         //intersecting spans will not be candidates .
-        if(result.size() > 0 )
+        if(res.size() > 0 )
             markSpanSegment(s.getStart(),s.size());
-        resOfBigSpans.addAll(result);
+        return res;
+    }
+
+    private int calculateNumOfSubPhrases(String text) {
+        int length= text.length();
+        double frac= ((double)length)/((double)MAXIMUM_PHRASE_LENGHT);
+        return (int)Math.ceil(frac);
     }
 
     @Override

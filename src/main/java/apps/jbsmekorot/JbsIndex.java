@@ -118,6 +118,18 @@ public abstract class JbsIndex extends LuceneIndex {
         return null;
     }
 
+    public List<Document> searchFuzzyWholePhraseInText(String phrase, int numOfSubs){
+        try {
+            return super.searchFuzzyForWholePhrase("text", phrase, numOfSubs);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public void searchFuzzyInText(String phrase){
         try {
             super.searchFuzzy("text", phrase);
