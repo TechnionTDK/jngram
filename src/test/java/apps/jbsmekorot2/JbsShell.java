@@ -51,7 +51,7 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(textRaba_39_1, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textGevurot_8_long, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
         try {
             PrintStream out = new PrintStream( new FileOutputStream("outbottomUp.txt"));
@@ -65,7 +65,7 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocumentTopDown(){
-        doc = new SpannedDocument(textRaba_39_1 ,JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textGevurot_8_long ,JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot2.findPsukimTopDown(doc);
         try {
             PrintStream out = new PrintStream( new FileOutputStream("outTopDown.txt"));
@@ -81,8 +81,9 @@ public class JbsShell {
     public void fuzzySearchTestWIthOneSubPhrase()
     {
         String text= "שמעי בת וראי והטי אזנך ושכחי עמך ובית אביך";
-        JbsTanachIndex tanach = new JbsTanachIndex();
-        List<Document> docs= tanach.searchExactInText(text);
+        //JbsTanachIndex tanachIndex = new JbsTanachIndex();
+        List<Document> docs= index.searchExactInText(text);
+        index.printDocs(docs);
 
     }
 }

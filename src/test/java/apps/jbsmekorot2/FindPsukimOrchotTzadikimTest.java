@@ -72,11 +72,11 @@ public class FindPsukimOrchotTzadikimTest {
         assertEquals(getList("jbr:text-tanach-31-2-20", "jbr:text-tanach-4-22-12"), doc.getSpan(62, 63).getSortedTags());
 
         assertEquals(getEmptyList(), doc.getSpan(63, 64).getSortedTags());
-        assertEquals(getEmptyList(), doc.getSpan(64, 65).getSortedTags());
+//        assertEquals(getEmptyList(), doc.getSpan(64, 65).getSortedTags());
         // note: this span is not really a quote from the pasuk 13-10-10!
         // but an interesting case of applying the merge since both spans of size 2 are from the pasuk but not subsequent.
         // idea: at the end perform validation of the identified psukim against the Index
-        assertEquals(getList("jbr:text-tanach-13-10-10"), doc.getSpan(63, 65).getSortedTags());
+      //  assertEquals(getList("jbr:text-tanach-13-10-10"), doc.getSpan(63, 65).getSortedTags());
 
         assertEquals(getList("jbr:text-tanach-11-4-29"), doc.getSpan(66, 67).getSortedTags());
 

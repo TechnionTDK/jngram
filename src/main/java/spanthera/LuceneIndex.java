@@ -114,53 +114,6 @@ public abstract class LuceneIndex {
         return getTextList(hits);
     }
 
-    public List<Document> searchFuzzyForWholePhrase(String field, String phrase, int numOfSubs) throws IOException {
-        if(phrase.length()<=20) return searchFuzzySmallLength(field, phrase, (int) Math.ceil(0.1*phrase.length()));
-        String[] terms = GetSubPhrases(phrase, numOfSubs);//phrase.split(" ");
-        SpanQuery[] clauses = new SpanQuery[terms.length];
-        for (int i = 0; i < terms.length; i++) {
-            int maxEdits= (int) Math.ceil(0.1*terms[i].length());
-            clauses[i] = new SpanMultiTermQueryWrapper<>
-                    (new FuzzyQuery(new Term(field, terms[i]), Math.min(maxEdits,2)));
-        }
-        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
-        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
-        ScoreDoc[] hits = docs.scoreDocs;
-        return getTextList(hits);
-    }
-
-    private List<Document> searchFuzzySmallLength(String field, String phrase, int maxEdits) throws IOException {
-        SpanQuery[] clauses = new SpanQuery[1];
-        clauses[0]= new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(field,phrase),maxEdits));
-        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
-        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
-        ScoreDoc[] hits = docs.scoreDocs;
-        return getTextList(hits);
-    }
-
-    private String[] GetSubPhrases(String phrase, int numOfSubs) {
-        int lenghtOfeachSub= phrase.length()/numOfSubs;
-        String[] words= phrase.split(" ");
-        int currentLenght= 0;
-        List<String> subPhrases= new ArrayList<>();
-        StringBuilder currSubString= new StringBuilder();
-        for (int i = 0; i< words.length; i++) {
-            currentLenght+=words[i].length();
-            if(currentLenght>lenghtOfeachSub) {
-                subPhrases.add(currSubString.toString());
-                currentLenght=0;
-                currSubString.setLength(0);
-                i--; //we want to get back to the same word because we ignored it.
-                continue;
-            }
-            currSubString.append(i==0 ? words[i] : " " + words[i]);
-        }
-        subPhrases.add(currSubString.toString()); //to add the tail
-        String[] res= new String[subPhrases.size()];
-        res= subPhrases.toArray(res);
-        return res;
-    }
-
     protected void searchFuzzy(String field, String phrase) throws IOException {
         String[] terms = phrase.split(" ");
         SpanQuery[] clauses = new SpanQuery[terms.length];
@@ -185,5 +138,19 @@ public abstract class LuceneIndex {
     public void printDocs(List<Document> docs) {
         for (Document d : docs)
             System.out.println(d.get("uri") + "\t" + d.get("text"));
+    }
+
+    public List<Document> searchFuzzyRestriction(String field, String phrase, int maxEdits, int minEditedWordLength) throws IOException{
+        String[] terms = phrase.split(" ");
+        SpanQuery[] clauses = new SpanQuery[terms.length];
+        for (int i = 0; i < terms.length; i++) {
+            int edits= terms[i].length() >=minEditedWordLength ? maxEdits: 0;
+            clauses[i] = new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(field, terms[i]), edits));
+        }
+
+        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
+        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
+        ScoreDoc[] hits = docs.scoreDocs;
+        return getTextList(hits);
     }
 }

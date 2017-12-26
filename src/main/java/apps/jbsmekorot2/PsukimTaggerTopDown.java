@@ -15,7 +15,9 @@ import static apps.jbsmekorot.JbsMekorot.format;
 public class PsukimTaggerTopDown implements SpanTagger {
 
 
-    private static final int MAXIMUM_PHRASE_LENGHT = 20 ;
+    private static final int MAXIMUM_PHRASE_LENGTH = 20 ;
+    private static final int MIN_EDITED_WORD_LENGTH = 4 ;
+    private static final int MAX_EDITS = 1 ;
     private JbsTanachIndex tanach;
     private JbsTanachMaleIndex tanachMale;
     private Boolean[] textCoveredBySpans;
@@ -63,16 +65,16 @@ public class PsukimTaggerTopDown implements SpanTagger {
     private List<String> tagBigSpan(Span s) {
         String text= format(s.text());
         List<String> res= new ArrayList<>();
-        List<Document>  docs= new ArrayList<>();//tanach.searchExactInText(text);
+        List<Document>  docs= new ArrayList<>();
+        docs= tanach.searchExactInText(text);
 //        if(docs.size()==0)
 //        {
 //            docs= tanachMale.searchExactInText(text);
 //        }
-       // if(docs.size()==0) {
+        if(docs.size()==0) {
             //we search with Levinstein distance
-            int numOfSubs= calculateNumOfSubPhrases(s.text());//(int) Math.ceil(0.1*s.size()); // span of size 1-10 1 edit allowed. more that size 10 : 2 edits allowed
-            docs= tanach.searchFuzzyWholePhraseInText(text, numOfSubs);
-      // }
+            docs= tanach.searchFuzzyInTextRestriction(text, MAX_EDITS,MIN_EDITED_WORD_LENGTH);
+       }
         for (Document doc : docs)
             res.add(doc.get("uri"));
         //intersecting spans will not be candidates .
@@ -83,7 +85,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
     private int calculateNumOfSubPhrases(String text) {
         int length= text.length();
-        double frac= ((double)length)/((double)MAXIMUM_PHRASE_LENGHT);
+        double frac= ((double)length)/((double) MAXIMUM_PHRASE_LENGTH);
         return (int)Math.ceil(frac);
     }
 
