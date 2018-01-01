@@ -28,12 +28,11 @@ public class PsukimTagger implements SpanTagger {
         if (text.split("\\s+").length == 1)
             return new ArrayList<>();
 
+        List<Integer> maxEdits = getMaxEdits(s);
+
         List<Document> docs1;
 
-        if(s.text().length() <= 6)
-            docs1 = tanach.searchExactInText(text);
-        else
-            docs1 = tanach.searchFuzzyInText(text, 1);
+        docs1 = tanach.searchFuzzyInText(text, maxEdits);
         //List<Document> docs1 = tanach.searchExactInText(text);
         //List<Document> docs2 = tanachMale.searchExactInText(text);
         //List<Document> docs2 = tanachMale.searchFuzzyInText(text, 2);
@@ -46,6 +45,28 @@ public class PsukimTagger implements SpanTagger {
 
         return new ArrayList<>(result);
     }
+
+    /**
+     * For each word in the span we return the
+     * number of maxEdits. Basically, the shorter the word the smaller its maxEdit.
+     * @param s
+     * @return
+     */
+    private List<Integer> getMaxEdits(Span s) {
+        List<Integer> maxEdits = new ArrayList<>();
+        String[] words = s.text().split("\\s+");
+        for (int i=0; i<words.length; i++) {
+            if (words[i].length() <= 2)
+                maxEdits.add(0);
+            else if (words[i].length() <= 3)
+                maxEdits.add(1);
+            else
+                maxEdits.add(2);
+        }
+
+        return maxEdits;
+    }
+
     public boolean isCandidate(Span s) {
         return s.size() == 2;
     }

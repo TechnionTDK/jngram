@@ -128,6 +128,17 @@ public abstract class JbsIndex extends LuceneIndex {
         return null;
     }
 
+    public List<Document> searchFuzzyInText(String phrase, List<Integer> maxEdits){
+        try {
+            return super.searchFuzzy("text", phrase, maxEdits);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void searchFuzzyInText(String phrase){
         try {

@@ -26,8 +26,8 @@ public class TestRecallPrecision {
 
         // find psukim in first subject and calculate recall & precision
         SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
-        System.out.println(calc.getRecall(sd));
-        //System.out.println(calc.getPrecision(sd));
+        //System.out.println(calc.getRecall(sd));
+        System.out.println(calc.getPrecision(sd));
 
 
     }
