@@ -1,5 +1,6 @@
 package apps.jbsmekorot2;
 
+import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
 import org.apache.lucene.document.Document;
@@ -12,7 +13,7 @@ import static apps.jbsmekorot.JbsMekorot.format;
 
 public class PsukimTaggerTopDown implements SpanTagger {
 
-
+    public int maxEdits = 1;
     private JbsTanachIndex tanach;
     private JbsTanachMaleIndex tanachMale;
     private Boolean[] textCoveredBySpans;
@@ -33,13 +34,83 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
     @Override
-    public List<String> tag(Span s) {
-        List<String> resOfBigSpans= new ArrayList<>();
-        List<String> resOfSmallSpans= new ArrayList<>();
-        if(s.size()>=CERTAIN_LENGTH) tagBigSpan(s, resOfBigSpans);
-        else tagSmallSpan(s, resOfSmallSpans);
-        resOfBigSpans.addAll(resOfSmallSpans);
-        return resOfBigSpans;
+//    public List<String> tag(Span s) {
+//        List<String> resOfBigSpans= new ArrayList<>();
+//        List<String> resOfSmallSpans= new ArrayList<>();
+//        if(s.size()>=CERTAIN_LENGTH) tagBigSpan(s, resOfBigSpans);
+//        else tagSmallSpan(s, resOfSmallSpans);
+//        resOfBigSpans.addAll(resOfSmallSpans);
+//        return resOfBigSpans;
+//    }
+    public List<String> tag(Span s){
+        String text= format(s.text());
+        if(s.size() <= JbsMekorot2.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
+            //1. exact in Tanach
+            List<Document>  docs= tanach.searchExactInText(text);
+            if(docs.size()==0){
+                //2. exact in Tanach Male
+                docs= tanachMale.searchExactInText(text);
+                if(docs.size()==0) {
+                    //3. Fuzzy in Tanach
+                    docs= tanach.searchFuzzyInText(format(s.text()), maxEdits);
+                }
+            }
+            List<String> result = new ArrayList<>();
+            for (Document doc : docs)
+                result.add(doc.get("uri"));
+            //intersecting spans will not be candidates .
+            if(result.size() > 0 )
+                markSpanSegment(s.getStart(),s.size());
+
+           return result;
+        }
+        if(s.size() <= Config.SPAN_SIZE_LAYER_1 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_2){
+            //1. exact in Tanach
+            List<Document>  docs= tanach.searchExactInText(text);
+            if(docs.size()==0){
+                //2. exact in Tanach Male
+                docs= tanachMale.searchExactInText(text);
+                if(docs.size()==0) {
+                    //3. Fuzzy in Tanach
+                    docs= tanach.searchFuzzyInText(format(s.text()), maxEdits);
+                }
+            }
+            //filter out tags
+            if(docs.size() >= 2){
+                //filterTagsByContextDistance(docs,Config.NUMBER_OF_TAGS_TO_KEEP);
+            }
+            List<String> result = new ArrayList<>();
+            for (Document doc : docs)
+                result.add(doc.get("uri"));
+            //intersecting spans will not be candidates .
+            if(result.size() > 0 )
+                markSpanSegment(s.getStart(),s.size());
+
+            return result;
+        }
+        if(s.size() <= Config.SPAN_SIZE_LAYER_2 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_3){
+            //1. exact in Tanach
+            List<Document>  docs= tanach.searchExactInText(text);
+            if(docs.size()==0){
+                //2. exact in Tanach Male
+                docs= tanachMale.searchExactInText(text);
+            }
+            //filter out tags
+            if(docs.size() >= 2){
+                //filterTagsByContextDistance(docs,Config.NUMBER_OF_TAGS_TO_KEEP);
+            }
+            List<String> result = new ArrayList<>();
+            for (Document doc : docs)
+                result.add(doc.get("uri"));
+            //intersecting spans will not be candidates .
+            if(result.size() > 0 )
+                markSpanSegment(s.getStart(),s.size());
+
+            return result;
+        }
+
+        System.out.println("span size outside of range\n");
+        return null;
     }
 
     private void tagSmallSpan(Span s, List<String> resOfSmallSpans ) {
@@ -69,7 +140,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
         }
         if(docs.size()==0) {
             //we search with Levinstein distance
-            int maxEdits= (int) Math.ceil(0.1*s.size()); // span of size 1-10 1 edit allowed. more that size 10 : 2 edits allowed
+            //int maxEdits= (int) Math.ceil(0.1*s.size()); // span of size 1-10 1 edit allowed. more that size 10 : 2 edits allowed
+
             docs= tanach.searchFuzzyInText(format(s.text()), maxEdits);
         }
         Set<String> result = new HashSet<>();
