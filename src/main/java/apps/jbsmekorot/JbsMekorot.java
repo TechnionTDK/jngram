@@ -118,17 +118,8 @@ public class JbsMekorot {
 
             // a subject denotes a specific text element within the json file
             for(Subject s : subjects) {
-                String text = s.getText();
-                String uri = s.getUri();
-
-                if (text == null || uri == null) {
-                    System.out.println("Subject " + s.getUri() + " has not text or uri " + "(" + name + ")");
-                    continue;
-                }
-
-                SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-                findPsukim(sd);
-                TaggedSubject taggedSubject = getTaggedSubject(sd, uri);
+                SpannedDocument sd = findPsukimInSubject(s);
+                TaggedSubject taggedSubject = getTaggedSubject(sd, s.getUri());
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
@@ -137,6 +128,21 @@ public class JbsMekorot {
             //System.out.println(subjects.get(0).getText());
         }
         return outputJson;
+    }
+
+    public static SpannedDocument findPsukimInSubject(Subject s) {
+        String text = s.getText();
+        String uri = s.getUri();
+
+        if (text == null || uri == null) {
+            System.out.println("Subject " + s.getUri() + " has not text or uri");
+            return null;
+        }
+
+        SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+        findPsukim(sd);
+
+        return sd;
     }
 
     public static TaggedSubject getTaggedSubject(SpannedDocument sd, String uri) {
@@ -158,10 +164,12 @@ public class JbsMekorot {
         // note the difference between replace and replaceAll https://stackoverflow.com/questions/10827872/difference-between-string-replace-and-replaceall\// should use replaceAll for entire words!!
         // see https://stackoverflow.com/questions/3223791/how-to-replace-all-occurences-of-a-word-in-a-string-with-another-word-in-java
         String result = s.replace("\"", "").
+                replace("%", ""). // special char we use for labeling the data
                 replace(";", "").
                 replace(".", "").
                 replace(",", "").
                 replace(":", "").
+                replace("?", "").
                 replace("-", "dash"). // in some texts dash appears as a whole "word" so we want to replace these cases with a special character. If we eliminate it it causes a 3-span to act like a 2-span.
                 replaceAll("\\bdash\\b", "@"). // replace "dash words" with a @ character
                 replace("dash", ""). // remove the rest occurrences.
@@ -185,6 +193,7 @@ public class JbsMekorot {
                 replaceAll("\\bאלקיך\\b", "אלהיך").
                 replaceAll("\\bכאלוקים\\b", "כאלהים").
                 replaceAll("\\bכאלקים\\b", "כאלהים").
+                replaceAll("\\bלאלקים\\b", "לאלהים").
                 replaceAll("\\bאלקיכם\\b", "אלהיכם").
 
                 replace("tag", ""); // should be applied at the end since previous replacements dependes on ' (tag) char

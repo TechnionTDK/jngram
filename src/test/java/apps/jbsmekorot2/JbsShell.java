@@ -51,10 +51,10 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(textGevurot_8, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textGevurot_8_long, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
         try {
-            PrintStream out = new PrintStream( new FileOutputStream("C:\\Users\\Gary\\OneDrive\\SemesterA2018\\project\\outButtomUp.txt"));
+            PrintStream out = new PrintStream( new FileOutputStream("outbottomUp.txt"));
             System.setOut(out);
 
         } catch (FileNotFoundException e) {
@@ -65,15 +65,25 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocumentTopDown(){
-        doc = new SpannedDocument(textGevurot_8, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textGevurot_8_long ,JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot2.findPsukimTopDown(doc);
         try {
-            PrintStream out = new PrintStream( new FileOutputStream("C:\\Users\\Gary\\OneDrive\\SemesterA2018\\project\\outTopDown.txt"));
+            PrintStream out = new PrintStream( new FileOutputStream("outTopDown.txt"));
             System.setOut(out);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         System.out.println(doc.toString());
+    }
+
+    @Test
+    public void fuzzySearchTestWIthOneSubPhrase()
+    {
+        String text= "שמעי בת וראי והטי אזנך ושכחי עמך ובית אביך";
+        //JbsTanachIndex tanachIndex = new JbsTanachIndex();
+        List<Document> docs= index.searchExactInText(text);
+        index.printDocs(docs);
+
     }
 }

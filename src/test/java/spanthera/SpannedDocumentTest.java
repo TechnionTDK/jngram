@@ -152,8 +152,13 @@ public class SpannedDocumentTest {
     }
 
     @Test
-    public void testToJbsJson() {
+    public void testSpanSeparators() {
+        // do we separate spans also by \n and not only spaces?
+        String text1 = "ויאמר משה אל\nרבי יהודה הנשיא";
+        doc = new SpannedDocument(text1, 1, 3);
 
+        List<Span> spans = doc.getSpans(1);
+        assertEquals(6, spans.size());
     }
 
     private List<String> getList(String... args) {
