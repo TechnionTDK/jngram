@@ -152,4 +152,18 @@ public abstract class LuceneIndex {
         for (Document d : docs)
             System.out.println(d.get("uri") + "\t" + d.get("text"));
     }
+
+    public List<Document> searchFuzzyRestriction(String field, String phrase, int maxEdits, int minEditedWordLength) throws IOException{
+        String[] terms = phrase.split(" ");
+        SpanQuery[] clauses = new SpanQuery[terms.length];
+        for (int i = 0; i < terms.length; i++) {
+            int edits= terms[i].length() >=minEditedWordLength ? maxEdits: 0;
+            clauses[i] = new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(field, terms[i]), edits));
+        }
+
+        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
+        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
+        ScoreDoc[] hits = docs.scoreDocs;
+        return getTextList(hits);
+    }
 }
