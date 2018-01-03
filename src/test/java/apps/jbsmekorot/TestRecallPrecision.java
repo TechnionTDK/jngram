@@ -35,8 +35,8 @@ public class TestRecallPrecision {
         System.out.print("Precision: ");
         System.out.println(precisionResult.getPrecision());
 
-        //recallResult.printMissedSpans();
-        //precisionResult.printImpreciseSpans();
+        recallResult.printMissedSpans();
+        precisionResult.printImpreciseSpans();
 
 
     }
