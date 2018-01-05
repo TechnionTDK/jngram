@@ -4,6 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 import spanthera.Span;
 import spanthera.SpannedDocument;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Provides services to calculate recall & precision for psukim detection.
  * It goes like that: identify psukim using one of the labeled data files
@@ -16,10 +19,10 @@ public class RecallPrecision {
     private static final String DOUBLE_LABEL = "%%";
     private static final String SINGLE_LABEL = "%";
 
-    public float getRecall(SpannedDocument sd) {
-        System.out.println("Calculating recall...");
+    public RecallResult getRecall(SpannedDocument sd) {
         float totalLabeledSpans = 0;
         float totalHits = 0;
+        RecallResult result = new RecallResult();
 
         for (Span s : sd.getAllSpans()) {
             if (!isLabeledSpan(s))
@@ -32,8 +35,7 @@ public class RecallPrecision {
                 if (s.getTags().size() >= 1)
                     totalHits++;
                 else { // we missed this span
-                    System.out.println("Missed span:");
-                    System.out.println(s);
+                    result.addMissedSpan(s);
                 }
             }
 
@@ -42,19 +44,14 @@ public class RecallPrecision {
                 if (s.getTags().size() > 2)
                     totalHits++;
                 else { // we missed this span
-                    System.out.println("Missed span:");
-                    System.out.println(s);
+                    result.addMissedSpan(s);
                 }
             }
         }
-        System.out.println("total labeled spans: " + totalLabeledSpans);
-        System.out.println("total hits: " + totalHits);
+        result.setTotalLabeldSpans(totalLabeledSpans);
+        result.setTotalHits(totalHits);
 
-        // in case of no labeled spans we return 100% recall
-        if (totalLabeledSpans == 0)
-            return 1;
-        else
-            return totalHits / totalLabeledSpans;
+        return result;
     }
 
     private boolean isLabeledSpan(Span s) {
@@ -92,10 +89,10 @@ public class RecallPrecision {
         return !isDoubleLabeledSpan(s) && s.text().startsWith(SINGLE_LABEL);
     }
 
-    public float getPrecision(SpannedDocument sd) {
-        System.out.println("Calculating precision...");
+    public PrecisionlResult getPrecision(SpannedDocument sd) {
         float totalLabeledTags = 0;
         float totalTags = 0;
+        PrecisionlResult result = new PrecisionlResult();
 
         for (Span s : sd.getAllSpans()) {
             if (s.getTags().size() == 0)
@@ -106,8 +103,7 @@ public class RecallPrecision {
             // here we have problems with precision,
             // since the span has tags however the span is not labeled.
             if (!isLabeledSpan(s)) {
-                System.out.println("Imprecise span:");
-                System.out.println(s);
+                result.addImpreciseSpan(s);
                 continue;
             }
 
@@ -120,14 +116,92 @@ public class RecallPrecision {
                 totalLabeledTags += 2;
         }
 
-        System.out.println("total labeled tags: " + totalLabeledTags);
-        System.out.println("total tags: " + totalTags);
+        result.setTotalLabeldTags(totalLabeledTags);
+        result.setTotalTags(totalTags);
 
-        // in case of no found tags we return 100% precision
-        if (totalTags == 0)
-            return 1;
-        else
-            return totalLabeledTags / totalTags;
+        return result;
+    }
+
+    public class RecallResult {
+        private float totalLabeledSpans, totalHits;
+
+        public float getTotalLabeldSpans() {
+            return totalLabeledSpans;
+        }
+
+        public void setTotalLabeldSpans(float totalLabeldSpans) {
+            this.totalLabeledSpans = totalLabeldSpans;
+        }
+
+        public float getTotalHits() {
+            return totalHits;
+        }
+
+        public void setTotalHits(float totalHits) {
+            this.totalHits = totalHits;
+        }
+
+        private List<Span> missedSpans = new ArrayList<>();
+
+        public void addMissedSpan(Span s) {
+            missedSpans.add(s);
+        }
+
+        public void printMissedSpans() {
+            for (Span s : missedSpans) {
+                System.out.println("Missed span:");
+                System.out.println(s);
+            }
+        }
+
+        public float getRecall() {
+            // in case of no labeled spans we return 100% recall
+            if (totalLabeledSpans == 0)
+                return 1;
+            else
+                return totalHits / totalLabeledSpans;
+        }
+    }
+
+    public class PrecisionlResult {
+        private float totalLabeledTags, totalTags;
+
+        public float getTotalLabeldTags() {
+            return totalLabeledTags;
+        }
+
+        public void setTotalLabeldTags(float totalLabeldTags) {
+            this.totalLabeledTags = totalLabeldTags;
+        }
+
+        public float getTotalTags() {
+            return totalTags;
+        }
+
+        public void setTotalTags(float totalTags) {
+            this.totalTags = totalTags;
+        }
+
+        private List<Span> impreciseSpans = new ArrayList<>();
+
+        public void addImpreciseSpan(Span s) {
+            impreciseSpans.add(s);
+        }
+
+        public void printImpreciseSpans() {
+            for (Span s : impreciseSpans) {
+                System.out.println("Imprecise span:");
+                System.out.println(s);
+            }
+        }
+
+        public float getPrecision() {
+            // in case of no found tags we return 100% precision
+            if (totalTags == 0)
+                return 1;
+            else
+                return totalLabeledTags / totalTags;
+        }
     }
 
 

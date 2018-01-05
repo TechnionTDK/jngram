@@ -26,8 +26,17 @@ public class TestRecallPrecision {
 
         // find psukim in first subject and calculate recall & precision
         SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
-        //System.out.println(calc.getRecall(sd));
-        System.out.println(calc.getPrecision(sd));
+
+        RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
+        System.out.print("Recall: ");
+        System.out.println(recallResult.getRecall());
+
+        RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sd);
+        System.out.print("Precision: ");
+        System.out.println(precisionResult.getPrecision());
+
+        //recallResult.printMissedSpans();
+        //precisionResult.printImpreciseSpans();
 
 
     }

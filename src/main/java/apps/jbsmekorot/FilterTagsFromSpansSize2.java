@@ -15,6 +15,8 @@ import java.util.List;
 public class FilterTagsFromSpansSize2 extends FilterTagsManipulation {
     private static final int MANY_TAGS = 2;
     private static final int CERTAIN_LENGTH = 4;
+    private static final int CERTAIN_DISTANCE = 70;
+
 
     public FilterTagsFromSpansSize2(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
@@ -36,9 +38,12 @@ public class FilterTagsFromSpansSize2 extends FilterTagsManipulation {
 
             // spansWithSameTag cannot be null since it contains at least s
 
-            if (spansWithSameTag.size() == 1)  // only s, no other spans with same tag => remove tag
+            if (spansWithSameTag.size() == 1) {  // only s, no other spans with same tag => remove tag
                 tagsToBeRemoved.add(tag); // if we use s.removeTag(tag) we get a java.util.ConcurrentModificationException
-            else if (!hasTagInCertainLength(spansWithSameTag)) // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
+                continue;
+            }
+
+            if (!hasTagInCertainLength(spansWithSameTag, s)) // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
                 tagsToBeRemoved.add(tag);
         }
 
@@ -50,6 +55,21 @@ public class FilterTagsFromSpansSize2 extends FilterTagsManipulation {
     private boolean hasTagInCertainLength(List<Span> spansWithSameTag) {
         for (Span s : spansWithSameTag)
             if (s.size() >= CERTAIN_LENGTH)
+                return true;
+
+        return false;
+    }
+
+    // also considers CERTAIN_DISTANCE - we return true if a certain span
+    // exists CERTAIN_DISTANCE words before s
+    private boolean hasTagInCertainLength(List<Span> spansWithSameTag, Span s1) {
+        int location = s1.getStart() - CERTAIN_DISTANCE;
+
+        if (location < 0)
+            return false;
+
+        for (Span s2 : spansWithSameTag)
+            if (s2.size() >= CERTAIN_LENGTH && s2.getStart() >= location && s2.getEnd() < s1.getStart())
                 return true;
 
         return false;
