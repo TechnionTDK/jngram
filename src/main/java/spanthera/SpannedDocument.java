@@ -290,4 +290,14 @@ public class SpannedDocument {
         }
         return this;
     }
+
+    /**
+     * Format the text of each span using the provided formatter.
+     * Formatted text will be available via Span.getTextFormatted.
+     * @param formatter
+     */
+    public void format(SpanFormatter formatter) {
+        for (Span s : getAllSpans())
+            s.setTextFormatted(formatter.format(s));
+    }
 }

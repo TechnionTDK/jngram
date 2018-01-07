@@ -161,8 +161,26 @@ public class SpannedDocumentTest {
         assertEquals(6, spans.size());
     }
 
+    @Test
+    public void testFilterMethod() {
+        SpanFormatter formatter = new SpanFormatter() {
+            @Override
+            public String format(Span s) {
+                String formatted = s.text().replace("ה", "ש");
+                return formatted;
+            }
+        };
+
+        doc.format(formatter);
+        Span s = doc.getSpan(0, 1);
+        assertEquals("ויאמר משש", s.getTextFormatted());
+        s = doc.getSpan(3, 5);
+        assertEquals("רבי ישודש שנשיא", s.getTextFormatted());
+    }
+
     private List<String> getList(String... args) {
         return Arrays.asList(args);
     }
+
 
 }
