@@ -98,6 +98,11 @@ public class JbsMekorot {
             public String format(Span s) {
                 return JbsMekorot.format(s.text());
             }
+
+            @Override
+            public boolean isCandidate(Span s) {
+                return s.size() == 2;
+            }
         });
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();

@@ -9,4 +9,5 @@ package spanthera;
  */
 public interface SpanFormatter {
     public String format(Span s);
+    public boolean isCandidate(Span s);
 }

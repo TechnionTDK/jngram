@@ -169,6 +169,11 @@ public class SpannedDocumentTest {
                 String formatted = s.text().replace("ה", "ש");
                 return formatted;
             }
+
+            @Override
+            public boolean isCandidate(Span s) {
+                return true;
+            }
         };
 
         doc.format(formatter);

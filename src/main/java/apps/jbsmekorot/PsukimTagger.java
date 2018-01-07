@@ -14,11 +14,11 @@ import java.util.regex.Pattern;
 public class PsukimTagger implements SpanTagger {
 
     private JbsTanachIndex tanach;
-    private JbsTanachMaleIndex tanachMale;
+    //private JbsTanachMaleIndex tanachMale;
 
     public PsukimTagger() {
         tanach = new JbsTanachIndex();
-        tanachMale = new JbsTanachMaleIndex();
+        //tanachMale = new JbsTanachMaleIndex();
     }
 
     public List<String> tag(Span s) {
@@ -56,7 +56,7 @@ public class PsukimTagger implements SpanTagger {
      */
     private void formatSpan(Span s) {
         //s.setTextFormatted(format(s.text()));
-        // if the span contains he with geresh, we also provide a (formatted) version with shem adnut.
+        // if the span contains "he" with geresh, we also provide a (formatted) version with shem adnut.
         if (shouldAddShemAdnut(s.text())) {
             String result = s.text().replace("'", "tag").
                     replaceAll("\\bהtag\\b", "אדני");
