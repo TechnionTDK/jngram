@@ -1,13 +1,13 @@
 package spanthera;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by omishali on 30/04/2017.
  */
 public class Span {
+    private Map<String, String> stringExtras = new HashMap<>();
+    private String textFormatted;
     private SpannedDocument doc;
     private int start, end;
     private List<String> tags = new ArrayList<String>();
@@ -28,6 +28,22 @@ public class Span {
         setDoc(document);
         setStart(start);
         setEnd(end);
+    }
+
+    public String getTextFormatted() {
+        return textFormatted;
+    }
+
+    public void setTextFormatted(String textFormatted) {
+        this.textFormatted = textFormatted;
+    }
+
+    public void putExtra(String key, String value) {
+        stringExtras.put(key, value);
+    }
+
+    public String getStringExtra(String key) {
+        return stringExtras.get(key);
     }
 
     /**

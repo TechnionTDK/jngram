@@ -2,6 +2,7 @@ package apps.jbsmekorot;
 
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
+import spanthera.SpanFormatter;
 import spanthera.SpannedDocument;
 import spanthera.io.*;
 import spanthera.manipulations.MergeSiblingSpans;
@@ -92,6 +93,12 @@ public class JbsMekorot {
     }
 
     public static void findPsukim(SpannedDocument doc) {
+        doc.format(new SpanFormatter() {
+            @Override
+            public String format(Span s) {
+                return JbsMekorot.format(s.text());
+            }
+        });
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveTagsInContainedSpans()).manipulate();

@@ -2,7 +2,9 @@ package spanthera;
 
 import apps.jbsmekorot.PsukimTagger;
 import org.apache.commons.lang3.StringUtils;
+import static org.hamcrest.Matchers.*;
 import org.junit.*;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static apps.jbsmekorot.JbsMekorot.format;
 

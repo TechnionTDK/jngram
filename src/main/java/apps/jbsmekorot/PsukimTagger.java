@@ -5,8 +5,8 @@ import spanthera.Span;
 import spanthera.SpanTagger;
 
 import java.util.*;
-
-import static apps.jbsmekorot.JbsMekorot.format;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by omishali on 10/09/2017.
@@ -22,7 +22,8 @@ public class PsukimTagger implements SpanTagger {
     }
 
     public List<String> tag(Span s) {
-        String text = format(s.text());
+        formatSpan(s);
+        String text = s.getTextFormatted();
 
         // formatting may cause reduce the size of the span to 1, which causes the fuzzy search to fail.
         if (text.split("\\s+").length == 1)
@@ -44,6 +45,32 @@ public class PsukimTagger implements SpanTagger {
         //    result.add(doc.get("uri"));
 
         return new ArrayList<>(result);
+    }
+
+    /**
+     * Here we initialize each span with the formatted text.
+     * For some spans we also initialize the text extras (read about
+     * them in the Span documentation.
+     * @param s
+     * @return
+     */
+    private void formatSpan(Span s) {
+        //s.setTextFormatted(format(s.text()));
+        // if the span contains he with geresh, we also provide a (formatted) version with shem adnut.
+        if (shouldAddShemAdnut(s.text())) {
+            String result = s.text().replace("'", "tag").
+                    replaceAll("\\bהtag\\b", "אדני");
+            //cont here..
+        }
+    }
+
+    private boolean shouldAddShemAdnut(String text) {
+        text = text.replace("'", "tag");
+        String regex = "\\bהtag\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+
+        return matcher.matches();
     }
 
     /**
