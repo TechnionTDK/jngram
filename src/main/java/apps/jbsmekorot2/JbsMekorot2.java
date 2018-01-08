@@ -1,7 +1,6 @@
 package apps.jbsmekorot2;
 
-import apps.jbsmekorot.FilterTagsFromSpansSize2;
-import apps.jbsmekorot.FilterTagsFromSpansSize3;
+import apps.jbsmekorot.JbsMekorot;
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
@@ -10,12 +9,9 @@ import spanthera.io.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import apps.jbsmekorot.JbsMekorot;
 
 import static java.lang.System.exit;
 
@@ -27,7 +23,6 @@ public class JbsMekorot2 {
     public static final int MAXIMAL_PASUK_LENGTH = 14;
     private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git", "manual", "tanach"}));
     private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{})); // if non-empty, only these directories will be analyzed.
-    private static int SATISFYING_PASUk_LENGHT=4;
 
     /**
      *
@@ -95,15 +90,21 @@ public class JbsMekorot2 {
         dir.mkdir();
     }
 
-//    public static void findPsukim(SpannedDocument doc) {
-//        doc.add(new PsukimTagger()).tag();
-//        doc.add(new MergeSiblingSpans()).manipulate();
-//        doc.add(new RemoveTagsInContainedSpans()).manipulate();
-//
-//        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
-//        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
-//    }
+    public static SpannedDocument findPsukimInSubject(Subject s) {
+        String text = s.getText();
+        String uri = s.getUri();
 
+        if (text == null || uri == null) {
+            System.out.println("Subject " + uri + " has not text or uri");
+            return null;
+        }
+
+        SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+        System.out.println("\nDocument name :" + uri);
+        findPsukimTopDown(sd);
+
+        return sd;
+    }
     public static void findPsukimTopDown(SpannedDocument doc){
         doc.add(new PsukimTaggerTopDown(doc.length()));
         StopWatch tag_timer = new StopWatch();

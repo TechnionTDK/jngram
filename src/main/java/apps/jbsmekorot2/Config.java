@@ -3,6 +3,7 @@ package apps.jbsmekorot2;
 
 
 public class Config {
+    public static int MAXIMAL_PASUK_LENGTH= 14;
     public static int SPAN_SIZE_LAYER_1 = 5;
     public static int SPAN_SIZE_LAYER_2 = 4;
     public static int SPAN_SIZE_LAYER_3 = 2;
