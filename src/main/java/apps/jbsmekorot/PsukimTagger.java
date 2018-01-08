@@ -38,7 +38,7 @@ public class PsukimTagger implements SpanTagger {
         //List<Document> docs2 = tanachMale.searchExactInText(text);
         //List<Document> docs2 = tanachMale.searchFuzzyInText(text, 2);
         if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
-            docs2 = tanach.searchFuzzyInText(text, maxEdits);
+            docs2 = tanach.searchFuzzyInText(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), maxEdits);
 
         Set<String> result = new HashSet<>();
         for (Document doc : docs1)

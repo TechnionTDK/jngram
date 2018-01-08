@@ -94,7 +94,7 @@ public class JbsMekorot {
 
     public static void findPsukim(SpannedDocument doc) {
         doc.format(new JbsSpanFormatter());
-        doc.add(new AddTextWithShemAdnut()).manipulate();
+        doc.add(new AddTextWithShemAdnut()).manipulate(); // should appear before PsukimTagger & after JbsSpanFormatter
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveTagsInContainedSpans()).manipulate();
