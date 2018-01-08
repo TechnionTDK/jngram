@@ -37,6 +37,20 @@ public class JbsMekorot {
             exit(0);
         }
 
+        if (args[0].equals("-text")) {
+            // here we expect a text in the second argument, where psukim
+            // should be identified in this text (for Dor's project).
+            // output json is sent to standard output.
+            String text = args[1];
+            SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+            findPsukim(sd);
+            TaggedSubject taggedSubject = getTaggedSubject(sd, "http://sometext");
+            TaggerOutput outputJson = new TaggerOutput();
+            outputJson.addTaggedSubject(taggedSubject);
+            System.out.println(outputJson.toString());
+            exit(1);
+        }
+
         // init timers to take time measurements
         StopWatch timerPerDir = new StopWatch();
         StopWatch timerTotal = new StopWatch();
