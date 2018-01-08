@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.*;
 import org.junit.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static apps.jbsmekorot.JbsMekorot.format;
 
 
 /**
@@ -28,12 +27,5 @@ public class VariousStringTests {
         String text = "''hello''";
         text = text.replace("''", "\"");
         assertEquals(2, StringUtils.countMatches(text, "\""));
-    }
-
-    @Test
-    public void testReplaceShem1() {
-        String text = "ה' אל";
-        PsukimTagger tagger = new PsukimTagger();
-        assertEquals("יהוה אל", format(text));
     }
 }

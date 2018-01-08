@@ -137,7 +137,7 @@ public class SpannedDocument {
      * @param spanSize
      * @return
      */
-    List<Span> getSpans(int spanSize) {
+    public List<Span> getSpans(int spanSize) {
         checkSpanSize(spanSize);
 
         return allSpans.get(spanSize - minimalSpanSize);

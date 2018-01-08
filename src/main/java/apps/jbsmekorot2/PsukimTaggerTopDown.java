@@ -10,8 +10,6 @@ import spanthera.SpanTagger;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static apps.jbsmekorot.JbsMekorot.format;
-
 public class PsukimTaggerTopDown implements SpanTagger {
 
     private ContextFinder contextFinder;
@@ -45,7 +43,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
 //        return resOfBigSpans;
 //    }
     public List<String> tag(Span s){
-        String text= format(s.text());
+        String text= s.getTextFormatted();
         // First Layer
         if(s.size() <= JbsMekorot2.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
             //1. exact in Tanach
@@ -55,7 +53,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
                 docs= tanachMale.searchExactInText(text);
                 if(docs.size()==0) {
                     //3. Fuzzy in Tanach
-                    docs= tanach.searchFuzzyInTextRestriction(format(s.text()) ,Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                    docs= tanach.searchFuzzyInTextRestriction(text ,Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 }
             }
             List<String> result = new ArrayList<>();
@@ -76,7 +74,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
                 docs= tanachMale.searchExactInText(text);
                 if(docs.size()==0) {
                     //3. Fuzzy in Tanach
-                    docs= tanach.searchFuzzyInTextRestriction(format(s.text()), Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                    docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted(), Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 }
             }
             //filter out tags
@@ -154,7 +152,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         //we check only 3 and 2 lengths
         if(s.size()<2) return;
         //now we search in tanach and if we didn't find we search in tanachMale
-        String text= format(s.text());
+        String text= s.getTextFormatted();
         List<Document> docs= tanach.searchExactInText(text);
         if(docs.size()==0)
             docs= tanachMale.searchExactInText(text);

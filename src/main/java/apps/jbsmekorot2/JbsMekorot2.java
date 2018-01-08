@@ -185,9 +185,5 @@ public class JbsMekorot2 {
         return outputJson;
     }
 
-    public static String format(String s) {
-      return JbsMekorot.format(s);
-    }
-
 
 }
