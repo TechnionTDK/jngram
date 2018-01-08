@@ -41,7 +41,7 @@ public class RecallPrecision {
 
             if (isDoubleLabeledSpan(s)) {
                 // s should have at least 2 tags
-                if (s.getTags().size() > 2)
+                if (s.getTags().size() >= 2)
                     totalHits++;
                 else { // we missed this span
                     result.addMissedSpan(s);
@@ -109,11 +109,19 @@ public class RecallPrecision {
 
             // here we deal with labeled spans.
 
-            if (isSingleLabeledSpan(s))
+            if (isSingleLabeledSpan(s)) {
                 totalLabeledTags += 1;
+                // do we have more than one tag? if yes, the span is imprecise
+                if (s.getTags().size() != 1)
+                    result.addImpreciseSpan(s);
+            }
 
-            if (isDoubleLabeledSpan(s))
+            if (isDoubleLabeledSpan(s)) {
                 totalLabeledTags += 2;
+                // do we have more or less than two tags? if yes, the span is imprecise
+                if (s.getTags().size() != 2)
+                    result.addImpreciseSpan(s);
+            }
         }
 
         result.setTotalLabeldTags(totalLabeledTags);

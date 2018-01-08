@@ -22,55 +22,31 @@ public class PsukimTagger implements SpanTagger {
     }
 
     public List<String> tag(Span s) {
-        formatSpan(s);
         String text = s.getTextFormatted();
 
-        // formatting may cause reduce the size of the span to 1, which causes the fuzzy search to fail.
+        // formatting may reduce the size of the span to 1, which causes the fuzzy search to fail.
         if (text.split("\\s+").length == 1)
             return new ArrayList<>();
 
         List<Integer> maxEdits = getMaxEdits(s);
 
         List<Document> docs1;
+        List<Document> docs2 = new ArrayList<>(); // for ADNUT_TEXT
 
         docs1 = tanach.searchFuzzyInText(text, maxEdits);
         //List<Document> docs1 = tanach.searchExactInText(text);
         //List<Document> docs2 = tanachMale.searchExactInText(text);
         //List<Document> docs2 = tanachMale.searchFuzzyInText(text, 2);
+        if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
+            docs2 = tanach.searchFuzzyInText(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), maxEdits);
 
         Set<String> result = new HashSet<>();
         for (Document doc : docs1)
             result.add(doc.get("uri"));
-        //for (Document doc : docs2)
-        //    result.add(doc.get("uri"));
+        for (Document doc : docs2)
+            result.add(doc.get("uri"));
 
         return new ArrayList<>(result);
-    }
-
-    /**
-     * Here we initialize each span with the formatted text.
-     * For some spans we also initialize the text extras (read about
-     * them in the Span documentation.
-     * @param s
-     * @return
-     */
-    private void formatSpan(Span s) {
-        //s.setTextFormatted(format(s.text()));
-        // if the span contains "he" with geresh, we also provide a (formatted) version with shem adnut.
-        if (shouldAddShemAdnut(s.text())) {
-            String result = s.text().replace("'", "tag").
-                    replaceAll("\\bהtag\\b", "אדני");
-            //cont here..
-        }
-    }
-
-    private boolean shouldAddShemAdnut(String text) {
-        text = text.replace("'", "tag");
-        String regex = "\\bהtag\\b";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
-
-        return matcher.matches();
     }
 
     /**
