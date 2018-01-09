@@ -33,6 +33,7 @@ public class TestFindPsukimKeliYekar_1 {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
 
         //assertTrue(doc.getSpan(0, 1).getSortedTags().contains("jbr:text-tanach-1-12-1"));
@@ -40,6 +41,7 @@ public class TestFindPsukimKeliYekar_1 {
 
     @Test
     public void testTagsAfterMerge() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 

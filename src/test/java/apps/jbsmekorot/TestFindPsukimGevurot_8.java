@@ -31,6 +31,7 @@ public class TestFindPsukimGevurot_8 {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
 
         // we have difficulties with the commented lines, see daf
@@ -43,6 +44,7 @@ public class TestFindPsukimGevurot_8 {
 
     @Test
     public void testTagsAfterMerge() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 

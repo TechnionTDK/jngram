@@ -31,12 +31,14 @@ public class TestFindPsukimRaba_39_9 {
 
     @Test
     public void testTagsSpansLength2() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
         assertTrue(doc.getSpan(23, 24).getSortedTags().contains("jbr:text-tanach-1-22-2"));
     }
 
     @Test
     public void testTagsAfterMerge() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 

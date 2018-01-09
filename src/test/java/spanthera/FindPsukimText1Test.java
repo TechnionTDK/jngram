@@ -1,5 +1,6 @@
 package spanthera;
 
+import apps.jbsmekorot.JbsSpanFormatter;
 import apps.jbsmekorot.PsukimTagger;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class FindPsukimText1Test {
         // we create a document with spans of size 2-8
         doc = new SpannedDocument(text, 2, 8);
         // we tag the uri "jbr:tanach-1-3-18" to spans of size 2 (that's how PsukimTagger is implemented)
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
     }
 

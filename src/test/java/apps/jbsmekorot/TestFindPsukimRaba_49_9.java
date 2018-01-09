@@ -30,13 +30,10 @@ public class TestFindPsukimRaba_49_9 {
         assertEquals(133, doc.getWords().size());
     }
 
-    @Test
-    public void testTagsSpansLength2() {
-        doc.add(new PsukimTagger()).tag();
-    }
 
     @Test
     public void testTagsAfterMerge() {
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
 
