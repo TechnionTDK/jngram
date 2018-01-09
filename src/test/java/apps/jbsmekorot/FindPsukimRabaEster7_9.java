@@ -1,6 +1,7 @@
 package apps.jbsmekorot;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import spanthera.SpannedDocument;
 import spanthera.manipulations.MergeSiblingSpans;
@@ -55,7 +56,7 @@ public class FindPsukimRabaEster7_9 {
         assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getSpan(68, 76).getSortedTags());
     }
 
-    @Test
+    @Test @Ignore
     public void testFinal() {
         JbsMekorot.findPsukim(doc);
 

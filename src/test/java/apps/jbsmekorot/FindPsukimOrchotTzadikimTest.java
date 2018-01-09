@@ -39,7 +39,6 @@ public class FindPsukimOrchotTzadikimTest {
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(11, 12).getSortedTags());
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getSpan(12, 13).getSortedTags());
 
-        assertEquals(getList(), doc.getSpan(35, 36).getSortedTags());
         assertTrue(doc.getSpan(36, 37).getSortedTags().contains("jbr:text-tanach-13-10-10"));
 
         assertEquals(getList("jbr:text-tanach-2-3-14"), doc.getSpan(41, 42).getSortedTags());
