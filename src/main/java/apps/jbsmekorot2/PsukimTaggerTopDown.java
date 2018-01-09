@@ -9,8 +9,6 @@ import spanthera.SpanTagger;
 
 import java.util.*;
 
-import static apps.jbsmekorot.JbsMekorot.format;
-
 public class PsukimTaggerTopDown implements SpanTagger {
 
     private ContextFinder contextFinder;
@@ -42,7 +40,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
     @Override
     public List<String> tag(Span s){
-        String text= format(s.text());
+        String text= s.getTextFormatted();
         List<String> results = null;
         if(s.size() <= Config.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
             results= HandleFirstLayerSpans(s, text);
@@ -105,7 +103,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
             docs= tanachMale.searchExactInText(text);
             if(docs.size()==0) {
                 //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(format(s.text()), Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted(), Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
             }
         }
         //filter out tags
@@ -139,7 +137,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
             docs= tanachMale.searchExactInText(text);
             if(docs.size()==0) {
                 //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(format(s.text()) , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
             }
         }
         List<String> result = new ArrayList<>();
