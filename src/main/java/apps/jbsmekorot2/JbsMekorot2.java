@@ -1,6 +1,7 @@
 package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsMekorot;
+import apps.jbsmekorot.JbsSpanFormatter;
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
@@ -106,6 +107,7 @@ public class JbsMekorot2 {
         return sd;
     }
     public static void findPsukimTopDown(SpannedDocument doc){
+        doc.format(new JbsSpanFormatter());
         doc.add(new PsukimTaggerTopDown(doc.length()));
         StopWatch tag_timer = new StopWatch();
         double tag_timer_total = 0;

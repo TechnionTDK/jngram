@@ -63,8 +63,8 @@ public class JbsShell {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("Recall is: "+ madad.getRecall(doc)+ "\n Precision is: " + madad.getPrecision(doc));
-        System.out.println(doc.toString());
+        System.out.println("Recall is: "+ madad.getRecall(doc).getRecall()+ "\n Precision is: " + madad.getPrecision(doc).getPrecision());
+        //System.out.println(doc.toString());
     }
 
     @Test
@@ -78,8 +78,8 @@ public class JbsShell {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("Recall is: "+ madad.getRecall(doc)+ "\n Precision is: " + madad.getPrecision(doc));
-        System.out.println(doc.toString());
+        System.out.println("Recall is: "+ madad.getRecall(doc).getRecall()+ "\n Precision is: " + madad.getPrecision(doc).getPrecision());
+       // System.out.println(doc.toString());
     }
 
     @Test
