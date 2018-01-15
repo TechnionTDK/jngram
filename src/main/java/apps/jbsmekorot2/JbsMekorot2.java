@@ -131,7 +131,7 @@ public class JbsMekorot2 {
 
 
 
-        //doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
+        //doc.add(new FilterTagsFromSpans(doc)).manipulate();
         //doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
     }
 

@@ -13,11 +13,11 @@ import java.util.List;
  * - Removes tags from spans in length 3 unless there is a single tag there.
  * Created by omishali on 15/10/2017.
  */
-public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
+public class FilterTagsFromSpans extends FilterTagsManipulation {
     private static final int CERTAIN_LENGTH = 4;
     private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 25;
 
-    public FilterTagsFromSpansSize3(SpannedDocument doc) {
+    public FilterTagsFromSpans(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
         doc.createTagSpanIndex();
     }

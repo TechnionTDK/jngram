@@ -2,7 +2,6 @@ package apps.jbsmekorot;
 
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
-import spanthera.SpanFormatter;
 import spanthera.SpannedDocument;
 import spanthera.io.*;
 import spanthera.manipulations.MergeSiblingSpans;
@@ -16,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.System.exit;
-import static java.lang.System.out;
 
 /**
  * Created by omishali on 23/10/2017.
@@ -112,8 +110,7 @@ public class JbsMekorot {
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveTagsInContainedSpans()).manipulate();
-        doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
-        doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
+        doc.add(new FilterTagsFromSpans(doc)).manipulate();
     }
 
      /**
