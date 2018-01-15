@@ -115,4 +115,25 @@ public class Span {
         }
         return result.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Span span = (Span) o;
+
+        if (start != span.start) return false;
+        if (end != span.end) return false;
+        return doc != null ? doc.equals(span.doc) : span.doc == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = doc != null ? doc.hashCode() : 0;
+        result = 31 * result + start;
+        result = 31 * result + end;
+        return result;
+    }
 }

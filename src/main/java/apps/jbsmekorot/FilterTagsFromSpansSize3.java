@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
     private static final int CERTAIN_LENGTH = 4;
-    private static final int CERTAIN_DISTANCE = 70;
+    private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 25;
 
     public FilterTagsFromSpansSize3(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
@@ -24,7 +24,7 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
 
     @Override
     protected boolean isCandidate(Span s) {
-        return s.size() == 3;
+        return s.size() == 2 || s.size() == 3;
     }
 
     @Override
@@ -54,10 +54,9 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
                 continue;
             }
 
-
-                // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
+            // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
             // In other words, we keep the tag only if it also appears in a CERTAIN span
-            if (!hasTagInCertainLength(spansWithSameTag, s))
+            if (isInLongDistanceFromCertainSpan(s, spansWithSameTag))
                 tagsToBeRemoved.add(tag);
         }
 
@@ -67,19 +66,25 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
         // here we may check whether s contains "many" tags (MANY_TAGS)
     }
 
-    // also considers CERTAIN_DISTANCE - we return true if a certain span
-    // exists CERTAIN_DISTANCE words before s
-    private boolean hasTagInCertainLength(List<Span> spansWithSameTag, Span s1) {
-        int location = s1.getStart() - CERTAIN_DISTANCE;
+    private boolean isInLongDistanceFromCertainSpan(Span thisSpan, List<Span> spansWithSameTag) {
+        for (Span otherSpan : spansWithSameTag) {
+            if (thisSpan.equals(otherSpan))
+                continue;
 
-        if (location < 0)
-            return false;
+            if (otherSpan.size() < CERTAIN_LENGTH)
+                continue;
 
-        for (Span s2 : spansWithSameTag)
-            if (s2.size() >= CERTAIN_LENGTH && s2.getStart() >= location && s2.getEnd() < s1.getStart())
-                return true;
+            int distance = 0;
+            if (thisSpan.getStart() > otherSpan.getEnd())
+                distance = thisSpan.getStart() - otherSpan.getEnd();
+            else
+                distance = otherSpan.getStart() - thisSpan.getEnd();
 
-        return false;
+            if (distance <= MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN + 1)
+                return false;
+        }
+
+        return true;
     }
 
     private boolean hasTagInCertainLength(List<Span> spansWithSameTag) {

@@ -16,14 +16,24 @@ import static org.junit.Assert.*;
  */
 public class TestManipulations {
     SpannedDocument doc;
-    private String text = "כי מקרא מלא שהביאוהו זכרונם לברכה לראיתם (ישעיה ט, טז) על כן על בחוריו לא ישמח ה' וגו'";
+    private String text1 = "כי מקרא מלא שהביאוהו זכרונם לברכה לראיתם (ישעיה ט, טז) על כן על בחוריו לא ישמח ה' וגו'";
+    private String text2 = "בראשית ברא אלקים את השמים ואת הארץ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 בראשית ברא אלקים";
     @Test
     public void testShemAdnutManipulation() {
-        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(text1, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
         assertEquals("ישמח אדני", doc.getSpan(15, 16).getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT));
         assertEquals(getList("jbr:text-tanach-12-9-16"), doc.getSpan(10, 16).getSortedTags());
+    }
+
+    @Test
+    public void testFilterTagsFromSpansManipulation() {
+        doc = new SpannedDocument(text2, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        assertEquals(getList("jbr:text-tanach-1-1-1"), doc.getSpan(0, 6).getSortedTags());
+        assertEquals(getList("jbr:text-tanach-1-1-1"), doc.getSpan(27, 29).getSortedTags());
     }
 
     /**
