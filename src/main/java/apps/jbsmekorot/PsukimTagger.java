@@ -1,12 +1,11 @@
 package apps.jbsmekorot;
 
+import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanTagger;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by omishali on 10/09/2017.

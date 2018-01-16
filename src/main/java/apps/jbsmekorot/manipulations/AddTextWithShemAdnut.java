@@ -1,4 +1,4 @@
-package apps.jbsmekorot;
+package apps.jbsmekorot.manipulations;
 
 import spanthera.Span;
 import spanthera.SpanManipulation;

@@ -1,8 +1,7 @@
 package apps.jbsmekorot;
 
+import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import org.junit.*;
-import spanthera.Span;
-import spanthera.SpanFormatter;
 import spanthera.SpannedDocument;
 
 import java.util.Arrays;

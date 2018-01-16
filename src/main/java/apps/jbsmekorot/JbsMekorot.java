@@ -1,5 +1,7 @@
 package apps.jbsmekorot;
 
+import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
+import apps.jbsmekorot.manipulations.FilterTagsFromSpans;
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
