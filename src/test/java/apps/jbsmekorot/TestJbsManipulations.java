@@ -49,6 +49,16 @@ public class TestJbsManipulations {
         assertEquals(getList("jbr:text-tanach-3-11-47"), doc.getSpan(0, 4).getSortedTags());
     }
 
+    @Test
+    public void testRemoveTagsFromOverlappingSpans() {
+        String text = "ורם לבבך ושכחת את ה' אלקיך על ";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        // without the manipulation, we should also detect a pasuk for (3,6)
+        assertEquals(0, doc.getSpan(3, 6).getSortedTags().size());
+    }
+
     /**
      * Returns a list, sorted.
      * @param args

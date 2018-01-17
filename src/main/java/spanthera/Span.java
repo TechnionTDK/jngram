@@ -136,4 +136,8 @@ public class Span {
         result = 31 * result + end;
         return result;
     }
+
+    public boolean hasNoTags() {
+        return getTags().size() == 0;
+    }
 }

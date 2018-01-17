@@ -300,4 +300,26 @@ public class SpannedDocument {
         for (Span s : getAllSpans())
             s.setTextFormatted(formatter.format(s));
     }
+
+    /**
+     * Note: return overlapping spans that appear AFTER s in
+     * the document, and besides s itself.
+     * @param s
+     * @return
+     */
+    public List<Span> getOverlappingSpans(Span s) {
+        List<Span> result = new ArrayList<>();
+        int start = s.getStart();
+        int end = s.getEnd();
+
+        // we start with span (start, end+1)
+        for (int i=start; i<=end; i++) {
+            int last = start + getMaximalSpanSize();
+            for (int j=end+1; j < last && j < length() ; j++) {
+               result.add(getSpan(i, j));
+            }
+        }
+
+        return result;
+    }
 }
