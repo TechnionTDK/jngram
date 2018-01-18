@@ -1,6 +1,5 @@
 package apps.jbsmekorot2;
 
-import apps.jbsmekorot.AddTextWithShemAdnut;
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
 import org.apache.lucene.document.Document;
@@ -140,8 +139,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
                 //3. Fuzzy in Tanach
                 docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 if(docs.size()==0){
-                    if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
-                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                    if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
+                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 }
             }
 
