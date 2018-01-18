@@ -1,4 +1,4 @@
-package apps.jbsmekorot;
+package apps.jbsmekorot.manipulations;
 
 import org.apache.commons.lang3.StringUtils;
 import spanthera.Span;

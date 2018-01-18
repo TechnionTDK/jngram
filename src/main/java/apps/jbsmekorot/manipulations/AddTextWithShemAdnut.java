@@ -1,4 +1,4 @@
-package apps.jbsmekorot;
+package apps.jbsmekorot.manipulations;
 
 import spanthera.Span;
 import spanthera.SpanManipulation;
@@ -11,7 +11,10 @@ import spanthera.SpannedDocument;
         public static final String ADNUT_TEXT = "adnut_text";
         @Override
         public void manipulate(SpannedDocument doc) {
-            for (Span s : doc.getSpans(2)) {
+            // we used to cover spans of size 2 since only these spans
+            // are get tagged however the manipulation RemoveNonSequentialTags requires
+            // larger spans as well.
+            for (Span s : doc.getAllSpans()) {
                 if (s.getTextFormatted().contains("יהוה"))
                     s.putExtra(ADNUT_TEXT, s.getTextFormatted().replace("יהוה", "אדני"));
             }
