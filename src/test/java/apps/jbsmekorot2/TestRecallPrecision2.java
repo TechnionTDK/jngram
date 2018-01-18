@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
     public class TestRecallPrecision2 {
         private static final String LABELED1 = "src/main/resources/labeledPsukimData/" + "tanach-midrashraba-1-labeled.json";
         private static final String LABELED2 = "src/main/resources/labeledPsukimData/" + "mesilatyesharim-labeled.json";
-        private static final int NUM_ITER = 2;
+        private static final int NUM_ITER = 1;
 
         @Before
         public void SetUpStream()
@@ -68,7 +68,7 @@ import static org.junit.Assert.assertNotNull;
             RecallPrecision calc = new RecallPrecision();
 
             // find psukim in second subject and calculate recall & precision
-            SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(11));
+           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(0));
             SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(0));
 
             PrintRecall(calc, sdTopDOwn, "TopDown");
@@ -80,17 +80,7 @@ import static org.junit.Assert.assertNotNull;
 
         }
 
-        @Test
-        public void IterationTest1()
-        {
-            TaggerInput inputJson = SpantheraIO.readInputJson(LABELED1);
-            assertNotNull(inputJson);
-            List<Subject> subjects = inputJson.getSubjects();
-
-            RecallPrecision calc = new RecallPrecision();
-
-        }
-        private void PrintPrecision(RecallPrecision calc, SpannedDocument sdButtomUp, String method) {
+        public static void PrintPrecision(RecallPrecision calc, SpannedDocument sdButtomUp, String method) {
             RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sdButtomUp);
             System.out.print("Precision "+ method+ " : ");
             System.out.println(precisionResult.getPrecision());
@@ -99,7 +89,7 @@ import static org.junit.Assert.assertNotNull;
         }
 
         @NotNull
-        private void PrintRecall(RecallPrecision calc, SpannedDocument sd, String method) {
+        public static void PrintRecall(RecallPrecision calc, SpannedDocument sd, String method) {
             RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
             System.out.print("Recall "+ method +" : ");
             System.out.println(recallResult.getRecall());

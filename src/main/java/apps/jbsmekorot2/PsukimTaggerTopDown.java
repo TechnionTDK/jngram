@@ -1,5 +1,6 @@
 package apps.jbsmekorot2;
 
+import apps.jbsmekorot.AddTextWithShemAdnut;
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
 import org.apache.lucene.document.Document;
@@ -75,11 +76,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     @NotNull
     private List<String> HandleThirdLayerSpans(Span s, String text) {
         //1. exact in Tanach
-        List<Document>  docs= tanach.searchExactInText(text);
-        if(docs.size()==0){
-            //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-        }
+        List<Document>  docs= searchByAllMeans(s,text);
         //filter out tags
 
         HashMap<String, Double> matches = contextFinder.getTagsInContext(s,docs);
@@ -97,15 +94,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     @NotNull
     private List<String> HandleSecondLayerSpans(Span s, String text) {
         //1. exact in Tanach
-        List<Document>  docs= tanach.searchExactInText(text);
-        if(docs.size()==0){
-            //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-            if(docs.size()==0) {
-                //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted(), Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
-            }
-        }
+        List<Document> docs = searchByAllMeans(s, text);
         //filter out tags
         //TODO: consult with Oren: when do we want to consider keeping more than 1 tag?
         // only helps decide which is better. but if not found in context - keep them anyway
@@ -131,15 +120,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     @NotNull
     private List<String> HandleFirstLayerSpans(Span s, String text) {
         //1. exact in Tanach
-        List<Document>  docs= tanach.searchExactInText(text);
-        if(docs.size()==0){
-            //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-            if(docs.size()==0) {
-                //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
-            }
-        }
+        List<Document> docs = searchByAllMeans(s, text);
         List<String> result = new ArrayList<>();
         for (Document doc : docs)
             result.add(doc.get("uri"));
@@ -148,6 +129,24 @@ public class PsukimTaggerTopDown implements SpanTagger {
             markSpanSegment(s.getStart(),s.size());
 
         return result;
+    }
+
+    private List<Document> searchByAllMeans(Span s, String text) {
+        List<Document>  docs= tanach.searchExactInText(text);
+        if(docs.size()==0){
+            //2. exact in Tanach Male
+            docs= tanachMale.searchExactInText(text);
+            if(docs.size()==0) {
+                //3. Fuzzy in Tanach
+                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                if(docs.size()==0){
+                    if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
+                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                }
+            }
+
+        }
+        return docs;
     }
 
     private void getBestKtags(HashMap<String, Double> matches, List<String> toKeep, int min) {
