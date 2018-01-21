@@ -4,9 +4,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.*;
 import org.apache.lucene.search.*;
-import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
-import org.apache.lucene.search.spans.SpanNearQuery;
-import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -178,5 +176,18 @@ public abstract class LuceneIndex {
         TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
         ScoreDoc[] hits = docs.scoreDocs;
         return getTextList(hits);
+    }
+
+    public void printSpans() throws IOException {
+        // Do a search using SpanQuery
+        SpanTermQuery fleeceQ = new SpanTermQuery(new Term("text", "בראשית"));
+        TopDocs results = indexSearcher.search(fleeceQ, 10);
+        for (int i = 0; i < results.scoreDocs.length; i++) {
+            ScoreDoc scoreDoc = results.scoreDocs[i];
+            System.out.println("Score Doc: " + scoreDoc);
+        }
+
+        System.out.println(fleeceQ.getTerm().text());
+
     }
 }

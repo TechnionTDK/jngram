@@ -38,9 +38,9 @@ public class JbsShell {
 
     @Test
     public void getDocumentByText() {
-        //List<Document> result = index.searchExactInText("בעיני יהוה");
-        //System.out.println(result.size() + " results:");
-        //index.printDocs(result);
+        List<Document> result = index.searchExactInText("בעיני יהוה");
+        System.out.println(result.size() + " results:");
+        index.printDocs(result);
     }
 
     @Test
