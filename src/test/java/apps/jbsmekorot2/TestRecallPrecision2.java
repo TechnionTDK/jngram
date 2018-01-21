@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
     public class TestRecallPrecision2 {
         private static final String LABELED1 = "src/main/resources/labeledPsukimData/" + "tanach-midrashraba-1-labeled.json";
         private static final String LABELED2 = "src/main/resources/labeledPsukimData/" + "mesilatyesharim-labeled.json";
+        private static final String ONE_SENTENCE = "src/main/resources/labeledPsukimData/" + "one_sentence.json";
         private static final int NUM_ITER = 1;
 
         @Before
@@ -68,8 +69,8 @@ import static org.junit.Assert.assertNotNull;
             RecallPrecision calc = new RecallPrecision();
 
             // find psukim in second subject and calculate recall & precision
-           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(0));
-            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(0));
+           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(6));
+            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(6));
 
             PrintRecall(calc, sdTopDOwn, "TopDown");
             PrintRecall(calc, sdBottomUp, "BottomUp");
@@ -79,6 +80,26 @@ import static org.junit.Assert.assertNotNull;
 
 
         }
+//        @Test
+//        public void test3() {
+//            TaggerInput inputJson = SpantheraIO.readInputJson(ONE_SENTENCE);
+//            assertNotNull(inputJson);
+//            List<Subject> subjects = inputJson.getSubjects();
+//
+//            RecallPrecision calc = new RecallPrecision();
+//
+//            // find psukim in second subject and calculate recall & precision
+//            SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(0));
+//            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(0));
+//
+//            PrintRecall(calc, sdTopDOwn, "TopDown");
+//            PrintRecall(calc, sdBottomUp, "BottomUp");
+//
+//            PrintPrecision(calc, sdTopDOwn, "TopDown");
+//            PrintPrecision(calc, sdBottomUp, "BottomUp");
+//
+//
+//        }
 
         public static void PrintPrecision(RecallPrecision calc, SpannedDocument sdButtomUp, String method) {
             RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sdButtomUp);

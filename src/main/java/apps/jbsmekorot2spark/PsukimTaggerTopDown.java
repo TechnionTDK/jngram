@@ -1,14 +1,12 @@
-package apps.jbsmekorot2;
+package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
-import org.apache.commons.lang3.builder.DiffBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
 import spanthera.Span;
 import spanthera.SpanTagger;
-import org.apache.commons.lang3.StringUtils;
-
 
 import java.util.*;
 
@@ -203,7 +201,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
             HashMap<String, Double> matches = contextFinder.getTagsInContext(s,docs);
 
             if(!matches.isEmpty()){
-                result = getBestKtags(matches,Config.NUMBER_OF_TAGS_TO_KEEP_L2);
+                result = getBestKtags(matches, Config.NUMBER_OF_TAGS_TO_KEEP_L2);
             } else {
                 for(Document d : docs){
                     result.add(d.get("uri"));

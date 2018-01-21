@@ -1,0 +1,10 @@
+{
+  "subjects": [
+    {
+      "uri": "one sentence",
+      "rdfs:label": "הקדמת הרב המחבר זצ\"ל",
+      "jbo:position": "0",
+      "jbo:book": "jbr:book-mesilatyesharim",
+      "jbo:text": "אפשר שלא. %ה' קנני ראשית דרכו.%"
+    } ]
+}
