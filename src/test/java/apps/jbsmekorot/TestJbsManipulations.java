@@ -1,7 +1,9 @@
 package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
+import apps.jbsmekorot.manipulations.CalcEditDistanceForTag;
 import org.junit.*;
+import spanthera.Span;
 import spanthera.SpannedDocument;
 
 import java.util.Arrays;
@@ -57,6 +59,28 @@ public class TestJbsManipulations {
 
         // without the manipulation, we should also detect a pasuk for (3,6)
         assertEquals(0, doc.getSpan(3, 6).getSortedTags().size());
+    }
+
+    @Test
+    public void testCalcEditDistanceForTag() {
+        String text = "כל העולם על המעלות";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        assertEquals(getList("jbr:text-tanach-13-1-10"), doc.getSpan(0, 3).getSortedTags());
+
+        Span s = doc.getSpan(0, 3);
+        assertEquals(new Integer(6), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-13-1-10"));
+
+        text = "ואת אשת רעהו לא טימא";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        assertEquals(getList("jbr:text-tanach-14-18-6", "jbr:text-tanach-14-18-15"), doc.getSpan(0, 4).getSortedTags());
+
+        s = doc.getSpan(0, 4);
+        assertEquals(new Integer(1), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-14-18-6"));
+        assertEquals(new Integer(2), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-14-18-15"));
     }
 
     /**

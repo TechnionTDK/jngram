@@ -1,9 +1,6 @@
 package apps.jbsmekorot;
 
-import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
-import apps.jbsmekorot.manipulations.FilterTagsFromSpans;
-import apps.jbsmekorot.manipulations.RemoveNonSequentialTags;
-import apps.jbsmekorot.manipulations.RemoveTagsFromOverlappingSpans;
+import apps.jbsmekorot.manipulations.*;
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
@@ -117,6 +114,7 @@ public class JbsMekorot {
         doc.add(new RemoveTagsFromOverlappingSpans()).manipulate();
         doc.add(new FilterTagsFromSpans(doc)).manipulate();
         doc.add(new RemoveNonSequentialTags()).manipulate();
+        doc.add(new CalcEditDistanceForTag()).manipulate();
     }
 
      /**

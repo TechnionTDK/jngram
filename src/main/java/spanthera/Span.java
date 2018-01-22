@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class Span {
     private Map<String, String> stringExtras = new HashMap<>();
+    private Map<String, Integer> intExtras = new HashMap<>();
     private String textFormatted;
     private SpannedDocument doc;
     private int start, end;
@@ -44,6 +45,14 @@ public class Span {
 
     public String getStringExtra(String key) {
         return stringExtras.get(key);
+    }
+
+    public void putExtra(String key, int value) {
+        intExtras.put(key, value);
+    }
+
+    public Integer getIntExtra(String key) {
+        return intExtras.get(key);
     }
 
     /**
