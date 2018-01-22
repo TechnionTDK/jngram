@@ -1,15 +1,12 @@
-package apps.jbsmekorot2;
+package apps.jbsmekorot2spark;
 
 
-import org.junit.Before;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import javax.swing.text.Document;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 
 public  final  class Config {
     public static final int MAXIMAL_PASUK_LENGTH= 14;
