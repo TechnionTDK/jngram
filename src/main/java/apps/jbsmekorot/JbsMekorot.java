@@ -114,7 +114,7 @@ public class JbsMekorot {
         doc.add(new RemoveTagsFromOverlappingSpans()).manipulate();
         doc.add(new FilterTagsFromSpans(doc)).manipulate();
         doc.add(new RemoveNonSequentialTags()).manipulate();
-        doc.add(new CalcEditDistanceForTag()).manipulate();
+        doc.add(new CalcAndFilterByEditDistance()).manipulate();
     }
 
      /**

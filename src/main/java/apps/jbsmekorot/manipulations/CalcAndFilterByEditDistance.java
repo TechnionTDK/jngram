@@ -1,6 +1,5 @@
 package apps.jbsmekorot.manipulations;
 
-import apps.jbsmekorot.JbsIndex;
 import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
 import org.apache.lucene.document.Document;
@@ -15,10 +14,13 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
 
 /**
  * Created by omishali on 21/01/2018.
+ * This manipulation filters tags based their edit distance value.
+ * First, it calculates edit distance for each tag. Then we
+ * remove tags based on several related strategies.
  */
-public class CalcEditDistanceForTag implements SpanManipulation {
+public class CalcAndFilterByEditDistance implements SpanManipulation {
     private static final String DISTANCE_KEY = "dist_key::";
-    private static final double PERCENTAGE_DISTANCE_ALLOWED = 0.1;
+    private static final double MAXIMAL_DISTANCE_LENGTH_RATIO = 0.15;
 
     @Override
     public void manipulate(SpannedDocument doc) {
@@ -32,33 +34,46 @@ public class CalcEditDistanceForTag implements SpanManipulation {
                 List<Document> docs = index.searchExactInUri(tag);
                 String pasuk = docs.get(0).get("text");
 
-                int minDistance = getMinimalDistance(pasuk, s.text());
+                int minDistance = getMinimalDistance(pasuk, s.getTextFormatted());
                 s.putExtra(DISTANCE_KEY + tag, minDistance);
             }
 
             // now that we have added distance to all tags we apply filtering
-            filterTags(s);
+            filterTagsBasedOnDistanceLengthRatio(s);
+            filterTagsWithDistanceHigherThanMinimalDistance(s);
         }
     }
 
-    private void filterTags(Span s) {
+    private void filterTagsWithDistanceHigherThanMinimalDistance(Span s) {
         List<String> removedTags = new ArrayList<>();
 
-        // filter out tags with more than PERCENTAGE_DISTANCE_ALLOWED than the length of text.
+        int min = getMinimalEditDistance(s);
+
+        for (String tag : s.getTags())
+            if (getDistance(s, tag) > min)
+                removedTags.add(tag);
+
+        s.removeTags(removedTags);
+    }
+
+    private int getMinimalEditDistance(Span s) {
+        int min = 1000;
+        for (String tag : s.getTags())
+            if (getDistance(s, tag) < min)
+                min = getDistance(s, tag);
+
+        return min;
+    }
+
+    private void filterTagsBasedOnDistanceLengthRatio(Span s) {
+        List<String> removedTags = new ArrayList<>();
+
         for (String tag : s.getTags()) {
             double distance = getDistance(s, tag);
-            double length = s.text().length();
-            //System.out.println(distance);
-            //System.out.println(length);
-            //System.out.println(distance / length);
-//            if (distance / length > PERCENTAGE_DISTANCE_ALLOWED) {
-//                removedTags.add(tag);
-//                System.out.println("REMOVED:");
-//                System.out.println(s);
-//                System.out.println(tag);
-//            }
+            double length = s.getTextFormatted().length();
+            if (distance / length > MAXIMAL_DISTANCE_LENGTH_RATIO)
+                removedTags.add(tag);
         }
-
         s.removeTags(removedTags);
     }
 

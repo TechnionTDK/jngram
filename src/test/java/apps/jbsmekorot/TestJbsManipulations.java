@@ -1,7 +1,7 @@
 package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
-import apps.jbsmekorot.manipulations.CalcEditDistanceForTag;
+import apps.jbsmekorot.manipulations.CalcAndFilterByEditDistance;
 import org.junit.*;
 import spanthera.Span;
 import spanthera.SpannedDocument;
@@ -62,7 +62,7 @@ public class TestJbsManipulations {
     }
 
     @Test
-    public void testCalcEditDistanceForTag() {
+    public void testCalcAndFilterByEditDistance1() {
         String text = "כל העולם על המעלות";
         doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
@@ -70,7 +70,7 @@ public class TestJbsManipulations {
         assertEquals(getList("jbr:text-tanach-13-1-10"), doc.getSpan(0, 3).getSortedTags());
 
         Span s = doc.getSpan(0, 3);
-        assertEquals(new Integer(6), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-13-1-10"));
+        assertEquals(new Integer(6), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-13-1-10"));
 
         text = "ואת אשת רעהו לא טימא";
         doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
@@ -79,8 +79,44 @@ public class TestJbsManipulations {
         assertEquals(getList("jbr:text-tanach-14-18-6", "jbr:text-tanach-14-18-15"), doc.getSpan(0, 4).getSortedTags());
 
         s = doc.getSpan(0, 4);
-        assertEquals(new Integer(1), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-14-18-6"));
-        assertEquals(new Integer(2), CalcEditDistanceForTag.getDistance(s, "jbr:text-tanach-14-18-15"));
+        assertEquals(new Integer(1), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-14-18-6"));
+        assertEquals(new Integer(2), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-14-18-15"));
+    }
+
+    @Test
+    public void testCalcAndFilterByEditDistance2() {
+        String text = "%לא מעבר לים היא% באותם שהולכים %מעבר לים% בסחורה";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        assertEquals(getList("jbr:text-tanach-5-30-13"), doc.getSpan(0, 3).getSortedTags());
+        assertEquals(getList("jbr:text-tanach-5-30-13"), doc.getSpan(6, 7).getSortedTags());
+
+        Span s = doc.getSpan(0, 3);
+        assertEquals(new Integer(2), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-5-30-13"));
+        s = doc.getSpan(6, 7);
+        assertEquals(new Integer(0), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-5-30-13"));
+    }
+
+    @Test
+    public void testCalcAndFilterByEditDistance3() {
+        String text = "%ואת אשת רעהו לא טימא%";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        // without the manipulation we should get also "jbr:text-tanach-14-18-15"
+        // however it should be filtered since its distance is higher than "jbr:text-tanach-14-18-6"
+        assertEquals(getList("jbr:text-tanach-14-18-6"), doc.getSpan(0, 4).getSortedTags());
+
+        text = "%ולא תשא עליו חטא.%";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+        assertEquals(getList("jbr:text-tanach-3-19-17"), doc.getSpan(0, 3).getSortedTags());
+
+        text = "לא תקרבו לגלות ערוה.";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+        assertEquals(getList("jbr:text-tanach-3-18-6"), doc.getSpan(0, 3).getSortedTags());
     }
 
     /**
