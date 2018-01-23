@@ -2,9 +2,13 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import apps.jbsmekorot.manipulations.CalcAndFilterByEditDistance;
+import apps.jbsmekorot.manipulations.FilterTagsFromSpans;
+import apps.jbsmekorot.manipulations.RemoveTagsFromOverlappingSpans;
 import org.junit.*;
 import spanthera.Span;
 import spanthera.SpannedDocument;
+import spanthera.manipulations.MergeSiblingSpans;
+import spanthera.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -117,6 +121,22 @@ public class TestJbsManipulations {
         doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
         assertEquals(getList("jbr:text-tanach-3-18-6"), doc.getSpan(0, 3).getSortedTags());
+        assertEquals(getList("jbr:text-tanach-3-18-6"), doc.getSpan(0, 3).getSortedTags());
+    }
+
+    @Test
+    public void testFilterTagsFromSpans() {
+        // we expect the last bigram to be found but it doesn't.
+        String text = "ולפני עור לא תתן מכשול,% לפני סומא בדבר. אמר לך, בת פלוני מהי לכהונה? אל תאמר לו, כשרה, והיא אינה אלא פסולה. היה נוטל בך עצה, אל תתן לו עצה שאינה הוגנת לו וכו', ואל תאמר לו מכור שדך וקח לך חמור, ואתה עוקף עליו ונוטלה ממנו. שמא תאמר, עצה יפה אני נותן לו, הרי הדבר מסור ללב, שנאמר, %ויראת מאלקיך.%";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getSpan(0, 4).getSortedTags());
+
+        Span s = doc.getSpan(59, 60);
+        assertEquals("%ויראת מאלקיך.%", s.text());
+        assertEquals("ויראת מאלהיך", s.getTextFormatted());
+        assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getSpan(59, 60).getSortedTags());
     }
 
     /**

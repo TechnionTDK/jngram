@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FilterTagsFromSpans extends FilterTagsManipulation {
     private static final int CERTAIN_LENGTH = 4;
-    private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 25;
+    private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 70;
 
     public FilterTagsFromSpans(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
@@ -29,11 +29,15 @@ public class FilterTagsFromSpans extends FilterTagsManipulation {
 
     @Override
     protected void filterTags(SpannedDocument doc, Span s) {
+        // we used to check this, but we prefer not to be based on dots and other punctuation marks.
+        // anyway, if you use this rule note that current impl. has bug: it doesn't filter out % that appear
+        // in labeled data!
         // if the span contains the dot char "." IN THE MIDDLE of it, we clear all tags - we assume that a quotation may not include a dot
-        if (s.text().matches("\\D+\\.\\D+")) {
-            s.clearTags();
-            return;
-        }
+//        if (s.text().matches("\\D+\\.\\D+")) {
+//            System.out.println(s);
+//            s.clearTags();
+//            return;
+//        }
 
         List<String> tagsToBeRemoved = new ArrayList<>();
 
