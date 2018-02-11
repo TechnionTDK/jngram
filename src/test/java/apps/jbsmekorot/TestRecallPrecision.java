@@ -8,6 +8,7 @@ import spanthera.io.SpantheraIO;
 import spanthera.io.Subject;
 import spanthera.io.TaggerInput;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class TestRecallPrecision {
     private static final String LABELED1 = "src/main/resources/labeledPsukimData/" + "tanach-midrashraba-1-labeled.json";
     private static final String LABELED2 = "src/main/resources/labeledPsukimData/" + "mesilatyesharim-labeled.json";
     @Test
-    public void test1() {
+    public void testMesilatYesharimPerek() {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED2);
         assertNotNull(inputJson);
         List<Subject> subjects = inputJson.getSubjects();
@@ -25,7 +26,7 @@ public class TestRecallPrecision {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
+        SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(13));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         System.out.print("Recall: ");
@@ -37,7 +38,28 @@ public class TestRecallPrecision {
 
         recallResult.printMissedSpans();
         precisionResult.printImpreciseSpans();
+    }
 
+    @Test
+    public void testMesilatYesharimAll() {
+        TaggerInput inputJson = SpantheraIO.readInputJson(LABELED2);
+        assertNotNull(inputJson);
+        List<Subject> subjects = inputJson.getSubjects();
+        RecallPrecision calc = new RecallPrecision();
 
+        List<SpannedDocument> sds = new ArrayList<>();
+        for (int i=0; i<=12; i++) {
+            SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(i));
+            sds.add(sd);
+        }
+
+        RecallPrecision.MultPrecisionResult multPrecisionResult = calc.getPrecision(sds);
+        RecallPrecision.MultRecallResult multRecallResult = calc.getRecall(sds);
+
+        System.out.print("Average recall: ");
+        System.out.println(multRecallResult.getAverageRecall());
+
+        System.out.print("Average precision: ");
+        System.out.println(multPrecisionResult.getAveragePrecision());
     }
 }
