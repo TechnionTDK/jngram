@@ -139,6 +139,35 @@ public class TestJbsManipulations {
         assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getSpan(59, 60).getSortedTags());
     }
 
+    @Test
+    public void testRemoveNonEheviFuzzyMatches() {
+        String text = "הבל ואין בו מועיל";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        // this pasuk contains "bam" instead of "bo", so we should filter it out since
+        // the letter "vav" is replaced with "mem"
+        assertTrue(!doc.getSpan(0,3).getTags().contains("jbr:text-tanach-13-16-19"));
+
+        text = "אם קטן ואם גדול";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        // this pasuk contains "im" instead of "et", so we should filter it out since
+        // the letter "mem" is replaced with "tav"
+        assertTrue(!doc.getSpan(0,3).getTags().contains("jbr:text-tanach-10-22-31"));
+
+
+        text = "על כל איש ישראל";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+
+        // this pasuk contains "al" instead of "el", so we should filter it out since
+        // the letter "ayin" is replaced with "alef"
+        assertTrue(!doc.getSpan(0,3).getTags().contains("jbr:text-tanach-5-27-14"));
+        assertTrue(!doc.getSpan(0,3).getTags().contains("jbr:text-tanach-6-10-24"));
+    }
+
     /**
      * Returns a list, sorted.
      * @param args

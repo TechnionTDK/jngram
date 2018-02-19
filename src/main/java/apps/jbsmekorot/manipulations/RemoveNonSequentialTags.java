@@ -1,5 +1,6 @@
 package apps.jbsmekorot.manipulations;
 
+import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.PsukimTagger;
 import spanthera.Span;
 import spanthera.SpanManipulation;
@@ -7,6 +8,8 @@ import spanthera.SpannedDocument;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
 
 /**
  * Created by omishali on 08/01/2018.
