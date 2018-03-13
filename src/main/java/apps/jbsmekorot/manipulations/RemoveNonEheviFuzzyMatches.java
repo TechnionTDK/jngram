@@ -39,12 +39,11 @@ public class RemoveNonEheviFuzzyMatches implements SpanManipulation {
                 if (adnutText == null) {
                     if (!HebrewUtils.isEheviDiff(s.getTextFormatted(), pasukSpan)) {
                         removedTags.add(tag);
-                        System.out.println(s.text());
+                        //System.out.println(s.text());
                     }
                 } else {
                     if (!HebrewUtils.isEheviDiff(s.getTextFormatted(), pasukSpan) && !HebrewUtils.isEheviDiff(adnutText, pasukSpan)) {
                         removedTags.add(tag);
-                        System.out.println(s.text());
                     }
                 }
             }

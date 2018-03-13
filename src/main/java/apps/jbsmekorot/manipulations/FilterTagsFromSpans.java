@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * - Removes tags from spans in length 2.
- * - Removes tags from spans in length 3 unless there is a single tag there.
  * Created by omishali on 15/10/2017.
  */
 public class FilterTagsFromSpans extends FilterTagsManipulation {

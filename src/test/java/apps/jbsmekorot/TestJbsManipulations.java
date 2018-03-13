@@ -137,6 +137,11 @@ public class TestJbsManipulations {
         assertEquals("%ויראת מאלקיך.%", s.text());
         assertEquals("ויראת מאלהיך", s.getTextFormatted());
         assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getSpan(59, 60).getSortedTags());
+
+        text = "המצות המוטלות על כל ישראל כבר ידועות";
+        doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        JbsMekorot.findPsukim(doc);
+        assertEquals(getList(), doc.getSpan(2, 4).getSortedTags());
     }
 
     @Test
