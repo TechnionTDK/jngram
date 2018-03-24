@@ -48,11 +48,11 @@ public class JbsMekorot2 {
     public void main(String[] args)
     {
         String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-        String outDir= "hdfs://tdkstdsparkmaster:54310/user/svitak/output";
+        String outDir = args[1];
         createFolderIfNotExists(outDir);
         TaggerOutput output = findPsukimInDirectoryAux(dirPath);
         try {
-            PrintWriter writer = new PrintWriter(outDir + "/" + "out.json");
+            PrintWriter writer = new PrintWriter(outDir + "/" + "mesilat.json");
             writer.println(output.toString());
             writer.close();
         } catch (FileNotFoundException e) {
