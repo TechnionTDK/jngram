@@ -98,4 +98,9 @@ public class JbsTanachIndexTest {
         assertEquals(1, result.size());
         assertEquals("jbr:text-tanach-1-3-18", result.get(0).get("uri"));
     }
+
+    @Test
+    public void test_getSearchSpans() throws IOException {
+        index.printSpans();
+    }
 }

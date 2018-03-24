@@ -49,6 +49,7 @@ public class JbsSpanFormatter implements SpanFormatter {
                 replaceAll("\\bואלקים\\b", "ואלהים").
                 replaceAll("\\bואלוקים\\b", "ואלהים").
                 replaceAll("\\bאלקיך\\b", "אלהיך").
+                replaceAll("\\bמאלקיך\\b", "מאלהיך").
                 replaceAll("\\bכאלוקים\\b", "כאלהים").
                 replaceAll("\\bכאלקים\\b", "כאלהים").
                 replaceAll("\\bלאלקים\\b", "לאלהים").

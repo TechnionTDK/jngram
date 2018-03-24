@@ -38,7 +38,7 @@ public class FindPsukimOrchotTzadikimTest {
         for(int spanSize = doc.getMaximalSpanSize() ; spanSize >= doc.getMinimalSpanSize(); spanSize-- ){
             doc.tag(spanSize);
         }
-        //doc.add(new FilterTagsFromSpansSize3(doc)).manipulate();
+        //doc.add(new FilterTagsFromSpans(doc)).manipulate();
         //doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
         // after applying the Remove manipulation we expext the URIs matched
         // for span [51,52] [52,53] to be totally removed!

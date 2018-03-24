@@ -1,12 +1,11 @@
 package apps.jbsmekorot;
 
+import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanTagger;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by omishali on 10/09/2017.
@@ -55,13 +54,11 @@ public class PsukimTagger implements SpanTagger {
      * @param s
      * @return
      */
-    private List<Integer> getMaxEdits(Span s) {
+     List<Integer> getMaxEdits(Span s) {
         List<Integer> maxEdits = new ArrayList<>();
-        String[] words = s.text().split("\\s+");
+        String[] words = s.getTextFormatted().split("\\s+");
         for (int i=0; i<words.length; i++) {
-            if (words[i].length() <= 2)
-                maxEdits.add(0);
-            else if (words[i].length() <= 3)
+            if (words[i].length() <= 4)
                 maxEdits.add(1);
             else
                 maxEdits.add(2);

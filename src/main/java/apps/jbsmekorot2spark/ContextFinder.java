@@ -1,4 +1,4 @@
-package apps.jbsmekorot2;
+package apps.jbsmekorot2spark;
 
 import org.apache.lucene.document.Document;
 import spanthera.Span;

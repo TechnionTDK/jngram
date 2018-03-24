@@ -130,6 +130,55 @@ public class RecallPrecision {
         return result;
     }
 
+    public MultPrecisionResult getPrecision(List<SpannedDocument> sds) {
+        MultPrecisionResult result = new MultPrecisionResult();
+        for (SpannedDocument sd : sds)
+            result.add(getPrecision(sd));
+
+        return result;
+    }
+
+    public MultRecallResult getRecall(List<SpannedDocument> sds) {
+        MultRecallResult result = new MultRecallResult();
+        for (SpannedDocument sd : sds)
+            result.add(getRecall(sd));
+
+        return result;
+    }
+
+    public class MultPrecisionResult {
+        private List<PrecisionlResult> results = new ArrayList<>();
+
+        public void add(PrecisionlResult result) {
+            results.add(result);
+        }
+
+        public float getAveragePrecision() {
+            float total = 0;
+            for (PrecisionlResult res : results)
+                total += res.getPrecision();
+
+            return total / results.size();
+        }
+    }
+
+    public class MultRecallResult {
+        private List<RecallResult> results = new ArrayList<>();
+
+        public void add(RecallResult result) {
+            results.add(result);
+        }
+
+        public float getAverageRecall() {
+            float total = 0;
+            for (RecallResult res : results)
+                total += res.getRecall();
+
+            return total / results.size();
+        }
+    }
+
+
     public class RecallResult {
         private float totalLabeledSpans, totalHits;
 

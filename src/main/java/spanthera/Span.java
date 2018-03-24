@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class Span {
     private Map<String, String> stringExtras = new HashMap<>();
+    private Map<String, Integer> intExtras = new HashMap<>();
     private String textFormatted;
     private SpannedDocument doc;
     private int start, end;
@@ -44,6 +45,14 @@ public class Span {
 
     public String getStringExtra(String key) {
         return stringExtras.get(key);
+    }
+
+    public void putExtra(String key, int value) {
+        intExtras.put(key, value);
+    }
+
+    public Integer getIntExtra(String key) {
+        return intExtras.get(key);
     }
 
     /**
@@ -114,5 +123,30 @@ public class Span {
             }
         }
         return result.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Span span = (Span) o;
+
+        if (start != span.start) return false;
+        if (end != span.end) return false;
+        return doc != null ? doc.equals(span.doc) : span.doc == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = doc != null ? doc.hashCode() : 0;
+        result = 31 * result + start;
+        result = 31 * result + end;
+        return result;
+    }
+
+    public boolean hasNoTags() {
+        return getTags().size() == 0;
     }
 }

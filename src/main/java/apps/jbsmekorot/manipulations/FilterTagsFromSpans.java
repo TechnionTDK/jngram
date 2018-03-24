@@ -1,4 +1,4 @@
-package apps.jbsmekorot;
+package apps.jbsmekorot.manipulations;
 
 import org.apache.commons.lang3.StringUtils;
 import spanthera.Span;
@@ -9,31 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * - Removes tags from spans in length 2.
- * - Removes tags from spans in length 3 unless there is a single tag there.
  * Created by omishali on 15/10/2017.
  */
-public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
+public class FilterTagsFromSpans extends FilterTagsManipulation {
     private static final int CERTAIN_LENGTH = 4;
-    private static final int CERTAIN_DISTANCE = 70;
+    private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 70;
 
-    public FilterTagsFromSpansSize3(SpannedDocument doc) {
+    public FilterTagsFromSpans(SpannedDocument doc) {
         doc.clearTagsSpanIndex();
         doc.createTagSpanIndex();
     }
 
     @Override
     protected boolean isCandidate(Span s) {
-        return s.size() == 3;
+        return s.size() == 2 || s.size() == 3;
     }
 
     @Override
     protected void filterTags(SpannedDocument doc, Span s) {
+        // we used to check this, but we prefer not to be based on dots and other punctuation marks.
+        // anyway, if you use this rule note that current impl. has bug: it doesn't filter out % that appear
+        // in labeled data!
         // if the span contains the dot char "." IN THE MIDDLE of it, we clear all tags - we assume that a quotation may not include a dot
-        if (s.text().matches("\\D+\\.\\D+")) {
-            s.clearTags();
-            return;
-        }
+//        if (s.text().matches("\\D+\\.\\D+")) {
+//            System.out.println(s);
+//            s.clearTags();
+//            return;
+//        }
 
         List<String> tagsToBeRemoved = new ArrayList<>();
 
@@ -54,10 +56,9 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
                 continue;
             }
 
-
-                // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
+            // if all found tags are in length < CERTAIN_LENGTH => remove tag. Example: Raba_39_9 !!
             // In other words, we keep the tag only if it also appears in a CERTAIN span
-            if (!hasTagInCertainLength(spansWithSameTag, s))
+            if (isInLongDistanceFromCertainSpan(s, spansWithSameTag))
                 tagsToBeRemoved.add(tag);
         }
 
@@ -67,19 +68,25 @@ public class FilterTagsFromSpansSize3 extends FilterTagsManipulation {
         // here we may check whether s contains "many" tags (MANY_TAGS)
     }
 
-    // also considers CERTAIN_DISTANCE - we return true if a certain span
-    // exists CERTAIN_DISTANCE words before s
-    private boolean hasTagInCertainLength(List<Span> spansWithSameTag, Span s1) {
-        int location = s1.getStart() - CERTAIN_DISTANCE;
+    private boolean isInLongDistanceFromCertainSpan(Span thisSpan, List<Span> spansWithSameTag) {
+        for (Span otherSpan : spansWithSameTag) {
+            if (thisSpan.equals(otherSpan))
+                continue;
 
-        if (location < 0)
-            return false;
+            if (otherSpan.size() < CERTAIN_LENGTH)
+                continue;
 
-        for (Span s2 : spansWithSameTag)
-            if (s2.size() >= CERTAIN_LENGTH && s2.getStart() >= location && s2.getEnd() < s1.getStart())
-                return true;
+            int distance = 0;
+            if (thisSpan.getStart() > otherSpan.getEnd())
+                distance = thisSpan.getStart() - otherSpan.getEnd();
+            else
+                distance = otherSpan.getStart() - thisSpan.getEnd();
 
-        return false;
+            if (distance <= MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN + 1)
+                return false;
+        }
+
+        return true;
     }
 
     private boolean hasTagInCertainLength(List<Span> spansWithSameTag) {

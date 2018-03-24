@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 
 /**
  * Created by omishali on 30/04/2017.
@@ -181,6 +183,34 @@ public class SpannedDocumentTest {
         assertEquals("ויאמר משש", s.getTextFormatted());
         s = doc.getSpan(3, 5);
         assertEquals("רבי ישודש שנשיא", s.getTextFormatted());
+    }
+
+    @Test
+    public void test_getOverlappingSpans() {
+        text.length();// reference for convenience...
+        Span s = doc.getSpan(0, 1);
+        assertEquals("ויאמר משה", s.text());
+
+        List<Span> spans = doc.getOverlappingSpans(s);
+        // we expect all overlapping spans besides s itself
+        assertThat(spans.size(), equalTo(8));
+
+        s = doc.getSpan(1, 2);
+        assertEquals("משה אל", s.text());
+        spans = doc.getOverlappingSpans(s);
+        // we do not expect spans BEFORE s, only AFTER
+        assertThat(spans.size(), equalTo(6));
+
+        s = doc.getSpan(4, 5);
+        assertEquals("יהודה הנשיא", s.text());
+        spans = doc.getOverlappingSpans(s);
+        // we do not expect spans BEFORE s, only AFTER
+        assertThat(spans.size(), equalTo(0));
+
+        s = doc.getSpan(0, 4);
+        assertEquals("ויאמר משה אל רבי יהודה", s.text());
+        spans = doc.getOverlappingSpans(s);
+        assertThat(spans.size(), equalTo(5));
     }
 
     private List<String> getList(String... args) {
