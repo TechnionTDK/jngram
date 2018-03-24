@@ -1,4 +1,7 @@
 package apps.jbsmekorot2spark;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 
 import apps.jbsmekorot.JbsSpanFormatter;
 import com.google.gson.Gson;
@@ -14,6 +17,7 @@ import spanthera.io.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +61,14 @@ public class JbsMekorot2 {
         createFolderIfNotExists(outputDirPath);
 
         timerTotal.start();
+//        String path = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim";
+//        try{
+//            FileSystem fs = new Path(path).getFileSystem(new Configuration(true));
+//        } catch (IOException e){
+//            System.out.println("getFileSystem Failed for this path: " + path );
+//            exit;
+//        }
+
 
         File rootDir = new File(rootDirPath);
         for (File subDir : rootDir.listFiles()) {
@@ -149,7 +161,9 @@ public class JbsMekorot2 {
 
     public TaggerOutput findPsukimInDirectoryAux(String dirName, String rootDir) {
         TaggerOutput outputJson = new TaggerOutput();
-        String filepath =   "hdfs://tdkstdsparkmaster:54310" + rootDir + "/" + dirName + "/*.json.spark";
+
+        String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/*.json.spark";
+       // String filepath =   "hdfs://tdkstdsparkmaster:54310" + rootDir + "/" + dirName + "/*.json.spark";
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x) );
         List<List<Row>> outPutJsonsList = matches.collect();

@@ -69,8 +69,8 @@ import static org.junit.Assert.assertNotNull;
             RecallPrecision calc = new RecallPrecision();
 
             // find psukim in second subject and calculate recall & precision
-           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(6));
-            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(6));
+           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(11));
+            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(11));
 
             PrintRecall(calc, sdTopDOwn, "TopDown");
             PrintRecall(calc, sdBottomUp, "BottomUp");
