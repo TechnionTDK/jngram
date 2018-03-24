@@ -61,7 +61,7 @@ public class JbsMekorot2 {
         }
 
     }
-    public  void main2(String[] args) {
+    public  void garbageFunc(String[] args) {
         if (args.length != 2) {
             System.out.println("Wrong arguments, should provide 2 arguments.");
             exit(0);
