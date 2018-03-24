@@ -45,7 +45,22 @@ public class JbsMekorot2 {
      * @param args arg1: path to input directory, basically it should be a path to "jbs-text"
      *             arg2: path to output directory.
      */
-    public  void main(String[] args) {
+    public void main(String[] args)
+    {
+        String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
+        String outDir= "hdfs://tdkstdsparkmaster:54310/user/svitak/output";
+        createFolderIfNotExists(outDir);
+        TaggerOutput output = findPsukimInDirectoryAux(dirPath);
+        try {
+            PrintWriter writer = new PrintWriter(outDir + "/" + "out.json");
+            writer.println(output.toString());
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public  void main2(String[] args) {
         if (args.length != 2) {
             System.out.println("Wrong arguments, should provide 2 arguments.");
             exit(0);
@@ -88,7 +103,7 @@ public class JbsMekorot2 {
             //System.out.println("Analyze " + subDir.getName() + "...");
             timerPerDir.reset(); timerPerDir.start();
 
-            TaggerOutput output = findPsukimInDirectoryAux(subDir.getName(), rootDirPath);
+            TaggerOutput output = findPsukimInDirectoryAux(subDir.getName());
 
             timerPerDir.stop();
             //System.out.println("TOTAL: " + timerPerDir.toString());
@@ -159,12 +174,12 @@ public class JbsMekorot2 {
         //doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();
     }
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirName, String rootDir) {
+    public TaggerOutput findPsukimInDirectoryAux(String dirName) {
         TaggerOutput outputJson = new TaggerOutput();
 
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-        String filepath =   "hdfs://tdkstdsparkmaster:54310/" + rootDir + "/" + dirName + "/*.json.spark"; //hardcoded
-        JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
+        //String filepath =   "hdfs://tdkstdsparkmaster:54310/" + rootDir + "/" + dirName + "/*.json.spark"; //hardcoded
+        JavaRDD<Row> javaRDD = this.sparkSession.read().json(dirName).javaRDD();
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x) );
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
