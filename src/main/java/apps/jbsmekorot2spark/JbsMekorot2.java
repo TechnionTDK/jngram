@@ -53,6 +53,7 @@ public class JbsMekorot2 {
         TaggerOutput output = findPsukimInDirectoryAux(dirPath);
         try {
             PrintWriter writer = new PrintWriter(outDir + "/" + "mesilat.json");
+            writer.println("file was created");
             writer.println(output.toString());
             writer.close();
         } catch (FileNotFoundException e) {
