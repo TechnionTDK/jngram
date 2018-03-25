@@ -66,11 +66,12 @@ public abstract class JbsSparkMekorot {
 
     public TaggerOutput findPsukimInDirectoryAux(String dirPath) {
         TaggerOutput outputJson = new TaggerOutput();
-        File dir = new File(dirPath);
-        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        if(files== null || files.length==0) return outputJson;
+        //File dir = new File(dirPath);
+        //File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
+        //if(files== null || files.length==0) return outputJson;
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String filepath =   dirPath+ "/*.json.spark";
+        System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x) );
         List<List<Row>> outPutJsonsList = matches.collect();
