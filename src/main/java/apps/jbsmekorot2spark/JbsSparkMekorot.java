@@ -1,5 +1,6 @@
 package apps.jbsmekorot2spark;
 
+import apps.jbsmekorot.JbsSpanFormatter;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static java.lang.System.exit;
 
-public abstract class JbsSparkMekorot {
+public class JbsSparkMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
     private SparkSession sparkSession;
@@ -82,7 +83,7 @@ public abstract class JbsSparkMekorot {
         return outputJson;
     }
 
-    public List<Row> findPsukimInJson(Row jSonName) {
+    public static List<Row> findPsukimInJson(Row jSonName) {
         int TEXT_INDEX = 1;
         int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
@@ -116,5 +117,32 @@ public abstract class JbsSparkMekorot {
         retList.add(row);
         return retList;
     }
-    public abstract void findPsukim(SpannedDocument sd);
+    public  static  void findPsukim(SpannedDocument sd){
+         findPsukimTopDown(sd);
+    };
+
+    public static void findPsukimTopDown(SpannedDocument doc){
+        doc.format(new JbsSpanFormatter());
+        doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
+        doc.add(new PsukimTaggerTopDown(doc.length()));
+        //StopWatch tag_timer = new StopWatch();
+        //double tag_timer_total = 0;
+        //int span_size = 0;
+        // int[] res_candidates = { 0 };
+        for(int spanSize = doc.getMaximalSpanSize() ; spanSize >= doc.getMinimalSpanSize(); spanSize-- ){
+            //span_size=spanSize;
+            //System.out.println(">> DEBUG: measuring time for spans of size: "+ spanSize  );
+            //tag_timer.start();
+            doc.tag(spanSize);
+            //System.out.println(">> DEBUG: result for spans of size: "+ spanSize + "is : "   + tag_timer.getNanoTime());
+            //tag_timer_total = tag_timer.getNanoTime()/Math.pow(10,9);
+            //DecimalFormat df = new DecimalFormat("#.##");
+            //String time_s = df.format(tag_timer_total);
+            //tag_timer.reset();
+//            System.out.println(">> Performance Test: avarage time to tag span sized     " + span_size + ":  "
+//                    + tag_timer_total/res_candidates[0] +"  #spans:     "
+//                    +res_candidates[0] + ",total:   "+time_s  +"    , (maxEdits = "+ 2 +" per word)" );
+//            res_candidates[0]=0;
+        }
+    }
 }
