@@ -121,7 +121,7 @@
 
         <resources>
             <resource>
-                <directory>tools/luceneIndex</directory>
+                <directory>src/main/resources/tools/luceneIndex</directory>
             </resource>
         </resources>
     </build>
