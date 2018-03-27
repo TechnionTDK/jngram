@@ -43,6 +43,11 @@ public class PsukimTaggerTopDown implements SpanTagger {
     public List<String> tag(Span s){
         String text= s.getTextFormatted();
         List<String> results = null;
+
+        // formatting may reduce the size of the span to 1, which causes the fuzzy search to fail.
+        if (text.split("\\s+").length == 1)
+            return new ArrayList<>();
+
         if(s.size() <= Config.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
             results= HandleFirstLayerSpans(s, text);
 

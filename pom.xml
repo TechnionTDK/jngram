@@ -118,6 +118,12 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>tools/luceneIndex</directory>
+            </resource>
+        </resources>
     </build>
 
 </project>
