@@ -34,7 +34,7 @@ public class PsukimTaggerTopDownTests {
     @Test
     public void Test1()
     {
-        TaggerInput inputJson = SpantheraIO.readInputJson(LABELED1);
+        TaggerInput inputJson = SpantheraIO.readInputJson(LABELED2);
         assertNotNull(inputJson);
         List<Subject> subjects = inputJson.getSubjects();
         SpannedDocument doc= JbsMekorot2.findPsukimInSubject(subjects.get(0));

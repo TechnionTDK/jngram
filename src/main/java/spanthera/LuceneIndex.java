@@ -33,6 +33,9 @@ public abstract class LuceneIndex {
         IndexReader reader = null;
         try {
             index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
+            System.out.println("index : ROOT_DIRECTORY [" + ROOT_DIRECTORY + "] + [" + "getOutputIndexDirectory() ["
+                    + getOutputIndexDirectory() + "]"  );
+            System.out.println("index : " + index );
             reader = DirectoryReader.open(index);
         } catch (IOException e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
