@@ -23,8 +23,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
-        tanach = new JbsTanachIndex();
-        tanachMale = new JbsTanachMaleIndex();
+        tanach = new JbsTanachIndex("./tools/luceneIndex/", false);
+        tanachMale = new JbsTanachMaleIndex("./tools/luceneIndex/", false);
     }
 
     @Override

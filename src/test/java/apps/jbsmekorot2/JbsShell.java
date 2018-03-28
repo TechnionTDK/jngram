@@ -35,7 +35,7 @@ public class JbsShell {
 
     @Before
     public void before() throws Exception {
-        index = new JbsTanachIndex();
+        index = new JbsTanachIndex("./tools/luceneIndex/", false);
         madad= new RecallPrecision();
     }
 

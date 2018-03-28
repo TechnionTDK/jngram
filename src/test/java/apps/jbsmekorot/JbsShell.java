@@ -27,7 +27,7 @@ public class JbsShell {
 
     @Before
     public void before() throws Exception {
-        index = new JbsTanachIndex();
+        index = new JbsTanachIndex("./tools/luceneIndex/", false);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(textGevurot_8_long, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        doc = new SpannedDocument(textMitzva_1_1, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
         System.out.println(doc.toString());

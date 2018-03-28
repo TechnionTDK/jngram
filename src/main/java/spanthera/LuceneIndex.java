@@ -1,12 +1,20 @@
 package spanthera;
 
+import com.bah.lucene.BlockCacheDirectoryFactoryV2;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.*;
 import org.apache.lucene.search.*;
-import org.apache.lucene.search.spans.*;
+import org.apache.lucene.search.spans.SpanMultiTermQueryWrapper;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.solr.store.hdfs.HdfsDirectory;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -14,39 +22,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class LuceneIndex {
+    protected static final int NUM_OF_RESULTS = 1500;
+    private boolean IS_SPARK;
+    protected Directory index;
+    protected IndexSearcher indexSearcher;
+    protected IndexWriter writer;
+    protected String ROOT_DIRECTORY ;
 
-    private static final int NUM_OF_RESULTS = 1500;
-    private Directory index;
-    private IndexSearcher indexSearcher;
-    private IndexWriter writer;
-    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/";
+    public LuceneIndex(String rootDirectory, boolean isSpark) {
+        ROOT_DIRECTORY= rootDirectory;
+        IS_SPARK= isSpark;
+        IndexReader reader = null;
+        if(isSpark)
+        {
+            try {
+                //copy lucene dir to hdfs
+
+                Configuration conf = new Configuration();
+                conf.set("fs.defaultFS", "hdfs://tdkstdsparkmaster:54310/");
+                FileSystem fileSystem = FileSystem.get(conf);
+                Path localIndexPath = new Path("./tools/luceneIndex");
+                fileSystem.mkdirs(localIndexPath);
+                HdfsDirectory hdfsDirectory = new HdfsDirectory
+                        (new org.apache.hadoop.fs.Path("hdfs://tdkstdsparkmaster:54310/"
+                                + ROOT_DIRECTORY+getOutputIndexDirectory()), conf);
+                index = new BlockCacheDirectoryFactoryV2(new Configuration(), 100000000).newDirectory(
+                        "index", "shard1", hdfsDirectory, null
+                );
+
+                //index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
+                reader = DirectoryReader.open(index);
+            }
+            catch (IOException e) {
+                throw new IllegalArgumentException("bad paths: "+ e.getMessage());
+                }
+
+        }
+        else{
+            try {
+                index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
+                reader = DirectoryReader.open(index);
+            } catch (IOException e) {
+                IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
+                try {
+                    writer = new IndexWriter(index, config);
+                    createIndex();
+                    reader = DirectoryReader.open(index);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+        }
+        indexSearcher = new IndexSearcher(reader);
+    }
+
 
     abstract protected String getOutputIndexDirectory();
-    abstract protected void createIndex() throws Exception;
+    protected abstract void createIndex() throws Exception;
     /**
      * To clean the index, just remove its directory. If the directory
      * exists, the index is not recreated.
      * @throws Exception
      */
-    public LuceneIndex() {
 
-        IndexReader reader = null;
-        try {
-            index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
-            reader = DirectoryReader.open(index);
-        } catch (IOException e) {
-            IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
-            try {
-                writer = new IndexWriter(index, config);
-                createIndex();
-                reader = DirectoryReader.open(index);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-
-        }
-        indexSearcher = new IndexSearcher(reader);
-    }
 
 //    void clear() throws IOException {
 //        FileUtils.cleanDirectory(new File(indexDirectory));
@@ -124,19 +163,6 @@ public abstract class LuceneIndex {
         ScoreDoc[] hits = docs.scoreDocs;
         return getTextList(hits);
     }
-
-//    protected List<Document> searchFuzzy2(String field, String phrase, int maxEdits) throws IOException {
-//        //String[] terms = phrase.split(" ");
-//        FuzzyQuery clauses = new FuzzyQuery(new Term(field, phrase),maxEdits);
-//        //for (int i = 0; i < terms.length; i++) {
-//         //   clauses[i] = new SpanMultiTermQueryWrapper<>(new FuzzyQuery(new Term(field, terms[i]), maxEdits));
-//        //}
-//
-//        SpanNearQuery q = new SpanNearQuery(clauses, 0, true);
-//        TopDocs docs = indexSearcher.search(q, NUM_OF_RESULTS);
-//        ScoreDoc[] hits = docs.scoreDocs;
-//        return getTextList(hits);
-//    }
 
     protected void searchFuzzy(String field, String phrase) throws IOException {
         String[] terms = phrase.split(" ");

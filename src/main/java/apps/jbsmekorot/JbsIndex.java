@@ -29,8 +29,8 @@ public abstract class JbsIndex extends LuceneIndex {
      *
      * @throws Exception
      */
-    public JbsIndex() {
-        super();
+    public JbsIndex(String rootDirectory, boolean isSpark) {
+        super(rootDirectory, isSpark);
     }
 
     protected abstract String getInputJsonDirectory();
