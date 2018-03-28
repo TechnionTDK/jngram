@@ -6,7 +6,7 @@ package apps.jbsmekorot;
 public class JbsTanachIndex extends JbsIndex {
     @Override
     protected String getInputJsonDirectory() {
-        return "./jbs-text/tanach/";
+        return "./src/main/resources/jbs-text/tanach/";
     }
 
     @Override
