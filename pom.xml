@@ -121,7 +121,10 @@
 
         <resources>
             <resource>
-                <directory>tools/luceneIndex</directory>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.*</include>
+                </includes>
             </resource>
         </resources>
     </build>
