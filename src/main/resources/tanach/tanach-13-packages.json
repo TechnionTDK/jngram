@@ -1,0 +1,316 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-13-1",
+      "rdfs:label": "ירמיה פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-2",
+      "rdfs:label": "ירמיה פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-3",
+      "rdfs:label": "ירמיה פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-4",
+      "rdfs:label": "ירמיה פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-5",
+      "rdfs:label": "ירמיה פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-6",
+      "rdfs:label": "ירמיה פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-7",
+      "rdfs:label": "ירמיה פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-8",
+      "rdfs:label": "ירמיה פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-9",
+      "rdfs:label": "ירמיה פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-10",
+      "rdfs:label": "ירמיה פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-11",
+      "rdfs:label": "ירמיה פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-12",
+      "rdfs:label": "ירמיה פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-13",
+      "rdfs:label": "ירמיה פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-14",
+      "rdfs:label": "ירמיה פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-15",
+      "rdfs:label": "ירמיה פרק טו",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-16",
+      "rdfs:label": "ירמיה פרק טז",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-17",
+      "rdfs:label": "ירמיה פרק יז",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-18",
+      "rdfs:label": "ירמיה פרק יח",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-19",
+      "rdfs:label": "ירמיה פרק יט",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-20",
+      "rdfs:label": "ירמיה פרק כ",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-21",
+      "rdfs:label": "ירמיה פרק כא",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-22",
+      "rdfs:label": "ירמיה פרק כב",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-23",
+      "rdfs:label": "ירמיה פרק כג",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-24",
+      "rdfs:label": "ירמיה פרק כד",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-25",
+      "rdfs:label": "ירמיה פרק כה",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-26",
+      "rdfs:label": "ירמיה פרק כו",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-27",
+      "rdfs:label": "ירמיה פרק כז",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-28",
+      "rdfs:label": "ירמיה פרק כח",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-29",
+      "rdfs:label": "ירמיה פרק כט",
+      "jbo:position": "29",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-30",
+      "rdfs:label": "ירמיה פרק ל",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-31",
+      "rdfs:label": "ירמיה פרק לא",
+      "jbo:position": "31",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-32",
+      "rdfs:label": "ירמיה פרק לב",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-33",
+      "rdfs:label": "ירמיה פרק לג",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-34",
+      "rdfs:label": "ירמיה פרק לד",
+      "jbo:position": "34",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-35",
+      "rdfs:label": "ירמיה פרק לה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-36",
+      "rdfs:label": "ירמיה פרק לו",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-37",
+      "rdfs:label": "ירמיה פרק לז",
+      "jbo:position": "37",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-38",
+      "rdfs:label": "ירמיה פרק לח",
+      "jbo:position": "38",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-39",
+      "rdfs:label": "ירמיה פרק לט",
+      "jbo:position": "39",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-40",
+      "rdfs:label": "ירמיה פרק מ",
+      "jbo:position": "40",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-41",
+      "rdfs:label": "ירמיה פרק מא",
+      "jbo:position": "41",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-42",
+      "rdfs:label": "ירמיה פרק מב",
+      "jbo:position": "42",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-43",
+      "rdfs:label": "ירמיה פרק מג",
+      "jbo:position": "43",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-44",
+      "rdfs:label": "ירמיה פרק מד",
+      "jbo:position": "44",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-45",
+      "rdfs:label": "ירמיה פרק מה",
+      "jbo:position": "45",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-46",
+      "rdfs:label": "ירמיה פרק מו",
+      "jbo:position": "46",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-47",
+      "rdfs:label": "ירמיה פרק מז",
+      "jbo:position": "47",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-48",
+      "rdfs:label": "ירמיה פרק מח",
+      "jbo:position": "48",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-49",
+      "rdfs:label": "ירמיה פרק מט",
+      "jbo:position": "49",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-50",
+      "rdfs:label": "ירמיה פרק נ",
+      "jbo:position": "50",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-51",
+      "rdfs:label": "ירמיה פרק נא",
+      "jbo:position": "51",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    },
+    {
+      "uri": "jbr:section-tanach-13-52",
+      "rdfs:label": "ירמיה פרק נב",
+      "jbo:position": "52",
+      "jbo:book": "jbr:book-tanach-yirmiya"
+    }
+  ]
+}

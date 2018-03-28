@@ -1,0 +1,88 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-15-1",
+      "rdfs:label": "הושע פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-2",
+      "rdfs:label": "הושע פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-3",
+      "rdfs:label": "הושע פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-4",
+      "rdfs:label": "הושע פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-5",
+      "rdfs:label": "הושע פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-6",
+      "rdfs:label": "הושע פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-7",
+      "rdfs:label": "הושע פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-8",
+      "rdfs:label": "הושע פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-9",
+      "rdfs:label": "הושע פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-10",
+      "rdfs:label": "הושע פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-11",
+      "rdfs:label": "הושע פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-12",
+      "rdfs:label": "הושע פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-13",
+      "rdfs:label": "הושע פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    },
+    {
+      "uri": "jbr:section-tanach-15-14",
+      "rdfs:label": "הושע פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-hoshea"
+    }
+  ]
+}

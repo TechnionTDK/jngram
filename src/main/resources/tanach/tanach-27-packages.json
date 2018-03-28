@@ -1,0 +1,904 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-27-1",
+      "rdfs:label": "תהילים פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-2",
+      "rdfs:label": "תהילים פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-3",
+      "rdfs:label": "תהילים פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-4",
+      "rdfs:label": "תהילים פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-5",
+      "rdfs:label": "תהילים פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-6",
+      "rdfs:label": "תהילים פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-7",
+      "rdfs:label": "תהילים פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-8",
+      "rdfs:label": "תהילים פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-9",
+      "rdfs:label": "תהילים פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-10",
+      "rdfs:label": "תהילים פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-11",
+      "rdfs:label": "תהילים פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-12",
+      "rdfs:label": "תהילים פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-13",
+      "rdfs:label": "תהילים פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-14",
+      "rdfs:label": "תהילים פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-15",
+      "rdfs:label": "תהילים פרק טו",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-16",
+      "rdfs:label": "תהילים פרק טז",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-17",
+      "rdfs:label": "תהילים פרק יז",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-18",
+      "rdfs:label": "תהילים פרק יח",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-19",
+      "rdfs:label": "תהילים פרק יט",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-20",
+      "rdfs:label": "תהילים פרק כ",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-21",
+      "rdfs:label": "תהילים פרק כא",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-22",
+      "rdfs:label": "תהילים פרק כב",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-23",
+      "rdfs:label": "תהילים פרק כג",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-24",
+      "rdfs:label": "תהילים פרק כד",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-25",
+      "rdfs:label": "תהילים פרק כה",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-26",
+      "rdfs:label": "תהילים פרק כו",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-27",
+      "rdfs:label": "תהילים פרק כז",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-28",
+      "rdfs:label": "תהילים פרק כח",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-29",
+      "rdfs:label": "תהילים פרק כט",
+      "jbo:position": "29",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-30",
+      "rdfs:label": "תהילים פרק ל",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-31",
+      "rdfs:label": "תהילים פרק לא",
+      "jbo:position": "31",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-32",
+      "rdfs:label": "תהילים פרק לב",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-33",
+      "rdfs:label": "תהילים פרק לג",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-34",
+      "rdfs:label": "תהילים פרק לד",
+      "jbo:position": "34",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-35",
+      "rdfs:label": "תהילים פרק לה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-36",
+      "rdfs:label": "תהילים פרק לו",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-37",
+      "rdfs:label": "תהילים פרק לז",
+      "jbo:position": "37",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-38",
+      "rdfs:label": "תהילים פרק לח",
+      "jbo:position": "38",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-39",
+      "rdfs:label": "תהילים פרק לט",
+      "jbo:position": "39",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-40",
+      "rdfs:label": "תהילים פרק מ",
+      "jbo:position": "40",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-41",
+      "rdfs:label": "תהילים פרק מא",
+      "jbo:position": "41",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-42",
+      "rdfs:label": "תהילים פרק מב",
+      "jbo:position": "42",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-43",
+      "rdfs:label": "תהילים פרק מג",
+      "jbo:position": "43",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-44",
+      "rdfs:label": "תהילים פרק מד",
+      "jbo:position": "44",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-45",
+      "rdfs:label": "תהילים פרק מה",
+      "jbo:position": "45",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-46",
+      "rdfs:label": "תהילים פרק מו",
+      "jbo:position": "46",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-47",
+      "rdfs:label": "תהילים פרק מז",
+      "jbo:position": "47",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-48",
+      "rdfs:label": "תהילים פרק מח",
+      "jbo:position": "48",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-49",
+      "rdfs:label": "תהילים פרק מט",
+      "jbo:position": "49",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-50",
+      "rdfs:label": "תהילים פרק נ",
+      "jbo:position": "50",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-51",
+      "rdfs:label": "תהילים פרק נא",
+      "jbo:position": "51",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-52",
+      "rdfs:label": "תהילים פרק נב",
+      "jbo:position": "52",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-53",
+      "rdfs:label": "תהילים פרק נג",
+      "jbo:position": "53",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-54",
+      "rdfs:label": "תהילים פרק נד",
+      "jbo:position": "54",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-55",
+      "rdfs:label": "תהילים פרק נה",
+      "jbo:position": "55",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-56",
+      "rdfs:label": "תהילים פרק נו",
+      "jbo:position": "56",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-57",
+      "rdfs:label": "תהילים פרק נז",
+      "jbo:position": "57",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-58",
+      "rdfs:label": "תהילים פרק נח",
+      "jbo:position": "58",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-59",
+      "rdfs:label": "תהילים פרק נט",
+      "jbo:position": "59",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-60",
+      "rdfs:label": "תהילים פרק ס",
+      "jbo:position": "60",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-61",
+      "rdfs:label": "תהילים פרק סא",
+      "jbo:position": "61",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-62",
+      "rdfs:label": "תהילים פרק סב",
+      "jbo:position": "62",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-63",
+      "rdfs:label": "תהילים פרק סג",
+      "jbo:position": "63",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-64",
+      "rdfs:label": "תהילים פרק סד",
+      "jbo:position": "64",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-65",
+      "rdfs:label": "תהילים פרק סה",
+      "jbo:position": "65",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-66",
+      "rdfs:label": "תהילים פרק סו",
+      "jbo:position": "66",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-67",
+      "rdfs:label": "תהילים פרק סז",
+      "jbo:position": "67",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-68",
+      "rdfs:label": "תהילים פרק סח",
+      "jbo:position": "68",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-69",
+      "rdfs:label": "תהילים פרק סט",
+      "jbo:position": "69",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-70",
+      "rdfs:label": "תהילים פרק ע",
+      "jbo:position": "70",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-71",
+      "rdfs:label": "תהילים פרק עא",
+      "jbo:position": "71",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-72",
+      "rdfs:label": "תהילים פרק עב",
+      "jbo:position": "72",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-73",
+      "rdfs:label": "תהילים פרק עג",
+      "jbo:position": "73",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-74",
+      "rdfs:label": "תהילים פרק עד",
+      "jbo:position": "74",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-75",
+      "rdfs:label": "תהילים פרק עה",
+      "jbo:position": "75",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-76",
+      "rdfs:label": "תהילים פרק עו",
+      "jbo:position": "76",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-77",
+      "rdfs:label": "תהילים פרק עז",
+      "jbo:position": "77",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-78",
+      "rdfs:label": "תהילים פרק עח",
+      "jbo:position": "78",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-79",
+      "rdfs:label": "תהילים פרק עט",
+      "jbo:position": "79",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-80",
+      "rdfs:label": "תהילים פרק פ",
+      "jbo:position": "80",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-81",
+      "rdfs:label": "תהילים פרק פא",
+      "jbo:position": "81",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-82",
+      "rdfs:label": "תהילים פרק פב",
+      "jbo:position": "82",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-83",
+      "rdfs:label": "תהילים פרק פג",
+      "jbo:position": "83",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-84",
+      "rdfs:label": "תהילים פרק פד",
+      "jbo:position": "84",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-85",
+      "rdfs:label": "תהילים פרק פה",
+      "jbo:position": "85",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-86",
+      "rdfs:label": "תהילים פרק פו",
+      "jbo:position": "86",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-87",
+      "rdfs:label": "תהילים פרק פז",
+      "jbo:position": "87",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-88",
+      "rdfs:label": "תהילים פרק פח",
+      "jbo:position": "88",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-89",
+      "rdfs:label": "תהילים פרק פט",
+      "jbo:position": "89",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-90",
+      "rdfs:label": "תהילים פרק צ",
+      "jbo:position": "90",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-91",
+      "rdfs:label": "תהילים פרק צא",
+      "jbo:position": "91",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-92",
+      "rdfs:label": "תהילים פרק צב",
+      "jbo:position": "92",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-93",
+      "rdfs:label": "תהילים פרק צג",
+      "jbo:position": "93",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-94",
+      "rdfs:label": "תהילים פרק צד",
+      "jbo:position": "94",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-95",
+      "rdfs:label": "תהילים פרק צה",
+      "jbo:position": "95",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-96",
+      "rdfs:label": "תהילים פרק צו",
+      "jbo:position": "96",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-97",
+      "rdfs:label": "תהילים פרק צז",
+      "jbo:position": "97",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-98",
+      "rdfs:label": "תהילים פרק צח",
+      "jbo:position": "98",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-99",
+      "rdfs:label": "תהילים פרק צט",
+      "jbo:position": "99",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-100",
+      "rdfs:label": "תהילים פרק ק",
+      "jbo:position": "100",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-101",
+      "rdfs:label": "תהילים פרק קא",
+      "jbo:position": "101",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-102",
+      "rdfs:label": "תהילים פרק קב",
+      "jbo:position": "102",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-103",
+      "rdfs:label": "תהילים פרק קג",
+      "jbo:position": "103",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-104",
+      "rdfs:label": "תהילים פרק קד",
+      "jbo:position": "104",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-105",
+      "rdfs:label": "תהילים פרק קה",
+      "jbo:position": "105",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-106",
+      "rdfs:label": "תהילים פרק קו",
+      "jbo:position": "106",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-107",
+      "rdfs:label": "תהילים פרק קז",
+      "jbo:position": "107",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-108",
+      "rdfs:label": "תהילים פרק קח",
+      "jbo:position": "108",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-109",
+      "rdfs:label": "תהילים פרק קט",
+      "jbo:position": "109",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-110",
+      "rdfs:label": "תהילים פרק קי",
+      "jbo:position": "110",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-111",
+      "rdfs:label": "תהילים פרק קיא",
+      "jbo:position": "111",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-112",
+      "rdfs:label": "תהילים פרק קיב",
+      "jbo:position": "112",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-113",
+      "rdfs:label": "תהילים פרק קיג",
+      "jbo:position": "113",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-114",
+      "rdfs:label": "תהילים פרק קיד",
+      "jbo:position": "114",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-115",
+      "rdfs:label": "תהילים פרק קטו",
+      "jbo:position": "115",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-116",
+      "rdfs:label": "תהילים פרק קטז",
+      "jbo:position": "116",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-117",
+      "rdfs:label": "תהילים פרק קיז",
+      "jbo:position": "117",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-118",
+      "rdfs:label": "תהילים פרק קיח",
+      "jbo:position": "118",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-119",
+      "rdfs:label": "תהילים פרק קיט",
+      "jbo:position": "119",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-120",
+      "rdfs:label": "תהילים פרק קכ",
+      "jbo:position": "120",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-121",
+      "rdfs:label": "תהילים פרק קכא",
+      "jbo:position": "121",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-122",
+      "rdfs:label": "תהילים פרק קכב",
+      "jbo:position": "122",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-123",
+      "rdfs:label": "תהילים פרק קכג",
+      "jbo:position": "123",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-124",
+      "rdfs:label": "תהילים פרק קכד",
+      "jbo:position": "124",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-125",
+      "rdfs:label": "תהילים פרק קכה",
+      "jbo:position": "125",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-126",
+      "rdfs:label": "תהילים פרק קכו",
+      "jbo:position": "126",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-127",
+      "rdfs:label": "תהילים פרק קכז",
+      "jbo:position": "127",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-128",
+      "rdfs:label": "תהילים פרק קכח",
+      "jbo:position": "128",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-129",
+      "rdfs:label": "תהילים פרק קכט",
+      "jbo:position": "129",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-130",
+      "rdfs:label": "תהילים פרק קל",
+      "jbo:position": "130",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-131",
+      "rdfs:label": "תהילים פרק קלא",
+      "jbo:position": "131",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-132",
+      "rdfs:label": "תהילים פרק קלב",
+      "jbo:position": "132",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-133",
+      "rdfs:label": "תהילים פרק קלג",
+      "jbo:position": "133",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-134",
+      "rdfs:label": "תהילים פרק קלד",
+      "jbo:position": "134",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-135",
+      "rdfs:label": "תהילים פרק קלה",
+      "jbo:position": "135",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-136",
+      "rdfs:label": "תהילים פרק קלו",
+      "jbo:position": "136",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-137",
+      "rdfs:label": "תהילים פרק קלז",
+      "jbo:position": "137",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-138",
+      "rdfs:label": "תהילים פרק קלח",
+      "jbo:position": "138",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-139",
+      "rdfs:label": "תהילים פרק קלט",
+      "jbo:position": "139",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-140",
+      "rdfs:label": "תהילים פרק קמ",
+      "jbo:position": "140",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-141",
+      "rdfs:label": "תהילים פרק קמא",
+      "jbo:position": "141",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-142",
+      "rdfs:label": "תהילים פרק קמב",
+      "jbo:position": "142",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-143",
+      "rdfs:label": "תהילים פרק קמג",
+      "jbo:position": "143",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-144",
+      "rdfs:label": "תהילים פרק קמד",
+      "jbo:position": "144",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-145",
+      "rdfs:label": "תהילים פרק קמה",
+      "jbo:position": "145",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-146",
+      "rdfs:label": "תהילים פרק קמו",
+      "jbo:position": "146",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-147",
+      "rdfs:label": "תהילים פרק קמז",
+      "jbo:position": "147",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-148",
+      "rdfs:label": "תהילים פרק קמח",
+      "jbo:position": "148",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-149",
+      "rdfs:label": "תהילים פרק קמט",
+      "jbo:position": "149",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    },
+    {
+      "uri": "jbr:section-tanach-27-150",
+      "rdfs:label": "תהילים פרק קנ",
+      "jbo:position": "150",
+      "jbo:book": "jbr:book-tanach-tehilim"
+    }
+  ]
+}
