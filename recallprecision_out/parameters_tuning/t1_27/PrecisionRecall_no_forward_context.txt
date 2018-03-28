@@ -1,0 +1,166 @@
+
+Document name :jbr:text-mesilatyesharim-0
+Recall TopDown : 0.8333333
+TopDown misses  
+Missed span:
+[504, 513]
+(%כי כל לבבות דורש ה' וכל יצר מחשבות הוא מבין%)
+
+Recall BottomUp : 0.8333333
+BottomUp misses  
+Missed span:
+[504, 513]
+(%כי כל לבבות דורש ה' וכל יצר מחשבות הוא מבין%)
+
+Precision TopDown : 0.2777778
+TopDown imprecise: 
+Imprecise span:
+[721, 722]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[724, 725]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[727, 728]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[730, 731]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[733, 734]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[827, 828]
+(היא חכמה)
+tags: jbr:text-tanach-29-28-28, 
+Imprecise span:
+[847, 850]
+(על כל הדברים האלה)
+tags: jbr:text-tanach-2-24-8, 
+Imprecise span:
+[1274, 1278]
+(למען נלמד ליראה את ה')
+tags: jbr:text-tanach-5-17-19, jbr:text-tanach-5-14-23, 
+Imprecise span:
+[504, 511]
+(%כי כל לבבות דורש ה' וכל יצר מחשבות)
+tags: jbr:text-tanach-38-28-9, 
+Imprecise span:
+[1312, 1319]
+(%הורני ה' דרכך אהלך באמתך יחד לבבי ליראה)
+tags: jbr:text-tanach-27-86-11, 
+Imprecise span:
+[905, 916]
+(בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך בכל לבבך ובכל נפשך,%)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[891, 904]
+(%ועתה ישראל מה ה' אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת)
+tags: jbr:text-tanach-5-10-12, 
+Precision BottomUp : 0.16129032
+BottomUp imprecise: 
+Imprecise span:
+[721, 722]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[724, 725]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[727, 728]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[730, 731]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[733, 734]
+(אז תבין)
+tags: jbr:text-tanach-28-2-5, 
+Imprecise span:
+[827, 828]
+(היא חכמה)
+tags: jbr:text-tanach-29-28-28, 
+Imprecise span:
+[10, 13]
+(אשר לא ידעו, אלא)
+tags: jbr:text-tanach-5-29-25, jbr:text-tanach-5-8-3, 
+Imprecise span:
+[537, 540]
+(מה ה' אלהינו שואל)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[847, 850]
+(על כל הדברים האלה)
+tags: jbr:text-tanach-2-24-8, 
+Imprecise span:
+[1274, 1279]
+(למען נלמד ליראה את ה' אלקינו)
+tags: jbr:text-tanach-5-17-19, 
+Imprecise span:
+[504, 511]
+(%כי כל לבבות דורש ה' וכל יצר מחשבות)
+tags: jbr:text-tanach-38-28-9, 
+Imprecise span:
+[1312, 1319]
+(%הורני ה' דרכך אהלך באמתך יחד לבבי ליראה)
+tags: jbr:text-tanach-27-86-11, 
+Imprecise span:
+[891, 904]
+(%ועתה ישראל מה ה' אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[892, 905]
+(ישראל מה ה' אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת בכל)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[893, 906]
+(מה ה' אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת בכל דרכיו)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[894, 907]
+(ה' אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[895, 908]
+(אלקיך שואל מעמך, כי אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[896, 909]
+(שואל מעמך, כי אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[897, 910]
+(מעמך, כי אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[898, 911]
+(כי אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה')
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[899, 912]
+(אם ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[900, 913]
+(ליראה את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך בכל)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[901, 914]
+(את ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך בכל לבבך)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[902, 915]
+(ה' אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך בכל לבבך ובכל)
+tags: jbr:text-tanach-5-10-12, 
+Imprecise span:
+[903, 916]
+(אלקיך ללכת בכל דרכיו ולאהבה אותו ולעבוד את ה' אלקיך בכל לבבך ובכל נפשך,%)
+tags: jbr:text-tanach-5-10-12, 
