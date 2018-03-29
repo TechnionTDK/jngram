@@ -33,6 +33,7 @@ public abstract class LuceneIndex {
         IndexReader reader = null;
         try {
             index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
+            if(index== null) FSDirectory.open(Paths.get("/home/svitak/resources/"+ getOutputIndexDirectory()));
             reader = DirectoryReader.open(index);
         } catch (IOException e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
