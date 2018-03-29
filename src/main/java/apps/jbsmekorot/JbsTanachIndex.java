@@ -13,7 +13,7 @@ public class JbsTanachIndex extends JbsIndex {
      * @throws Exception
      */
     public JbsTanachIndex(String rootDirectory, boolean isSpark) {
-        super(rootDirectory, isSpark);
+        super();
     }
 
     @Override
