@@ -37,8 +37,8 @@ public class JbsSparkMekorot {
      */
      public void main(String[] args)
     {
-        if (args.length != 2) {
-            System.out.println("Wrong arguments, should provide 2 arguments.");
+        if (args.length < 2) {
+            System.out.println("Wrong arguments, should provide at least 2 arguments.");
             exit(0);
         }
         String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
