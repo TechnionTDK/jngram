@@ -7,8 +7,10 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,12 @@ public abstract class LuceneIndex {
         IndexReader reader = null;
         try {
             index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
-            if(index== null) FSDirectory.open(Paths.get("/home/svitak/resources/"+ getOutputIndexDirectory()));
+            if(index== null)
+            {
+                if(!Files.exists(Paths.get("/home/svitak/resources/" + getOutputIndexDirectory())))
+                    throw new IllegalArgumentException("path isnt reachable: "+ "/home/svitak/resources/"+ getOutputIndexDirectory());
+                FSDirectory.open(Paths.get("/home/svitak/resources/"+ getOutputIndexDirectory()));
+            }
             reader = DirectoryReader.open(index);
         } catch (IOException e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
