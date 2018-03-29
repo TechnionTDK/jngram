@@ -7,7 +7,6 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,14 +34,8 @@ public abstract class LuceneIndex {
         IndexReader reader = null;
         try {
             index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
-            if(index== null)
-            {
-                if(!Files.exists(Paths.get("/home/svitak/resources/" + getOutputIndexDirectory())))
-                    throw new IllegalArgumentException("path isnt reachable: "+ "/home/svitak/resources/"+ getOutputIndexDirectory());
-                FSDirectory.open(Paths.get("/home/svitak/resources/"+ getOutputIndexDirectory()));
-            }
             reader = DirectoryReader.open(index);
-        } catch (IOException e) {
+        } catch (Exception e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
             try {
                 writer = new IndexWriter(index, config);
@@ -51,7 +44,6 @@ public abstract class LuceneIndex {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-
         }
         indexSearcher = new IndexSearcher(reader);
     }

@@ -6,7 +6,6 @@ import apps.jbsmekorot.JbsTanachIndex;
 import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanManipulation;
-import spanthera.SpanTagger;
 import spanthera.SpannedDocument;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class RemoveNonEheviFuzzyMatches implements SpanManipulation {
             List<String> removedTags = new ArrayList<>();
             for (String tag : s.getTags()) {
                 // get the text of the pasuk
-                JbsTanachIndex index = new JbsTanachIndex("./tools/luceneIndex/", false);
+                JbsTanachIndex index = new JbsTanachIndex();
                 List<Document> docs = index.searchExactInUri(tag);
                 String pasuk = docs.get(0).get("text");
 

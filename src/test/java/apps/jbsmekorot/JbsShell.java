@@ -27,7 +27,7 @@ public class JbsShell {
 
     @Before
     public void before() throws Exception {
-        index = new JbsTanachIndex("./tools/luceneIndex/", false);
+        index = new JbsTanachIndex();
     }
 
     @Test

@@ -2,7 +2,6 @@ package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
-import org.apache.commons.lang3.builder.DiffBuilder;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
 import spanthera.Span;
@@ -23,8 +22,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
-        tanach = new JbsTanachIndex("./tools/luceneIndex/", false);
-        tanachMale = new JbsTanachMaleIndex("./tools/luceneIndex/", false);
+        tanach = new JbsTanachIndex();
+        tanachMale = new JbsTanachMaleIndex();
     }
 
     @Override

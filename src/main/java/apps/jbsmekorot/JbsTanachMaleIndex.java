@@ -8,17 +8,15 @@ public class JbsTanachMaleIndex extends JbsIndex {
      * To clean the index, just remove its directory. If the directory
      * exists, the index is not recreated.
      *
-     * @param rootDirectory
-     * @param isSpark
      * @throws Exception
      */
-    public JbsTanachMaleIndex(String rootDirectory, boolean isSpark) {
+    public JbsTanachMaleIndex() {
         super();
     }
 
     @Override
     protected String getInputJsonDirectory() {
-        return "./src/main/resources/tanach_ktivmale";
+        return "./src/main/resources/tanach_ktivmale/";
     }
 
     @Override

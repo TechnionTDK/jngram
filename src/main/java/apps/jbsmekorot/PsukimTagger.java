@@ -16,7 +16,7 @@ public class PsukimTagger implements SpanTagger {
     //private JbsTanachMaleIndex tanachMale;
 
     public PsukimTagger() {
-        tanach = new JbsTanachIndex("./tools/luceneIndex/", false);
+        tanach = new JbsTanachIndex();
         //tanachMale = new JbsTanachMaleIndex();
     }
 
