@@ -41,12 +41,13 @@ public class JbsSparkMekorot {
             System.out.println("Wrong arguments, should provide 2 arguments.");
             exit(0);
         }
-        String dirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
-        String dirName= new File(dirPath).getParentFile().getName();
+        String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
+        String roodHdfsDir= args[2];
+        String dirName= new File(inputDirPath).getParentFile().getName();
         //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[1];
         createFolderIfNotExists(outDir);
-        TaggerOutput output = findPsukimInDirectoryAux(dirPath);
+        TaggerOutput output = findPsukimInDirectoryAux(inputDirPath, roodHdfsDir);
         try {
             PrintWriter writer = new PrintWriter(outDir + "/" + dirName+".json");
             writer.println("output file was created");
@@ -65,7 +66,7 @@ public class JbsSparkMekorot {
         dir.mkdir();
     }
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirPath) {
+    public TaggerOutput findPsukimInDirectoryAux(String dirPath, String roodHdfsDir) {
         TaggerOutput outputJson = new TaggerOutput();
         //File dir = new File(dirPath);
         //File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
@@ -74,7 +75,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x) );
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,roodHdfsDir));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);
@@ -83,7 +84,7 @@ public class JbsSparkMekorot {
         return outputJson;
     }
 
-    public static List<Row> findPsukimInJson(Row jSonName) {
+    public static List<Row> findPsukimInJson(Row jSonName, String roodHdfsDir) {
         int TEXT_INDEX = 1;
         int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
@@ -101,7 +102,7 @@ public class JbsSparkMekorot {
         }
 
         SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-        findPsukim(sd);
+        findPsukim(sd, roodHdfsDir, true);
         // now we should output the result to a file & directory...
         taggedSubject.setUri(uri);
         for (Span span : sd.getAllSpans()) {
@@ -117,14 +118,14 @@ public class JbsSparkMekorot {
         retList.add(row);
         return retList;
     }
-    public  static  void findPsukim(SpannedDocument sd){
-         findPsukimTopDown(sd);
+    public  static  void findPsukim(SpannedDocument sd, String roodHdfsDir, boolean isSpark){
+         findPsukimTopDown(sd,roodHdfsDir, isSpark);
     };
 
-    public static void findPsukimTopDown(SpannedDocument doc){
+    public static void findPsukimTopDown(SpannedDocument doc, String roodHdfsDir, boolean isSpark){
         doc.format(new JbsSpanFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length()));
+        doc.add(new PsukimTaggerTopDown(doc.length(),roodHdfsDir, isSpark));
         //StopWatch tag_timer = new StopWatch();
         //double tag_timer_total = 0;
         //int span_size = 0;

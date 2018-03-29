@@ -30,7 +30,7 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
 
             for (String tag : s.getTags()) {
                 // get the text of the pasuk
-                JbsTanachIndex index = new JbsTanachIndex();
+                JbsTanachIndex index = new JbsTanachIndex("./tools/luceneIndex/", false);
                 List<Document> docs = index.searchExactInUri(tag);
                 String pasuk = docs.get(0).get("text");
 

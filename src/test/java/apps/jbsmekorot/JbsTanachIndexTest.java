@@ -15,7 +15,7 @@ public class JbsTanachIndexTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        index = new JbsTanachIndex();
+        index = new JbsTanachIndex("./tools/luceneIndex/", false);
     }
 
     @Test
