@@ -96,7 +96,13 @@ public class JbsSparkMekorot {
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
         List<List<Row>> outPutJsonsList = matches.collect();
+        List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
         for(List<Row> rowList : outPutJsonsList){
+            if(rowList.size() > 0){
+                outPutJsonsListNotEmpty.add(rowList);
+            }
+        }
+        for(List<Row> rowList : outPutJsonsListNotEmpty){
             Row temp_row = rowList.get(0);
             TaggedSubject taggedSubject = new TaggedSubject();
             taggedSubject.setUri((String) temp_row.get(0));
@@ -113,10 +119,10 @@ public class JbsSparkMekorot {
     }
 
     public static List<Row> findPsukimInJson(Row jSonName) {
-        int TEXT_INDEX = 1;
-        int URI_INDEX = 2;
+//        int TEXT_INDEX = 1;
+//        int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
-        Subject subject = new Subject((String) jSonName.get(URI_INDEX), (String) jSonName.get(TEXT_INDEX));
+        Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("text"));
 
         // a subject denotes a specific text element within the json file
 
