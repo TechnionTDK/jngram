@@ -20,7 +20,7 @@ public abstract class LuceneIndex {
     private Directory index;
     private IndexSearcher indexSearcher;
     private IndexWriter writer;
-    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/";
+    private static final String ROOT_DIRECTORY = "/home/orasraf/gitprojects/spanthera/tools/luceneIndex/";//"./tools/luceneIndex/";
 
     abstract protected String getOutputIndexDirectory();
     abstract protected void createIndex() throws Exception;
