@@ -1,6 +1,7 @@
 package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsSpanFormatter;
+import apps.jbsmekorot.JbsTanachIndex;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -81,7 +82,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,LuceneGlobalIndex.tanach));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);
@@ -90,7 +91,7 @@ public class JbsSparkMekorot {
         return outputJson;
     }
 
-    public static List<Row> findPsukimInJson(Row jSonName) {
+    public static List<Row> findPsukimInJson(Row jSonName, JbsTanachIndex tanachIndex) {
         int TEXT_INDEX = 1;
         int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
@@ -108,7 +109,7 @@ public class JbsSparkMekorot {
         }
 
         SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-        findPsukim(sd);
+        findPsukim(sd,tanachIndex);
         // now we should output the result to a file & directory...
         taggedSubject.setUri(uri);
         for (Span span : sd.getAllSpans()) {
@@ -124,14 +125,14 @@ public class JbsSparkMekorot {
         retList.add(row);
         return retList;
     }
-    public  static  void findPsukim(SpannedDocument sd){
-         findPsukimTopDown(sd);
+    public  static  void findPsukim(SpannedDocument sd, JbsTanachIndex tanachIndex ){
+         findPsukimTopDown(sd,tanachIndex);
     };
 
-    public static void findPsukimTopDown(SpannedDocument doc){
+    public static void findPsukimTopDown(SpannedDocument doc , JbsTanachIndex tanachIndex){
         doc.format(new JbsSpanFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length()));
+        doc.add(new PsukimTaggerTopDown(doc.length(),tanachIndex));
         //StopWatch tag_timer = new StopWatch();
         //double tag_timer_total = 0;
         //int span_size = 0;
