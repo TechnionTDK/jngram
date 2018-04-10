@@ -76,8 +76,8 @@ public class JbsSparkMekorot {
 
     public TaggerOutput findPsukimInDirectoryAux(String dirPath) throws Exception {
          // TEST
-
-        List<Document> res = LuceneGlobalIndex.tanach.searchFuzzyInText("אהיה אשר אהיה", 1);
+        JbsTanachIndex tanachIndex = new JbsTanachIndex();
+        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
         if (res.size() == 0 ){
             throw new Exception("Lucene Global Index did not return any results.");
         }
@@ -92,7 +92,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,LuceneGlobalIndex.tanach));
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,tanachIndex));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);
