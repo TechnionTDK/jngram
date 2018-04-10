@@ -97,17 +97,26 @@ public class JbsSparkMekorot {
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
-            Row row = rowList.get(0);
-            outputJson.addTaggedSubject((TaggedSubject) row.get(0));
+            Row temp_row = rowList.get(0);
+            TaggedSubject taggedSubject = new TaggedSubject();
+            taggedSubject.setUri((String) temp_row.get(0));
+            for(Row row : rowList){
+                taggedSubject.addTag(new Tag(
+                        (String) row.get(1),
+                        (String) row.get(2)
+                )
+                );
+            }
+            outputJson.addTaggedSubject(taggedSubject);
         }
         return outputJson;
     }
 
     public static List<Row> findPsukimInJson(Row jSonName) {
-        int TEXT_INDEX = 1;
-        int URI_INDEX = 2;
+//        int TEXT_INDEX = 4;
+//        int URI_INDEX = 0;
         List<Row> retList = new ArrayList<>();
-        Subject subject = new Subject((String) jSonName.get(URI_INDEX), (String) jSonName.get(TEXT_INDEX));
+        Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("jbo:text"));
 
         // a subject denotes a specific text element within the json file
 
@@ -132,9 +141,14 @@ public class JbsSparkMekorot {
                 taggedSubject.addTag(t);
             }
         }
-
-        Row row = RowFactory.create(taggedSubject);
-        retList.add(row);
+//        private String uri;
+//        private List<Tag> tags;
+        for(Tag tag : taggedSubject.getTags()){
+            Row row = RowFactory.create(taggedSubject.getUri(),tag.getUri(),tag.getSpan());
+            retList.add(row);
+        }
+//        Row row = RowFactory.create(taggedSubject.getUri(),taggedSubject.getTags());
+//        retList.add(row);
         return retList;
     }
     public  static  void findPsukim(SpannedDocument sd ){
