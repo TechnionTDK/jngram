@@ -71,7 +71,7 @@ public class TestJbsManipulations {
         doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
-        assertEquals(getList("jbr:text-tanach-13-1-10"), doc.getSpan(0, 3).getSortedTags());
+        assertEquals(getList(), doc.getSpan(0, 3).getSortedTags());
 
         Span s = doc.getSpan(0, 3);
         assertEquals(new Integer(6), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-13-1-10"));
@@ -80,7 +80,7 @@ public class TestJbsManipulations {
         doc = new SpannedDocument(text, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
-        assertEquals(getList("jbr:text-tanach-14-18-6", "jbr:text-tanach-14-18-15"), doc.getSpan(0, 4).getSortedTags());
+        assertEquals(getList("jbr:text-tanach-14-18-6"), doc.getSpan(0, 4).getSortedTags());
 
         s = doc.getSpan(0, 4);
         assertEquals(new Integer(1), CalcAndFilterByEditDistance.getDistance(s, "jbr:text-tanach-14-18-6"));
