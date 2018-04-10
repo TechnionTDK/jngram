@@ -94,7 +94,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,tanachIndex));
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);
@@ -103,7 +103,7 @@ public class JbsSparkMekorot {
         return outputJson;
     }
 
-    public static List<Row> findPsukimInJson(Row jSonName, JbsTanachIndex tanachIndex) {
+    public static List<Row> findPsukimInJson(Row jSonName) {
         int TEXT_INDEX = 1;
         int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
@@ -121,7 +121,7 @@ public class JbsSparkMekorot {
         }
 
         SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-        findPsukim(sd,tanachIndex);
+        findPsukim(sd);
         // now we should output the result to a file & directory...
         taggedSubject.setUri(uri);
         for (Span span : sd.getAllSpans()) {
@@ -137,14 +137,14 @@ public class JbsSparkMekorot {
         retList.add(row);
         return retList;
     }
-    public  static  void findPsukim(SpannedDocument sd, JbsTanachIndex tanachIndex ){
-         findPsukimTopDown(sd,tanachIndex);
+    public  static  void findPsukim(SpannedDocument sd ){
+         findPsukimTopDown(sd);
     };
 
-    public static void findPsukimTopDown(SpannedDocument doc , JbsTanachIndex tanachIndex){
+    public static void findPsukimTopDown(SpannedDocument doc ){
         doc.format(new JbsSpanFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length(),tanachIndex));
+        doc.add(new PsukimTaggerTopDown(doc.length()));
         //StopWatch tag_timer = new StopWatch();
         //double tag_timer_total = 0;
         //int span_size = 0;
