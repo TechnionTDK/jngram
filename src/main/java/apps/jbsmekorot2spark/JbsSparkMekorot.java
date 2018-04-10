@@ -2,6 +2,8 @@ package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsSpanFormatter;
 import apps.jbsmekorot.JbsTanachIndex;
+import org.apache.lucene.document.Document;
+import org.apache.solr.api.ApiBag;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -47,7 +49,13 @@ public class JbsSparkMekorot {
         //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[1];
         createFolderIfNotExists(outDir);
-        TaggerOutput output = findPsukimInDirectoryAux(inputDirPath);
+        TaggerOutput output;
+        try{
+            output = findPsukimInDirectoryAux(inputDirPath);
+        } catch (Exception e){
+            return;
+        }
+
         try {
             PrintWriter writer = new PrintWriter(outDir + "/" + dirName+".json");
             writer.println("output file was created");
@@ -66,11 +74,13 @@ public class JbsSparkMekorot {
         dir.mkdir();
     }
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirPath) {
+    public TaggerOutput findPsukimInDirectoryAux(String dirPath) throws Exception {
          // TEST
 
-        LuceneGlobalIndex.tanach.searchFuzzyInText("......", 1);
-
+        List<Document> res = LuceneGlobalIndex.tanach.searchFuzzyInText("אהיה אשר אהיה", 1);
+        if (res.size() == 0 ){
+            throw new Exception("Lucene Global Index did not return any results.");
+        }
 
             //
 
