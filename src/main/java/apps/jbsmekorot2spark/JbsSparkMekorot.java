@@ -50,11 +50,8 @@ public class JbsSparkMekorot {
         String outDir = args[1];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
-        try{
-            output = findPsukimInDirectoryAux(inputDirPath);
-        } catch (Exception e){
-            return;
-        }
+        output = findPsukimInDirectoryAux(inputDirPath);
+
 
         try {
             PrintWriter writer = new PrintWriter(outDir + "/" + "output.json");
@@ -79,7 +76,7 @@ public class JbsSparkMekorot {
         dir.mkdir();
     }
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirPath) throws Exception {
+    public TaggerOutput findPsukimInDirectoryAux(String dirPath)  {
          // TEST
         JbsTanachIndex tanachIndex = new JbsTanachIndex();
 //        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
