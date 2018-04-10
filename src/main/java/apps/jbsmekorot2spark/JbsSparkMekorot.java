@@ -68,7 +68,7 @@ public class JbsSparkMekorot {
     public TaggerOutput findPsukimInDirectoryAux(String dirPath) {
          // TEST
 
-        LuceneGlobalIndex.tanach.searchFuzzyInText("טסט", 1);
+        LuceneGlobalIndex.tanach.searchFuzzyInText("......", 1);
 
 
             //
