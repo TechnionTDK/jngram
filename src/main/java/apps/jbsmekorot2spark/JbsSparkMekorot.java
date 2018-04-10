@@ -61,6 +61,10 @@ public class JbsSparkMekorot {
             writer.println("output file was created");
             writer.println(output.toString());
             writer.close();
+            createFolderIfNotExists(outDir + "/test_out_dir");
+            PrintWriter test_writer = new PrintWriter(outDir + "/test_out_dir" + "/" + "test_output.json");
+            writer.println(output.toString());
+            writer.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
