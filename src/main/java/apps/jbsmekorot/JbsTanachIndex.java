@@ -1,9 +1,11 @@
 package apps.jbsmekorot;
 
+import java.io.Serializable;
+
 /**
  * Created by omishali on 06/11/2017.
  */
-public class JbsTanachIndex extends JbsIndex {
+public class JbsTanachIndex extends JbsIndex implements Serializable {
     /**
      * To clean the index, just remove its directory. If the directory
      * exists, the index is not recreated.

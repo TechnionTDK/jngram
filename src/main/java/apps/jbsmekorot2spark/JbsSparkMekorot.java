@@ -1,6 +1,9 @@
 package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsSpanFormatter;
+import apps.jbsmekorot.JbsTanachIndex;
+import org.apache.lucene.document.Document;
+import org.apache.solr.api.ApiBag;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -46,12 +49,20 @@ public class JbsSparkMekorot {
         //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[1];
         createFolderIfNotExists(outDir);
-        TaggerOutput output = findPsukimInDirectoryAux(inputDirPath);
+        TaggerOutput output;
+        output = findPsukimInDirectoryAux(inputDirPath);
+
+
         try {
-            PrintWriter writer = new PrintWriter(outDir + "/" + dirName+".json");
+            PrintWriter writer = new PrintWriter(outDir + "/" + "output.json");
             writer.println("output file was created");
             writer.println(output.toString());
             writer.close();
+            createFolderIfNotExists(outDir + "/test_out_dir");
+            PrintWriter test_writer = new PrintWriter(outDir + "/test_out_dir" + "/" + "test_output.json");
+            writer.println(output.toString());
+            writer.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,11 +76,13 @@ public class JbsSparkMekorot {
         dir.mkdir();
     }
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirPath) {
+    public TaggerOutput findPsukimInDirectoryAux(String dirPath)  {
          // TEST
-
-        LuceneGlobalIndex.tanach.searchFuzzyInText("......", 1);
-
+        JbsTanachIndex tanachIndex = new JbsTanachIndex();
+//        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
+//        if (res.size() == 0 ){
+//            throw new Exception("Lucene Global Index did not return any results.");
+//        }
 
             //
 
@@ -81,7 +94,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,tanachIndex));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);
@@ -90,7 +103,7 @@ public class JbsSparkMekorot {
         return outputJson;
     }
 
-    public static List<Row> findPsukimInJson(Row jSonName) {
+    public static List<Row> findPsukimInJson(Row jSonName, JbsTanachIndex tanachIndex) {
         int TEXT_INDEX = 1;
         int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
@@ -108,7 +121,7 @@ public class JbsSparkMekorot {
         }
 
         SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-        findPsukim(sd);
+        findPsukim(sd,tanachIndex);
         // now we should output the result to a file & directory...
         taggedSubject.setUri(uri);
         for (Span span : sd.getAllSpans()) {
@@ -124,14 +137,14 @@ public class JbsSparkMekorot {
         retList.add(row);
         return retList;
     }
-    public  static  void findPsukim(SpannedDocument sd){
-         findPsukimTopDown(sd);
+    public  static  void findPsukim(SpannedDocument sd, JbsTanachIndex tanachIndex ){
+         findPsukimTopDown(sd,tanachIndex);
     };
 
-    public static void findPsukimTopDown(SpannedDocument doc){
+    public static void findPsukimTopDown(SpannedDocument doc , JbsTanachIndex tanachIndex){
         doc.format(new JbsSpanFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length()));
+        doc.add(new PsukimTaggerTopDown(doc.length(),tanachIndex));
         //StopWatch tag_timer = new StopWatch();
         //double tag_timer_total = 0;
         //int span_size = 0;
