@@ -61,6 +61,7 @@ public class JbsSparkMekorot {
             writer.println("output file was created");
             writer.println(output.toString());
             writer.close();
+            System.out.println(output.toString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -77,10 +78,10 @@ public class JbsSparkMekorot {
     public TaggerOutput findPsukimInDirectoryAux(String dirPath) throws Exception {
          // TEST
         JbsTanachIndex tanachIndex = new JbsTanachIndex();
-        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
-        if (res.size() == 0 ){
-            throw new Exception("Lucene Global Index did not return any results.");
-        }
+//        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
+//        if (res.size() == 0 ){
+//            throw new Exception("Lucene Global Index did not return any results.");
+//        }
 
             //
 
