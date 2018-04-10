@@ -6,7 +6,6 @@ import apps.jbsmekorot.JbsTanachIndex;
 import org.apache.lucene.document.Document;
 import spanthera.Span;
 import spanthera.SpanManipulation;
-import spanthera.SpanTagger;
 import spanthera.SpannedDocument;
 
 import java.util.ArrayList;

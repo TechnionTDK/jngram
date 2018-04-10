@@ -41,12 +41,12 @@ public class JbsSparkMekorot {
             System.out.println("Wrong arguments, should provide 2 arguments.");
             exit(0);
         }
-        String dirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
-        String dirName= new File(dirPath).getParentFile().getName();
+        String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
+        String dirName= new File(inputDirPath).getParentFile().getName();
         //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[1];
         createFolderIfNotExists(outDir);
-        TaggerOutput output = findPsukimInDirectoryAux(dirPath);
+        TaggerOutput output = findPsukimInDirectoryAux(inputDirPath);
         try {
             PrintWriter writer = new PrintWriter(outDir + "/" + dirName+".json");
             writer.println("output file was created");
@@ -74,7 +74,7 @@ public class JbsSparkMekorot {
         String filepath =   dirPath+ "/*.json.spark";
         System.out.println("input file name is: " + filepath);
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x) );
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
         List<List<Row>> outPutJsonsList = matches.collect();
         for(List<Row> rowList : outPutJsonsList){
             Row row = rowList.get(0);

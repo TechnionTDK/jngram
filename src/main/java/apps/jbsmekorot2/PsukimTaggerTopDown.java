@@ -2,7 +2,6 @@ package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.JbsTanachMaleIndex;
-import org.apache.commons.lang3.builder.DiffBuilder;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
 import spanthera.Span;

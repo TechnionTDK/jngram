@@ -84,6 +84,25 @@
             <artifactId>annotations</artifactId>
             <version>15.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>7.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-core</artifactId>
+            <version>7.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.bah.lucene/lucene-hdfs-directory -->
+        <dependency>
+            <groupId>com.bah.lucene</groupId>
+            <artifactId>lucene-hdfs-directory</artifactId>
+            <version>4.7.0-0</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -121,10 +140,7 @@
 
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>*.*</include>
-                </includes>
+                <directory>tools/luceneIndex</directory>
             </resource>
         </resources>
     </build>

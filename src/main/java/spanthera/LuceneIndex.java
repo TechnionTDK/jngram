@@ -9,6 +9,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +34,8 @@ public abstract class LuceneIndex {
         IndexReader reader = null;
         try {
             index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
-            System.out.println("index : ROOT_DIRECTORY [" + ROOT_DIRECTORY + "] + [" + "getOutputIndexDirectory() ["
-                    + getOutputIndexDirectory() + "]"  );
-            System.out.println("index : " + index );
             reader = DirectoryReader.open(index);
-        } catch (IOException e) {
+        } catch (Exception e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
             try {
                 writer = new IndexWriter(index, config);
@@ -46,7 +44,6 @@ public abstract class LuceneIndex {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-
         }
         indexSearcher = new IndexSearcher(reader);
     }
