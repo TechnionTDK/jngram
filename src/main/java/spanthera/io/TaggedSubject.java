@@ -7,6 +7,9 @@ import java.util.List;
  * Created by valkh on 29-Nov-16.
  */
 public class TaggedSubject {
+
+    private static final long serialVersionUID = 1L;
+
     private String uri;
     private List<Tag> tags;
 
