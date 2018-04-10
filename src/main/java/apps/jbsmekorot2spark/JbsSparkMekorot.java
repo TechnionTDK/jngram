@@ -108,8 +108,8 @@ public class JbsSparkMekorot {
             taggedSubject.setUri((String) temp_row.get(0));
             for(Row row : rowList){
                 taggedSubject.addTag(new Tag(
-                        (String) row.get(1),
-                        (String) row.get(2)
+                        (String) row.get(2),
+                        (String) row.get(1)
                 )
                 );
             }

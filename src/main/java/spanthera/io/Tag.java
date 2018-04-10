@@ -5,9 +5,7 @@ import java.io.Serializable;
 /**
  * Created by valkh on 29-Nov-16.
  */
-public class Tag implements Serializable{
-
-    private static final long serialVersionUID = 1L;
+public class Tag{
 
     private String uri;
     private String span;
