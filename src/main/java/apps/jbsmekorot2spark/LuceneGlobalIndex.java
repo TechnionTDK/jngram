@@ -5,5 +5,5 @@ import apps.jbsmekorot.JbsTanachMaleIndex;
 
 public class LuceneGlobalIndex {
     public static JbsTanachIndex tanach = new JbsTanachIndex();
-    public static JbsTanachMaleIndex tanachMale = new JbsTanachMaleIndex();
+    public static JbsTanachIndex tanachMale = new JbsTanachIndex();
 }
