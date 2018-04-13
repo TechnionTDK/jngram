@@ -63,12 +63,11 @@ public class JbsSparkMekorot {
 
         String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
         String indexPath= args[1];
-        //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[2];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
 
-       
+
         File dir = new File(inputDirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
         System.out.println("dir: " + dir.getAbsolutePath());
@@ -104,18 +103,20 @@ public class JbsSparkMekorot {
     public TaggerOutput findPsukimInDirectoryAux(String dirPath, String indexPath)  {
 
         TaggerOutput outputJson = new TaggerOutput();
-        File dir = new File(dirPath);
-        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        if(files== null || files.length==0) {
-            return outputJson;
-        }
+//        File dir = new File(dirPath);
+//        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
+//        if(files== null || files.length==0) {
+//            return outputJson;
+//        }
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
+        String signleFile= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
 
 
-        for(File file : files){
-            String absolutePath = file.getAbsolutePath();
-            String absolutePathWithMachineAddress = dirPath + absolutePath;
-            JavaRDD<Row> javaRDD = this.sparkSession.read().json(absolutePathWithMachineAddress).javaRDD();
+        for(int i = 0 ; i < 1 ; i++){
+//        for(File file : files){
+//            String absolutePath = file.getAbsolutePath();
+//            String absolutePathWithMachineAddress = dirPath + absolutePath;
+            JavaRDD<Row> javaRDD = this.sparkSession.read().json(signleFile).javaRDD();
             JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,indexPath));
             List<List<Row>> outPutJsonsList = matches.collect();
             List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
