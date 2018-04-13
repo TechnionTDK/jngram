@@ -86,7 +86,10 @@ public class JbsSparkMekorot {
         TaggerOutput outputJson = new TaggerOutput();
         File dir = new File(dirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        if(files== null || files.length==0) return outputJson;
+        if(files== null || files.length==0) {
+            System.out.println("files: " + dir.listFiles());
+            return outputJson;
+        }
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
 
 
