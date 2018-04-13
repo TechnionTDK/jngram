@@ -24,7 +24,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
 
         tanach = new JbsTanachIndex();
-        tanachMale = new JbsTanachIndex();
+        //tanachMale = new JbsTanachIndex();
     }
 
     @Override
@@ -99,8 +99,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
         for(Document d : docs) {
             Double diffGrade = 0.0;
             int numOfWords = s.size();
-            String[] docWords = d.getFields().get(0).stringValue().split(" ");
-            String[] spanWords = s.getTextFormatted().split(" ");
+            String[] docWords = d.getFields().get(0).stringValue().split("\\s+");
+            String[] spanWords = s.getTextFormatted().split("\\s+");
             //find starting index:
             int starting_idx = getStartingIndex( docWords, spanWords);
             if (starting_idx == -1) {

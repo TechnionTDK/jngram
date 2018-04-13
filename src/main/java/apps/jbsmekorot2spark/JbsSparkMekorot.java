@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.System.exit;
@@ -26,6 +27,9 @@ import static java.lang.System.exit;
 public class JbsSparkMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
+    public static final int SPAN_INDEX_IN_ROW = 2;
+    public static final int URI_INDEX_IN_ROW = 1;
+    public static final int SUBJECT_URI_INDEX_IN_ROW = 0;
     private SparkSession sparkSession;
 
     public JbsSparkMekorot(SparkSession sparkSession)
@@ -77,44 +81,53 @@ public class JbsSparkMekorot {
     }
 
     public TaggerOutput findPsukimInDirectoryAux(String dirPath)  {
-         // TEST
-        JbsTanachIndex tanachIndex = new JbsTanachIndex();
-//        List<Document> res = tanachIndex.searchFuzzyInText("אהיה אשר אהיה", 1);
-//        if (res.size() == 0 ){
-//            throw new Exception("Lucene Global Index did not return any results.");
-//        }
 
-            //
+
 
         TaggerOutput outputJson = new TaggerOutput();
-        //File dir = new File(dirPath);
-        //File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        //if(files== null || files.length==0) return outputJson;
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
+        if(files== null || files.length==0) return outputJson;
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-        String filepath =   dirPath+ "/*.json.spark";
-        System.out.println("input file name is: " + filepath);
-        JavaRDD<Row> javaRDD = this.sparkSession.read().json(filepath).javaRDD();
-        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
-        List<List<Row>> outPutJsonsList = matches.collect();
-        List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
-        for(List<Row> rowList : outPutJsonsList){
-            if(rowList.size() > 0){
-                outPutJsonsListNotEmpty.add(rowList);
+        //String filepath =   dirPath+ "/*.json.spark";
+
+        for(File file : files){
+            String absolutePath = file.getAbsolutePath();
+            String absolutePathWithMachineAddress = dirPath + absolutePath;
+            JavaRDD<Row> javaRDD = this.sparkSession.read().json(absolutePathWithMachineAddress).javaRDD();
+            JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x));
+            List<List<Row>> outPutJsonsList = matches.collect();
+            List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
+            for(List<Row> rowList : outPutJsonsList){
+                if(rowList.size() > 0){
+                    outPutJsonsListNotEmpty.add(rowList);
+                }
+            }
+            HashMap<String,TaggedSubject> taggedSubjectsMap = new HashMap<String,TaggedSubject>();
+            for(List<Row> rowList : outPutJsonsListNotEmpty){
+                Row temp_row = rowList.get(0);
+                String subjectURI = (String) temp_row.get(0);
+                if(!taggedSubjectsMap.containsKey(subjectURI)){
+                    TaggedSubject taggedSubject = new TaggedSubject();
+                    taggedSubject.setUri((String) temp_row.get(SUBJECT_URI_INDEX_IN_ROW));
+                    taggedSubjectsMap.put(subjectURI,taggedSubject);
+                }
+                TaggedSubject taggedSubject = taggedSubjectsMap.get(subjectURI);
+
+                for(Row row : rowList){
+                    taggedSubject.addTag(new Tag(
+                                    (String) row.get(SPAN_INDEX_IN_ROW),
+                                    (String) row.get(URI_INDEX_IN_ROW)
+                            )
+                    );
+                }
+
+            }
+            for(TaggedSubject taggedSubject : taggedSubjectsMap.values()){
+                outputJson.addTaggedSubject(taggedSubject);
             }
         }
-        for(List<Row> rowList : outPutJsonsListNotEmpty){
-            Row temp_row = rowList.get(0);
-            TaggedSubject taggedSubject = new TaggedSubject();
-            taggedSubject.setUri((String) temp_row.get(0));
-            for(Row row : rowList){
-                taggedSubject.addTag(new Tag(
-                        (String) row.get(2),
-                        (String) row.get(1)
-                )
-                );
-            }
-            outputJson.addTaggedSubject(taggedSubject);
-        }
+
         return outputJson;
     }
 
