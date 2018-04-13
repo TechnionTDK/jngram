@@ -2,8 +2,17 @@ package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsSpanFormatter;
 import apps.jbsmekorot.JbsTanachIndex;
-import org.apache.lucene.document.Document;
-import org.apache.solr.api.ApiBag;
+import org.apache.hadoop.fs.FileStatus;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.*;
+import java.net.*;
+import org.apache.hadoop.fs.*;
+import org.apache.hadoop.conf.*;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapred.*;
+import org.apache.hadoop.util.*;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -15,6 +24,7 @@ import spanthera.io.Tag;
 import spanthera.io.TaggedSubject;
 import spanthera.io.TaggerOutput;
 
+import javax.security.auth.login.Configuration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -57,17 +67,8 @@ public class JbsSparkMekorot {
         String outDir = args[2];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
-        Path path = FileSystems.getDefault().getPath(inputDirPath);
 
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
-            for (Path file: stream) {
-                System.out.println(file.getFileName());
-            }
-        } catch (IOException | DirectoryIteratorException x) {
-            // IOException can never be thrown by the iteration.
-            // In this snippet, it can only be thrown by newDirectoryStream.
-            System.err.println(x);
-        }
+       
         File dir = new File(inputDirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
         System.out.println("dir: " + dir.getAbsolutePath());
