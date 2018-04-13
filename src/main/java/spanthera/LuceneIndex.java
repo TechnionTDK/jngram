@@ -9,7 +9,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import java.io.IOException;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,21 @@ public abstract class LuceneIndex {
      */
     public LuceneIndex() {
 
+        Path indexPath =Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory());
+        InitializeSearcher(indexPath);
+    }
+
+    //To use when the index is already exist and not solution relative (example- spark)
+    public LuceneIndex(String indexPathString)
+    {
+        Path indexPath= Paths.get(indexPathString);
+        InitializeSearcher(indexPath);
+    }
+
+    private void InitializeSearcher(Path indexPath) {
         IndexReader reader = null;
         try {
-            index = FSDirectory.open(Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory()));
+            index = FSDirectory.open(indexPath);
             reader = DirectoryReader.open(index);
         } catch (Exception e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
@@ -48,9 +60,8 @@ public abstract class LuceneIndex {
         indexSearcher = new IndexSearcher(reader);
     }
 
-//    void clear() throws IOException {
-//        FileUtils.cleanDirectory(new File(indexDirectory));
-//    }
+
+
 
     protected IndexWriter getWriter() {
         return writer;

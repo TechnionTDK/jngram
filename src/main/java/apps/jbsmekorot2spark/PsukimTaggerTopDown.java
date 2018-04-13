@@ -17,14 +17,16 @@ public class PsukimTaggerTopDown implements SpanTagger {
     private JbsTanachIndex tanachMale;
     private Boolean[] textCoveredBySpans;
 
-    public PsukimTaggerTopDown(int documentLength) {
+    public PsukimTaggerTopDown(int documentLength,String indexPath) {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
 
 
-        tanach = new JbsTanachIndex();
-        //tanachMale = new JbsTanachIndex();
+
+        tanach = new JbsTanachIndex(indexPath);
+        tanachMale = new JbsTanachIndex(indexPath);
+
     }
 
     @Override
