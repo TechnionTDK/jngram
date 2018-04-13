@@ -48,12 +48,18 @@ public class JbsSparkMekorot {
             System.out.println("Wrong arguments, should provide 3 arguments.");
             exit(0);
         }
+
         String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
         String indexPath= args[1];
         //String dirPath= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
         String outDir = args[2];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
+        File dir = new File(inputDirPath);
+        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
+        System.out.println("dir: " + dir.getAbsolutePath());
+        System.out.println("files: " + dir.listFiles());
+
         output = findPsukimInDirectoryAux(inputDirPath, indexPath);
 
 
@@ -87,7 +93,6 @@ public class JbsSparkMekorot {
         File dir = new File(dirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
         if(files== null || files.length==0) {
-            System.out.println("files: " + dir.listFiles());
             return outputJson;
         }
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
