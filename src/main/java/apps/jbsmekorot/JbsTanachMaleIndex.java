@@ -13,6 +13,10 @@ public class JbsTanachMaleIndex extends JbsIndex {
     public JbsTanachMaleIndex() {
         super();
     }
+    public JbsTanachMaleIndex(String pathToIndex)
+    {
+        super(pathToIndex);
+    }
 
     @Override
     protected String getInputJsonDirectory() {

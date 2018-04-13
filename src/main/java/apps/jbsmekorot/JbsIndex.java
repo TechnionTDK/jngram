@@ -33,6 +33,11 @@ public abstract class JbsIndex extends LuceneIndex {
         super();
     }
 
+    public JbsIndex(String pathToIndex)
+    {
+        super(pathToIndex);
+    }
+
     protected abstract String getInputJsonDirectory();
 
     protected void createIndex() throws Exception {

@@ -15,6 +15,9 @@ public class JbsTanachIndex extends JbsIndex implements Serializable {
     public JbsTanachIndex() {
         super();
     }
+    public JbsTanachIndex(String pathToIndex){
+        super(pathToIndex);
+    }
 
     @Override
     protected String getInputJsonDirectory() {
