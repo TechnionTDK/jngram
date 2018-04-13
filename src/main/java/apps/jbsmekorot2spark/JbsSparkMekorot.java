@@ -17,7 +17,9 @@ import spanthera.io.TaggerOutput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +57,17 @@ public class JbsSparkMekorot {
         String outDir = args[2];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
+        Path path = FileSystems.getDefault().getPath(inputDirPath);
+
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
+            for (Path file: stream) {
+                System.out.println(file.getFileName());
+            }
+        } catch (IOException | DirectoryIteratorException x) {
+            // IOException can never be thrown by the iteration.
+            // In this snippet, it can only be thrown by newDirectoryStream.
+            System.err.println(x);
+        }
         File dir = new File(inputDirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
         System.out.println("dir: " + dir.getAbsolutePath());
