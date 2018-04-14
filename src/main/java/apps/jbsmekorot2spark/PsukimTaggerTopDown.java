@@ -314,7 +314,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
                     if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
                         docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 }
-                //docs = filterOutExtremeEdits(docs,s);
+                docs = filterOutExtremeEdits(docs,s);
             }
 
         }
