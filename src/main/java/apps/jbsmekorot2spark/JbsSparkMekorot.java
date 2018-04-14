@@ -70,8 +70,8 @@ public class JbsSparkMekorot {
 
         File dir = new File(inputDirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        System.out.println("dir: " + dir.getAbsolutePath());
-        System.out.println("files: " + dir.listFiles());
+        System.out.println("dir: " + inputDirPath);
+        System.out.println("files: " + files.toString());
 
         output = findPsukimInDirectoryAux(inputDirPath, indexPath);
 
@@ -109,8 +109,9 @@ public class JbsSparkMekorot {
 //            return outputJson;
 //        }
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-        String signleFile= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-
+        //String signleFile= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
+        String signleFile= dirPath + "/*.json.spark";
+        System.out.println(signleFile);
 
         for(int i = 0 ; i < 1 ; i++){
 //        for(File file : files){

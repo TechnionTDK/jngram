@@ -23,7 +23,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
         tanach = new JbsTanachIndex();
-        tanachMale = new JbsTanachMaleIndex();
+        //tanachMale = new JbsTanachMaleIndex();
     }
 
     @Override
@@ -234,14 +234,15 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<Document>  docs= tanach.searchExactInText(text);
         if(docs.size()==0){
             //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-            if(docs.size()==0) {
+//            docs= tanachMale.searchExactInText(text);
+//            if(docs.size()==0) {
                 //3. Fuzzy in Tanach
                 docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 if(docs.size()==0){
                     if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
-                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                }
+                        docs = tanach.searchFuzzyInTextRestriction(
+                                s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                //}
                 docs = filterOutExtremeEdits(docs,s);
             }
 
