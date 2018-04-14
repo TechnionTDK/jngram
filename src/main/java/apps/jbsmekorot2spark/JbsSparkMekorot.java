@@ -61,7 +61,7 @@ public class JbsSparkMekorot {
             exit(0);
         }
 
-        String inputDirPath= "hdfs://tdkstdsparkmaster:54310/"+ args[0];
+        String inputDirPath= "hdfs://tdkstdsparkmaster:54310"+ args[0];
         String indexPath= args[1];
         String outDir = args[2];
         createFolderIfNotExists(outDir);
@@ -71,7 +71,7 @@ public class JbsSparkMekorot {
         File dir = new File(inputDirPath);
         File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
         System.out.println("dir: " + inputDirPath);
-        System.out.println("files: " + files.toString());
+        //System.out.println("files: " + files.toString());
 
         output = findPsukimInDirectoryAux(inputDirPath, indexPath);
 
