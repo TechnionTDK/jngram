@@ -102,7 +102,8 @@ public class PsukimTaggerTopDown implements SpanTagger {
             Double diffGrade = 0.0;
             int numOfWords = s.size();
             String[] docWords = d.getFields().get(0).stringValue().split("\\s+");
-            String[] spanWords = s.getTextFormatted().split("\\s+");
+//            String[] spanWords = s.getTextFormatted().split("\\s+");
+            String[] spanWords = spanToWordsArray(s);
             //find starting index:
             int starting_idx = getStartingIndex( docWords, spanWords);
             if (starting_idx == -1) {
@@ -134,6 +135,14 @@ public class PsukimTaggerTopDown implements SpanTagger {
             }
         }
         return filtered_docs;
+    }
+
+    private String[] spanToWordsArray(Span s) {
+        String[] wordsArray = new String[s.size()];
+        for(int i = 0; i < s.size() ; i++){
+            wordsArray[i] = s.getWord(i).toString();
+        }
+        return wordsArray;
     }
 
     private static Double calcDiffGradeDeleteLetter(Double diffGrade, int numOfWords, char[] docChars, char[] spanChars) {
@@ -195,8 +204,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         for(int i = 0 ; i < numOfWords ; i++){
             temp_docWords[i] = docWords[starting_idx + i];
         }
-        docWords = temp_docWords;
-        return docWords;
+        return temp_docWords;
     }
 
     /*
