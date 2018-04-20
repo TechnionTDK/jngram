@@ -1,14 +1,13 @@
 package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsSpanFormatter;
+import apps.jbsmekorot.RecallPrecision;
 import org.apache.commons.lang3.time.StopWatch;
 import spanthera.Span;
 import spanthera.SpannedDocument;
 import spanthera.io.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +79,7 @@ public class JbsMekorot2 {
         }
 
         // and eventually we print the total execution time
-        //System.out.println("TOTAL TIME: " + timerTotal.toString());
+       // System.out.println("TOTAL TIME: " + timerTotal.toString());
     }
 
     private static void createFolderIfNotExists(String outputDirPath) {
@@ -146,7 +145,9 @@ public class JbsMekorot2 {
 
         TaggerOutput outputJson = new TaggerOutput();
         String[] jsonNames = SpantheraIO.getJsonsInDir(rootDir + "/" + dirName);
-
+        List<SpannedDocument> docs= new ArrayList<>();
+        StopWatch watch= new StopWatch();
+        watch.start();
         for (String name : jsonNames) {
             TaggerInput inputJson = SpantheraIO.readInputJson(rootDir + "/" + dirName + "/" + name);
             List<Subject> subjects = inputJson.getSubjects();
@@ -164,8 +165,8 @@ public class JbsMekorot2 {
 
                 SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
                 findPsukimTopDown(sd);
-                //System.out.println("===== " + uri + " =====");
-                //System.out.println(sd.toString());
+                System.out.println("===== " + uri + " =====");
+                System.out.println(sd.toString());
                 // now we should output the result to a file & directory...
                 taggedSubject.setUri(uri);
                 for (Span span : sd.getAllSpans()) {
@@ -176,8 +177,8 @@ public class JbsMekorot2 {
                         taggedSubject.addTag(t);
                     }
                 }
-
-                //System.out.println(taggedSubject.getUri() + "...");
+                docs.add(sd);
+                System.out.println(taggedSubject.getUri() + "...");
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
@@ -185,7 +186,36 @@ public class JbsMekorot2 {
             //System.out.println(subjects.get(0).getUri());
             //System.out.println(subjects.get(0).getText());
         }
+        watch.stop();
+        PtintRecallAndRes(docs, watch.toString());
         return outputJson;
+    }
+
+    public static void PtintRecallAndRes(List<SpannedDocument> docs, String time)
+    {
+
+        RecallPrecision madad= new RecallPrecision();
+        PrintStream stdout= System.out;
+        try {
+            PrintStream out = new PrintStream( new FileOutputStream("C:\\Users\\vkopilov\\Pictures\\OutSpanthera\\outBottomUpMesilatYesharimLabled.txt"));
+            System.setOut(out);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        RecallPrecision.MultRecallResult recallRes= madad.getRecall(docs);
+        RecallPrecision.MultPrecisionResult presRes= madad.getPrecision(docs);
+        System.out.println("Total time: " +time);
+        System.out.println("Avarge Recall is: "+recallRes.getAverageRecall()+ "\n Average Precision is: " + presRes.getAveragePrecision());
+        for (SpannedDocument doc: docs) {
+
+            RecallPrecision.RecallResult recallOneRes= madad.getRecall(doc);
+            RecallPrecision.PrecisionlResult presOneRes= madad.getPrecision(doc);
+            System.out.println("Recall is: "+recallOneRes.getRecall() +"\nPrecision is: " + presOneRes.getPrecision());
+            recallOneRes.printMissedSpans();
+            presOneRes.printImpreciseSpans();
+        }
+        System.setOut(stdout);
     }
 
 

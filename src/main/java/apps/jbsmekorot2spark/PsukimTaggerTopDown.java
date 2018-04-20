@@ -327,7 +327,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<String> toKeep = new ArrayList<>();
         for(int i = 0 ; i < min ; i++ ){
             String bestString = getBest(matches);
-            if(matches.get(bestString) < Config.MINIMUM_GRADE){
+            if(matches.get(bestString) <= Config.MINIMUM_GRADE){
                 break;
             }
             toKeep.add(bestString);
@@ -340,7 +340,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         String bestTag = new String();
         Double bestScore = 0.0;
         for(Map.Entry<String , Double> ent : matches.entrySet()){
-            if(ent.getValue() > bestScore){
+            if(ent.getValue() >= bestScore){
                 bestTag = ent.getKey();
                 bestScore = ent.getValue();
             }

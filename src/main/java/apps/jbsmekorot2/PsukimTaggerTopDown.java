@@ -1,7 +1,9 @@
 package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsTanachIndex;
-import apps.jbsmekorot.JbsTanachMaleIndex;
+import apps.jbsmekorot2spark.AddTextWithShemAdnutTopDown;
+import apps.jbsmekorot2spark.Config;
+import apps.jbsmekorot2spark.ContextFinder;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
 import spanthera.Span;
@@ -13,17 +15,30 @@ import java.util.*;
 
 public class PsukimTaggerTopDown implements SpanTagger {
 
-    private ContextFinder contextFinder;
+    private apps.jbsmekorot2spark.ContextFinder contextFinder;
     private JbsTanachIndex tanach;
-    private JbsTanachMaleIndex tanachMale;
+    private JbsTanachIndex tanachMale;
     private Boolean[] textCoveredBySpans;
 
-    public PsukimTaggerTopDown(int documentLength) {
+    public PsukimTaggerTopDown(int documentLength,String indexPath) {
+        contextFinder = new apps.jbsmekorot2spark.ContextFinder();
+        textCoveredBySpans = new Boolean[documentLength];
+        Arrays.fill(textCoveredBySpans, false);
+
+
+
+        tanach = new JbsTanachIndex(indexPath);
+        tanachMale = new JbsTanachIndex(indexPath);
+
+    }
+
+    public PsukimTaggerTopDown(int documentLength)
+    {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
         tanach = new JbsTanachIndex();
-        //tanachMale = new JbsTanachMaleIndex();
+        tanachMale = new JbsTanachIndex();
     }
 
     @Override
@@ -44,15 +59,20 @@ public class PsukimTaggerTopDown implements SpanTagger {
     public List<String> tag(Span s){
         String text= s.getTextFormatted();
         List<String> results = null;
-        if(s.size() <= Config.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
+
+        // formatting may reduce the size of the span to 1, which causes the fuzzy search to fail.
+        if (text.split("\\s+").length == 1)
+            return new ArrayList<>();
+
+        if(s.size() <= apps.jbsmekorot2spark.Config.MAXIMAL_PASUK_LENGTH && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_1){
             results= HandleFirstLayerSpans(s, text);
 
         }
-        if(s.size() <= Config.SPAN_SIZE_LAYER_1 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_2){
+        if(s.size() <= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_1 - 1 && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_2){
             results= HandleSecondLayerSpans(s, text);
 
         }
-        if(s.size() <= Config.SPAN_SIZE_LAYER_2 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_3){
+        if(s.size() <= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_2 - 1 && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_3){
             results= HandleThirdLayerSpans(s, text);
         }
         if(results!=null)
@@ -65,97 +85,161 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
 
+    /*
+        *** ONLY WORKS LEVINSTEIN DIST = 1 ***
+        params:
+            @s - span sent to Lucene's index (FuzzySearch)
+            @docs - all results returned from Lucene
+        returns:
+            a subset of @docs -> { d in docs | d's distance from s is 'not too far' }
+            where the distance is graded by diffGrade calculated in this method.
+            look into the Config file for mor details but in general:
+            droping a letter from set A of letters is graded x while doing the same from set B (complements A)
+            is graded y.
+            same from adding a letter or replacing a letter.
+
+            this can be configurable.
+     */
     private List<Document> filterOutExtremeEdits(List<Document> docs, Span s) {
-        if(Config.MAX_EDITS > 1){
+        if(apps.jbsmekorot2spark.Config.MAX_EDITS > 1){
             return docs;
         }
-        if(s.size()> Config.EXTREME_EDITS_FILTER_CANDIDATE){
+        if(s.size()> apps.jbsmekorot2spark.Config.EXTREME_EDITS_FILTER_CANDIDATE){
             return docs;
         }
 
 
         List<Document> filtered_docs = new ArrayList<>();
         for(Document d : docs) {
-            double diffGrade = 0.0;
+            Double diffGrade = 0.0;
             int numOfWords = s.size();
-            String[] docWords = d.getFields().get(0).stringValue().split(" ");
-            String[] spanWords = s.getTextFormatted().split(" ");
+            String[] docWords = d.getFields().get(0).stringValue().split("\\s+");
+            String[] spanWords = s.getTextFormatted().split("\\s+");
             //find starting index:
-            int starting_idx = -1;
-
-            for (int i = 0; i < docWords.length - numOfWords + 1; i++) {
-                int numberOfCloseWords = 0;
-                for (int j = 0; j < numOfWords; j++) {
-                    if (StringUtils.getLevenshteinDistance(spanWords[j],docWords[i + j]) > 1) {
-                        break;
-                    }
-                    numberOfCloseWords += 1;
-                }
-                if (numberOfCloseWords == numOfWords) {
-                    starting_idx = i;
-                    break;
-                }
-            }
+            int starting_idx = getStartingIndex( docWords, spanWords);
             if (starting_idx == -1) {
                 break;
             }
-            String[] temp_docWords = new String[numOfWords];
-            for(int i = 0 ; i < numOfWords ; i++){
-                temp_docWords[i] = docWords[starting_idx + i];
-            }
-            docWords = temp_docWords;
+            docWords = extractSpanFromStartingIdx(numOfWords, docWords, starting_idx);
             for (int i = 0; i < numOfWords; i++) {
                 String spanWord = spanWords[i];
-                if (spanWord.length() < Config.MIN_WORD_LENGTH_FOR_FUZZY) {
+                if (spanWord.length() < apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY) {
                     continue;
                 }
                 char[] docChars = docWords[i].toCharArray();
                 char[] spanChars = spanWord.toCharArray();
                 if (docChars.length == spanChars.length) {
                     // Edit = letter change or No change at all
-                    for (int j = 0; j < spanChars.length; j++) {
-                        if (spanChars[j] != docChars[j]) {
-                            diffGrade += Config.calcGradeDiff(spanChars[j], docChars[j]) / numOfWords;
-                            break;
-                        }
-                    }
+                    diffGrade = calcDiffGradeReplaceLetter(diffGrade, numOfWords, docChars, spanChars);
                 } else if (docChars.length > spanChars.length) {
                     // Edit = letter was added to the orig. first letter on docChars that doest match spanChars in the j'th
                     // index is the added letter.
-                    Boolean handled_flag = false;
-                    for (int j = 0; j < spanChars.length; j++) {
-                        if (spanChars[j] != docChars[j]) {
-                            diffGrade += Config.calcGradeDiff('a', docChars[j]) / numOfWords; // 'a' for added
-                            handled_flag = true;
-                            break;
-                        }
-                    }
-                    if (handled_flag == false) {
-                        diffGrade += Config.calcGradeDiff('a', docChars[docChars.length - 1]) / numOfWords; // 'a' for added
-                    }
+                    diffGrade = calcDiffGradeAddLetter(diffGrade, numOfWords, docChars, spanChars);
                 } else {
                     // Edit = letter was deleted from the orig. first letter on docChars that doest match spanChars in the j'th
                     // index - indicates that spanChars[j] is the deleted letter
-                    Boolean handled_flag = false;
-                    for (int j = 0; j < docChars.length; j++) {
-                        if (spanChars[j] != docChars[j]) {
-                            diffGrade += Config.calcGradeDiff('d', docChars[j]) / numOfWords; // 'd' for deleted
-                            handled_flag = true;
-                            break;
-                        }
-                    }
-                    if (handled_flag == false) {
-                        diffGrade += Config.calcGradeDiff('d', docChars[docChars.length - 1]) / numOfWords; // 'd' for deleted
-                    }
+                    diffGrade = calcDiffGradeDeleteLetter(diffGrade, numOfWords, docChars, spanChars);
                 }
             }
-            if (diffGrade <= Config.MAXIMUM_DIFF_GRADE) {
+            if (diffGrade <= apps.jbsmekorot2spark.Config.MAXIMUM_DIFF_GRADE) {
                 filtered_docs.add(d);
             }
         }
         return filtered_docs;
     }
 
+    private static Double calcDiffGradeDeleteLetter(Double diffGrade, int numOfWords, char[] docChars, char[] spanChars) {
+        Boolean handled_flag = false;
+        for (int j = 0; j < docChars.length; j++) {
+            if (spanChars[j] != docChars[j]) {
+                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('d', docChars[j]) / numOfWords; // 'd' for deleted
+                handled_flag = true;
+                break;
+            }
+        }
+        if (handled_flag == false) {
+            diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('d', docChars[docChars.length - 1]) / numOfWords; // 'd' for deleted
+        }
+        return diffGrade;
+    }
+
+    private static Double calcDiffGradeAddLetter(Double diffGrade, int numOfWords, char[] docChars, char[] spanChars) {
+        Boolean handled_flag = false;
+        for (int j = 0; j < spanChars.length; j++) {
+            if (spanChars[j] != docChars[j]) {
+                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('a', docChars[j]) / numOfWords; // 'a' for added
+                handled_flag = true;
+                break;
+            }
+        }
+        if (handled_flag == false) {
+            diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('a', docChars[docChars.length - 1]) / numOfWords; // 'a' for added
+        }
+        return diffGrade;
+    }
+
+    private static Double calcDiffGradeReplaceLetter(Double diffGrade, int numOfWords, char[] docChars, char[] spanChars) {
+        for (int j = 0; j < spanChars.length; j++) {
+            if (spanChars[j] != docChars[j]) {
+                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff(spanChars[j], docChars[j]) / numOfWords;
+                break;
+            }
+        }
+        return diffGrade;
+    }
+
+    /*
+        //extract only the wanted span from docWords
+        params:
+            @numOfWords - size of the small span
+            @docWords - the 'containing' span
+            @starting_idx - the index in @docWords in which the small span starts
+         example:
+                    @docWords = [ a , bb ,ccc , ddd ]
+                    @starting_idx = 1
+                    @numOfWords = 2
+
+                    will return [ bb , ccc ]
+     */
+    @NotNull
+    private static String[] extractSpanFromStartingIdx(int numOfWords, String[] docWords, int starting_idx) {
+        String[] temp_docWords = new String[numOfWords];
+        for(int i = 0 ; i < numOfWords ; i++){
+            temp_docWords[i] = docWords[starting_idx + i];
+        }
+        docWords = temp_docWords;
+        return docWords;
+    }
+
+    /*
+        returns: the index in the span returned from the Lucene index (@docWords) in which the
+                 the span sent to Lucene index (@spanWords) starts.
+        example: @spanWords =  [ this , is , a ] is sent to FuzzySearch which returns -
+                 @docWords =  [ hello , thi , is , an , example ]
+                 the method will return index = 1 ('thi')
+        params:
+                @docWords - a String array
+                @spanWords - a String array
+
+     */
+    private static int getStartingIndex( String[] docWords, String[] spanWords) {
+        int starting_idx = -1;
+        int numOfWords = spanWords.length;
+        for (int i = 0; i < docWords.length - numOfWords + 1; i++) {
+            int numberOfCloseWords = 0;
+            for (int j = 0; j < numOfWords; j++) {
+                if (StringUtils.getLevenshteinDistance(spanWords[j],docWords[i + j]) > 1) {
+                    break;
+                }
+                numberOfCloseWords += 1;
+            }
+            if (numberOfCloseWords == numOfWords) {
+                starting_idx = i;
+                break;
+            }
+        }
+        return starting_idx;
+    }
 
 
     //region privates
@@ -178,7 +262,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<String> result = new ArrayList<>();
 
         if(!matches.isEmpty()){
-            result = getBestKtags(matches, Config.NUMBER_OF_TAGS_TO_KEEP_L3);
+            result = getBestKtags(matches, apps.jbsmekorot2spark.Config.NUMBER_OF_TAGS_TO_KEEP_L3);
         }
         //intersecting spans will not be candidates .
         if(result.size() > 0 )
@@ -202,7 +286,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
             HashMap<String, Double> matches = contextFinder.getTagsInContext(s,docs);
 
             if(!matches.isEmpty()){
-                result = getBestKtags(matches,Config.NUMBER_OF_TAGS_TO_KEEP_L2);
+                result = getBestKtags(matches, apps.jbsmekorot2spark.Config.NUMBER_OF_TAGS_TO_KEEP_L2);
             } else {
                 for(Document d : docs){
                     result.add(d.get("uri"));
@@ -234,16 +318,15 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<Document>  docs= tanach.searchExactInText(text);
         if(docs.size()==0){
             //2. exact in Tanach Male
-//            docs= tanachMale.searchExactInText(text);
-//            if(docs.size()==0) {
+            docs= tanachMale.searchExactInText(text);
+            if(docs.size()==0) {
                 //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , apps.jbsmekorot2spark.Config.MAX_EDITS , apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY);
                 if(docs.size()==0){
-                    if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
-                        docs = tanach.searchFuzzyInTextRestriction(
-                                s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                //}
-                docs = filterOutExtremeEdits(docs,s);
+                    if (s.getStringExtra(apps.jbsmekorot2spark.AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
+                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), apps.jbsmekorot2spark.Config.MAX_EDITS, apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY);
+                }
+                //docs = filterOutExtremeEdits(docs,s);
             }
 
         }
@@ -256,7 +339,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<String> toKeep = new ArrayList<>();
         for(int i = 0 ; i < min ; i++ ){
             String bestString = getBest(matches);
-            if(matches.get(bestString) < Config.MINIMUM_GRADE){
+            if(matches.get(bestString) <= Config.MINIMUM_GRADE){
                 break;
             }
             toKeep.add(bestString);
@@ -269,7 +352,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         String bestTag = new String();
         Double bestScore = 0.0;
         for(Map.Entry<String , Double> ent : matches.entrySet()){
-            if(ent.getValue() > bestScore){
+            if(ent.getValue() >= bestScore){
                 bestTag = ent.getKey();
                 bestScore = ent.getValue();
             }
