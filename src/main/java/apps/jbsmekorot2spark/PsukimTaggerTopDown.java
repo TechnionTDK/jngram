@@ -14,18 +14,20 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
     private ContextFinder contextFinder;
     private JbsTanachIndex tanach;
-    private JbsTanachIndex tanachMale;
     private Boolean[] textCoveredBySpans;
 
     public PsukimTaggerTopDown(int documentLength,String indexPath) {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
-
-
-
         tanach = new JbsTanachIndex(indexPath);
-        tanachMale = new JbsTanachIndex(indexPath);
+
+    }
+    public PsukimTaggerTopDown(int documentLength) {
+        contextFinder = new ContextFinder();
+        textCoveredBySpans = new Boolean[documentLength];
+        Arrays.fill(textCoveredBySpans, false);
+        tanach = new JbsTanachIndex();
 
     }
 
@@ -109,7 +111,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
                 break;
             }
             docWords = extractSpanFromStartingIdx(numOfWords, docWords, starting_idx);
-            for (int i = 0; i < numOfWords; i++) {
+            for (int i = 0; i < spanWords.length; i++) {
                 String spanWord = spanWords[i];
                 if (spanWord.length() < Config.MIN_WORD_LENGTH_FOR_FUZZY) {
                     continue;
@@ -303,20 +305,16 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
     private List<Document> searchByAllMeans(Span s, String text) {
+        //1.exact in tanach
         List<Document>  docs= tanach.searchExactInText(text);
         if(docs.size()==0){
-            //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-            if(docs.size()==0) {
-                //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                if(docs.size()==0){
-                    if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
-                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                }
-                //docs = filterOutExtremeEdits(docs,s);
+            //2. Fuzzy in Tanach
+            docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+            if(docs.size()==0){
+                if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
+                    docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
             }
-
+            docs = filterOutExtremeEdits(docs,s);
         }
         return docs;
     }
@@ -348,7 +346,6 @@ public class PsukimTaggerTopDown implements SpanTagger {
         return bestTag;
     }
     //endregion
-
 
 
 }

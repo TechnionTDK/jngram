@@ -197,7 +197,7 @@ public class JbsMekorot2 {
         RecallPrecision madad= new RecallPrecision();
         PrintStream stdout= System.out;
         try {
-            PrintStream out = new PrintStream( new FileOutputStream("C:\\Users\\vkopilov\\Pictures\\OutSpanthera\\outBottomUpMesilatYesharimLabled.txt"));
+            PrintStream out = new PrintStream( new FileOutputStream("C:\\Users\\vkopilov\\Pictures\\OutSpanthera\\outBottomUpMesilatYesharimLabled_afterchange.txt"));
             System.setOut(out);
 
         } catch (FileNotFoundException e) {

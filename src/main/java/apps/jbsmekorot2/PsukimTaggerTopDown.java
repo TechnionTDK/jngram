@@ -15,30 +15,23 @@ import java.util.*;
 
 public class PsukimTaggerTopDown implements SpanTagger {
 
-    private apps.jbsmekorot2spark.ContextFinder contextFinder;
+    private ContextFinder contextFinder;
     private JbsTanachIndex tanach;
-    private JbsTanachIndex tanachMale;
     private Boolean[] textCoveredBySpans;
 
     public PsukimTaggerTopDown(int documentLength,String indexPath) {
-        contextFinder = new apps.jbsmekorot2spark.ContextFinder();
+        contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
-
-
-
         tanach = new JbsTanachIndex(indexPath);
-        tanachMale = new JbsTanachIndex(indexPath);
 
     }
-
-    public PsukimTaggerTopDown(int documentLength)
-    {
+    public PsukimTaggerTopDown(int documentLength) {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
         tanach = new JbsTanachIndex();
-        tanachMale = new JbsTanachIndex();
+
     }
 
     @Override
@@ -64,15 +57,15 @@ public class PsukimTaggerTopDown implements SpanTagger {
         if (text.split("\\s+").length == 1)
             return new ArrayList<>();
 
-        if(s.size() <= apps.jbsmekorot2spark.Config.MAXIMAL_PASUK_LENGTH && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_1){
+        if(s.size() <= Config.MAXIMAL_PASUK_LENGTH && s.size() >= Config.SPAN_SIZE_LAYER_1){
             results= HandleFirstLayerSpans(s, text);
 
         }
-        if(s.size() <= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_1 - 1 && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_2){
+        if(s.size() <= Config.SPAN_SIZE_LAYER_1 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_2){
             results= HandleSecondLayerSpans(s, text);
 
         }
-        if(s.size() <= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_2 - 1 && s.size() >= apps.jbsmekorot2spark.Config.SPAN_SIZE_LAYER_3){
+        if(s.size() <= Config.SPAN_SIZE_LAYER_2 - 1 && s.size() >= Config.SPAN_SIZE_LAYER_3){
             results= HandleThirdLayerSpans(s, text);
         }
         if(results!=null)
@@ -101,10 +94,10 @@ public class PsukimTaggerTopDown implements SpanTagger {
             this can be configurable.
      */
     private List<Document> filterOutExtremeEdits(List<Document> docs, Span s) {
-        if(apps.jbsmekorot2spark.Config.MAX_EDITS > 1){
+        if(Config.MAX_EDITS > 1){
             return docs;
         }
-        if(s.size()> apps.jbsmekorot2spark.Config.EXTREME_EDITS_FILTER_CANDIDATE){
+        if(s.size()> Config.EXTREME_EDITS_FILTER_CANDIDATE){
             return docs;
         }
 
@@ -121,9 +114,9 @@ public class PsukimTaggerTopDown implements SpanTagger {
                 break;
             }
             docWords = extractSpanFromStartingIdx(numOfWords, docWords, starting_idx);
-            for (int i = 0; i < numOfWords; i++) {
+            for (int i = 0; i < spanWords.length; i++) {
                 String spanWord = spanWords[i];
-                if (spanWord.length() < apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY) {
+                if (spanWord.length() < Config.MIN_WORD_LENGTH_FOR_FUZZY) {
                     continue;
                 }
                 char[] docChars = docWords[i].toCharArray();
@@ -141,7 +134,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
                     diffGrade = calcDiffGradeDeleteLetter(diffGrade, numOfWords, docChars, spanChars);
                 }
             }
-            if (diffGrade <= apps.jbsmekorot2spark.Config.MAXIMUM_DIFF_GRADE) {
+            if (diffGrade <= Config.MAXIMUM_DIFF_GRADE) {
                 filtered_docs.add(d);
             }
         }
@@ -152,13 +145,13 @@ public class PsukimTaggerTopDown implements SpanTagger {
         Boolean handled_flag = false;
         for (int j = 0; j < docChars.length; j++) {
             if (spanChars[j] != docChars[j]) {
-                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('d', docChars[j]) / numOfWords; // 'd' for deleted
+                diffGrade += Config.calcGradeDiff('d', docChars[j]) / numOfWords; // 'd' for deleted
                 handled_flag = true;
                 break;
             }
         }
         if (handled_flag == false) {
-            diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('d', docChars[docChars.length - 1]) / numOfWords; // 'd' for deleted
+            diffGrade += Config.calcGradeDiff('d', docChars[docChars.length - 1]) / numOfWords; // 'd' for deleted
         }
         return diffGrade;
     }
@@ -167,13 +160,13 @@ public class PsukimTaggerTopDown implements SpanTagger {
         Boolean handled_flag = false;
         for (int j = 0; j < spanChars.length; j++) {
             if (spanChars[j] != docChars[j]) {
-                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('a', docChars[j]) / numOfWords; // 'a' for added
+                diffGrade += Config.calcGradeDiff('a', docChars[j]) / numOfWords; // 'a' for added
                 handled_flag = true;
                 break;
             }
         }
         if (handled_flag == false) {
-            diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff('a', docChars[docChars.length - 1]) / numOfWords; // 'a' for added
+            diffGrade += Config.calcGradeDiff('a', docChars[docChars.length - 1]) / numOfWords; // 'a' for added
         }
         return diffGrade;
     }
@@ -181,7 +174,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     private static Double calcDiffGradeReplaceLetter(Double diffGrade, int numOfWords, char[] docChars, char[] spanChars) {
         for (int j = 0; j < spanChars.length; j++) {
             if (spanChars[j] != docChars[j]) {
-                diffGrade += apps.jbsmekorot2spark.Config.calcGradeDiff(spanChars[j], docChars[j]) / numOfWords;
+                diffGrade += Config.calcGradeDiff(spanChars[j], docChars[j]) / numOfWords;
                 break;
             }
         }
@@ -262,7 +255,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<String> result = new ArrayList<>();
 
         if(!matches.isEmpty()){
-            result = getBestKtags(matches, apps.jbsmekorot2spark.Config.NUMBER_OF_TAGS_TO_KEEP_L3);
+            result = getBestKtags(matches, Config.NUMBER_OF_TAGS_TO_KEEP_L3);
         }
         //intersecting spans will not be candidates .
         if(result.size() > 0 )
@@ -286,7 +279,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
             HashMap<String, Double> matches = contextFinder.getTagsInContext(s,docs);
 
             if(!matches.isEmpty()){
-                result = getBestKtags(matches, apps.jbsmekorot2spark.Config.NUMBER_OF_TAGS_TO_KEEP_L2);
+                result = getBestKtags(matches, Config.NUMBER_OF_TAGS_TO_KEEP_L2);
             } else {
                 for(Document d : docs){
                     result.add(d.get("uri"));
@@ -315,20 +308,16 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
     private List<Document> searchByAllMeans(Span s, String text) {
+        //1.exact in tanach
         List<Document>  docs= tanach.searchExactInText(text);
         if(docs.size()==0){
-            //2. exact in Tanach Male
-            docs= tanachMale.searchExactInText(text);
-            if(docs.size()==0) {
-                //3. Fuzzy in Tanach
-                docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , apps.jbsmekorot2spark.Config.MAX_EDITS , apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                if(docs.size()==0){
-                    if (s.getStringExtra(apps.jbsmekorot2spark.AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
-                        docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), apps.jbsmekorot2spark.Config.MAX_EDITS, apps.jbsmekorot2spark.Config.MIN_WORD_LENGTH_FOR_FUZZY);
-                }
-                //docs = filterOutExtremeEdits(docs,s);
+            //2. Fuzzy in Tanach
+            docs= tanach.searchFuzzyInTextRestriction(s.getTextFormatted() , Config.MAX_EDITS , Config.MIN_WORD_LENGTH_FOR_FUZZY);
+            if(docs.size()==0){
+                if (s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT) != null)
+                    docs = tanach.searchFuzzyInTextRestriction(s.getStringExtra(AddTextWithShemAdnutTopDown.ADNUT_TEXT), Config.MAX_EDITS, Config.MIN_WORD_LENGTH_FOR_FUZZY);
             }
-
+            docs = filterOutExtremeEdits(docs,s);
         }
         return docs;
     }
