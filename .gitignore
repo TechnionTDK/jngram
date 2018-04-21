@@ -16,6 +16,7 @@ output*
 # Maven
 log/
 target/
+Images_Or_vita/
 
 # Custom
 csv/
