@@ -105,16 +105,17 @@ public class PsukimTaggerTopDown implements SpanTagger {
         List<Document> filtered_docs = new ArrayList<>();
         for(Document d : docs) {
             Double diffGrade = 0.0;
-            int numOfWords = s.size();
             String[] docWords = d.getFields().get(0).stringValue().split("\\s+");
             String[] spanWords = s.getTextFormatted().split("\\s+");
+            int numOfWords = spanWords.length;
+
             //find starting index:
             int starting_idx = getStartingIndex( docWords, spanWords);
             if (starting_idx == -1) {
                 break;
             }
             docWords = extractSpanFromStartingIdx(numOfWords, docWords, starting_idx);
-            for (int i = 0; i < spanWords.length; i++) {
+            for (int i = 0; i < numOfWords; i++) {
                 String spanWord = spanWords[i];
                 if (spanWord.length() < Config.MIN_WORD_LENGTH_FOR_FUZZY) {
                     continue;

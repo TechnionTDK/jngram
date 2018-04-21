@@ -72,8 +72,8 @@ public class JbsShell {
     @Test
     public void AllTest()
     {
-//       String[] args= {"C:\\Users\\vkopilov\\Music\\", "C:\\Users\\vkopilov\\Pictures\\OutSpanthera"};
-//      JbsMekorot2.main(args);
+       String[] args= {"C:\\Users\\vkopilov\\Music\\", "C:\\Users\\vkopilov\\Pictures\\OutSpanthera"};
+      JbsMekorot2.main(args);
     }
 
     @Test
