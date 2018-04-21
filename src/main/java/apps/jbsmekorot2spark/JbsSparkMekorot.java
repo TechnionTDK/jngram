@@ -17,6 +17,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
+import org.jetbrains.annotations.NotNull;
 import spanthera.Span;
 import spanthera.SpannedDocument;
 import spanthera.io.Subject;
@@ -42,7 +43,10 @@ public class JbsSparkMekorot {
     public static final int SPAN_INDEX_IN_ROW = 2;
     public static final int URI_INDEX_IN_ROW = 1;
     public static final int SUBJECT_URI_INDEX_IN_ROW = 0;
+    private final String HdfsPort= "hdfs://tdkstdsparkmaster:54310";
+
     private SparkSession sparkSession;
+
 
     public JbsSparkMekorot(SparkSession sparkSession)
     {
@@ -51,7 +55,8 @@ public class JbsSparkMekorot {
 
     /**
      * arg[0] is the directory we want to work with. notice that it should be a directory without sub directories. e.g sub directory of jbs-text (like mesilatyesharim)
-     * arg[1] is the output directory that the user want to get the results in.
+     * arg[1] is the local path of lucene index files on all slaves and master (should be the same in all of them).
+     * arg[2] is the output directory that the user want to get the results in.
      * @param args
      */
      public void main(String[] args)
@@ -61,18 +66,11 @@ public class JbsSparkMekorot {
             exit(0);
         }
 
-        String inputDirPath= "hdfs://tdkstdsparkmaster:54310"+ args[0];
+        String inputDirPath= HdfsPort + args[0];
         String indexPath= args[1];
         String outDir = args[2];
         createFolderIfNotExists(outDir);
         TaggerOutput output;
-
-
-        File dir = new File(inputDirPath);
-        File[] files = dir.listFiles((d, name) -> name.endsWith(".json.spark"));
-        System.out.println("dir: " + inputDirPath);
-        //System.out.println("files: " + files.toString());
-
         output = findPsukimInDirectoryAux(inputDirPath, indexPath);
 
 
@@ -82,7 +80,6 @@ public class JbsSparkMekorot {
             writer.println(output.toString());
             writer.close();
             createFolderIfNotExists(outDir + "/test_out_dir");
-            PrintWriter test_writer = new PrintWriter(outDir + "/test_out_dir" + "/" + "test_output.json");
             writer.println(output.toString());
             writer.close();
 
@@ -100,59 +97,62 @@ public class JbsSparkMekorot {
     }
 
 
-    public TaggerOutput findPsukimInDirectoryAux(String dirPath, String indexPath)  {
+    public TaggerOutput findPsukimInDirectoryAux(String dirInputPath, String indexPath)  {
 
         TaggerOutput outputJson = new TaggerOutput();
+        String inputFile= dirInputPath + "/*.json.spark";
+        JavaRDD<Row> javaRDD = this.sparkSession.read().json(inputFile).javaRDD();
+        JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,indexPath));
+        List<List<Row>> outPutJsonsList = matches.collect();
+        List<List<Row>> outPutJsonsListNotEmpty = CollectNonEmpty(outPutJsonsList);
+        HashMap<String, TaggedSubject> taggedSubjectsMap = FormatOutput(outPutJsonsListNotEmpty);
 
-        String signleFile= dirPath + "/*.json.spark";
-        System.out.println(signleFile);
-        for(int i = 0 ; i < 1 ; i++){
-
-            JavaRDD<Row> javaRDD = this.sparkSession.read().json(signleFile).javaRDD();
-            JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,indexPath));
-            List<List<Row>> outPutJsonsList = matches.collect();
-            List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
-            for(List<Row> rowList : outPutJsonsList){
-                if(rowList.size() > 0){
-                    outPutJsonsListNotEmpty.add(rowList);
-                }
-            }
-            HashMap<String,TaggedSubject> taggedSubjectsMap = new HashMap<String,TaggedSubject>();
-            for(List<Row> rowList : outPutJsonsListNotEmpty){
-                Row temp_row = rowList.get(0);
-                String subjectURI = (String) temp_row.get(0);
-                if(!taggedSubjectsMap.containsKey(subjectURI)){
-                    TaggedSubject taggedSubject = new TaggedSubject();
-                    taggedSubject.setUri((String) temp_row.get(SUBJECT_URI_INDEX_IN_ROW));
-                    taggedSubjectsMap.put(subjectURI,taggedSubject);
-                }
-                TaggedSubject taggedSubject = taggedSubjectsMap.get(subjectURI);
-
-                for(Row row : rowList){
-                    taggedSubject.addTag(new Tag(
-                                    (String) row.get(SPAN_INDEX_IN_ROW),
-                                    (String) row.get(URI_INDEX_IN_ROW)
-                            )
-                    );
-                }
-
-            }
-            for(TaggedSubject taggedSubject : taggedSubjectsMap.values()){
-                outputJson.addTaggedSubject(taggedSubject);
-            }
+        for(TaggedSubject taggedSubject : taggedSubjectsMap.values()){
+            outputJson.addTaggedSubject(taggedSubject);
         }
-
         return outputJson;
     }
 
+    @NotNull
+    private List<List<Row>> CollectNonEmpty(List<List<Row>> outPutJsonsList) {
+        List<List<Row>> outPutJsonsListNotEmpty = new ArrayList<>();
+        for(List<Row> rowList : outPutJsonsList){
+            if(rowList.size() > 0){
+                outPutJsonsListNotEmpty.add(rowList);
+            }
+        }
+        return outPutJsonsListNotEmpty;
+    }
+
+    @NotNull
+    private HashMap<String, TaggedSubject> FormatOutput(List<List<Row>> outPutJsonsListNotEmpty) {
+        HashMap<String,TaggedSubject> taggedSubjectsMap = new HashMap<String,TaggedSubject>();
+        for(List<Row> rowList : outPutJsonsListNotEmpty){
+            Row temp_row = rowList.get(0);
+            String subjectURI = (String) temp_row.get(0);
+            if(!taggedSubjectsMap.containsKey(subjectURI)){
+                TaggedSubject taggedSubject = new TaggedSubject();
+                taggedSubject.setUri((String) temp_row.get(SUBJECT_URI_INDEX_IN_ROW));
+                taggedSubjectsMap.put(subjectURI,taggedSubject);
+            }
+            TaggedSubject taggedSubject = taggedSubjectsMap.get(subjectURI);
+            for(Row row : rowList){
+                taggedSubject.addTag(new Tag(
+                                (String) row.get(SPAN_INDEX_IN_ROW),
+                                (String) row.get(URI_INDEX_IN_ROW)
+                        )
+                );
+            }
+
+        }
+        return taggedSubjectsMap;
+    }
+
     public static List<Row> findPsukimInJson(Row jSonName, String indexPath) {
-//        int TEXT_INDEX = 1;
-//        int URI_INDEX = 2;
         List<Row> retList = new ArrayList<>();
         Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("text"));
 
         // a subject denotes a specific text element within the json file
-
         TaggedSubject taggedSubject = new TaggedSubject();
         String text = subject.getText();
         String uri = subject.getUri();
@@ -164,7 +164,11 @@ public class JbsSparkMekorot {
 
         SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
         findPsukim(sd, indexPath);
-        // now we should output the result to a file & directory...
+        OutputTheResultToFIle(retList, taggedSubject, uri, sd);
+        return retList;
+    }
+
+    private static void OutputTheResultToFIle(List<Row> retList, TaggedSubject taggedSubject, String uri, SpannedDocument sd) {
         taggedSubject.setUri(uri);
         for (Span span : sd.getAllSpans()) {
             if (span.getTags().size() == 0)
@@ -174,42 +178,22 @@ public class JbsSparkMekorot {
                 taggedSubject.addTag(t);
             }
         }
-//        private String uri;
-//        private List<Tag> tags;
         for(Tag tag : taggedSubject.getTags()){
             Row row = RowFactory.create(taggedSubject.getUri(),tag.getUri(),tag.getSpan());
             retList.add(row);
         }
-//        Row row = RowFactory.create(taggedSubject.getUri(),taggedSubject.getTags());
-//        retList.add(row);
-        return retList;
     }
+
     public  static  void findPsukim(SpannedDocument sd,  String indexPath){
          findPsukimTopDown(sd, indexPath);
-    };
+    }
 
     public static void findPsukimTopDown(SpannedDocument doc, String indexPath){
         doc.format(new JbsSpanFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
         doc.add(new PsukimTaggerTopDown(doc.length(),indexPath));
-        //StopWatch tag_timer = new StopWatch();
-        //double tag_timer_total = 0;
-        //int span_size = 0;
-        // int[] res_candidates = { 0 };
         for(int spanSize = doc.getMaximalSpanSize() ; spanSize >= doc.getMinimalSpanSize(); spanSize-- ){
-            //span_size=spanSize;
-            //System.out.println(">> DEBUG: measuring time for spans of size: "+ spanSize  );
-            //tag_timer.start();
             doc.tag(spanSize);
-            //System.out.println(">> DEBUG: result for spans of size: "+ spanSize + "is : "   + tag_timer.getNanoTime());
-            //tag_timer_total = tag_timer.getNanoTime()/Math.pow(10,9);
-            //DecimalFormat df = new DecimalFormat("#.##");
-            //String time_s = df.format(tag_timer_total);
-            //tag_timer.reset();
-//            System.out.println(">> Performance Test: avarage time to tag span sized     " + span_size + ":  "
-//                    + tag_timer_total/res_candidates[0] +"  #spans:     "
-//                    +res_candidates[0] + ",total:   "+time_s  +"    , (maxEdits = "+ 2 +" per word)" );
-//            res_candidates[0]=0;
         }
     }
 }
