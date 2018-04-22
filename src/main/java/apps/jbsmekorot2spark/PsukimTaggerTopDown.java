@@ -334,6 +334,9 @@ public class PsukimTaggerTopDown implements SpanTagger {
     private List<String>  getBestKtags(HashMap<String, Double> matches, int min) {
         List<String> toKeep = new ArrayList<>();
         for(int i = 0 ; i < min ; i++ ){
+            if(matches.isEmpty()){
+                break;
+            }
             String bestString = getBest(matches);
             if(matches.get(bestString) < Config.MINIMUM_GRADE){
                 break;
