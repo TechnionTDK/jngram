@@ -135,7 +135,7 @@ public class JbsSparkMekorot {
     public static List<Row> findPsukimInJson(Row jSonName, String indexPath) {
         List<Row> retList = new ArrayList<>();
         // a subject denotes a specific text element within the json file
-        Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("text"));
+        Subject subject = new Subject((String) jSonName.get(URI_INDEX_IN_ROW), (String) jSonName.get(SPAN_INDEX_IN_ROW));
         TaggedSubject taggedSubject = new TaggedSubject();
         String text = subject.getText();
         String uri = subject.getUri();
