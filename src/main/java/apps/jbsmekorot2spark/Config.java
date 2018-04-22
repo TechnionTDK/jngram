@@ -17,8 +17,8 @@ public  final  class Config {
     public static final int MIN_WORD_LENGTH_FOR_FUZZY = 3;
     public static final int CONTEXT_DISTANCE = 25 ;
     public static final double MINIMUM_GRADE = 0.0;
-    public static final int NUMBER_OF_TAGS_TO_KEEP_L1 = 3;
-    public static final int NUMBER_OF_TAGS_TO_KEEP_L2 = 2;
+    public static final int NUMBER_OF_TAGS_TO_KEEP_L1 = 1;
+    public static final int NUMBER_OF_TAGS_TO_KEEP_L2 = 1;
     public static final int NUMBER_OF_TAGS_TO_KEEP_L3 = 1;
     public static final int EXTREME_EDITS_FILTER_CANDIDATE = SPAN_SIZE_LAYER_2;
     public static final double MAXIMUM_DIFF_GRADE = 0.3;
