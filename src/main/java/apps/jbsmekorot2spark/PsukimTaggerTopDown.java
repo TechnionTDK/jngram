@@ -351,7 +351,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         String bestTag = new String();
         Double bestScore = 0.0;
         for(Map.Entry<String , Double> ent : matches.entrySet()){
-            if(ent.getValue() > bestScore){
+            if(ent.getValue() >= bestScore){
                 bestTag = ent.getKey();
                 bestScore = ent.getValue();
             }
