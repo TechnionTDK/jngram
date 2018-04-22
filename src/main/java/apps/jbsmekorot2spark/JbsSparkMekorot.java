@@ -1,18 +1,6 @@
 package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsSpanFormatter;
-import apps.jbsmekorot.JbsTanachIndex;
-import org.apache.hadoop.fs.FileStatus;
-import java.io.*;
-import java.nio.file.Path;
-import java.util.*;
-import java.net.*;
-import org.apache.hadoop.fs.*;
-import org.apache.hadoop.conf.*;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.io.*;
-import org.apache.hadoop.mapred.*;
-import org.apache.hadoop.util.*;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -24,13 +12,9 @@ import spanthera.io.Subject;
 import spanthera.io.Tag;
 import spanthera.io.TaggedSubject;
 import spanthera.io.TaggerOutput;
-
-import javax.security.auth.login.Configuration;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -126,7 +110,7 @@ public class JbsSparkMekorot {
 
     @NotNull
     private HashMap<String, TaggedSubject> FormatOutput(List<List<Row>> outPutJsonsListNotEmpty) {
-        HashMap<String,TaggedSubject> taggedSubjectsMap = new HashMap<String,TaggedSubject>();
+        HashMap<String,TaggedSubject> taggedSubjectsMap = new HashMap<>();
         for(List<Row> rowList : outPutJsonsListNotEmpty){
             Row temp_row = rowList.get(0);
             String subjectURI = (String) temp_row.get(0);
@@ -150,9 +134,8 @@ public class JbsSparkMekorot {
 
     public static List<Row> findPsukimInJson(Row jSonName, String indexPath) {
         List<Row> retList = new ArrayList<>();
-        Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("text"));
-
         // a subject denotes a specific text element within the json file
+        Subject subject = new Subject((String) jSonName.getAs("uri"), (String) jSonName.getAs("text"));
         TaggedSubject taggedSubject = new TaggedSubject();
         String text = subject.getText();
         String uri = subject.getUri();
