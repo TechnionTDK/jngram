@@ -109,7 +109,7 @@ public class JbsSparkMekorot {
 //            return outputJson;
 //        }
         //String filepath = "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
-        String signleFile= "hdfs://tdkstdsparkmaster:54310/user/svitak/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
+        String signleFile= "hdfs://tdkstdsparkmaster:54310/user/orasraf/jbs-text/mesilatyesharim/mesilatyesharim.json.spark";
 
 
         for(int i = 0 ; i < 1 ; i++){
