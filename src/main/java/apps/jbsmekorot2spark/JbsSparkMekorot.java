@@ -84,7 +84,7 @@ public class JbsSparkMekorot {
     public TaggerOutput findPsukimInDirectoryAux(String dirInputPath, String indexPath)  {
 
         TaggerOutput outputJson = new TaggerOutput();
-        String inputFile= dirInputPath + "/*.json.spark";
+        String inputFile= dirInputPath + "/mesilatyesharim.json.spark";
         JavaRDD<Row> javaRDD = this.sparkSession.read().json(inputFile).javaRDD();
         JavaRDD<List<Row>> matches = javaRDD.map(x->findPsukimInJson(x,indexPath));
         List<List<Row>> outPutJsonsList = matches.collect();
