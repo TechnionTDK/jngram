@@ -26,7 +26,7 @@ def pre_process_jbs_json_file_for_spark(json_file_name, remove_prefix):
         json_data = json.load(json_file, encoding="utf-8")
         for entity in json_data["subjects"]:
             result.append((json.dumps(pre_process_jbs_obj_for_spark(entity, remove_prefix), ensure_ascii=False),
-                           len(entity["jbo:name"])+1 if remove_prefix else 0))
+                           len(entity["jbo:book"])+1 if remove_prefix else 0))
 
     return result
 
@@ -34,7 +34,7 @@ def pre_process_jbs_json_file_for_spark(json_file_name, remove_prefix):
 def pre_process_jbs_obj_for_spark(json_object, remove_prefix):
     if remove_prefix:
         return {"uri": json_object["uri"],
-                "text": remove_name_prefix(remove_vowels_hebrew(json_object["jbo:text"]), json_object["jbo:name"])
+                "text": remove_name_prefix(remove_vowels_hebrew(json_object["jbo:text"]), json_object["jbo:book"])
                 }
     else:
         return {"uri": json_object["uri"],
