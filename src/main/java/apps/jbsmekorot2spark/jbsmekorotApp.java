@@ -1,10 +1,16 @@
 package apps.jbsmekorot2spark;
 
+import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 
 public class jbsmekorotApp {
     public static void main(String[] args){
         SparkSession sparkSession = SparkSession.builder().appName("jbsmekorotApp").getOrCreate();
+        sparkSession.conf().set("spark.shuffle.service.enabled", "false");
+        sparkSession.conf().set("spark.dynamicAllocation.enabled", "false");
+        sparkSession.conf().set("spark.io.compression.codec", "snappy");
+        sparkSession.conf().set("spark.rdd.compress", "true");
+        sparkSession.conf();
         JbsSparkMekorot jbsMekorot = new JbsMekorot2(sparkSession);
         jbsMekorot.main(args);
     }
