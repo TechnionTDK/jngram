@@ -1,10 +1,10 @@
 package apps.jbsmekorot2;
 
-import apps.jbsmekorot.JbsSpanFormatter;
+import apps.jbsmekorot.JbsNgramFormatter;
 import apps.jbsmekorot.RecallPrecision;
 import org.apache.commons.lang3.time.StopWatch;
-import spanthera.Span;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
 import spanthera.io.*;
 
 import java.io.*;
@@ -89,7 +89,7 @@ public class JbsMekorot2 {
         dir.mkdir();
     }
 
-    public static SpannedDocument findPsukimInSubject(Subject s) {
+    public static NgramDocument findPsukimInSubject(Subject s) {
         String text = s.getText();
         String uri = s.getUri();
 
@@ -98,21 +98,21 @@ public class JbsMekorot2 {
             return null;
         }
 
-        SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
-        System.out.println("\nDocument name :" + uri);
+        NgramDocument sd = new NgramDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+        System.out.println("\nNgramDocument name :" + uri);
         findPsukimTopDown(sd);
 
         return sd;
     }
-    public static void findPsukimTopDown(SpannedDocument doc){
-        doc.format(new JbsSpanFormatter());
+    public static void findPsukimTopDown(NgramDocument doc){
+        doc.format(new JbsNgramFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
         doc.add(new PsukimTaggerTopDown(doc.length()));
         StopWatch tag_timer = new StopWatch();
         double tag_timer_total = 0;
         int span_size = 0;
        // int[] res_candidates = { 0 };
-        for(int spanSize = doc.getMaximalSpanSize() ; spanSize >= doc.getMinimalSpanSize(); spanSize-- ){
+        for(int spanSize = doc.getMaximalNgramSize(); spanSize >= doc.getMinimalNgramSize(); spanSize-- ){
             //span_size=spanSize;
             //System.out.println(">> DEBUG: measuring time for spans of size: "+ spanSize  );
             //tag_timer.start();
@@ -145,7 +145,7 @@ public class JbsMekorot2 {
 
         TaggerOutput outputJson = new TaggerOutput();
         String[] jsonNames = SpantheraIO.getJsonsInDir(rootDir + "/" + dirName);
-        List<SpannedDocument> docs= new ArrayList<>();
+        List<NgramDocument> docs= new ArrayList<>();
         StopWatch watch= new StopWatch();
         watch.start();
         for (String name : jsonNames) {
@@ -163,17 +163,17 @@ public class JbsMekorot2 {
                     continue;
                 }
 
-                SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+                NgramDocument sd = new NgramDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
                 findPsukimTopDown(sd);
                 System.out.println("===== " + uri + " =====");
                 System.out.println(sd.toString());
                 // now we should output the result to a file & directory...
                 taggedSubject.setUri(uri);
-                for (Span span : sd.getAllSpans()) {
-                    if (span.getTags().size() == 0)
+                for (Ngram ngram : sd.getAllNgrams()) {
+                    if (ngram.getTags().size() == 0)
                         continue;
-                    for (String tag : span.getTags()) {
-                        Tag t = new Tag(span.getStart(), span.getEnd(), tag);
+                    for (String tag : ngram.getTags()) {
+                        Tag t = new Tag(ngram.getStart(), ngram.getEnd(), tag);
                         taggedSubject.addTag(t);
                     }
                 }
@@ -191,7 +191,7 @@ public class JbsMekorot2 {
         return outputJson;
     }
 
-    public static void PtintRecallAndRes(List<SpannedDocument> docs, String time)
+    public static void PtintRecallAndRes(List<NgramDocument> docs, String time)
     {
 
         RecallPrecision madad= new RecallPrecision();
@@ -207,7 +207,7 @@ public class JbsMekorot2 {
         RecallPrecision.MultPrecisionResult presRes= madad.getPrecision(docs);
         System.out.println("Total time: " +time);
         System.out.println("Avarge Recall is: "+recallRes.getAverageRecall()+ "\n Average Precision is: " + presRes.getAveragePrecision());
-        for (SpannedDocument doc: docs) {
+        for (NgramDocument doc: docs) {
 
             RecallPrecision.RecallResult recallOneRes= madad.getRecall(doc);
             RecallPrecision.PrecisionlResult presOneRes= madad.getPrecision(doc);

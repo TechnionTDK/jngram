@@ -4,7 +4,7 @@ import apps.jbsmekorot.RecallPrecision;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
 import spanthera.io.SpantheraIO;
 import spanthera.io.Subject;
 import spanthera.io.TaggerInput;
@@ -49,8 +49,8 @@ import static org.junit.Assert.assertNotNull;
             RecallPrecision calc = new RecallPrecision();
 
             // find psukim in first subject and calculate recall & precision
-            SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(index));
-            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(index));
+            NgramDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(index));
+            NgramDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(index));
 
             PrintRecall(calc, sdTopDOwn, "TopDown");
             PrintRecall(calc, sdBottomUp, "BottomUp");
@@ -69,8 +69,8 @@ import static org.junit.Assert.assertNotNull;
             RecallPrecision calc = new RecallPrecision();
 
             // find psukim in second subject and calculate recall & precision
-           SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(11));
-            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(11));
+           NgramDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(11));
+            NgramDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(11));
 
             PrintRecall(calc, sdTopDOwn, "TopDown");
             PrintRecall(calc, sdBottomUp, "BottomUp");
@@ -89,8 +89,8 @@ import static org.junit.Assert.assertNotNull;
 //            RecallPrecision calc = new RecallPrecision();
 //
 //            // find psukim in second subject and calculate recall & precision
-//            SpannedDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(0));
-//            SpannedDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(0));
+//            NgramDocument sdTopDOwn = JbsMekorot2.findPsukimInSubject(subjects.get(0));
+//            NgramDocument sdBottomUp = JbsMekorot.findPsukimInSubject(subjects.get(0));
 //
 //            PrintRecall(calc, sdTopDOwn, "TopDown");
 //            PrintRecall(calc, sdBottomUp, "BottomUp");
@@ -101,7 +101,7 @@ import static org.junit.Assert.assertNotNull;
 //
 //        }
 
-        public static void PrintPrecision(RecallPrecision calc, SpannedDocument sdButtomUp, String method) {
+        public static void PrintPrecision(RecallPrecision calc, NgramDocument sdButtomUp, String method) {
             RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sdButtomUp);
             System.out.print("Precision "+ method+ " : ");
             System.out.println(precisionResult.getPrecision());
@@ -110,7 +110,7 @@ import static org.junit.Assert.assertNotNull;
         }
 
         @NotNull
-        public static void PrintRecall(RecallPrecision calc, SpannedDocument sd, String method) {
+        public static void PrintRecall(RecallPrecision calc, NgramDocument sd, String method) {
             RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
             System.out.print("Recall "+ method +" : ");
             System.out.println(recallResult.getRecall());

@@ -2,10 +2,9 @@ package apps.jbsmekorot.manipulations;
 
 import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
-import org.apache.lucene.document.Document;
-import spanthera.Span;
-import spanthera.SpanManipulation;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocumentManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +17,20 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * First, it calculates edit distance for each tag. Then we
  * remove tags based on several related strategies.
  */
-public class CalcAndFilterByEditDistance implements SpanManipulation {
+public class CalcAndFilterByEditDistance implements NgramDocumentManipulation {
     private static final String DISTANCE_KEY = "dist_key::";
     private static final double MAXIMAL_DISTANCE_LENGTH_RATIO = 0.15;
 
     @Override
-    public void manipulate(SpannedDocument doc) {
-        for (Span s : doc.getAllSpans()) {
+    public void manipulate(NgramDocument doc) {
+        for (Ngram s : doc.getAllNgrams()) {
             if (s.hasNoTags())
                 continue;
 
             for (String tag : s.getTags()) {
                 // get the text of the pasuk
                 JbsTanachIndex index = new JbsTanachIndex();
-                List<Document> docs = index.searchExactInUri(tag);
+                List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
                 String pasuk = docs.get(0).get("text");
 
                 int minDistance = getMinimalDistance(pasuk, s.getTextFormatted());
@@ -44,7 +43,7 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
         }
     }
 
-    private void filterTagsWithDistanceHigherThanMinimalDistance(Span s) {
+    private void filterTagsWithDistanceHigherThanMinimalDistance(Ngram s) {
         List<String> removedTags = new ArrayList<>();
 
         int min = getMinimalEditDistance(s);
@@ -56,7 +55,7 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
         s.removeTags(removedTags);
     }
 
-    private int getMinimalEditDistance(Span s) {
+    private int getMinimalEditDistance(Ngram s) {
         int min = 1000;
         for (String tag : s.getTags())
             if (getDistance(s, tag) < min)
@@ -65,7 +64,7 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
         return min;
     }
 
-    private void filterTagsBasedOnDistanceLengthRatio(Span s) {
+    private void filterTagsBasedOnDistanceLengthRatio(Ngram s) {
         List<String> removedTags = new ArrayList<>();
 
         for (String tag : s.getTags()) {
@@ -84,10 +83,10 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
      * @return
      */
     private int getMinimalDistance(String pasuk, String text) {
-        SpannedDocument sd = new SpannedDocument(pasuk, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        NgramDocument sd = new NgramDocument(pasuk, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
 
         int minDistance = 1000;
-        for (Span s : sd.getAllSpans()) {
+        for (Ngram s : sd.getAllNgrams()) {
             int currDist = getLevenshteinDistance(s.text(), text);
             if (currDist < minDistance)
                 minDistance = currDist;
@@ -96,7 +95,7 @@ public class CalcAndFilterByEditDistance implements SpanManipulation {
         return minDistance;
     }
 
-    public static Integer getDistance(Span s, String tag) {
+    public static Integer getDistance(Ngram s, String tag) {
         return  s.getIntExtra(DISTANCE_KEY + tag);
     }
 }

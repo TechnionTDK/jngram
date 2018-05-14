@@ -1,11 +1,9 @@
 package apps.jbsmekorot.manipulations;
 
-import apps.jbsmekorot.PsukimTagger;
-import spanthera.Span;
-import spanthera.SpanManipulation;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocumentManipulation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,15 +12,15 @@ import java.util.List;
  * If an overlapping span s2 has tags then we  remove all tags from either s1 or s2.
  * Current strategy: remove tags from smaller span. If they are equal: keep tags in both.
  */
-    public class RemoveTagsFromOverlappingSpans implements SpanManipulation {
+    public class RemoveTagsFromOverlappingSpans implements NgramDocumentManipulation {
         @Override
-        public void manipulate(SpannedDocument doc) {
-            for (Span s1 : doc.getAllSpans()) {
+        public void manipulate(NgramDocument doc) {
+            for (Ngram s1 : doc.getAllNgrams()) {
                 if (s1.hasNoTags())
                     continue;
 
-                List<Span> overlappingSpans = doc.getOverlappingSpans(s1);
-                for (Span s2 : overlappingSpans) {
+                List<Ngram> overlappingNgrams = doc.getOverlappingNgrams(s1);
+                for (Ngram s2 : overlappingNgrams) {
                     if (s2.hasNoTags())
                         continue;
                     // remove tags from smaller span

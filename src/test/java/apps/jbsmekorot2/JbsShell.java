@@ -3,10 +3,9 @@ package apps.jbsmekorot2;
 import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.RecallPrecision;
-import org.apache.lucene.document.Document;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 public class JbsShell {
     private JbsTanachIndex index;
-    SpannedDocument doc;
+    NgramDocument doc;
     RecallPrecision madad;
     private String textOrchotTzadikim = "האמת. הנשמה נבראת ממקום רוח הקודש, שנאמר (בראשית ב ד): \"ויפח באפיו נשמת חיים\"; ונחצבה ממקום טהרה, ונבראת מזוהר העליון מכסא הכבוד. ואין למעלה במקום קודשי הקודשים שקר, אלא הכל אמת, שנאמר (ירמיהו י י): \"ויי אלהים אמת\". ומצאתי כי כתיב: \"אהיה אשר אהיה\" (שמות ג יד), וכתיב: \"ויי אלהים אמת, הוא אלהים חיים ומלך עולם\" (ירמיהו שם). ועתה יש להודיעך שהקדוש ברוך הוא אלהים אמת: כי תמצא עשרים ואחת פעמים \"אהיה\" שהוא בגימטריא \"אמת\", וגם כן \"אהיה\" בגימטריא עשרים ואחת.";
     private String textMidrashRabaEster_7_9 = "וירא המן כי אין מרדכי כרע ומשתחוה לו (אסתר ג, ה), אמר רבי איבו (תהלים סט, כד): תחשכנה עיניהם של רשעים מראות. לפי שמראית עיניהם של רשעים מורידות אותם לגיהנם, הדא הוא דכתיב (בראשית ו, ב): ויראו בני האלהים את בנות האדם. (בראשית ט, כב): וירא חם אבי כנען. (בראשית כח, ח): וירא עשו כי רעות בנות כנען. (במדבר כב, ב): וירא בלק בן צפור. (במדבר כד, א): וירא בלעם כי טוב בעיני ה' לברך את ישראל. וירא המן כי אין מרדכי כרע ומשתחוה לו. אבל מראית עיניהם של צדיקים תואר, לפי שמראית עיניהם של צדיקים מעלה אותם למעלה העליונה, הדא הוא דכתיב (בראשית יח, ב): וישא עיניו וירא והנה שלשה אנשים. (בראשית כב, יג): וירא והנה איל. (בראשית כט, ב): וירא והנה באר בשדה. (שמות ג, ב): וירא והנה הסנה. (במדבר כה, ז): וירא פינחס, לפיכך הם שמחים במראית עיניהם, שנאמר (תהלים קז, מב): יראו ישרים וישמחו.";
@@ -43,20 +42,20 @@ public class JbsShell {
 
     @Test
     public void getDocumentByURI() {
-        List<Document> result = index.searchExactInUri("jbr:text-tanach-28-1-1");
+        List<org.apache.lucene.document.Document> result = index.searchExactInUri("jbr:text-tanach-28-1-1");
         index.printDocs(result);
     }
 
     @Test
     public void getDocumentByText() {
-        List<Document> result = index.searchFuzzyInTextRestriction("בעיני יהוה", 1, 3);
+        List<org.apache.lucene.document.Document> result = index.searchFuzzyInTextRestriction("בעיני יהוה", 1, 3);
         System.out.println(result.size() + " results:");
         index.printDocs(result);
     }
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(MesilatYesharim1, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new NgramDocument(MesilatYesharim1, JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
         try {
             PrintStream out = new PrintStream(new FileOutputStream("outbottomUp.txt"));
@@ -78,7 +77,7 @@ public class JbsShell {
 
     @Test
     public void printSpannedDocumentTopDown(){
-        doc = new SpannedDocument(MesilatYesharim1,JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
+        doc = new NgramDocument(MesilatYesharim1,JbsMekorot2.MINIMAL_PASUK_LENGTH, JbsMekorot2.MAXIMAL_PASUK_LENGTH);
         JbsMekorot2.findPsukimTopDown(doc);
         try {
             PrintStream out = new PrintStream( new FileOutputStream("outTopDown.txt"));
@@ -95,7 +94,7 @@ public class JbsShell {
     public void fuzzySearchTestWIthOneSubPhrase()
     {
         String text= "שמעי בת וראי והטי אזנך ושכחי עמך ובית אביך";
-        List<Document> docs= index.searchFuzzyInTextRestriction(text,1,3);
+        List<org.apache.lucene.document.Document> docs= index.searchFuzzyInTextRestriction(text,1,3);
         index.printDocs(docs);
 
     }

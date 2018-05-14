@@ -1,10 +1,9 @@
 package apps.jbsmekorot.manipulations;
 
-import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.PsukimTagger;
-import spanthera.Span;
-import spanthera.SpanManipulation;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocumentManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +16,10 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * made of different parts of the pasuk.
  * Here we detect and remove such tags.
  */
-    public class RemoveNonSequentialTags implements SpanManipulation {
+    public class RemoveNonSequentialTags implements NgramDocumentManipulation {
         @Override
-        public void manipulate(SpannedDocument doc) {
-            for (Span s : doc.getAllSpans()) {
+        public void manipulate(NgramDocument doc) {
+            for (Ngram s : doc.getAllNgrams()) {
                 if (s.size() == 2 || s.getTags().size() == 0)
                     continue;
 

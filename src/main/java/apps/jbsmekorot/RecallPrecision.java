@@ -1,8 +1,8 @@
 package apps.jbsmekorot;
 
 import org.apache.commons.lang3.StringUtils;
-import spanthera.Span;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * Provides services to calculate recall & precision for psukim detection.
  * It goes like that: identify psukim using one of the labeled data files
  * found in resources/labeledPsukimData (of course you should ignore the labels, i.e.,
- * remove % chars). Then you should give the resulted SpannedDocument to this
+ * remove % chars). Then you should give the resulted NgramDocument to this
  * class for calculating recall & precision.
  * Created by omishali on 14/12/2017.
  */
@@ -19,12 +19,12 @@ public class RecallPrecision {
     private static final String DOUBLE_LABEL = "%%";
     private static final String SINGLE_LABEL = "%";
 
-    public RecallResult getRecall(SpannedDocument sd) {
+    public RecallResult getRecall(NgramDocument sd) {
         float totalLabeledSpans = 0;
         float totalHits = 0;
         RecallResult result = new RecallResult();
 
-        for (Span s : sd.getAllSpans()) {
+        for (Ngram s : sd.getAllNgrams()) {
             if (!isLabeledSpan(s))
                 continue;
 
@@ -54,7 +54,7 @@ public class RecallPrecision {
         return result;
     }
 
-    private boolean isLabeledSpan(Span s) {
+    private boolean isLabeledSpan(Ngram s) {
         if (s.text().startsWith(DOUBLE_LABEL) && s.text().endsWith(DOUBLE_LABEL)) { // potential labeled span
             if (StringUtils.countMatches(s.text(), "%") == 4)
                 return true; // no inner marks
@@ -72,29 +72,29 @@ public class RecallPrecision {
     }
 
     /**
-     * Span s should be a labeled span.
+     * Ngram s should be a labeled span.
      * @param s
      * @return
      */
-    private boolean isDoubleLabeledSpan(Span s) {
+    private boolean isDoubleLabeledSpan(Ngram s) {
         return s.text().startsWith(DOUBLE_LABEL);
     }
 
     /**
-     * Span s should be a labeled span.
+     * Ngram s should be a labeled span.
      * @param s
      * @return
      */
-    private boolean isSingleLabeledSpan(Span s) {
+    private boolean isSingleLabeledSpan(Ngram s) {
         return !isDoubleLabeledSpan(s) && s.text().startsWith(SINGLE_LABEL);
     }
 
-    public PrecisionlResult getPrecision(SpannedDocument sd) {
+    public PrecisionlResult getPrecision(NgramDocument sd) {
         float totalLabeledTags = 0;
         float totalTags = 0;
         PrecisionlResult result = new PrecisionlResult();
 
-        for (Span s : sd.getAllSpans()) {
+        for (Ngram s : sd.getAllNgrams()) {
             if (s.getTags().size() == 0)
                 continue;
 
@@ -130,17 +130,17 @@ public class RecallPrecision {
         return result;
     }
 
-    public MultPrecisionResult getPrecision(List<SpannedDocument> sds) {
+    public MultPrecisionResult getPrecision(List<NgramDocument> sds) {
         MultPrecisionResult result = new MultPrecisionResult();
-        for (SpannedDocument sd : sds)
+        for (NgramDocument sd : sds)
             result.add(getPrecision(sd));
 
         return result;
     }
 
-    public MultRecallResult getRecall(List<SpannedDocument> sds) {
+    public MultRecallResult getRecall(List<NgramDocument> sds) {
         MultRecallResult result = new MultRecallResult();
-        for (SpannedDocument sd : sds)
+        for (NgramDocument sd : sds)
             result.add(getRecall(sd));
 
         return result;
@@ -198,14 +198,14 @@ public class RecallPrecision {
             this.totalHits = totalHits;
         }
 
-        private List<Span> missedSpans = new ArrayList<>();
+        private List<Ngram> missedNgrams = new ArrayList<>();
 
-        public void addMissedSpan(Span s) {
-            missedSpans.add(s);
+        public void addMissedSpan(Ngram s) {
+            missedNgrams.add(s);
         }
 
         public void printMissedSpans() {
-            for (Span s : missedSpans) {
+            for (Ngram s : missedNgrams) {
                 System.out.println("Missed span:");
                 System.out.println(s);
             }
@@ -239,14 +239,14 @@ public class RecallPrecision {
             this.totalTags = totalTags;
         }
 
-        private List<Span> impreciseSpans = new ArrayList<>();
+        private List<Ngram> impreciseNgrams = new ArrayList<>();
 
-        public void addImpreciseSpan(Span s) {
-            impreciseSpans.add(s);
+        public void addImpreciseSpan(Ngram s) {
+            impreciseNgrams.add(s);
         }
 
         public void printImpreciseSpans() {
-            for (Span s : impreciseSpans) {
+            for (Ngram s : impreciseNgrams) {
                 System.out.println("Imprecise span:");
                 System.out.println(s);
             }

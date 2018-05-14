@@ -3,17 +3,18 @@ package spanthera;
 import java.util.*;
 
 /**
+ * A contiguous sequence of words.
  * Created by omishali on 30/04/2017.
  */
-public class Span {
+public class Ngram {
     private Map<String, String> stringExtras = new HashMap<>();
     private Map<String, Integer> intExtras = new HashMap<>();
     private String textFormatted;
-    private SpannedDocument doc;
+    private NgramDocument doc;
     private int start, end;
     private List<String> tags = new ArrayList<String>();
 
-    public void setDoc(SpannedDocument doc) {
+    public void setDoc(NgramDocument doc) {
         this.doc = doc;
     }
 
@@ -25,8 +26,8 @@ public class Span {
         this.end = end;
     }
 
-    public Span(SpannedDocument document, int start, int end) {
-        setDoc(document);
+    public Ngram(NgramDocument ngramDocument, int start, int end) {
+        setDoc(ngramDocument);
         setStart(start);
         setEnd(end);
     }
@@ -56,7 +57,7 @@ public class Span {
     }
 
     /**
-     * Span's size in words
+     * Ngram's size in words
      * @return
      */
     public int size() {
@@ -130,11 +131,11 @@ public class Span {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Span span = (Span) o;
+        Ngram ngram = (Ngram) o;
 
-        if (start != span.start) return false;
-        if (end != span.end) return false;
-        return doc != null ? doc.equals(span.doc) : span.doc == null;
+        if (start != ngram.start) return false;
+        if (end != ngram.end) return false;
+        return doc != null ? doc.equals(ngram.doc) : ngram.doc == null;
 
     }
 

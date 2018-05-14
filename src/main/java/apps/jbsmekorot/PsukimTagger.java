@@ -2,15 +2,15 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import org.apache.lucene.document.Document;
-import spanthera.Span;
-import spanthera.SpanTagger;
+import spanthera.Ngram;
+import spanthera.NgramTagger;
 
 import java.util.*;
 
 /**
  * Created by omishali on 10/09/2017.
  */
-public class PsukimTagger implements SpanTagger {
+public class PsukimTagger implements NgramTagger {
 
     private JbsTanachIndex tanach;
     //private JbsTanachMaleIndex tanachMale;
@@ -20,7 +20,7 @@ public class PsukimTagger implements SpanTagger {
         //tanachMale = new JbsTanachMaleIndex();
     }
 
-    public List<String> tag(Span s) {
+    public List<String> tag(Ngram s) {
         String text = s.getTextFormatted();
 
         // formatting may reduce the size of the span to 1, which causes the fuzzy search to fail.
@@ -33,9 +33,9 @@ public class PsukimTagger implements SpanTagger {
         List<Document> docs2 = new ArrayList<>(); // for ADNUT_TEXT
 
         docs1 = tanach.searchFuzzyInText(text, maxEdits);
-        //List<Document> docs1 = tanach.searchExactInText(text);
-        //List<Document> docs2 = tanachMale.searchExactInText(text);
-        //List<Document> docs2 = tanachMale.searchFuzzyInText(text, 2);
+        //List<NgramDocument> docs1 = tanach.searchExactInText(text);
+        //List<NgramDocument> docs2 = tanachMale.searchExactInText(text);
+        //List<NgramDocument> docs2 = tanachMale.searchFuzzyInText(text, 2);
         if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
             docs2 = tanach.searchFuzzyInText(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), maxEdits);
 
@@ -54,7 +54,7 @@ public class PsukimTagger implements SpanTagger {
      * @param s
      * @return
      */
-     List<Integer> getMaxEdits(Span s) {
+     List<Integer> getMaxEdits(Ngram s) {
         List<Integer> maxEdits = new ArrayList<>();
         String[] words = s.getTextFormatted().split("\\s+");
         for (int i=0; i<words.length; i++) {
@@ -67,7 +67,7 @@ public class PsukimTagger implements SpanTagger {
         return maxEdits;
     }
 
-    public boolean isCandidate(Span s) {
+    public boolean isCandidate(Ngram s) {
         return s.size() == 2;
     }
 }

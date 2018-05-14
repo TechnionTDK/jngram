@@ -1,13 +1,13 @@
 package apps.jbsmekorot2spark;
 
-import apps.jbsmekorot.JbsSpanFormatter;
+import apps.jbsmekorot.JbsNgramFormatter;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
 import org.jetbrains.annotations.NotNull;
-import spanthera.Span;
-import spanthera.SpannedDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocument;
 import spanthera.io.Subject;
 import spanthera.io.Tag;
 import spanthera.io.TaggedSubject;
@@ -145,19 +145,19 @@ public class JbsSparkMekorot {
             return retList;
         }
 
-        SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+        NgramDocument sd = new NgramDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
         findPsukim(sd, indexPath);
         OutputTheResultToFIle(retList, taggedSubject, uri, sd);
         return retList;
     }
 
-    private static void OutputTheResultToFIle(List<Row> retList, TaggedSubject taggedSubject, String uri, SpannedDocument sd) {
+    private static void OutputTheResultToFIle(List<Row> retList, TaggedSubject taggedSubject, String uri, NgramDocument sd) {
         taggedSubject.setUri(uri);
-        for (Span span : sd.getAllSpans()) {
-            if (span.getTags().size() == 0)
+        for (Ngram ngram : sd.getAllNgrams()) {
+            if (ngram.getTags().size() == 0)
                 continue;
-            for (String tag : span.getTags()) {
-                Tag t = new Tag(span.getStart(), span.getEnd(), tag);
+            for (String tag : ngram.getTags()) {
+                Tag t = new Tag(ngram.getStart(), ngram.getEnd(), tag);
                 taggedSubject.addTag(t);
             }
         }
@@ -167,15 +167,15 @@ public class JbsSparkMekorot {
         }
     }
 
-    public  static  void findPsukim(SpannedDocument sd,  String indexPath){
+    public  static  void findPsukim(NgramDocument sd, String indexPath){
          findPsukimTopDown(sd, indexPath);
     }
 
-    public static void findPsukimTopDown(SpannedDocument doc, String indexPath){
-        doc.format(new JbsSpanFormatter());
+    public static void findPsukimTopDown(NgramDocument doc, String indexPath){
+        doc.format(new JbsNgramFormatter());
         doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
         doc.add(new PsukimTaggerTopDown(doc.length(),indexPath));
-        for(int spanSize = doc.getMaximalSpanSize() ; spanSize >= doc.getMinimalSpanSize(); spanSize-- ){
+        for(int spanSize = doc.getMaximalNgramSize(); spanSize >= doc.getMinimalNgramSize(); spanSize-- ){
             doc.tag(spanSize);
         }
     }

@@ -6,14 +6,14 @@ import apps.jbsmekorot2spark.Config;
 import apps.jbsmekorot2spark.ContextFinder;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
-import spanthera.Span;
-import spanthera.SpanTagger;
+import spanthera.Ngram;
+import spanthera.NgramTagger;
 import org.apache.commons.lang3.StringUtils;
 
 
 import java.util.*;
 
-public class PsukimTaggerTopDown implements SpanTagger {
+public class PsukimTaggerTopDown implements NgramTagger {
 
     private ContextFinder contextFinder;
     private JbsTanachIndex tanach;
@@ -43,13 +43,13 @@ public class PsukimTaggerTopDown implements SpanTagger {
      * ** 'true'  in textCoveredBySpans  denotes "marked"
      */
     //endregion
-    public boolean isCandidate(Span s) {
+    public boolean isCandidate(Ngram s) {
 
         return !(textCoveredBySpans[s.getStart()] || textCoveredBySpans[s.getEnd()] );
     }
 
     @Override
-    public List<String> tag(Span s){
+    public List<String> tag(Ngram s){
         String text= s.getTextFormatted();
         List<String> results = null;
 
@@ -93,7 +93,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
 
             this can be configurable.
      */
-    private List<Document> filterOutExtremeEdits(List<Document> docs, Span s) {
+    private List<Document> filterOutExtremeEdits(List<Document> docs, Ngram s) {
         if(Config.MAX_EDITS > 1){
             return docs;
         }
@@ -247,7 +247,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         }
     }
     @NotNull
-    private List<String> HandleThirdLayerSpans(Span s, String text) {
+    private List<String> HandleThirdLayerSpans(Ngram s, String text) {
         //1. exact in Tanach
         List<Document>  docs= searchByAllMeans(s,text);
         //filter out tags
@@ -265,7 +265,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
     @NotNull
-    private List<String> HandleSecondLayerSpans(Span s, String text) {
+    private List<String> HandleSecondLayerSpans(Ngram s, String text) {
         //1. exact in Tanach
         List<Document> docs = searchByAllMeans(s, text);
         //filter out tags
@@ -295,7 +295,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
     }
 
     @NotNull
-    private List<String> HandleFirstLayerSpans(Span s, String text) {
+    private List<String> HandleFirstLayerSpans(Ngram s, String text) {
         //1. exact in Tanach
         List<Document> docs = searchByAllMeans(s, text);
         List<String> result = new ArrayList<>();
@@ -308,7 +308,7 @@ public class PsukimTaggerTopDown implements SpanTagger {
         return result;
     }
 
-    private List<Document> searchByAllMeans(Span s, String text) {
+    private List<Document> searchByAllMeans(Ngram s, String text) {
         //1.exact in tanach
         List<Document>  docs= tanach.searchExactInText(text);
         if(docs.size()==0){

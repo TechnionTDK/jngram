@@ -1,9 +1,9 @@
 package apps.jbsmekorot.manipulations;
 
 import org.apache.commons.lang3.StringUtils;
-import spanthera.Span;
-import spanthera.SpannedDocument;
-import spanthera.manipulations.FilterTagsManipulation;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.manipulations.FilterTagsManipulationNgram;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,22 +11,22 @@ import java.util.List;
 /**
  * Created by omishali on 15/10/2017.
  */
-public class FilterTagsFromSpans extends FilterTagsManipulation {
+public class FilterTagsFromSpans extends FilterTagsManipulationNgram {
     private static final int CERTAIN_LENGTH = 4;
     private static final int MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN = 70;
 
-    public FilterTagsFromSpans(SpannedDocument doc) {
-        doc.clearTagsSpanIndex();
-        doc.createTagSpanIndex();
+    public FilterTagsFromSpans(NgramDocument doc) {
+        doc.clearTagsNgramIndex();
+        doc.createTagNgramIndex();
     }
 
     @Override
-    protected boolean isCandidate(Span s) {
+    protected boolean isCandidate(Ngram s) {
         return s.size() == 2 || s.size() == 3;
     }
 
     @Override
-    protected void filterTags(SpannedDocument doc, Span s) {
+    protected void filterTags(NgramDocument doc, Ngram s) {
         // we used to check this, but we prefer not to be based on dots and other punctuation marks.
         // anyway, if you use this rule note that current impl. has bug: it doesn't filter out % that appear
         // in labeled data!
@@ -47,7 +47,7 @@ public class FilterTagsFromSpans extends FilterTagsManipulation {
 
         // keep a tag if it appears in a different span in the document
         for (String tag : s.getTags()) {
-            List<Span> spansWithSameTag = doc.getSpans(tag);
+            List<Ngram> spansWithSameTag = doc.getNgrams(tag);
 
             // spansWithSameTag cannot be null since it contains at least s
 
@@ -68,19 +68,19 @@ public class FilterTagsFromSpans extends FilterTagsManipulation {
         // here we may check whether s contains "many" tags (MANY_TAGS)
     }
 
-    private boolean isInLongDistanceFromCertainSpan(Span thisSpan, List<Span> spansWithSameTag) {
-        for (Span otherSpan : spansWithSameTag) {
-            if (thisSpan.equals(otherSpan))
+    private boolean isInLongDistanceFromCertainSpan(Ngram thisNgram, List<Ngram> spansWithSameTag) {
+        for (Ngram otherNgram : spansWithSameTag) {
+            if (thisNgram.equals(otherNgram))
                 continue;
 
-            if (otherSpan.size() < CERTAIN_LENGTH)
+            if (otherNgram.size() < CERTAIN_LENGTH)
                 continue;
 
             int distance = 0;
-            if (thisSpan.getStart() > otherSpan.getEnd())
-                distance = thisSpan.getStart() - otherSpan.getEnd();
+            if (thisNgram.getStart() > otherNgram.getEnd())
+                distance = thisNgram.getStart() - otherNgram.getEnd();
             else
-                distance = otherSpan.getStart() - thisSpan.getEnd();
+                distance = otherNgram.getStart() - thisNgram.getEnd();
 
             if (distance <= MAXIMAL_DISTANCE_FROM_CERTAIN_SPAN + 1)
                 return false;
@@ -89,8 +89,8 @@ public class FilterTagsFromSpans extends FilterTagsManipulation {
         return true;
     }
 
-    private boolean hasTagInCertainLength(List<Span> spansWithSameTag) {
-        for (Span s : spansWithSameTag)
+    private boolean hasTagInCertainLength(List<Ngram> spansWithSameTag) {
+        for (Ngram s : spansWithSameTag)
             if (s.size() >= CERTAIN_LENGTH)
                 return true;
 
@@ -103,7 +103,7 @@ public class FilterTagsFromSpans extends FilterTagsManipulation {
      * @param s
      * @return
      */
-    private boolean isSurroundedWithQuotes(Span s) {
+    private boolean isSurroundedWithQuotes(Ngram s) {
         String text = s.text();
         text = text.replace("''", "\""); // replace double quotes of torat emet '' with normal quotes
 

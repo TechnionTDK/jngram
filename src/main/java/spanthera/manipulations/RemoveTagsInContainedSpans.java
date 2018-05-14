@@ -1,8 +1,8 @@
 package spanthera.manipulations;
 
-import spanthera.Span;
-import spanthera.SpanManipulation;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocumentManipulation;
 
 import java.util.List;
 
@@ -11,16 +11,16 @@ import java.util.List;
  * For spans s1 s2, if s1 is contained in s2 AND s2 has any tags, then remove all tags
  * from s1.
  */
-public class RemoveTagsInContainedSpans implements SpanManipulation {
+public class RemoveTagsInContainedSpans implements NgramDocumentManipulation {
     @Override
-    public void manipulate(SpannedDocument doc) {
-        for (Span s1 : doc.getAllSpans()) {
+    public void manipulate(NgramDocument doc) {
+        for (Ngram s1 : doc.getAllNgrams()) {
             if (s1.getTags().size() == 0)
                 continue;
 
 
-            List<Span> containingSpans = doc.getContainingSpans(s1);
-            for (Span s2 : containingSpans) {
+            List<Ngram> containingNgrams = doc.getContainingNgrams(s1);
+            for (Ngram s2 : containingNgrams) {
                 if (s2.getTags().size() != 0) {
                     s1.clearTags();
                     break;

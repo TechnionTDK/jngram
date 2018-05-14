@@ -1,17 +1,17 @@
 package spanthera.manipulations;
 
-import spanthera.Span;
-import spanthera.SpanManipulation;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
+import spanthera.NgramDocumentManipulation;
 
 /**
  * Super class for manipulations that remove tags from spans
  * based on a certain criteria.
  */
-public abstract class FilterTagsManipulation implements SpanManipulation {
+public abstract class FilterTagsManipulationNgram implements NgramDocumentManipulation {
     @Override
-    public void manipulate(SpannedDocument doc) {
-        for (Span s : doc.getAllSpans()) {
+    public void manipulate(NgramDocument doc) {
+        for (Ngram s : doc.getAllNgrams()) {
             if (isCandidate(s))
                 filterTags(doc, s);}
     }
@@ -23,6 +23,6 @@ public abstract class FilterTagsManipulation implements SpanManipulation {
      * @param s
      * @return
      */
-    protected abstract boolean isCandidate(Span s);
-    protected abstract void filterTags(SpannedDocument doc, Span s);
+    protected abstract boolean isCandidate(Ngram s);
+    protected abstract void filterTags(NgramDocument doc, Ngram s);
 }

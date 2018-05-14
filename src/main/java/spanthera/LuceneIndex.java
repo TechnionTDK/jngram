@@ -136,7 +136,7 @@ public abstract class LuceneIndex {
         return getTextList(hits);
     }
 
-//    protected List<Document> searchFuzzy2(String field, String phrase, int maxEdits) throws IOException {
+//    protected List<NgramDocument> searchFuzzy2(String field, String phrase, int maxEdits) throws IOException {
 //        //String[] terms = phrase.split(" ");
 //        FuzzyQuery clauses = new FuzzyQuery(new Term(field, phrase),maxEdits);
 //        //for (int i = 0; i < terms.length; i++) {

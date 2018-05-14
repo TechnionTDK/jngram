@@ -3,7 +3,7 @@ package apps.jbsmekorot2;
 import apps.jbsmekorot.RecallPrecision;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
 import spanthera.io.SpantheraIO;
 import spanthera.io.Subject;
 import spanthera.io.TaggerInput;
@@ -37,7 +37,7 @@ public class PsukimTaggerTopDownTests {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED2);
         assertNotNull(inputJson);
         List<Subject> subjects = inputJson.getSubjects();
-        SpannedDocument doc= JbsMekorot2.findPsukimInSubject(subjects.get(0));
+        NgramDocument doc= JbsMekorot2.findPsukimInSubject(subjects.get(0));
         System.out.println("Recall is: "+ madad.getRecall(doc).getRecall()+ "\n Precision is: " + madad.getPrecision(doc).getPrecision());
         System.out.println(doc.toString());
         TestRecallPrecision2.PrintRecall(madad,doc, "");

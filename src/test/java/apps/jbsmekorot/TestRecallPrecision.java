@@ -3,7 +3,7 @@ package apps.jbsmekorot;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
 import spanthera.io.SpantheraIO;
 import spanthera.io.Subject;
 import spanthera.io.TaggerInput;
@@ -26,7 +26,7 @@ public class TestRecallPrecision {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(19));
+        NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         System.out.print("Recall: ");
@@ -47,9 +47,9 @@ public class TestRecallPrecision {
         List<Subject> subjects = inputJson.getSubjects();
         RecallPrecision calc = new RecallPrecision();
 
-        List<SpannedDocument> sds = new ArrayList<>();
+        List<NgramDocument> sds = new ArrayList<>();
         for (int i=0; i<=17; i++) {
-            SpannedDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(i));
+            NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(i));
             sds.add(sd);
         }
 

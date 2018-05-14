@@ -2,8 +2,8 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.*;
 import org.apache.commons.lang3.time.StopWatch;
-import spanthera.Span;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
+import spanthera.Ngram;
 import spanthera.io.*;
 import spanthera.manipulations.MergeSiblingSpans;
 import spanthera.manipulations.RemoveTagsInContainedSpans;
@@ -41,7 +41,7 @@ public class JbsMekorot {
             // should be identified in this text (for Dor's project).
             // output json is sent to standard output.
             String text = args[1];
-            SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+            NgramDocument sd = new NgramDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
             findPsukim(sd);
             TaggedSubject taggedSubject = getTaggedSubject(sd, "http://sometext");
             TaggerOutput outputJson = new TaggerOutput();
@@ -105,9 +105,9 @@ public class JbsMekorot {
         dir.mkdir();
     }
 
-    public static void findPsukim(SpannedDocument doc) {
-        doc.format(new JbsSpanFormatter());
-        doc.add(new AddTextWithShemAdnut()).manipulate(); // should appear before PsukimTagger & after JbsSpanFormatter
+    public static void findPsukim(NgramDocument doc) {
+        doc.format(new JbsNgramFormatter());
+        doc.add(new AddTextWithShemAdnut()).manipulate(); // should appear before PsukimTagger & after JbsNgramFormatter
         doc.add(new PsukimTagger()).tag();
         doc.add(new MergeSiblingSpans()).manipulate();
         doc.add(new RemoveTagsInContainedSpans()).manipulate();
@@ -136,7 +136,7 @@ public class JbsMekorot {
 
             // a subject denotes a specific text element within the json file
             for(Subject s : subjects) {
-                SpannedDocument sd = findPsukimInSubject(s);
+                NgramDocument sd = findPsukimInSubject(s);
                 TaggedSubject taggedSubject = getTaggedSubject(sd, s.getUri());
                 outputJson.addTaggedSubject(taggedSubject);
             }
@@ -148,7 +148,7 @@ public class JbsMekorot {
         return outputJson;
     }
 
-    public static SpannedDocument findPsukimInSubject(Subject s) {
+    public static NgramDocument findPsukimInSubject(Subject s) {
         String text = s.getText();
         String uri = s.getUri();
 
@@ -157,20 +157,20 @@ public class JbsMekorot {
             return null;
         }
 
-        SpannedDocument sd = new SpannedDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
+        NgramDocument sd = new NgramDocument(text, MINIMAL_PASUK_LENGTH, MAXIMAL_PASUK_LENGTH);
         findPsukim(sd);
 
         return sd;
     }
 
-    public static TaggedSubject getTaggedSubject(SpannedDocument sd, String uri) {
+    public static TaggedSubject getTaggedSubject(NgramDocument sd, String uri) {
         TaggedSubject taggedSubject = new TaggedSubject();
         taggedSubject.setUri(uri);
-        for (Span span : sd.getAllSpans()) {
-            if (span.getTags().size() == 0)
+        for (Ngram ngram : sd.getAllNgrams()) {
+            if (ngram.getTags().size() == 0)
                 continue;
-            for (String tag : span.getTags()) {
-                Tag t = new Tag(span.getStart(), span.getEnd(), tag);
+            for (String tag : ngram.getTags()) {
+                Tag t = new Tag(ngram.getStart(), ngram.getEnd(), tag);
                 taggedSubject.addTag(t);
             }
         }

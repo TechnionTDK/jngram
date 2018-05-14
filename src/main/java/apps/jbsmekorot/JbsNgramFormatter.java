@@ -1,20 +1,20 @@
 package apps.jbsmekorot;
 
-import spanthera.Span;
-import spanthera.SpanFormatter;
+import spanthera.Ngram;
+import spanthera.NgramFormatter;
 
 /**
  * Created by omishali on 08/01/2018.
  */
-public class JbsSpanFormatter implements SpanFormatter {
+public class JbsNgramFormatter implements NgramFormatter {
 
     @Override
-    public String format(Span s) {
+    public String format(Ngram s) {
         return format(s.text());
     }
 
     @Override
-    public boolean isCandidate(Span s) {
+    public boolean isCandidate(Ngram s) {
         return s.size() == 2;
     }
 

@@ -1,8 +1,7 @@
 package apps.jbsmekorot;
 
-import org.apache.lucene.document.Document;
 import org.junit.*;
-import spanthera.SpannedDocument;
+import spanthera.NgramDocument;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public class JbsShell {
     private JbsTanachIndex index;
-    SpannedDocument doc;
+    NgramDocument doc;
     private String textOrchotTzadikim = "האמת. הנשמה נבראת ממקום רוח הקודש, שנאמר (בראשית ב ד): \"ויפח באפיו נשמת חיים\"; ונחצבה ממקום טהרה, ונבראת מזוהר העליון מכסא הכבוד. ואין למעלה במקום קודשי הקודשים שקר, אלא הכל אמת, שנאמר (ירמיהו י י): \"ויי אלהים אמת\". ומצאתי כי כתיב: \"אהיה אשר אהיה\" (שמות ג יד), וכתיב: \"ויי אלהים אמת, הוא אלהים חיים ומלך עולם\" (ירמיהו שם). ועתה יש להודיעך שהקדוש ברוך הוא אלהים אמת: כי תמצא עשרים ואחת פעמים \"אהיה\" שהוא בגימטריא \"אמת\", וגם כן \"אהיה\" בגימטריא עשרים ואחת.";
     private String textMidrashRabaEster_7_9 = "וירא המן כי אין מרדכי כרע ומשתחוה לו (אסתר ג, ה), אמר רבי איבו (תהלים סט, כד): תחשכנה עיניהם של רשעים מראות. לפי שמראית עיניהם של רשעים מורידות אותם לגיהנם, הדא הוא דכתיב (בראשית ו, ב): ויראו בני האלהים את בנות האדם. (בראשית ט, כב): וירא חם אבי כנען. (בראשית כח, ח): וירא עשו כי רעות בנות כנען. (במדבר כב, ב): וירא בלק בן צפור. (במדבר כד, א): וירא בלעם כי טוב בעיני ה' לברך את ישראל. וירא המן כי אין מרדכי כרע ומשתחוה לו. אבל מראית עיניהם של צדיקים תואר, לפי שמראית עיניהם של צדיקים מעלה אותם למעלה העליונה, הדא הוא דכתיב (בראשית יח, ב): וישא עיניו וירא והנה שלשה אנשים. (בראשית כב, יג): וירא והנה איל. (בראשית כט, ב): וירא והנה באר בשדה. (שמות ג, ב): וירא והנה הסנה. (במדבר כה, ז): וירא פינחס, לפיכך הם שמחים במראית עיניהם, שנאמר (תהלים קז, מב): יראו ישרים וישמחו.";
     private String textRashi_1_6_9 = "רש\"י אלה תולדת נח נח איש צדיק. הואיל והזכירו, סיפר בשבחו, (א) שנאמר זכר צדיק לברכה (משלי י, ז.). דבר אחר, ללמדך שעיקר תולדותיהם (ב) של צדיקים מעשים טובים בדורותיו. יש מרבותינו דורשים אותו לשבח, כל שכן שאילו היה בדור צדיקים היה צדיק יותר, ויש שדורשים אותו לגנאי, (ג) לפי דורו היה צדיק, ואילו היה בדורו של אברהם לא היה נחשב לכלום (סנהדרין קח.): את האלהים התהלך נח. ובאברהם (ד) הוא אומר אשר התהלכתי לפניו (בראשית כד, מ.), נח היה צריך סעד לתומכו, אבל אברהם היה מתחזק ומהלך בצדקו מאליו: התהלך. לשון עבר, (ה) וזהו שמושו של ל' בלשון (ו) כבד משמשת להבא ולשעבר בלשון אחד, קום התהלך (שם יג, יז.), להבא. התהלך נח, לשעבר. התפלל בעד עבדיך (שמואל-א יב, יט.), להבא. ובא והתפלל אל הבית הזה (מלכים-א ח, מב.), לשון עבר, אלא שהוי\"ו שבראשו (ז) הופכו להבא:";
@@ -32,20 +31,20 @@ public class JbsShell {
 
     @Test
     public void getDocumentByURI() {
-        List<Document> result = index.searchExactInUri("jbr:text-tanach-28-1-1");
+        List<org.apache.lucene.document.Document> result = index.searchExactInUri("jbr:text-tanach-28-1-1");
         index.printDocs(result);
     }
 
     @Test
     public void getDocumentByText() {
-        List<Document> result = index.searchExactInText("בעיני יהוה");
+        List<org.apache.lucene.document.Document> result = index.searchExactInText("בעיני יהוה");
         System.out.println(result.size() + " results:");
         index.printDocs(result);
     }
 
     @Test
     public void printSpannedDocument() {
-        doc = new SpannedDocument(textMitzva_1_1, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
+        doc = new NgramDocument(textMitzva_1_1, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
         JbsMekorot.findPsukim(doc);
 
         System.out.println(doc.toString());

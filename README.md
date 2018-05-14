@@ -1,5 +1,5 @@
-Spanthera is a library for working with spans in textual documents
-and doing interesting things. A span is a sequence of words in a document. (In fact,
+Spanthera is a library for working with ngrams in textual documents
+and doing interesting things. A ngram is a sequence of words in a ngramDocument. (In fact,
 a more precise term would be [n-gram](https://en.wikipedia.org/wiki/N-gram).)
 
 In this README, we explain how to use spanthera using a simple example: entity detection.
@@ -37,10 +37,10 @@ The first step would be to turn the input string into a SpannedDocument object:
 doc = new SpannedDocument(text, 1, 3);
 ```
 
-The parameters 1 and 3 say that we want to look at spans in length 1 to 3. This will allow
-us to, e.g., iterate all spans in length 2 such as "Prime minister" and "minister Bibi". Here,
+The parameters 1 and 3 say that we want to look at ngrams in length 1 to 3. This will allow
+us to, e.g., iterate all ngrams in length 2 such as "Prime minister" and "minister Bibi". Here,
 we assume that entities do not exceed length 3. For better performance, ask for the minimal
-range of spans.
+range of ngrams.
 
 ## Adding a formatter
 Often, we would like to remove some characters from the input text before
@@ -55,7 +55,7 @@ public interface SpanFormatter {
 ``` 
 
 In our example we want to remove the chars: {", !} so we implement the *format* method
-accordingly, and the *isCandidate* method to return *true* (meaning that we handle each span).
+accordingly, and the *isCandidate* method to return *true* (meaning that we handle each ngram).
 Eventually, we should pass the formatter object to our SpannedDocument
 object so that the formatting will take place:
 
@@ -64,32 +64,32 @@ object so that the formatting will take place:
 doc.format(formatter);
 ```
 
-Note that after the formatting, we may retrieve from each span both the original text
-(using *span.getText*),
+Note that after the formatting, we may retrieve from each ngram both the original text
+(using *ngram.getText*),
 and the formatted text (using *getTextFormatted*).
 
 Consult the class *JbsSpanFormatter* for the implementation of a
 formatter for a real-world problem.  
 
-# Adding tags to relevant spans (tagging)
-Now that we have "cleaned" the input text, we would like to **mark** (tag) spans that
+# Adding tags to relevant ngrams (tagging)
+Now that we have "cleaned" the input text, we would like to **mark** (tag) ngrams that
 may represent entities. Specifically, we would like to attach the identifier "BIBI" to
-each span in the text that corresponds to "Bibi" or "Bibi Netanyahu", and the
-identifier "TRUMP" to spans corresponding to "Donald Trump" or "Trump".
+each ngram in the text that corresponds to "Bibi" or "Bibi Netanyahu", and the
+identifier "TRUMP" to ngrams corresponding to "Donald Trump" or "Trump".
 
-Note that after this tagging process, the document will contain some duplicates.
-For example, the span of size two "Bibi Netanyahu" will point to "BIBI" where the span
+Note that after this tagging process, the ngramDocument will contain some duplicates.
+For example, the ngram of size two "Bibi Netanyahu" will point to "BIBI" where the ngram
 "Bibi" within it will also point to "BIBI". We will remove the duplicates afterwards.
 
-For adding tags to spans, we use another interface called *SpanTagger*:
+For adding tags to ngrams, we use another interface called *SpanTagger*:
 ```
 public interface SpanTagger {
     public List<String> tag(Span s);
     public boolean isCandidate(Span s);
 }
 ```
-We should implement the first *tag* method to return a list with "BIBI" for spans such
-as "Bibi" and "Bibi Netanyahu", and a list with "TRUMP" for spans such as "Donald Trump"
+We should implement the first *tag* method to return a list with "BIBI" for ngrams such
+as "Bibi" and "Bibi Netanyahu", and a list with "TRUMP" for ngrams such as "Donald Trump"
 and "Trump". Again, for the tagging to take place, the tagger object should be added
 to the SpannedDocument object:
 ```
@@ -97,15 +97,15 @@ doc.add(tagger);
 doc.tag();
 ```
 
-After calling *doc.tag* we may access the tags of each span using the *span.getTags* method.
+After calling *doc.tag* we may access the tags of each ngram using the *ngram.getTags* method.
 
 Refer to *PsukimTagger* for a more elaborated tagger example. 
 
-# Removing tags from inner spans
-As mentioned, since we tag both spans of size one and two (and also three),
-the span "Bibi Netanyahu" will have the tag "BIBI", where its inner span "BIBI" will also
-have the same tag. The task now is to remove tags from such inner spans, leaving the tag for
-only the outer span.
+# Removing tags from inner ngrams
+As mentioned, since we tag both ngrams of size one and two (and also three),
+the ngram "Bibi Netanyahu" will have the tag "BIBI", where its inner ngram "BIBI" will also
+have the same tag. The task now is to remove tags from such inner ngrams, leaving the tag for
+only the outer ngram.
 
 The interface for doing this and other related taks is *SpanManipulation*:
 ```
@@ -115,7 +115,7 @@ public interface SpanManipulation {
 ```
 
 The method *manipulate* is provided with the SpannedDocument,
-and you may perform any manipulation you like on the tags found in the contained spans.
+and you may perform any manipulation you like on the tags found in the contained ngrams.
 In our example... // TODO
 
 # Installation (Linux)

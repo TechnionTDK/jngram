@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by omishali on 04/09/2017.
  */
-public interface SpanTagger {
+public interface NgramTagger {
     /**
      * Does the actual tagging, returns a list
      * of string tags, or null
@@ -13,7 +13,7 @@ public interface SpanTagger {
      * @param s
      * @return
      */
-    public List<String> tag(Span s);
+    public List<String> tag(Ngram s);
 
     /**
      * Whether the span is a candidate for tagging, e.g.,
@@ -21,5 +21,5 @@ public interface SpanTagger {
      * @param s
      * @return
      */
-    public boolean isCandidate(Span s);
+    public boolean isCandidate(Ngram s);
 }

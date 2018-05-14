@@ -1,7 +1,7 @@
 package apps.jbsmekorot2spark;
 
 import org.apache.lucene.document.Document;
-import spanthera.Span;
+import spanthera.Ngram;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,16 +20,16 @@ public class ContextFinder {
         public int End;
     }
 
-    public HashMap<String, Double>  getTagsInContext(Span span, List<Document> tags){
-        int contextStartIndex =  Math.max(span.getStart() - CONTEXT_DISTANCE , 0);
+    public HashMap<String, Double>  getTagsInContext(Ngram ngram, List<Document> tags){
+        int contextStartIndex =  Math.max(ngram.getStart() - CONTEXT_DISTANCE , 0);
         HashMap<String, Double>  matches = new HashMap<>();
         for(SpanKey sk : SpanKey2Tags.keySet()){
-            if(sk.End >=  contextStartIndex && sk.End < span.getStart()){
+            if(sk.End >=  contextStartIndex && sk.End < ngram.getStart()){
                 try{
                     for(Document tag : tags){
                         String tagStr = tag.get("uri");
                         if(SpanKey2Tags.get(sk).contains(tagStr)){
-                            Double grade = contextGrade(span.getStart() - sk.End);
+                            Double grade = contextGrade(ngram.getStart() - sk.End);
                             matches.put(tagStr,grade);
                         }
                     }
@@ -40,8 +40,8 @@ public class ContextFinder {
         }
         return matches;
     }
-    public void insertTags(Span span, List<String> tags){
-        SpanKey spanKey= new SpanKey(span.getStart(), span.getEnd());
+    public void insertTags(Ngram ngram, List<String> tags){
+        SpanKey spanKey= new SpanKey(ngram.getStart(), ngram.getEnd());
         SpanKey2Tags.put(spanKey, tags);
     }
 
