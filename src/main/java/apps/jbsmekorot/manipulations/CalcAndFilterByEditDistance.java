@@ -87,7 +87,7 @@ public class CalcAndFilterByEditDistance implements NgramDocumentManipulation {
 
         int minDistance = 1000;
         for (Ngram s : sd.getAllNgrams()) {
-            int currDist = getLevenshteinDistance(s.text(), text);
+            int currDist = getLevenshteinDistance(s.getText(), text);
             if (currDist < minDistance)
                 minDistance = currDist;
         }

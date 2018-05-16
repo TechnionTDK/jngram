@@ -6,7 +6,7 @@ package spanthera;
 public class Word {
     private String text;
 
-    public String text() {
+    public String getText() {
         return text;
     }
 

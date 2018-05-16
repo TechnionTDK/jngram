@@ -130,7 +130,7 @@ public class TestJbsManipulations {
         assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getNgram(0, 4).getSortedTags());
 
         Ngram s = doc.getNgram(59, 60);
-        assertEquals("%ויראת מאלקיך.%", s.text());
+        assertEquals("%ויראת מאלקיך.%", s.getText());
         assertEquals("ויראת מאלהיך", s.getTextFormatted());
         assertEquals(getList("jbr:text-tanach-3-19-14"), doc.getNgram(59, 60).getSortedTags());
 

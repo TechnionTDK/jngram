@@ -8,6 +8,6 @@ package spanthera;
  * Created by omishali on 07/01/2018.
  */
 public interface NgramFormatter {
-    public String format(Ngram s);
-    public boolean isCandidate(Ngram s);
+    public String format(Ngram ng);
+    public boolean isCandidate(Ngram ng);
 }

@@ -10,16 +10,16 @@ public interface NgramTagger {
      * Does the actual tagging, returns a list
      * of string tags, or null
      * if there is no tag to be added.
-     * @param s
+     * @param ng
      * @return
      */
-    public List<String> tag(Ngram s);
+    public List<String> tag(Ngram ng);
 
     /**
-     * Whether the span is a candidate for tagging, e.g.,
-     * some matchers may only consider spans having a specific length.
-     * @param s
+     * Whether the ngram is a candidate for tagging, e.g.,
+     * some matchers may only consider ngrams having a specific length.
+     * @param ng
      * @return
      */
-    public boolean isCandidate(Ngram s);
+    public boolean isCandidate(Ngram ng);
 }

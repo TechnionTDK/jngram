@@ -70,11 +70,11 @@ public class Ngram {
 
         return doc.getWord(start + index);
     }
-    public String text() {
+    public String getText() {
         StringBuffer result = new StringBuffer();
 
         for (int i = start; i <= end; i++)
-            result.append(doc.getWord(i).text() + " ");
+            result.append(doc.getWord(i).getText() + " ");
 
         return result.toString().trim();
     }
@@ -116,7 +116,7 @@ public class Ngram {
     public String toString() {
         StringBuffer result = new StringBuffer();
         result.append("[" + getStart() + ", " + getEnd() + "]" + "\n");
-        result.append("(" + text() + ")" + "\n");
+        result.append("(" + getText() + ")" + "\n");
         if (tags.size() > 0) {
             result.append("tags: ");
             for (String tag : tags) {

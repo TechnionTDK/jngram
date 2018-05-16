@@ -10,7 +10,7 @@ public class JbsNgramFormatter implements NgramFormatter {
 
     @Override
     public String format(Ngram s) {
-        return format(s.text());
+        return format(s.getText());
     }
 
     @Override

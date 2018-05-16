@@ -1,6 +1,5 @@
 Spanthera is a library for working with ngrams in textual documents
-and doing interesting things. A ngram is a sequence of words in a ngramDocument. (In fact,
-a more precise term would be [n-gram](https://en.wikipedia.org/wiki/N-gram).)
+and doing interesting things. An [n-gram](https://en.wikipedia.org/wiki/N-gram) is a contiguous sequence of words in a document.
 
 In this README, we explain how to use spanthera using a simple example: entity detection.
 Suppose we have a file with a list of entities
@@ -14,7 +13,17 @@ and that we would like to detect their occurrence in a given text.
 ```
 git clone https://github.com/TechnionTDK/spanthera.git
 ```
-- Open the project using IntelliJ.
+These steps are needed if you wish use to spanthera for text analysis tasks. 
+- Open IntelliJ and create a **new** project where the code using spanthera
+will reside.
+- Add a dependency to spanthera in the new project:
+  - File > Project Structure > Modules
+  - Dependencies > Add JARs or directories...
+  - Browse and add the folder **spanthera/target/classes**
+  - Make sure the dependency is checked and press "OK".
+
+Note: in case the spanthera library is changed, to accommodate the changes, 'git gull' the
+spanthera repository and 'Rebuild Project'. 
  
  Validate your installation:
  - You should have no compilation errors of course.
@@ -31,10 +40,10 @@ Donald Trump. After the meeting Bibi said: "it was a great pleasure
 to meet with the president!". 
 ```
 
-## Create a SpannedDocument object
-The first step would be to turn the input string into a SpannedDocument object:
+## Create an NgramDocument
+The first step would be to turn the input string into an NgramDocument object:
 ```
-doc = new SpannedDocument(text, 1, 3);
+doc = new NgramDocument(text, 1, 3);
 ```
 
 The parameters 1 and 3 say that we want to look at ngrams in length 1 to 3. This will allow
@@ -45,22 +54,22 @@ range of ngrams.
 ## Adding a formatter
 Often, we would like to remove some characters from the input text before
 we start the analysis process. This could be done
-using the *SpanFormatter* interface:
+using the *NgramFormatter* interface:
 
 ```
-public interface SpanFormatter {
-    public String format(Span s);
-    public boolean isCandidate(Span s);
+public interface NgramFormatter {
+    public String format(Ngram ng);
+    public boolean isCandidate(Ngram ng);
 }
 ``` 
 
 In our example we want to remove the chars: {", !} so we implement the *format* method
 accordingly, and the *isCandidate* method to return *true* (meaning that we handle each ngram).
-Eventually, we should pass the formatter object to our SpannedDocument
+Eventually, we should pass the formatter object to our NgramdDocument
 object so that the formatting will take place:
 
 ```
-// formatter is an object implementing the SpanFormatter interface
+// formatter is an object implementing the NgramFormatter interface
 doc.format(formatter);
 ```
 
@@ -68,7 +77,7 @@ Note that after the formatting, we may retrieve from each ngram both the origina
 (using *ngram.getText*),
 and the formatted text (using *getTextFormatted*).
 
-Consult the class *JbsSpanFormatter* for the implementation of a
+Consult the class *JbsNgramFormatter* for the implementation of a
 formatter for a real-world problem.  
 
 # Adding tags to relevant ngrams (tagging)
@@ -77,21 +86,21 @@ may represent entities. Specifically, we would like to attach the identifier "BI
 each ngram in the text that corresponds to "Bibi" or "Bibi Netanyahu", and the
 identifier "TRUMP" to ngrams corresponding to "Donald Trump" or "Trump".
 
-Note that after this tagging process, the ngramDocument will contain some duplicates.
+Note that after this tagging process, the NgramDocument will contain some duplicates.
 For example, the ngram of size two "Bibi Netanyahu" will point to "BIBI" where the ngram
 "Bibi" within it will also point to "BIBI". We will remove the duplicates afterwards.
 
-For adding tags to ngrams, we use another interface called *SpanTagger*:
+For adding tags to ngrams, we use another interface called *NgramTagger*:
 ```
-public interface SpanTagger {
-    public List<String> tag(Span s);
-    public boolean isCandidate(Span s);
+public interface NgramTagger {
+    public List<String> tag(Ngram ng);
+    public boolean isCandidate(Ngram ng);
 }
 ```
 We should implement the first *tag* method to return a list with "BIBI" for ngrams such
 as "Bibi" and "Bibi Netanyahu", and a list with "TRUMP" for ngrams such as "Donald Trump"
 and "Trump". Again, for the tagging to take place, the tagger object should be added
-to the SpannedDocument object:
+to the NgramDocument object:
 ```
 doc.add(tagger);
 doc.tag();
@@ -107,14 +116,14 @@ the ngram "Bibi Netanyahu" will have the tag "BIBI", where its inner ngram "BIBI
 have the same tag. The task now is to remove tags from such inner ngrams, leaving the tag for
 only the outer ngram.
 
-The interface for doing this and other related taks is *SpanManipulation*:
+The interface for doing this and other related taks is *NgramDocumentManipulation*:
 ```
-public interface SpanManipulation {
-    public void manipulate(SpannedDocument doc);
+public interface NgramDocumentManipulation {
+    public void manipulate(NgramDocument doc);
 }
 ```
 
-The method *manipulate* is provided with the SpannedDocument,
+The method *manipulate* is provided with the NgramDocument,
 and you may perform any manipulation you like on the tags found in the contained ngrams.
 In our example... // TODO
 

@@ -67,7 +67,7 @@ public class HebrewUtils {
         }
     }
 
-    private static List<Character> getChars(String word) {
+    public static List<Character> getChars(String word) {
         List<Character> res = new ArrayList<>();
         for (char c : word.toCharArray()) {
             res.add(c);

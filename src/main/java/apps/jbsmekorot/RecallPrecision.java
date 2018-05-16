@@ -55,14 +55,14 @@ public class RecallPrecision {
     }
 
     private boolean isLabeledSpan(Ngram s) {
-        if (s.text().startsWith(DOUBLE_LABEL) && s.text().endsWith(DOUBLE_LABEL)) { // potential labeled span
-            if (StringUtils.countMatches(s.text(), "%") == 4)
+        if (s.getText().startsWith(DOUBLE_LABEL) && s.getText().endsWith(DOUBLE_LABEL)) { // potential labeled span
+            if (StringUtils.countMatches(s.getText(), "%") == 4)
                 return true; // no inner marks
             else
                 return false;
         }
-        if (s.text().startsWith(SINGLE_LABEL) && s.text().endsWith(SINGLE_LABEL)) { // potential labeled span
-            if (StringUtils.countMatches(s.text(), "%") == 2)
+        if (s.getText().startsWith(SINGLE_LABEL) && s.getText().endsWith(SINGLE_LABEL)) { // potential labeled span
+            if (StringUtils.countMatches(s.getText(), "%") == 2)
                 return true; // no inner marks
             else
                 return false;
@@ -77,7 +77,7 @@ public class RecallPrecision {
      * @return
      */
     private boolean isDoubleLabeledSpan(Ngram s) {
-        return s.text().startsWith(DOUBLE_LABEL);
+        return s.getText().startsWith(DOUBLE_LABEL);
     }
 
     /**
@@ -86,7 +86,7 @@ public class RecallPrecision {
      * @return
      */
     private boolean isSingleLabeledSpan(Ngram s) {
-        return !isDoubleLabeledSpan(s) && s.text().startsWith(SINGLE_LABEL);
+        return !isDoubleLabeledSpan(s) && s.getText().startsWith(SINGLE_LABEL);
     }
 
     public PrecisionlResult getPrecision(NgramDocument sd) {

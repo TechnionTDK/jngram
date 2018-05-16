@@ -31,17 +31,17 @@ public class NgramDocumentTest {
 
     @Test
     public void testGetWord() {
-        assertEquals("יהודה", doc.getWord(4).text());
+        assertEquals("יהודה", doc.getWord(4).getText());
     }
 
     @Test
     public void testSpan() {
         Ngram ngram = doc.getNgram(3, 5);
         assertEquals(3, ngram.size());
-        assertEquals("רבי יהודה הנשיא", ngram.text());
-        assertEquals("רבי", ngram.getWord(0).text());
-        assertEquals("יהודה", ngram.getWord(1).text());
-        assertEquals("הנשיא", ngram.getWord(2).text());
+        assertEquals("רבי יהודה הנשיא", ngram.getText());
+        assertEquals("רבי", ngram.getWord(0).getText());
+        assertEquals("יהודה", ngram.getWord(1).getText());
+        assertEquals("הנשיא", ngram.getWord(2).getText());
     }
 
     /**
@@ -54,28 +54,28 @@ public class NgramDocumentTest {
         // iterate all getNgrams of 1 word length
         List<Ngram> ngrams = doc.getNgrams(1);
         assertEquals(6, ngrams.size());
-        assertEquals("ויאמר", ngrams.get(0).text());
+        assertEquals("ויאמר", ngrams.get(0).getText());
 
         // iterate all getNgrams of 2 word length
         ngrams = doc.getNgrams(2);
         assertEquals(5, ngrams.size());
-        assertEquals("ויאמר משה", ngrams.get(0).text());
-        assertEquals("אל רבי", ngrams.get(2).text());
+        assertEquals("ויאמר משה", ngrams.get(0).getText());
+        assertEquals("אל רבי", ngrams.get(2).getText());
 
         // iterate all getNgrams of 3 word length
         ngrams = doc.getNgrams(3);
         assertEquals(4, ngrams.size());
-        assertEquals("ויאמר משה אל", ngrams.get(0).text());
+        assertEquals("ויאמר משה אל", ngrams.get(0).getText());
 
         // iterate all getNgrams of 5 word length
         ngrams = doc.getNgrams(5);
         assertEquals(2, ngrams.size());
-        assertEquals("ויאמר משה אל רבי יהודה", ngrams.get(0).text());
+        assertEquals("ויאמר משה אל רבי יהודה", ngrams.get(0).getText());
 
         // iterate all getNgrams of 6 word length
         ngrams = doc.getNgrams(6);
         assertEquals(1, ngrams.size());
-        assertEquals("ויאמר משה אל רבי יהודה הנשיא", ngrams.get(0).text());
+        assertEquals("ויאמר משה אל רבי יהודה הנשיא", ngrams.get(0).getText());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class NgramDocumentTest {
         // we create a document with spans of one size: 4
         NgramDocument doc = new NgramDocument(text, 4, 4);
         assertEquals(3, doc.getAllNgrams().size());
-        assertEquals("אל רבי יהודה הנשיא", doc.getNgram(2,5).text());
+        assertEquals("אל רבי יהודה הנשיא", doc.getNgram(2,5).getText());
     }
 
     @Test
@@ -105,9 +105,9 @@ public class NgramDocumentTest {
         sd.add(new NgramTagger() {
             public List<String> tag(Ngram s) {
                 List<String> result = new ArrayList<String>();
-                if (s.text().equals("משה"))
+                if (s.getText().equals("משה"))
                     result.add("jbr:person-moshe");
-                else if (s.text().equals("רבי"))
+                else if (s.getText().equals("רבי"))
                     result.add("jbr:person-rabbi");
 
                 return result;
@@ -121,7 +121,7 @@ public class NgramDocumentTest {
         .add(new NgramTagger() {
             public List<String> tag(Ngram s) {
                 List<String> result = new ArrayList<String>();
-                if (s.text().equals("רבי יהודה הנשיא"))
+                if (s.getText().equals("רבי יהודה הנשיא"))
                     result.add("jbr:person-rabbi");
 
                 return result;
@@ -168,7 +168,7 @@ public class NgramDocumentTest {
         NgramFormatter formatter = new NgramFormatter() {
             @Override
             public String format(Ngram s) {
-                String formatted = s.text().replace("ה", "ש");
+                String formatted = s.getText().replace("ה", "ש");
                 return formatted;
             }
 
@@ -189,26 +189,26 @@ public class NgramDocumentTest {
     public void test_getOverlappingSpans() {
         text.length();// reference for convenience...
         Ngram s = doc.getNgram(0, 1);
-        assertEquals("ויאמר משה", s.text());
+        assertEquals("ויאמר משה", s.getText());
 
         List<Ngram> ngrams = doc.getOverlappingNgrams(s);
         // we expect all overlapping ngrams besides s itself
         assertThat(ngrams.size(), equalTo(8));
 
         s = doc.getNgram(1, 2);
-        assertEquals("משה אל", s.text());
+        assertEquals("משה אל", s.getText());
         ngrams = doc.getOverlappingNgrams(s);
         // we do not expect ngrams BEFORE s, only AFTER
         assertThat(ngrams.size(), equalTo(6));
 
         s = doc.getNgram(4, 5);
-        assertEquals("יהודה הנשיא", s.text());
+        assertEquals("יהודה הנשיא", s.getText());
         ngrams = doc.getOverlappingNgrams(s);
         // we do not expect ngrams BEFORE s, only AFTER
         assertThat(ngrams.size(), equalTo(0));
 
         s = doc.getNgram(0, 4);
-        assertEquals("ויאמר משה אל רבי יהודה", s.text());
+        assertEquals("ויאמר משה אל רבי יהודה", s.getText());
         ngrams = doc.getOverlappingNgrams(s);
         assertThat(ngrams.size(), equalTo(5));
     }

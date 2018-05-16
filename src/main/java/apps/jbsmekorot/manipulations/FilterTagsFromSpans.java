@@ -104,7 +104,7 @@ public class FilterTagsFromSpans extends FilterTagsManipulationNgram {
      * @return
      */
     private boolean isSurroundedWithQuotes(Ngram s) {
-        String text = s.text();
+        String text = s.getText();
         text = text.replace("''", "\""); // replace double quotes of torat emet '' with normal quotes
 
         // count the number of quotes
