@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 /**
  * Created by omishali on 30/04/2017.

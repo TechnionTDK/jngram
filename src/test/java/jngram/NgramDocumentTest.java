@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 import org.junit.Before;
 import org.junit.Test;

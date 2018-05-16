@@ -1,4 +1,4 @@
-package spanthera.io;
+package jngram.io;
 
 import java.io.Serializable;
 

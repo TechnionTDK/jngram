@@ -1,8 +1,8 @@
 package apps.jbsmekorot;
 
 import org.apache.commons.lang3.StringUtils;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
+import jngram.NgramDocument;
+import jngram.Ngram;
 
 import java.util.ArrayList;
 import java.util.List;

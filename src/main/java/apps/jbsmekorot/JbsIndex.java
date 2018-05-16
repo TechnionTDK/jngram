@@ -8,7 +8,7 @@ import org.apache.lucene.index.IndexWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import spanthera.LuceneIndex;
+import jngram.LuceneIndex;
 
 import java.io.File;
 import java.io.FileReader;

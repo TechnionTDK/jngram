@@ -1,8 +1,8 @@
 package apps.jbsmekorot2;
 
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.NgramDocumentManipulation;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.NgramDocumentManipulation;
 
 public class AddTextWithShemAdnutTopDown implements NgramDocumentManipulation {
         public static final String ADNUT_TEXT = "adnut_text";

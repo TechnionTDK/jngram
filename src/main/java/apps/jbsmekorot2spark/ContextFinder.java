@@ -1,7 +1,7 @@
 package apps.jbsmekorot2spark;
 
 import org.apache.lucene.document.Document;
-import spanthera.Ngram;
+import jngram.Ngram;
 
 import java.util.HashMap;
 import java.util.List;

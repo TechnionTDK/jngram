@@ -3,10 +3,10 @@ package apps.jbsmekorot;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import spanthera.NgramDocument;
-import spanthera.io.SpantheraIO;
-import spanthera.io.Subject;
-import spanthera.io.TaggerInput;
+import jngram.NgramDocument;
+import jngram.io.SpantheraIO;
+import jngram.io.Subject;
+import jngram.io.TaggerInput;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 /**
  * In case we want to format the text of all ngrams in the document,

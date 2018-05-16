@@ -1,7 +1,7 @@
 package apps.jbsmekorot;
 
-import spanthera.Ngram;
-import spanthera.NgramFormatter;
+import jngram.Ngram;
+import jngram.NgramFormatter;
 
 /**
  * Created by omishali on 08/01/2018.

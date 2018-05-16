@@ -1,7 +1,7 @@
 package apps.jbsmekorot;
 
 import org.junit.Test;
-import spanthera.NgramDocument;
+import jngram.NgramDocument;
 
 import java.util.Arrays;
 import java.util.Collections;

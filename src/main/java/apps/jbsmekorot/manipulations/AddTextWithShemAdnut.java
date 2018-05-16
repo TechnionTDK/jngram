@@ -1,8 +1,8 @@
 package apps.jbsmekorot.manipulations;
 
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.NgramDocumentManipulation;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.NgramDocumentManipulation;
 
 /**
  * Created by omishali on 08/01/2018.

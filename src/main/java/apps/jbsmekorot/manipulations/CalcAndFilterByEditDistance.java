@@ -2,9 +2,9 @@ package apps.jbsmekorot.manipulations;
 
 import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.NgramDocumentManipulation;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.NgramDocumentManipulation;
 
 import java.util.ArrayList;
 import java.util.List;

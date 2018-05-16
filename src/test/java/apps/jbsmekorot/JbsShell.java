@@ -1,7 +1,7 @@
 package apps.jbsmekorot;
 
 import org.junit.*;
-import spanthera.NgramDocument;
+import jngram.NgramDocument;
 
 import java.util.List;
 

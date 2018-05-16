@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 import org.apache.commons.collections4.CollectionUtils;
 

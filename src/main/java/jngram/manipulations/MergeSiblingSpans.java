@@ -1,9 +1,9 @@
-package spanthera.manipulations;
+package jngram.manipulations;
 
 import org.apache.commons.collections4.CollectionUtils;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.NgramDocumentManipulation;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.NgramDocumentManipulation;
 
 import java.util.HashMap;
 import java.util.List;

@@ -3,9 +3,9 @@ package apps.jbsmekorot;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import spanthera.NgramDocument;
-import spanthera.io.TaggedSubject;
-import spanthera.manipulations.MergeSiblingSpans;
+import jngram.NgramDocument;
+import jngram.io.TaggedSubject;
+import jngram.manipulations.MergeSiblingSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;

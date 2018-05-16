@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 import apps.jbsmekorot.PsukimTagger;
 import org.apache.commons.lang3.StringUtils;

@@ -1,9 +1,9 @@
 package apps.jbsmekorot;
 
 import org.junit.*;
-import spanthera.NgramDocument;
-import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveTagsInContainedSpans;
+import jngram.NgramDocument;
+import jngram.manipulations.MergeSiblingSpans;
+import jngram.manipulations.RemoveTagsInContainedSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;

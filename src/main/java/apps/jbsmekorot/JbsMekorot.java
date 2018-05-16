@@ -2,11 +2,11 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.*;
 import org.apache.commons.lang3.time.StopWatch;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.io.*;
-import spanthera.manipulations.MergeSiblingSpans;
-import spanthera.manipulations.RemoveTagsInContainedSpans;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.io.*;
+import jngram.manipulations.MergeSiblingSpans;
+import jngram.manipulations.RemoveTagsInContainedSpans;
 
 import java.io.File;
 import java.io.FileNotFoundException;

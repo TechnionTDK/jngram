@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 import java.util.*;
 

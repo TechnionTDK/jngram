@@ -1,4 +1,4 @@
-package spanthera.io;
+package jngram.io;
 
 //import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package spanthera;
+package jngram;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -20,7 +20,7 @@ public abstract class LuceneIndex {
     private Directory index;
     private IndexSearcher indexSearcher;
     private IndexWriter writer;
-    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/"; //"/home/orasraf/gitprojects/spanthera/tools/luceneIndex/";//
+    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/"; //"/home/orasraf/gitprojects/jngram/tools/luceneIndex/";//
 
     abstract protected String getOutputIndexDirectory();
     abstract protected void createIndex() throws Exception;

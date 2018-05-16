@@ -3,7 +3,7 @@ package apps.jbsmekorot2;
 import apps.jbsmekorot.JbsMekorot;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.NgramDocument;
+import jngram.NgramDocument;
 
 import java.util.ArrayList;
 import java.util.Arrays;

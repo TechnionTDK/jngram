@@ -1,8 +1,8 @@
-package spanthera.manipulations;
+package jngram.manipulations;
 
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.NgramDocumentManipulation;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.NgramDocumentManipulation;
 
 import java.util.List;
 

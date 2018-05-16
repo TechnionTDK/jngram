@@ -3,9 +3,9 @@ package apps.jbsmekorot2;
 import apps.jbsmekorot.JbsNgramFormatter;
 import apps.jbsmekorot.RecallPrecision;
 import org.apache.commons.lang3.time.StopWatch;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.io.*;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.io.*;
 
 import java.io.*;
 import java.util.ArrayList;

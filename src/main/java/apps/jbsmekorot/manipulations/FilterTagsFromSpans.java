@@ -1,9 +1,9 @@
 package apps.jbsmekorot.manipulations;
 
 import org.apache.commons.lang3.StringUtils;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
-import spanthera.manipulations.FilterTagsManipulationNgram;
+import jngram.NgramDocument;
+import jngram.Ngram;
+import jngram.manipulations.FilterTagsManipulationNgram;
 
 import java.util.ArrayList;
 import java.util.List;

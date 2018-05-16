@@ -3,8 +3,8 @@ package apps.jbsmekorot;
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import apps.jbsmekorot.manipulations.CalcAndFilterByEditDistance;
 import org.junit.*;
-import spanthera.NgramDocument;
-import spanthera.Ngram;
+import jngram.NgramDocument;
+import jngram.Ngram;
 
 import java.util.Arrays;
 import java.util.Collections;

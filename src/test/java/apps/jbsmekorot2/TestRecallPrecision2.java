@@ -4,10 +4,10 @@ import apps.jbsmekorot.RecallPrecision;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.NgramDocument;
-import spanthera.io.SpantheraIO;
-import spanthera.io.Subject;
-import spanthera.io.TaggerInput;
+import jngram.NgramDocument;
+import jngram.io.SpantheraIO;
+import jngram.io.Subject;
+import jngram.io.TaggerInput;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

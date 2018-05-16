@@ -5,7 +5,7 @@ import apps.jbsmekorot.JbsTanachIndex;
 import apps.jbsmekorot.RecallPrecision;
 import org.junit.Before;
 import org.junit.Test;
-import spanthera.NgramDocument;
+import jngram.NgramDocument;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

@@ -2,8 +2,8 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import org.apache.lucene.document.Document;
-import spanthera.Ngram;
-import spanthera.NgramTagger;
+import jngram.Ngram;
+import jngram.NgramTagger;
 
 import java.util.*;
 

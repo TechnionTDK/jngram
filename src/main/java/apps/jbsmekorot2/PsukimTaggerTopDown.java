@@ -6,8 +6,8 @@ import apps.jbsmekorot2spark.Config;
 import apps.jbsmekorot2spark.ContextFinder;
 import org.apache.lucene.document.Document;
 import org.jetbrains.annotations.NotNull;
-import spanthera.Ngram;
-import spanthera.NgramTagger;
+import jngram.Ngram;
+import jngram.NgramTagger;
 import org.apache.commons.lang3.StringUtils;
 
 
