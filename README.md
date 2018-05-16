@@ -1,7 +1,7 @@
-Spanthera is a library for working with ngrams in textual documents
-and doing interesting things. An [n-gram](https://en.wikipedia.org/wiki/N-gram) is a contiguous sequence of words in a document.
+**jngram** is a Java library for working with n-grams in textual documents.
+An [n-gram](https://en.wikipedia.org/wiki/N-gram) is a contiguous sequence of words in a document.
 
-In this README, we explain how to use spanthera using a simple example: entity detection.
+In this README, we explain how to use jngram using a simple example: entity detection.
 Suppose we have a file with a list of entities
 such as "Bibi", "Bibi Netanyahu", "Donald Trump", and "Trump",
 and that we would like to detect their occurrence in a given text.  
@@ -11,19 +11,19 @@ and that we would like to detect their occurrence in a given text.
 - Install [Git for Windows](https://git-scm.com/download/win).
 - Open git shell and clone the repository:
 ```
-git clone https://github.com/TechnionTDK/spanthera.git
+git clone https://github.com/TechnionTDK/jngram.git
 ```
-These steps are needed if you wish use to spanthera for text analysis tasks. 
-- Open IntelliJ and create a **new** project where the code using spanthera
+These steps are needed if you wish use to jngram for text analysis tasks. 
+- Open IntelliJ and create a **new** project where the code using jngram
 will reside.
-- Add a dependency to spanthera in the new project:
+- Add a dependency to jngram in the new project:
   - File > Project Structure > Modules
   - Dependencies > Add JARs or directories...
-  - Browse and add the folder **spanthera/target/classes**
+  - Browse and add the folder **jngram/target/classes**
   - Make sure the dependency is checked and press "OK".
 
-Note: in case the spanthera library is changed, to accommodate the changes, 'git gull' the
-spanthera repository and 'Rebuild Project'. 
+Note: in case the jngram library is changed, to accommodate the changes, 'git gull' the
+jngram repository and 'Rebuild Project'. 
  
  Validate your installation:
  - You should have no compilation errors of course.
@@ -130,7 +130,7 @@ In our example... // TODO
 # Installation (Linux)
 - Clone the repository:
 ```
-git clone https://github.com/TechnionTDK/spanthera.git
+git clone https://github.com/TechnionTDK/jngram.git
 ```
 
 - Make sure you have Java 8 & Maven installed.
@@ -148,7 +148,7 @@ mvn clean install -DskipTests
 ## Finding psukim for a given text (command line)
 - Execute the command:
 ```
-java -cp target/spanthera-1.0-jar-with-dependencies.jar apps.jbsmekorot.JbsMekorot -text "Type your text here"
+java -cp target/jngram-1.0-jar-with-dependencies.jar apps.jbsmekorot.JbsMekorot -text "Type your text here"
 ```
 
 The output (in json format) will be sent to the standard output.
