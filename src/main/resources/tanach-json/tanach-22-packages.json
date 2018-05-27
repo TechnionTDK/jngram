@@ -1,0 +1,22 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-22-1",
+      "rdfs:label": "חבקוק פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-chavakuk"
+    },
+    {
+      "uri": "jbr:section-tanach-22-2",
+      "rdfs:label": "חבקוק פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-chavakuk"
+    },
+    {
+      "uri": "jbr:section-tanach-22-3",
+      "rdfs:label": "חבקוק פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-chavakuk"
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-39-1",
+      "rdfs:label": "דברי הימים ב פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-2",
+      "rdfs:label": "דברי הימים ב פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-3",
+      "rdfs:label": "דברי הימים ב פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-4",
+      "rdfs:label": "דברי הימים ב פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-5",
+      "rdfs:label": "דברי הימים ב פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-6",
+      "rdfs:label": "דברי הימים ב פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-7",
+      "rdfs:label": "דברי הימים ב פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-8",
+      "rdfs:label": "דברי הימים ב פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-9",
+      "rdfs:label": "דברי הימים ב פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-10",
+      "rdfs:label": "דברי הימים ב פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-11",
+      "rdfs:label": "דברי הימים ב פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-12",
+      "rdfs:label": "דברי הימים ב פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-13",
+      "rdfs:label": "דברי הימים ב פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-14",
+      "rdfs:label": "דברי הימים ב פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-15",
+      "rdfs:label": "דברי הימים ב פרק טו",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-16",
+      "rdfs:label": "דברי הימים ב פרק טז",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-17",
+      "rdfs:label": "דברי הימים ב פרק יז",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-18",
+      "rdfs:label": "דברי הימים ב פרק יח",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-19",
+      "rdfs:label": "דברי הימים ב פרק יט",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-20",
+      "rdfs:label": "דברי הימים ב פרק כ",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-21",
+      "rdfs:label": "דברי הימים ב פרק כא",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-22",
+      "rdfs:label": "דברי הימים ב פרק כב",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-23",
+      "rdfs:label": "דברי הימים ב פרק כג",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-24",
+      "rdfs:label": "דברי הימים ב פרק כד",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-25",
+      "rdfs:label": "דברי הימים ב פרק כה",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-26",
+      "rdfs:label": "דברי הימים ב פרק כו",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-27",
+      "rdfs:label": "דברי הימים ב פרק כז",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-28",
+      "rdfs:label": "דברי הימים ב פרק כח",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-29",
+      "rdfs:label": "דברי הימים ב פרק כט",
+      "jbo:position": "29",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-30",
+      "rdfs:label": "דברי הימים ב פרק ל",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-31",
+      "rdfs:label": "דברי הימים ב פרק לא",
+      "jbo:position": "31",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-32",
+      "rdfs:label": "דברי הימים ב פרק לב",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-33",
+      "rdfs:label": "דברי הימים ב פרק לג",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-34",
+      "rdfs:label": "דברי הימים ב פרק לד",
+      "jbo:position": "34",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-35",
+      "rdfs:label": "דברי הימים ב פרק לה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    },
+    {
+      "uri": "jbr:section-tanach-39-36",
+      "rdfs:label": "דברי הימים ב פרק לו",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-tanach-divreyhayamimB"
+    }
+  ]
+}

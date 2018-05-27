@@ -1,0 +1,82 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-37-1",
+      "rdfs:label": "נחמיה פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-2",
+      "rdfs:label": "פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-3",
+      "rdfs:label": "פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-4",
+      "rdfs:label": "פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-5",
+      "rdfs:label": "פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-6",
+      "rdfs:label": "פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-7",
+      "rdfs:label": "פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-8",
+      "rdfs:label": "פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-9",
+      "rdfs:label": "פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-10",
+      "rdfs:label": "פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-11",
+      "rdfs:label": "פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-12",
+      "rdfs:label": "פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    },
+    {
+      "uri": "jbr:section-tanach-37-13",
+      "rdfs:label": "פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-nechemya"
+    }
+  ]
+}

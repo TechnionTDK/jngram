@@ -1,0 +1,292 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-14-1",
+      "rdfs:label": "יחזקאל פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-2",
+      "rdfs:label": "יחזקאל פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-3",
+      "rdfs:label": "יחזקאל פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-4",
+      "rdfs:label": "יחזקאל פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-5",
+      "rdfs:label": "יחזקאל פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-6",
+      "rdfs:label": "יחזקאל פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-7",
+      "rdfs:label": "יחזקאל פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-8",
+      "rdfs:label": "יחזקאל פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-9",
+      "rdfs:label": "יחזקאל פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-10",
+      "rdfs:label": "יחזקאל פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-11",
+      "rdfs:label": "יחזקאל פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-12",
+      "rdfs:label": "יחזקאל פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-13",
+      "rdfs:label": "יחזקאל פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-14",
+      "rdfs:label": "יחזקאל פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-15",
+      "rdfs:label": "יחזקאל פרק טו",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-16",
+      "rdfs:label": "יחזקאל פרק טז",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-17",
+      "rdfs:label": "יחזקאל פרק יז",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-18",
+      "rdfs:label": "יחזקאל פרק יח",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-19",
+      "rdfs:label": "יחזקאל פרק יט",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-20",
+      "rdfs:label": "יחזקאל פרק כ",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-21",
+      "rdfs:label": "יחזקאל פרק כא",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-22",
+      "rdfs:label": "יחזקאל פרק כב",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-23",
+      "rdfs:label": "יחזקאל פרק כג",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-24",
+      "rdfs:label": "יחזקאל פרק כד",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-25",
+      "rdfs:label": "יחזקאל פרק כה",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-26",
+      "rdfs:label": "יחזקאל פרק כו",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-27",
+      "rdfs:label": "יחזקאל פרק כז",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-28",
+      "rdfs:label": "יחזקאל פרק כח",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-29",
+      "rdfs:label": "יחזקאל פרק כט",
+      "jbo:position": "29",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-30",
+      "rdfs:label": "יחזקאל פרק ל",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-31",
+      "rdfs:label": "יחזקאל פרק לא",
+      "jbo:position": "31",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-32",
+      "rdfs:label": "יחזקאל פרק לב",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-33",
+      "rdfs:label": "יחזקאל פרק לג",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-34",
+      "rdfs:label": "יחזקאל פרק לד",
+      "jbo:position": "34",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-35",
+      "rdfs:label": "יחזקאל פרק לה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-36",
+      "rdfs:label": "יחזקאל פרק לו",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-37",
+      "rdfs:label": "יחזקאל פרק לז",
+      "jbo:position": "37",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-38",
+      "rdfs:label": "יחזקאל פרק לח",
+      "jbo:position": "38",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-39",
+      "rdfs:label": "יחזקאל פרק לט",
+      "jbo:position": "39",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-40",
+      "rdfs:label": "יחזקאל פרק מ",
+      "jbo:position": "40",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-41",
+      "rdfs:label": "יחזקאל פרק מא",
+      "jbo:position": "41",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-42",
+      "rdfs:label": "יחזקאל פרק מב",
+      "jbo:position": "42",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-43",
+      "rdfs:label": "יחזקאל פרק מג",
+      "jbo:position": "43",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-44",
+      "rdfs:label": "יחזקאל פרק מד",
+      "jbo:position": "44",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-45",
+      "rdfs:label": "יחזקאל פרק מה",
+      "jbo:position": "45",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-46",
+      "rdfs:label": "יחזקאל פרק מו",
+      "jbo:position": "46",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-47",
+      "rdfs:label": "יחזקאל פרק מז",
+      "jbo:position": "47",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    },
+    {
+      "uri": "jbr:section-tanach-14-48",
+      "rdfs:label": "יחזקאל פרק מח",
+      "jbo:position": "48",
+      "jbo:book": "jbr:book-tanach-yechezkel"
+    }
+  ]
+}

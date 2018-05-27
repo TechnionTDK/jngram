@@ -1,0 +1,52 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-30-1",
+      "rdfs:label": "שיר השירים פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-2",
+      "rdfs:label": "שיר השירים פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-3",
+      "rdfs:label": "שיר השירים פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-4",
+      "rdfs:label": "שיר השירים פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-5",
+      "rdfs:label": "שיר השירים פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-6",
+      "rdfs:label": "שיר השירים פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-7",
+      "rdfs:label": "שיר השירים פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    },
+    {
+      "uri": "jbr:section-tanach-30-8",
+      "rdfs:label": "שיר השירים פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-shirhashirim"
+    }
+  ]
+}

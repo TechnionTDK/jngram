@@ -1,0 +1,400 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-tanach-12-1",
+      "rdfs:label": "ישעיה פרק א",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-2",
+      "rdfs:label": "ישעיה פרק ב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-3",
+      "rdfs:label": "ישעיה פרק ג",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-4",
+      "rdfs:label": "ישעיה פרק ד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-5",
+      "rdfs:label": "ישעיה פרק ה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-6",
+      "rdfs:label": "ישעיה פרק ו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-7",
+      "rdfs:label": "ישעיה פרק ז",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-8",
+      "rdfs:label": "ישעיה פרק ח",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-9",
+      "rdfs:label": "ישעיה פרק ט",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-10",
+      "rdfs:label": "ישעיה פרק י",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-11",
+      "rdfs:label": "ישעיה פרק יא",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-12",
+      "rdfs:label": "ישעיה פרק יב",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-13",
+      "rdfs:label": "ישעיה פרק יג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-14",
+      "rdfs:label": "ישעיה פרק יד",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-15",
+      "rdfs:label": "ישעיה פרק טו",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-16",
+      "rdfs:label": "ישעיה פרק טז",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-17",
+      "rdfs:label": "ישעיה פרק יז",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-18",
+      "rdfs:label": "ישעיה פרק יח",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-19",
+      "rdfs:label": "ישעיה פרק יט",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-20",
+      "rdfs:label": "ישעיה פרק כ",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-21",
+      "rdfs:label": "ישעיה פרק כא",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-22",
+      "rdfs:label": "ישעיה פרק כב",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-23",
+      "rdfs:label": "ישעיה פרק כג",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-24",
+      "rdfs:label": "ישעיה פרק כד",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-25",
+      "rdfs:label": "ישעיה פרק כה",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-26",
+      "rdfs:label": "ישעיה פרק כו",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-27",
+      "rdfs:label": "ישעיה פרק כז",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-28",
+      "rdfs:label": "ישעיה פרק כח",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-29",
+      "rdfs:label": "ישעיה פרק כט",
+      "jbo:position": "29",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-30",
+      "rdfs:label": "ישעיה פרק ל",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-31",
+      "rdfs:label": "ישעיה פרק לא",
+      "jbo:position": "31",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-32",
+      "rdfs:label": "ישעיה פרק לב",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-33",
+      "rdfs:label": "ישעיה פרק לג",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-34",
+      "rdfs:label": "ישעיה פרק לד",
+      "jbo:position": "34",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-35",
+      "rdfs:label": "ישעיה פרק לה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-36",
+      "rdfs:label": "ישעיה פרק לו",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-37",
+      "rdfs:label": "ישעיה פרק לז",
+      "jbo:position": "37",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-38",
+      "rdfs:label": "ישעיה פרק לח",
+      "jbo:position": "38",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-39",
+      "rdfs:label": "ישעיה פרק לט",
+      "jbo:position": "39",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-40",
+      "rdfs:label": "ישעיה פרק מ",
+      "jbo:position": "40",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-41",
+      "rdfs:label": "ישעיה פרק מא",
+      "jbo:position": "41",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-42",
+      "rdfs:label": "ישעיה פרק מב",
+      "jbo:position": "42",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-43",
+      "rdfs:label": "ישעיה פרק מג",
+      "jbo:position": "43",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-44",
+      "rdfs:label": "ישעיה פרק מד",
+      "jbo:position": "44",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-45",
+      "rdfs:label": "ישעיה פרק מה",
+      "jbo:position": "45",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-46",
+      "rdfs:label": "ישעיה פרק מו",
+      "jbo:position": "46",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-47",
+      "rdfs:label": "ישעיה פרק מז",
+      "jbo:position": "47",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-48",
+      "rdfs:label": "ישעיה פרק מח",
+      "jbo:position": "48",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-49",
+      "rdfs:label": "ישעיה פרק מט",
+      "jbo:position": "49",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-50",
+      "rdfs:label": "ישעיה פרק נ",
+      "jbo:position": "50",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-51",
+      "rdfs:label": "ישעיה פרק נא",
+      "jbo:position": "51",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-52",
+      "rdfs:label": "ישעיה פרק נב",
+      "jbo:position": "52",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-53",
+      "rdfs:label": "ישעיה פרק נג",
+      "jbo:position": "53",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-54",
+      "rdfs:label": "ישעיה פרק נד",
+      "jbo:position": "54",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-55",
+      "rdfs:label": "ישעיה פרק נה",
+      "jbo:position": "55",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-56",
+      "rdfs:label": "ישעיה פרק נו",
+      "jbo:position": "56",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-57",
+      "rdfs:label": "ישעיה פרק נז",
+      "jbo:position": "57",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-58",
+      "rdfs:label": "ישעיה פרק נח",
+      "jbo:position": "58",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-59",
+      "rdfs:label": "ישעיה פרק נט",
+      "jbo:position": "59",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-60",
+      "rdfs:label": "ישעיה פרק ס",
+      "jbo:position": "60",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-61",
+      "rdfs:label": "ישעיה פרק סא",
+      "jbo:position": "61",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-62",
+      "rdfs:label": "ישעיה פרק סב",
+      "jbo:position": "62",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-63",
+      "rdfs:label": "ישעיה פרק סג",
+      "jbo:position": "63",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-64",
+      "rdfs:label": "ישעיה פרק סד",
+      "jbo:position": "64",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-65",
+      "rdfs:label": "ישעיה פרק סה",
+      "jbo:position": "65",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    },
+    {
+      "uri": "jbr:section-tanach-12-66",
+      "rdfs:label": "ישעיה פרק סו",
+      "jbo:position": "66",
+      "jbo:book": "jbr:book-tanach-yeshaaya"
+    }
+  ]
+}

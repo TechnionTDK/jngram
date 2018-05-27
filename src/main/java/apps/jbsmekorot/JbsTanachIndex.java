@@ -21,7 +21,7 @@ public class JbsTanachIndex extends JbsIndex implements Serializable {
 
     @Override
     protected String getInputJsonDirectory() {
-        return "./src/main/resources/jbs-text/tanach/";
+        return "./src/main/resources/tanach-json/";
     }
 
     @Override
