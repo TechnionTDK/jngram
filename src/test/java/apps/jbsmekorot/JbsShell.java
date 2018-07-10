@@ -37,7 +37,7 @@ public class JbsShell {
 
     @Test
     public void getDocumentByText() {
-        List<org.apache.lucene.document.Document> result = index.searchExactInText("בעיני יהוה");
+        List<org.apache.lucene.document.Document> result = index.searchFuzzyInText("אל הארץ אשר אראך", 2);
         System.out.println(result.size() + " results:");
         index.printDocs(result);
     }

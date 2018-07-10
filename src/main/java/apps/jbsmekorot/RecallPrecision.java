@@ -16,6 +16,7 @@ import java.util.List;
  * Created by omishali on 14/12/2017.
  */
 public class RecallPrecision {
+    private static final String TRIPLE_LABEL = "%%%";
     private static final String DOUBLE_LABEL = "%%";
     private static final String SINGLE_LABEL = "%";
 
@@ -55,6 +56,12 @@ public class RecallPrecision {
     }
 
     private boolean isLabeledSpan(Ngram s) {
+        if (s.getText().startsWith(TRIPLE_LABEL) && s.getText().endsWith(TRIPLE_LABEL)) { // potential labeled span
+            if (StringUtils.countMatches(s.getText(), "%") == 6)
+                return true; // no inner marks
+            else
+                return false;
+        }
         if (s.getText().startsWith(DOUBLE_LABEL) && s.getText().endsWith(DOUBLE_LABEL)) { // potential labeled span
             if (StringUtils.countMatches(s.getText(), "%") == 4)
                 return true; // no inner marks

@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by omishali on 08/01/2018.
- * For each span s1 (that has tags) we all its overlapping spans.
+ * For each span s1 (that has tags) we get all its overlapping spans.
  * If an overlapping span s2 has tags then we  remove all tags from either s1 or s2.
  * Current strategy: remove tags from smaller span. If they are equal: keep tags in both.
  */
