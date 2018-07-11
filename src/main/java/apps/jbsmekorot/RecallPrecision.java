@@ -21,41 +21,54 @@ public class RecallPrecision {
     private static final String SINGLE_LABEL = "%";
 
     public RecallResult getRecall(NgramDocument sd) {
-        float totalLabeledSpans = 0;
-        float totalHits = 0;
+        float numOfLabels = 0;
+        float numOfHits = 0;
         RecallResult result = new RecallResult();
 
-        for (Ngram s : sd.getAllNgrams()) {
-            if (!isLabeledSpan(s))
+        for (Ngram ng : sd.getAllNgrams()) {
+            if (!isLabeledNgram(ng))
                 continue;
 
-            totalLabeledSpans++;
-
-            if (isSingleLabeledSpan(s)) {
-                // s should have at least 1 tag
-                if (s.getTags().size() >= 1)
-                    totalHits++;
+            if (isSingleLabeledNgram(ng)) {
+                numOfLabels += 1;
+                // ng should have at least 1 tag, if there are more, we ASSUME the correct is one of them.
+                if (ng.getTags().size() >= 1)
+                    numOfHits += 1;
                 else { // we missed this span
-                    result.addMissedSpan(s);
+                    numOfHits += ng.getTags().size(); // = 0 here
+                    result.addMissedNgram(ng);
                 }
             }
 
-            if (isDoubleLabeledSpan(s)) {
-                // s should have at least 2 tags
-                if (s.getTags().size() >= 2)
-                    totalHits++;
+            if (isDoubleLabeledNgram(ng)) {
+                numOfLabels += 2;
+                // ng should have at least 2 tags
+                if (ng.getTags().size() >= 2)
+                    numOfHits += 2;
                 else { // we missed this span
-                    result.addMissedSpan(s);
+                    numOfHits += ng.getTags().size(); // < 2 here
+                    result.addMissedNgram(ng);
+                }
+            }
+
+            if (isTripleLabeledNgram(ng)) {
+                numOfLabels += 3;
+                // ng should have at least 3 tags
+                if (ng.getTags().size() >= 3)
+                    numOfHits += 3;
+                else { // we missed this span
+                    numOfHits += ng.getTags().size(); // < 3 here
+                    result.addMissedNgram(ng);
                 }
             }
         }
-        result.setTotalLabeldSpans(totalLabeledSpans);
-        result.setTotalHits(totalHits);
+        result.setNumOfLabels(numOfLabels);
+        result.setNumOfHits(numOfHits);
 
         return result;
     }
 
-    private boolean isLabeledSpan(Ngram s) {
+    private boolean isLabeledNgram(Ngram s) {
         if (s.getText().startsWith(TRIPLE_LABEL) && s.getText().endsWith(TRIPLE_LABEL)) { // potential labeled span
             if (StringUtils.countMatches(s.getText(), "%") == 6)
                 return true; // no inner marks
@@ -79,21 +92,25 @@ public class RecallPrecision {
     }
 
     /**
-     * Ngram s should be a labeled span.
-     * @param s
+     * Ngram ng should be a labeled span.
+     * @param ng
      * @return
      */
-    private boolean isDoubleLabeledSpan(Ngram s) {
-        return s.getText().startsWith(DOUBLE_LABEL);
+    private boolean isDoubleLabeledNgram(Ngram ng) {
+        return !isTripleLabeledNgram(ng) && ng.getText().startsWith(DOUBLE_LABEL);
+    }
+
+    private boolean isTripleLabeledNgram(Ngram ng) {
+        return ng.getText().startsWith(TRIPLE_LABEL);
     }
 
     /**
-     * Ngram s should be a labeled span.
-     * @param s
+     * Ngram ng should be a labeled span.
+     * @param ng
      * @return
      */
-    private boolean isSingleLabeledSpan(Ngram s) {
-        return !isDoubleLabeledSpan(s) && s.getText().startsWith(SINGLE_LABEL);
+    private boolean isSingleLabeledNgram(Ngram ng) {
+        return !isDoubleLabeledNgram(ng) && !isTripleLabeledNgram(ng)&& ng.getText().startsWith(SINGLE_LABEL);
     }
 
     public PrecisionlResult getPrecision(NgramDocument sd) {
@@ -109,24 +126,31 @@ public class RecallPrecision {
 
             // here we have problems with precision,
             // since the span has tags however the span is not labeled.
-            if (!isLabeledSpan(s)) {
+            if (!isLabeledNgram(s)) {
                 result.addImpreciseSpan(s);
                 continue;
             }
 
             // here we deal with labeled spans.
 
-            if (isSingleLabeledSpan(s)) {
+            if (isSingleLabeledNgram(s)) {
                 totalLabeledTags += 1;
                 // do we have more than one tag? if yes, the span is imprecise
                 if (s.getTags().size() != 1)
                     result.addImpreciseSpan(s);
             }
 
-            if (isDoubleLabeledSpan(s)) {
+            if (isDoubleLabeledNgram(s)) {
                 totalLabeledTags += 2;
                 // do we have more or less than two tags? if yes, the span is imprecise
                 if (s.getTags().size() != 2)
+                    result.addImpreciseSpan(s);
+            }
+
+            if (isTripleLabeledNgram(s)) {
+                totalLabeledTags += 3;
+                // do we have more or less than three tags? if yes, the span is imprecise
+                if (s.getTags().size() != 3)
                     result.addImpreciseSpan(s);
             }
         }
@@ -185,45 +209,45 @@ public class RecallPrecision {
         }
     }
 
-
     public class RecallResult {
-        private float totalLabeledSpans, totalHits;
+        private float numOfLabels, numOfHits;
 
-        public float getTotalLabeldSpans() {
-            return totalLabeledSpans;
+        public float getNumOfLabels() {
+            return numOfLabels;
         }
 
-        public void setTotalLabeldSpans(float totalLabeldSpans) {
-            this.totalLabeledSpans = totalLabeldSpans;
+        public void setNumOfLabels(float numOfLabels) {
+            this.numOfLabels = numOfLabels;
         }
 
-        public float getTotalHits() {
-            return totalHits;
+        public float getNumOfHits() {
+            return numOfHits;
         }
 
-        public void setTotalHits(float totalHits) {
-            this.totalHits = totalHits;
+        public void setNumOfHits(float numOfHits) {
+            this.numOfHits = numOfHits;
         }
 
         private List<Ngram> missedNgrams = new ArrayList<>();
 
-        public void addMissedSpan(Ngram s) {
+        public void addMissedNgram(Ngram s) {
             missedNgrams.add(s);
         }
 
-        public void printMissedSpans() {
+        public void printReport() {
+            System.out.println("Recall " + getRecall() + " (" + numOfHits + "/" + numOfLabels + ")");
             for (Ngram s : missedNgrams) {
-                System.out.println("Missed span:");
+                System.out.println("Missed ngram:");
                 System.out.println(s);
             }
         }
 
         public float getRecall() {
             // in case of no labeled spans we return 100% recall
-            if (totalLabeledSpans == 0)
+            if (numOfLabels == 0)
                 return 1;
             else
-                return totalHits / totalLabeledSpans;
+                return numOfHits / numOfLabels;
         }
     }
 

@@ -29,14 +29,13 @@ public class TestRecallPrecision {
         NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(20));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
-        System.out.print("Recall: ");
-        System.out.println(recallResult.getRecall());
+        recallResult.printReport();
 
         RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sd);
         System.out.print("Precision: ");
         System.out.println(precisionResult.getPrecision());
 
-        recallResult.printMissedSpans();
+
         precisionResult.printImpreciseSpans();
     }
 

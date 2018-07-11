@@ -115,7 +115,7 @@ import static org.junit.Assert.assertNotNull;
             System.out.print("Recall "+ method +" : ");
             System.out.println(recallResult.getRecall());
             System.out.println(method + " misses  ");
-            recallResult.printMissedSpans();
+            recallResult.printReport();
 
         }
     }

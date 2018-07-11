@@ -212,7 +212,7 @@ public class JbsMekorot2 {
             RecallPrecision.RecallResult recallOneRes= madad.getRecall(doc);
             RecallPrecision.PrecisionlResult presOneRes= madad.getPrecision(doc);
             System.out.println("Recall is: "+recallOneRes.getRecall() +"\nPrecision is: " + presOneRes.getPrecision());
-            recallOneRes.printMissedSpans();
+            recallOneRes.printReport();
             presOneRes.printImpreciseSpans();
         }
         System.setOut(stdout);
