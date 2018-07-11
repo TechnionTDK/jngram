@@ -106,7 +106,7 @@ import static org.junit.Assert.assertNotNull;
             System.out.print("Precision "+ method+ " : ");
             System.out.println(precisionResult.getPrecision());
             System.out.println(method + " imprecise: ");
-            precisionResult.printImpreciseSpans();
+            precisionResult.printReport();
         }
 
         @NotNull

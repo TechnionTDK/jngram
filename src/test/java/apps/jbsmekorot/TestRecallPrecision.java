@@ -26,17 +26,13 @@ public class TestRecallPrecision {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(20));
+        NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();
 
         RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sd);
-        System.out.print("Precision: ");
-        System.out.println(precisionResult.getPrecision());
-
-
-        precisionResult.printImpreciseSpans();
+        precisionResult.printReport();
     }
 
     @Test
@@ -47,7 +43,7 @@ public class TestRecallPrecision {
         RecallPrecision calc = new RecallPrecision();
 
         List<NgramDocument> sds = new ArrayList<>();
-        for (int i=0; i<=17; i++) {
+        for (int i=0; i<=20; i++) {
             NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(i));
             sds.add(sd);
         }

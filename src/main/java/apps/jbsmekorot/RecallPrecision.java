@@ -97,11 +97,12 @@ public class RecallPrecision {
      * @return
      */
     private boolean isDoubleLabeledNgram(Ngram ng) {
-        return !isTripleLabeledNgram(ng) && ng.getText().startsWith(DOUBLE_LABEL);
+        return !isTripleLabeledNgram(ng) && ng.getText().startsWith(DOUBLE_LABEL)
+                && ng.getText().endsWith(DOUBLE_LABEL);
     }
 
     private boolean isTripleLabeledNgram(Ngram ng) {
-        return ng.getText().startsWith(TRIPLE_LABEL);
+        return ng.getText().startsWith(TRIPLE_LABEL) && ng.getText().endsWith(TRIPLE_LABEL);
     }
 
     /**
@@ -110,53 +111,57 @@ public class RecallPrecision {
      * @return
      */
     private boolean isSingleLabeledNgram(Ngram ng) {
-        return !isDoubleLabeledNgram(ng) && !isTripleLabeledNgram(ng)&& ng.getText().startsWith(SINGLE_LABEL);
+        return !isDoubleLabeledNgram(ng) && !isTripleLabeledNgram(ng)&& ng.getText().startsWith(SINGLE_LABEL)
+                && ng.getText().endsWith(SINGLE_LABEL);
     }
 
     public PrecisionlResult getPrecision(NgramDocument sd) {
-        float totalLabeledTags = 0;
-        float totalTags = 0;
+        float numOfLabels = 0;
+        float numOfImpreciseTags = 0;
         PrecisionlResult result = new PrecisionlResult();
 
-        for (Ngram s : sd.getAllNgrams()) {
-            if (s.getTags().size() == 0)
-                continue;
-
-            totalTags += s.getTags().size();
-
-            // here we have problems with precision,
-            // since the span has tags however the span is not labeled.
-            if (!isLabeledNgram(s)) {
-                result.addImpreciseSpan(s);
+        for (Ngram ng : sd.getAllNgrams()) {
+            if (!isLabeledNgram(ng)) {
+                if (ng.getTags().size() > 0) {
+                    // here we have problems with precision,
+                    // since the ngram has tags however the ngram is not labeled.
+                    numOfImpreciseTags += ng.getTags().size();
+                    result.addImpreciseNgram(ng);
+                }
                 continue;
             }
 
-            // here we deal with labeled spans.
-
-            if (isSingleLabeledNgram(s)) {
-                totalLabeledTags += 1;
+            // now we deal with labeled ngrams.
+            if (isSingleLabeledNgram(ng)) {
+                numOfLabels += 1;
                 // do we have more than one tag? if yes, the span is imprecise
-                if (s.getTags().size() != 1)
-                    result.addImpreciseSpan(s);
+                if (ng.getTags().size() > 1) {
+                    numOfImpreciseTags += ng.getTags().size() - 1; // all but one tag are considered imprecise
+                    result.addImpreciseNgram(ng);
+                }
             }
 
-            if (isDoubleLabeledNgram(s)) {
-                totalLabeledTags += 2;
-                // do we have more or less than two tags? if yes, the span is imprecise
-                if (s.getTags().size() != 2)
-                    result.addImpreciseSpan(s);
+            if (isDoubleLabeledNgram(ng)) {
+                numOfLabels += 2;
+                // do we have more than two tags? if yes, the span is imprecise
+                if (ng.getTags().size() > 2) {
+                    numOfImpreciseTags += ng.getTags().size() - 2; // all but two tags are considered imprecise
+                    result.addImpreciseNgram(ng);
+                }
             }
 
-            if (isTripleLabeledNgram(s)) {
-                totalLabeledTags += 3;
-                // do we have more or less than three tags? if yes, the span is imprecise
-                if (s.getTags().size() != 3)
-                    result.addImpreciseSpan(s);
+            if (isTripleLabeledNgram(ng)) {
+                numOfLabels += 3;
+                // do we have more than three tags? if yes, the span is imprecise
+                if (ng.getTags().size() > 3) {
+                    numOfImpreciseTags += ng.getTags().size() - 3; // all but three tags are considered imprecise
+                    result.addImpreciseNgram(ng);
+                }
             }
         }
 
-        result.setTotalLabeldTags(totalLabeledTags);
-        result.setTotalTags(totalTags);
+        result.setNumOfLabels(numOfLabels);
+        result.setNumOfImpreciseTags(numOfImpreciseTags);
 
         return result;
     }
@@ -252,31 +257,32 @@ public class RecallPrecision {
     }
 
     public class PrecisionlResult {
-        private float totalLabeledTags, totalTags;
+        private float numOfLabels, numOfImpreciseTags;
 
-        public float getTotalLabeldTags() {
-            return totalLabeledTags;
+        public float getNumOfLabels() {
+            return numOfLabels;
         }
 
-        public void setTotalLabeldTags(float totalLabeldTags) {
-            this.totalLabeledTags = totalLabeldTags;
+        public void setNumOfLabels(float numOfLabels) {
+            this.numOfLabels = numOfLabels;
         }
 
-        public float getTotalTags() {
-            return totalTags;
+        public float getNumOfImpreciseTags() {
+            return numOfImpreciseTags;
         }
 
-        public void setTotalTags(float totalTags) {
-            this.totalTags = totalTags;
+        public void setNumOfImpreciseTags(float numOfImpreciseTags) {
+            this.numOfImpreciseTags = numOfImpreciseTags;
         }
 
         private List<Ngram> impreciseNgrams = new ArrayList<>();
 
-        public void addImpreciseSpan(Ngram s) {
+        public void addImpreciseNgram(Ngram s) {
             impreciseNgrams.add(s);
         }
 
-        public void printImpreciseSpans() {
+        public void printReport() {
+            System.out.println("Precision " + getPrecision() + " (" + numOfLabels + "/(" + numOfLabels + "+" + numOfImpreciseTags + "))");
             for (Ngram s : impreciseNgrams) {
                 System.out.println("Imprecise span:");
                 System.out.println(s);
@@ -284,11 +290,7 @@ public class RecallPrecision {
         }
 
         public float getPrecision() {
-            // in case of no found tags we return 100% precision
-            if (totalTags == 0)
-                return 1;
-            else
-                return totalLabeledTags / totalTags;
+            return numOfLabels / (numOfLabels + numOfImpreciseTags);
         }
     }
 
