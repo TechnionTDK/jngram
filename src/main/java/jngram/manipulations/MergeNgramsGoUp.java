@@ -10,27 +10,32 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * This manipulation is part of the bottom-up process we are taking. Here we
+ * "go up" from bigrams (where tagging occurs) to maximal ngrams where matches exist.
+ * If ngrams ng1 and ng2 overlap, and they share the same tags, all shared
+ * tags are moved to the parent and removed from them. Eventually, at the end of this
+ * process, there should not be overlapping ngrams that share the same tag.
  * Created by omishali on 07/09/2017.
  */
-public class MergeSiblingSpans implements NgramDocumentManipulation {
+public class MergeNgramsGoUp implements NgramDocumentManipulation {
 
     private Map<Ngram,List<String>> tagsToBeRemoved = new HashMap<>();
 
     public void manipulate(NgramDocument doc) {
         int spanOffset = doc.getMinimalNgramSize();
         int maximalSpanSize = doc.getMaximalNgramSize();
-        // merge spans with size minimalSpanSize
+
         while (spanOffset < maximalSpanSize) {
             for (int start = 0; start < doc.length() - spanOffset; start++) {
                 int end = start + spanOffset - 1;
                 Ngram curr = doc.getNgram(start, end);
                 Ngram next = doc.getNgram(start + 1, end + 1);
-                List<String> intersection = getIntersection(curr, next);
-                if (intersection.size() > 0) {
+                List<String> sharedTags = getSharedTags(curr, next);
+                if (sharedTags.size() > 0) {
                     Ngram parent = doc.getNgram(start, end + 1);
-                    parent.addTags(intersection);
-                    tagsToBeRemoved.put(curr, intersection);
-                    tagsToBeRemoved.put(next, intersection);
+                    parent.addTags(sharedTags);
+                    tagsToBeRemoved.put(curr, sharedTags);
+                    tagsToBeRemoved.put(next, sharedTags);
                 }
             }
             removeTags();
@@ -47,7 +52,7 @@ public class MergeSiblingSpans implements NgramDocumentManipulation {
         tagsToBeRemoved.clear();
     }
 
-    List<String> getIntersection(Ngram s1, Ngram s2) {
-        return (List<String>) CollectionUtils.intersection(s1.getTags(), s2.getTags());
+    List<String> getSharedTags(Ngram ng1, Ngram ng2) {
+        return (List<String>) CollectionUtils.intersection(ng1.getTags(), ng2.getTags());
     }
 }

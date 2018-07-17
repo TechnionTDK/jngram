@@ -213,6 +213,82 @@ public class NgramDocumentTest {
         assertThat(ngrams.size(), equalTo(5));
     }
 
+    @Test
+    public void test_getNgramBefore() {
+        NgramDocument doc = new NgramDocument(text, 1, 5);
+        Ngram ng = doc.getNgram(5, 5);
+        assertEquals("הנשיא", ng.getText());
+
+        // test all valid before options
+        Ngram ngBefore = doc.getNgramBefore(ng, 1);
+        assertEquals("יהודה", ngBefore.getText());
+
+        ngBefore = doc.getNgramBefore(ng, 2);
+        assertEquals("רבי יהודה", ngBefore.getText());
+
+        ngBefore = doc.getNgramBefore(ng, 3);
+        assertEquals("אל רבי יהודה", ngBefore.getText());
+
+        ngBefore = doc.getNgramBefore(ng, 4);
+        assertEquals("משה אל רבי יהודה", ngBefore.getText());
+
+        // we do our best effort to provide a result, and truncate if needed
+        ngBefore = doc.getNgramBefore(ng, 6); // invalid size, too big
+        // we return the closest result
+        assertEquals("ויאמר משה אל רבי יהודה", ngBefore.getText());
+
+        ng = doc.getNgram(1, 2);
+        assertEquals("משה אל", ng.getText());
+        ngBefore = doc.getNgramBefore(ng, 1);
+        assertEquals("ויאמר", ngBefore.getText());
+        ngBefore = doc.getNgramBefore(ng, 2);
+        assertEquals("ויאמר", ngBefore.getText());
+
+        // test some invalid options
+        ng = doc.getNgram(0, 0);
+        assertEquals("ויאמר", ng.getText());
+        ngBefore = doc.getNgramBefore(ng, 1);
+        assertNull(ngBefore);
+
+        doc = new NgramDocument(text, 1, 3);
+        ng = doc.getNgram(4, 5);
+        assertEquals("יהודה הנשיא", ng.getText());
+        ngBefore = doc.getNgramBefore(ng, 4);
+        assertEquals("משה אל רבי", ngBefore.getText());
+    }
+
+    @Test
+    public void test_getNgramAfter() {
+        NgramDocument doc = new NgramDocument(text, 1, 5);
+        Ngram ng = doc.getNgram(0, 0);
+        assertEquals("ויאמר", ng.getText());
+
+        // test all valid after options
+        Ngram ngAfter = doc.getNgramAfter(ng, 1);
+        assertEquals("משה", ngAfter.getText());
+
+        ngAfter = doc.getNgramAfter(ng, 2);
+        assertEquals("משה אל", ngAfter.getText());
+
+        ngAfter = doc.getNgramAfter(ng, 3);
+        assertEquals("משה אל רבי", ngAfter.getText());
+
+        ngAfter = doc.getNgramAfter(ng, 4);
+        assertEquals("משה אל רבי יהודה", ngAfter.getText());
+
+        ngAfter = doc.getNgramAfter(ng, 5);
+        assertEquals("משה אל רבי יהודה הנשיא", ngAfter.getText());
+
+        // more extreme options, some are invalid
+        ngAfter = doc.getNgramAfter(ng, 6);
+        assertEquals("משה אל רבי יהודה הנשיא", ngAfter.getText());
+        ng = doc.getNgram(3, 4);
+        assertEquals("רבי יהודה", ng.getText());
+        ngAfter = doc.getNgramAfter(ng, 1);
+        assertNotNull(ngAfter);
+        ngAfter = doc.getNgramAfter(ng, 2);
+        assertNotNull(ngAfter);
+    }
     private List<String> getList(String... args) {
         return Arrays.asList(args);
     }

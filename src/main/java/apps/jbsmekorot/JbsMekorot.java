@@ -1,12 +1,12 @@
 package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.*;
+import jngram.manipulations.MergeNgramsGoUp;
 import org.apache.commons.lang3.time.StopWatch;
 import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.io.*;
-import jngram.manipulations.MergeSiblingSpans;
-import jngram.manipulations.RemoveTagsInContainedSpans;
+import jngram.manipulations.RemoveTagsInContainedNgrams;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +23,8 @@ import static java.lang.System.exit;
 public class JbsMekorot {
     public static final int MINIMAL_PASUK_LENGTH = 2;
     public static final int MAXIMAL_PASUK_LENGTH = 14;
+    public static final int CERTAIN_NGRAM_SIZE = 4;
+    public static final int MAXIMAL_DISTANCE_FROM_CERTAIN_NGRAM = 70;
     private static List<String> ignoreDirs = new ArrayList<>(Arrays.asList(new String[]{".git", "manual", "tanach"}));
     private static List<String> includeDirs = new ArrayList<>(Arrays.asList(new String[]{"likuteymoharan"})); // if non-empty, only these directories will be analyzed.
     /**
@@ -109,10 +111,19 @@ public class JbsMekorot {
         doc.format(new JbsNgramFormatter());
         doc.add(new AddTextWithShemAdnut()).manipulate(); // should appear before PsukimTagger & after JbsNgramFormatter
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveTagsInContainedSpans()).manipulate();
-        doc.add(new RemoveTagsFromOverlappingSpans()).manipulate();
-        doc.add(new FilterTagsFromSpans(doc)).manipulate();
+
+        // going bottom-up to maximal ngram matches:
+        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new RemoveTagsInContainedNgrams()).manipulate();
+        doc.add(new ResolveOverlappingNgramsWithDifferentTags()).manipulate();
+
+        // Mark "certain" tags. We have different levels of certainty (see class Certain).
+        doc.add(new MarkCertainBySize()).manipulate();
+        doc.add(new MarkCertainByProximity()).manipulate();
+        doc.add(new MarkCertainByContext()).manipulate();
+
+        // closure operations. It was reasonable to apply them earlier
+        // but because of performance issues they are applied here (work with index).
         doc.add(new RemoveNonSequentialTags()).manipulate();
         doc.add(new CalcAndFilterByEditDistance()).manipulate();
         doc.add(new RemoveNonEheviFuzzyMatches()).manipulate();

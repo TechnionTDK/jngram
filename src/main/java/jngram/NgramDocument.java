@@ -322,4 +322,62 @@ public class NgramDocument {
 
         return result;
     }
+
+    /**
+     * Returns an ngram that appears right before ng.
+     * @param size the size of the returned ngram
+     *             (in case of an invalid size we return the closest result).
+     * @return null when ng starts at 0 or when the result is out of legal range.
+     */
+    public Ngram getNgramBefore(Ngram ng, int size) {
+        if (size > getMaximalNgramSize())
+            size = getMaximalNgramSize();
+
+        int resStart = ng.getStart() - size;
+        int resEnd = ng.getStart() - 1;
+
+        // null is returned when ng starts at 0
+        if (resEnd < 0)
+            return null;
+
+        // "fix" values ("best effort" policy)
+        if (resStart < 0) resStart = 0;
+
+        // return null if invalid
+        try {
+            checkNgramRangeAndSize(resStart, resEnd);
+        } catch(DocumentException e) {
+            return null;
+        }
+
+        return getNgram(resStart, resEnd);
+    }
+
+    /**
+     * Returns an ngram that appears right after ng.
+     * @param size the size of the returned ngram.
+     * @return null for an invalid request
+     */
+    public Ngram getNgramAfter(Ngram ng, int size) {
+        if (size > getMaximalNgramSize())
+            size = getMaximalNgramSize();
+
+        int resStart = ng.getEnd() + 1;
+        int resEnd = ng.getEnd() + size;
+
+        // null is returned when ng ends at end of document
+        if (resStart >= length())
+            return null;
+        // "fix" values ("best effort" policy)
+        if (resEnd >= length()) resEnd = length() - 1;
+
+        // return null if invalid
+        try {
+            checkNgramRangeAndSize(resStart, resEnd);
+        } catch(DocumentException e) {
+            return null;
+        }
+
+        return getNgram(resStart, resEnd);
+    }
 }

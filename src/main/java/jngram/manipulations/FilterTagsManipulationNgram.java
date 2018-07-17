@@ -5,7 +5,7 @@ import jngram.Ngram;
 import jngram.NgramDocumentManipulation;
 
 /**
- * Super class for manipulations that remove tags from spans
+ * Super class for manipulations that remove tags from ngrams
  * based on a certain criteria.
  */
 public abstract class FilterTagsManipulationNgram implements NgramDocumentManipulation {
@@ -20,9 +20,9 @@ public abstract class FilterTagsManipulationNgram implements NgramDocumentManipu
      * Whether the span is a candidate for tag removal.
      * Only spans that answer "yes" be later be queried
      * using shouldRemoveTag.
-     * @param s
+     * @param ng
      * @return
      */
-    protected abstract boolean isCandidate(Ngram s);
-    protected abstract void filterTags(NgramDocument doc, Ngram s);
+    protected abstract boolean isCandidate(Ngram ng);
+    protected abstract void filterTags(NgramDocument doc, Ngram ng);
 }

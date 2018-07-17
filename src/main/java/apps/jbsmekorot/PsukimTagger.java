@@ -8,36 +8,33 @@ import jngram.NgramTagger;
 import java.util.*;
 
 /**
+ * Here we iterate all ngrams in size 2, and for each we ask the
+ * Tanach index for candidate psukim (added as tags to the ngram).
  * Created by omishali on 10/09/2017.
  */
 public class PsukimTagger implements NgramTagger {
 
     private JbsTanachIndex tanach;
-    //private JbsTanachMaleIndex tanachMale;
 
     public PsukimTagger() {
         tanach = new JbsTanachIndex();
-        //tanachMale = new JbsTanachMaleIndex();
     }
 
-    public List<String> tag(Ngram s) {
-        String text = s.getTextFormatted();
+    public List<String> tag(Ngram ng) {
+        String text = ng.getTextFormatted();
 
-        // formatting may reduce the size of the span to 1, which causes the fuzzy search to fail.
+        // formatting may reduce the size of the ngram to 1, which causes the fuzzy search to fail.
         if (text.split("\\s+").length == 1)
             return new ArrayList<>();
 
-        List<Integer> maxEdits = getMaxEdits(s);
+        List<Integer> maxEdits = getMaxEdits(ng);
 
         List<Document> docs1;
         List<Document> docs2 = new ArrayList<>(); // for ADNUT_TEXT
 
         docs1 = tanach.searchFuzzyInText(text, maxEdits);
-        //List<NgramDocument> docs1 = tanach.searchExactInText(text);
-        //List<NgramDocument> docs2 = tanachMale.searchExactInText(text);
-        //List<NgramDocument> docs2 = tanachMale.searchFuzzyInText(text, 2);
-        if (s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
-            docs2 = tanach.searchFuzzyInText(s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), maxEdits);
+        if (ng.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT) != null)
+            docs2 = tanach.searchFuzzyInText(ng.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT), maxEdits);
 
         Set<String> result = new HashSet<>();
         for (Document doc : docs1)
@@ -49,14 +46,14 @@ public class PsukimTagger implements NgramTagger {
     }
 
     /**
-     * For each word in the span we return the
+     * For each word in the ngram we return the
      * number of maxEdits. Basically, the shorter the word the smaller its maxEdit.
-     * @param s
+     * @param ng
      * @return
      */
-     List<Integer> getMaxEdits(Ngram s) {
+     List<Integer> getMaxEdits(Ngram ng) {
         List<Integer> maxEdits = new ArrayList<>();
-        String[] words = s.getTextFormatted().split("\\s+");
+        String[] words = ng.getTextFormatted().split("\\s+");
         for (int i=0; i<words.length; i++) {
             if (words[i].length() <= 4)
                 maxEdits.add(1);
@@ -67,7 +64,7 @@ public class PsukimTagger implements NgramTagger {
         return maxEdits;
     }
 
-    public boolean isCandidate(Ngram s) {
-        return s.size() == 2;
+    public boolean isCandidate(Ngram ng) {
+        return ng.size() == 2;
     }
 }

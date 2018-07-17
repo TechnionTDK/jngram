@@ -1,9 +1,9 @@
 package apps.jbsmekorot;
 
+import jngram.manipulations.MergeNgramsGoUp;
 import org.junit.Before;
 import org.junit.Test;
 import jngram.NgramDocument;
-import jngram.manipulations.MergeSiblingSpans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public class TestFindPsukimGevurot_8 {
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeSiblingSpans()).manipulate();
+        doc.add(new MergeNgramsGoUp()).manipulate();
 
         //assertTrue(doc.getNgram(23, 24).getSortedTags().contains("jbr:text-tanach-1-22-2"));
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getNgram(68, 76).getSortedTags());

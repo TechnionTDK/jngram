@@ -2,8 +2,8 @@ package apps.jbsmekorot;
 
 import org.junit.*;
 import jngram.NgramDocument;
-import jngram.manipulations.MergeSiblingSpans;
-import jngram.manipulations.RemoveTagsInContainedSpans;
+import jngram.manipulations.MergeNgramsGoUp;
+import jngram.manipulations.RemoveTagsInContainedNgrams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +65,7 @@ public class FindPsukimOrchotTzadikimTest {
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeSiblingSpans()).manipulate();
+        doc.add(new MergeNgramsGoUp()).manipulate();
 
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getNgram(10, 13).getSortedTags());
         assertEquals(getEmptyList(), doc.getNgram(11, 12).getSortedTags());
@@ -105,8 +105,8 @@ public class FindPsukimOrchotTzadikimTest {
     public void testRemoveMatchesInContainedSpans() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeSiblingSpans()).manipulate();
-        doc.add(new RemoveTagsInContainedSpans()).manipulate();
+        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new RemoveTagsInContainedNgrams()).manipulate();
 
         // after applying the Remove manipulation we expext the URIs matched
         // for span [51,52] [52,53] to be totally removed!

@@ -9,6 +9,8 @@ import java.util.*;
 public class Ngram {
     private Map<String, String> stringExtras = new HashMap<>();
     private Map<String, Integer> intExtras = new HashMap<>();
+    private Map<String, Boolean> booleanExtras = new HashMap<>();
+    private Map<String, List<String>> listExtras = new HashMap<>();
     private String textFormatted;
     private NgramDocument doc;
     private int start, end;
@@ -54,6 +56,22 @@ public class Ngram {
 
     public Integer getIntExtra(String key) {
         return intExtras.get(key);
+    }
+
+    public void putExtra(String key, Boolean value) {
+        booleanExtras.put(key, value);
+    }
+
+    public Boolean getBooleanExtra(String key) {
+        return booleanExtras.get(key);
+    }
+
+    public void putExtra(String key, List<String> value) {
+        listExtras.put(key, value);
+    }
+
+    public List<String> getListExtra(String key) {
+        return listExtras.get(key);
     }
 
     /**
@@ -149,5 +167,9 @@ public class Ngram {
 
     public boolean hasNoTags() {
         return getTags().size() == 0;
+    }
+
+    public boolean hasTags() {
+        return getTags().size() > 0;
     }
 }
