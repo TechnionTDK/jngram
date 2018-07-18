@@ -63,7 +63,10 @@ public class Ngram {
     }
 
     public Boolean getBooleanExtra(String key) {
-        return booleanExtras.get(key);
+        if (booleanExtras.get(key) == null)
+            return false;
+        else
+            return true;
     }
 
     public void putExtra(String key, List<String> value) {
@@ -135,6 +138,7 @@ public class Ngram {
         StringBuffer result = new StringBuffer();
         result.append("[" + getStart() + ", " + getEnd() + "]" + "\n");
         result.append("(" + getText() + ")" + "\n");
+        //result.append("(" + getTextFormatted() + ")" + "\n");
         if (tags.size() > 0) {
             result.append("tags: ");
             for (String tag : tags) {
@@ -171,5 +175,14 @@ public class Ngram {
 
     public boolean hasTags() {
         return getTags().size() > 0;
+    }
+
+    public void printDebugInfo() {
+        System.out.println(toString());
+        System.out.println("Extras:");
+        System.out.println("String: " + stringExtras);
+        System.out.println("Int: " + intExtras);
+        System.out.println("Boolean: " + booleanExtras);
+        System.out.println("List: " + listExtras);
     }
 }

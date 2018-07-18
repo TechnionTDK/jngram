@@ -6,11 +6,12 @@ import jngram.NgramDocument;
 import jngram.NgramManipulation;
 
 /**
- * Mark with Certain.BY_SIZE all ngrams (having tags) with size greater than CERTAIN_NGRAM_SIZE.
+ * Mark with MarkCertainBySize.MARK = true
+ * all ngrams (having tags) with size >= than CERTAIN_NGRAM_SIZE.
  * We assume that such ngrams' tags represent real quotations.
  */
 public class MarkCertainBySize extends NgramManipulation {
-    public static final String KEY = "certain_size";
+    public static final String MARK = "certain_size_mark";
 
     @Override
     protected boolean isCandidate(Ngram ng) {
@@ -19,6 +20,6 @@ public class MarkCertainBySize extends NgramManipulation {
 
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
-        ng.putExtra(MarkCertainBySize.KEY, true);
+        ng.putExtra(MarkCertainBySize.MARK, true);
     }
 }

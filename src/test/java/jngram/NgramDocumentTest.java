@@ -198,13 +198,13 @@ public class NgramDocumentTest {
         s = doc.getNgram(1, 2);
         assertEquals("משה אל", s.getText());
         ngrams = doc.getOverlappingNgrams(s);
-        // we do not expect ngrams BEFORE s, only AFTER
+        // we do not expect ngrams MARK_BEFORE s, only MARK_AFTER
         assertThat(ngrams.size(), equalTo(6));
 
         s = doc.getNgram(4, 5);
         assertEquals("יהודה הנשיא", s.getText());
         ngrams = doc.getOverlappingNgrams(s);
-        // we do not expect ngrams BEFORE s, only AFTER
+        // we do not expect ngrams MARK_BEFORE s, only MARK_AFTER
         assertThat(ngrams.size(), equalTo(0));
 
         s = doc.getNgram(0, 4);

@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * If ta
- * Here we mark short ngrams (size 2,3) with MarkCertainByProximity.KEY = true if there are
+ * Here we mark short ngrams (size 2,3) with MarkCertainByProximity.MARK = true if there are
  * other ngrams "nearby" that are marked with MarkCertainBySize and
- * have the same tags. In addition, a list of tags to be removed is also added to the extras
+ * have the same tags. In addition, a list of tags to be keep is also added to the extras
  * (list is available via TAGS_TO_KEEP key).
  */
 public class MarkCertainByProximity extends NgramManipulation {
-    public static final String KEY = "certain_proximity";
+    public static final String MARK = "certain_proximity";
     public static final String TAGS_TO_KEEP = "to_keep";
 
     @Override
@@ -55,7 +54,7 @@ public class MarkCertainByProximity extends NgramManipulation {
         }
 
         if (tagsToKeep.size() > 0) {
-            ng.putExtra(KEY, true);
+            ng.putExtra(MARK, true);
             ng.putExtra(TAGS_TO_KEEP, tagsToKeep);
         }
     }

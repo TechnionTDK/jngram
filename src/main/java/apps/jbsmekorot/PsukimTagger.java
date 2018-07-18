@@ -27,6 +27,11 @@ public class PsukimTagger implements NgramTagger {
         if (text.split("\\s+").length == 1)
             return new ArrayList<>();
 
+        // also, formatting may cause "one character" words. If we have
+        // such a word, we can say for sure: this is not a part of a quotation.
+        if (hasOneCharacterWord(text))
+            return new ArrayList<>();
+
         List<Integer> maxEdits = getMaxEdits(ng);
 
         List<Document> docs1;
@@ -43,6 +48,14 @@ public class PsukimTagger implements NgramTagger {
             result.add(doc.get("uri"));
 
         return new ArrayList<>(result);
+    }
+
+    private boolean hasOneCharacterWord(String text) {
+        String[] split = text.split("\\s+");
+        for (String word : split)
+            if (word.length() == 1)
+                return true;
+        return false;
     }
 
     /**

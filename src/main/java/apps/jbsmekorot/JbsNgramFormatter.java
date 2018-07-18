@@ -28,6 +28,8 @@ public class JbsNgramFormatter implements NgramFormatter {
                 replace(",", "").
                 replace(":", "").
                 replace("?", "").
+                replace("(", "").
+                replace(")", "").
                 replace("-", "dash"). // in some texts dash appears as a whole "word" so we want to replace these cases with a special character. If we eliminate it it causes a 3-span to act like a 2-span.
                 replaceAll("\\bdash\\b", "@"). // replace "dash words" with a @ character
                 replace("dash", ""). // remove the rest occurrences.

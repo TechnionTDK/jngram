@@ -120,13 +120,23 @@ public class JbsMekorot {
         // Mark "certain" tags. We have different levels of certainty (see class Certain).
         doc.add(new MarkCertainBySize()).manipulate();
         doc.add(new MarkCertainByProximity()).manipulate();
-        doc.add(new MarkCertainByContext()).manipulate();
+        doc.add(new MarkCertainByHintWords()).manipulate();
+
+        // Remove tags based on previous marks
+        doc.add(new RemoveTagsBasedOnMarks()).manipulate();
 
         // closure operations. It was reasonable to apply them earlier
         // but because of performance issues they are applied here (work with index).
         doc.add(new RemoveNonSequentialTags()).manipulate();
         doc.add(new CalcAndFilterByEditDistance()).manipulate();
         doc.add(new RemoveNonEheviFuzzyMatches()).manipulate();
+
+        // DEBUG
+        System.out.println("=== DEBUG INFO ===");
+        for (Ngram ng : doc.getAllNgramsWithTags())
+            ng.printDebugInfo();
+        System.out.println("=== DEBUG INFO ===");
+
     }
 
      /**

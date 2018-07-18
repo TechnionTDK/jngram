@@ -156,6 +156,20 @@ public class NgramDocument {
         return result;
     }
 
+    /**
+     * Returns all ngrams in the document. The ngrams are sorted by size.
+     * @return
+     */
+    public List<Ngram> getAllNgramsWithTags() {
+        List<Ngram> result = new ArrayList<Ngram>();
+        List<Ngram> all = getAllNgrams();
+        for (Ngram ng : all)
+            if (ng.hasTags())
+                result.add(ng);
+
+        return result;
+    }
+
     public int getMinimalNgramSize() {
         return minimalNgramSize;
     }
@@ -302,7 +316,7 @@ public class NgramDocument {
     }
 
     /**
-     * Note: return overlapping ngrams that appear AFTER s in
+     * Note: return overlapping ngrams that appear MARK_AFTER s in
      * the document, and besides s itself.
      * @param s
      * @return
@@ -379,5 +393,9 @@ public class NgramDocument {
         }
 
         return getNgram(resStart, resEnd);
+    }
+
+    public List<Ngram> getAdjacentNgrams(Ngram ng, int maxDistance) {
+        return null;
     }
 }
