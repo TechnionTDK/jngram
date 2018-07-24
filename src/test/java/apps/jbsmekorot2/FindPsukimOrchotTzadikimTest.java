@@ -1,6 +1,7 @@
 package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsMekorot;
+import jngram.NgramTagger;
 import org.junit.Before;
 import org.junit.Test;
 import jngram.NgramDocument;
@@ -34,9 +35,9 @@ public class FindPsukimOrchotTzadikimTest {
     // This test produces erros so was disabled.
     //@Test
     public void testRemoveMatchesInContainedSpans() {
-        doc.add(new PsukimTaggerTopDown(doc.length()));
+        NgramTagger tagger = new PsukimTaggerTopDown(doc.length());
         for(int spanSize = doc.getMaximalNgramSize(); spanSize >= doc.getMinimalNgramSize(); spanSize-- ){
-            doc.tag(spanSize);
+            doc.add(tagger, spanSize);
         }
         //doc.add(new MarkCertainByProximity(doc)).manipulate();
         //doc.add(new FilterTagsFromSpansSize2(doc)).manipulate();

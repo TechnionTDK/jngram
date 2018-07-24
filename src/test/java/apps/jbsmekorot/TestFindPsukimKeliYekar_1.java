@@ -35,7 +35,7 @@ public class TestFindPsukimKeliYekar_1 {
     @Test
     public void testTagsSpansLength2() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
+        doc.add(new PsukimTagger());
 
         //assertTrue(doc.getNgram(0, 1).getSortedTags().contains("jbr:text-tanach-1-12-1"));
     }
@@ -43,8 +43,8 @@ public class TestFindPsukimKeliYekar_1 {
     @Test
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeToMaximalNgrams()).manipulate();
+        doc.add(new PsukimTagger());
+        doc.add(new MergeToMaximalNgrams());
 
         //assertTrue(doc.getNgram(23, 24).getSortedTags().contains("jbr:text-tanach-1-22-2"));
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getNgram(68, 76).getSortedTags());

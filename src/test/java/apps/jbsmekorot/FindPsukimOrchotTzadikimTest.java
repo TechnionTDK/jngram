@@ -33,7 +33,7 @@ public class FindPsukimOrchotTzadikimTest {
     @Test
     public void testTagsSpansLength2() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
+        doc.add(new PsukimTagger());
 
         assertTrue(doc.getNgram(10, 11).getSortedTags().contains("jbr:text-tanach-1-2-7"));
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getNgram(11, 12).getSortedTags());
@@ -64,8 +64,8 @@ public class FindPsukimOrchotTzadikimTest {
     @Test
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeToMaximalNgrams()).manipulate();
+        doc.add(new PsukimTagger());
+        doc.add(new MergeToMaximalNgrams());
 
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getNgram(10, 13).getSortedTags());
         assertEquals(getEmptyList(), doc.getNgram(11, 12).getSortedTags());
@@ -104,9 +104,9 @@ public class FindPsukimOrchotTzadikimTest {
     @Test
     public void testRemoveMatchesInContainedSpans() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeToMaximalNgrams()).manipulate();
-        doc.add(new RemoveTagsInContainedNgrams()).manipulate();
+        doc.add(new PsukimTagger());
+        doc.add(new MergeToMaximalNgrams());
+        doc.add(new RemoveTagsInContainedNgrams());
 
         // after applying the Remove manipulation we expext the URIs matched
         // for span [51,52] [52,53] to be totally removed!

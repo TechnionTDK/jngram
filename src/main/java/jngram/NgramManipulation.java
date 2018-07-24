@@ -8,7 +8,7 @@ public abstract class NgramManipulation extends NgramDocumentManipulation {
 
     @Override
     public void manipulate(NgramDocument doc) {
-        System.out.println("Apply maniuplation " + getName() + "...");
+        //System.out.println("Apply maniuplation " + getName() + "...");
         for (Ngram ng : doc.getAllNgrams()) {
             if (!isCandidate(ng))
                 continue;

@@ -100,9 +100,9 @@ public class NgramDocumentTest {
 
     @Test
     public void testAddMatchers() {
-        NgramDocument sd = new NgramDocument(text, 1, 3);
+        NgramDocument doc = new NgramDocument(text, 1, 3);
 
-        sd.add(new NgramTagger() {
+        doc.add(new NgramTagger() {
             public List<String> tag(Ngram s) {
                 List<String> result = new ArrayList<String>();
                 if (s.getText().equals("משה"))
@@ -131,14 +131,13 @@ public class NgramDocumentTest {
             public boolean isCandidate(Ngram s) {
                 return s.size() == 3;
             }
-        })
-        .tag();
+        });
 
-        Ngram s = sd.getNgram(1, 1);
+        Ngram s = doc.getNgram(1, 1);
         assertEquals(getList("jbr:person-moshe"), s.getTags());
-        s = sd.getNgram(3, 3);
+        s = doc.getNgram(3, 3);
         assertEquals(getList("jbr:person-rabbi"), s.getTags());
-        s = sd.getNgram(3, 5);
+        s = doc.getNgram(3, 5);
         assertEquals(getList("jbr:person-rabbi"), s.getTags());
     }
 

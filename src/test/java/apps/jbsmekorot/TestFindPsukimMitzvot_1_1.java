@@ -33,15 +33,15 @@ public class TestFindPsukimMitzvot_1_1 {
     @Test
     public void testTagsSpansLength2() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
+        doc.add(new PsukimTagger());
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getNgram(68, 69).getSortedTags());
     }
 
     @Test
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
-        doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeToMaximalNgrams()).manipulate();
+        doc.add(new PsukimTagger());
+        doc.add(new MergeToMaximalNgrams());
 
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getNgram(68, 76).getSortedTags());
     }

@@ -109,34 +109,33 @@ public class JbsMekorot {
 
     public static void findPsukim(NgramDocument doc) {
         doc.format(new JbsNgramFormatter());
-        doc.add(new AddTextWithShemAdnut()).manipulate(); // should appear before PsukimTagger & after JbsNgramFormatter
-        doc.add(new PsukimTagger()).tag();
+        doc.add(new AddTextWithShemAdnut()); // should appear before PsukimTagger & after JbsNgramFormatter
+        doc.add(new PsukimTagger());
 
         // going bottom-up to maximal ngram matches:
-        doc.add(new MergeToMaximalNgrams()).manipulate();
-        doc.add(new RemoveTagsInContainedNgrams()).manipulate();
-        doc.add(new ResolveOverlappingNgramsWithDifferentTags()).manipulate();
+        doc.add(new MergeToMaximalNgrams());
+        doc.add(new RemoveTagsInContainedNgrams());
+        doc.add(new ResolveOverlappingNgramsWithDifferentTags());
 
         // Mark "certain" tags. We have different levels of certainty (see class Certain).
-        doc.add(new MarkCertainBySize()).manipulate();
-        doc.add(new MarkCertainByProximity()).manipulate();
-        doc.add(new MarkCertainByHintWords()).manipulate();
+        doc.add(new MarkCertainBySize());
+        doc.add(new MarkCertainByProximity());
+        doc.add(new MarkCertainByHintWords());
 
         // Remove tags based on previous marks
-        doc.add(new RemoveTagsBasedOnMarks()).manipulate();
+        doc.add(new RemoveTagsBasedOnMarks());
 
         // closure operations. It was reasonable to apply them earlier
         // but because of performance issues they are applied here (work with index).
-        doc.add(new RemoveNonSequentialTags()).manipulate();
-        doc.add(new CalcAndFilterByEditDistance()).manipulate();
-        doc.add(new RemoveNonEheviFuzzyMatches()).manipulate();
+        doc.add(new RemoveNonSequentialTags());
+        doc.add(new CalcAndFilterByEditDistance());
+        doc.add(new RemoveNonEheviFuzzyMatches());
 
         // DEBUG
-        System.out.println("=== DEBUG INFO ===");
-        for (Ngram ng : doc.getAllNgramsWithTags())
-            ng.printDebugInfo();
-        System.out.println("=== DEBUG INFO ===");
-
+//        System.out.println("=== DEBUG INFO ===");
+//        for (Ngram ng : doc.getAllNgramsWithTags())
+//            ng.printDebugInfo();
+//        System.out.println("=== DEBUG INFO ===");
     }
 
      /**

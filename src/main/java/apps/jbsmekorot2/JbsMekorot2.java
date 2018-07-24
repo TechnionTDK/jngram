@@ -2,6 +2,7 @@ package apps.jbsmekorot2;
 
 import apps.jbsmekorot.JbsNgramFormatter;
 import apps.jbsmekorot.RecallPrecision;
+import jngram.NgramTagger;
 import org.apache.commons.lang3.time.StopWatch;
 import jngram.NgramDocument;
 import jngram.Ngram;
@@ -106,8 +107,8 @@ public class JbsMekorot2 {
     }
     public static void findPsukimTopDown(NgramDocument doc){
         doc.format(new JbsNgramFormatter());
-        doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length()));
+        doc.add(new AddTextWithShemAdnutTopDown());
+        NgramTagger tagger = new PsukimTaggerTopDown(doc.length());
         StopWatch tag_timer = new StopWatch();
         double tag_timer_total = 0;
         int span_size = 0;
@@ -116,7 +117,7 @@ public class JbsMekorot2 {
             //span_size=spanSize;
             //System.out.println(">> DEBUG: measuring time for spans of size: "+ spanSize  );
             //tag_timer.start();
-            doc.tag(spanSize);
+            doc.add(tagger, spanSize);
             //System.out.println(">> DEBUG: result for spans of size: "+ spanSize + "is : "   + tag_timer.getNanoTime());
             //tag_timer_total = tag_timer.getNanoTime()/Math.pow(10,9);
             //DecimalFormat df = new DecimalFormat("#.##");

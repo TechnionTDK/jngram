@@ -14,8 +14,6 @@ public class NgramDocument {
     private List<List<Ngram>> allNgrams = new ArrayList<List<Ngram>>(); // position 0 holds all ngrams of size minimalNgramSize, position 1 of size minimalNgramSize+1, etc.
     private List<List<Ngram>> ngramsByWords; // position 0 holds all ngrams that contain word 0, position 1 holds all ngrams that contain word 1, etc. Why? for efficient implementation of getNgrams(int wordIndex)
     private Map<String, List<Ngram>> tagNgramIndex = new HashMap<>(); // holds mappings from tag to ngrams. For boosting method getNgrams(tag). Note: is created by demand!
-    private List<NgramTagger> taggers = new ArrayList<NgramTagger>();
-    private List<NgramDocumentManipulation> manipulations = new ArrayList<NgramDocumentManipulation>();
 
     /**
      * This constructor creates all ngrams from minimalNgramSize size
@@ -101,33 +99,42 @@ public class NgramDocument {
     /**
      * Execute taggers on all ngrams
      */
-    public NgramDocument tag() {
+    private NgramDocument tag(NgramTagger tagger) {
         for (Ngram s : getAllNgrams()) {
-            for (NgramTagger m : taggers) {
-                if (m.isCandidate(s)) {
-                    List<String> result = m.tag(s);
+                if (tagger.isCandidate(s)) {
+                    List<String> result = tagger.tag(s);
                     if (result != null)
                         s.addTags(result);
                 }
             }
-        }
         return this;
     }
 
-    public NgramDocument manipulate() {
-        for (NgramDocumentManipulation manipulator : manipulations)
-            manipulator.manipulate(this);
-
-        return this;
-    }
-
+    /**
+     * Apply the given tagger on the document.
+     * @param tagger
+     * @return
+     */
     public NgramDocument add(NgramTagger tagger) {
-        taggers.add(tagger);
-        return this;
+        return tag(tagger);
     }
 
-    public NgramDocument add(NgramDocumentManipulation manipulator) {
-        manipulations.add(manipulator);
+    /**
+     * Apply the given tagger on the document.
+     * @param tagger
+     * @return
+     */
+    public NgramDocument add(NgramTagger tagger, int ngramSize) {
+        return tag(tagger, ngramSize);
+    }
+
+    /**
+     * Apply the given manipulation on the document.
+     * @param manipulation
+     * @return
+     */
+    public NgramDocument add(NgramDocumentManipulation manipulation) {
+        manipulation.manipulate(this);
         return this;
     }
 
@@ -290,18 +297,15 @@ public class NgramDocument {
 
     // this tag is a version that only tags the ngrams with size  @ngramSize
     // @param  ngramSize : the size of the ngrams that are going to be tagged. IE NgramDocument(4) will tag all the ngrams with size 4
-
-   public NgramDocument tag(int ngramSize) {
+   private NgramDocument tag(NgramTagger tagger, int ngramSize) {
         List<Ngram> ngrams = getNgrams(ngramSize);
         for (Ngram s : ngrams) {
-            for (NgramTagger m : taggers) {
-                if (m.isCandidate(s)) {
-                    List<String> result = m.tag(s);
+                if (tagger.isCandidate(s)) {
+                    List<String> result = tagger.tag(s);
                     if (result != null  && result.size()!=0)
                         s.addTags(result);
                 }
             }
-        }
         return this;
     }
 

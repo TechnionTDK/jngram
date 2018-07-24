@@ -1,6 +1,7 @@
 package apps.jbsmekorot2spark;
 
 import apps.jbsmekorot.JbsNgramFormatter;
+import jngram.NgramTagger;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
@@ -173,10 +174,10 @@ public class JbsSparkMekorot {
 
     public static void findPsukimTopDown(NgramDocument doc, String indexPath){
         doc.format(new JbsNgramFormatter());
-        doc.add(new AddTextWithShemAdnutTopDown()).manipulate();
-        doc.add(new PsukimTaggerTopDown(doc.length(),indexPath));
+        doc.add(new AddTextWithShemAdnutTopDown());
+        NgramTagger tagger = new PsukimTaggerTopDown(doc.length(),indexPath);
         for(int spanSize = doc.getMaximalNgramSize(); spanSize >= doc.getMinimalNgramSize(); spanSize-- ){
-            doc.tag(spanSize);
+            doc.add(tagger, spanSize);
         }
     }
 }
