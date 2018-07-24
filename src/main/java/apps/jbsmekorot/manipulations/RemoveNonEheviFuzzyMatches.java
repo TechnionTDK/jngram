@@ -6,6 +6,7 @@ import apps.jbsmekorot.JbsTanachIndex;
 import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.NgramDocumentManipulation;
+import jngram.NgramManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,37 +17,37 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * Some of the fuzzy matches contain non-ehevi diffs. This manipulation removes
  * such matches.
  */
-public class RemoveNonEheviFuzzyMatches implements NgramDocumentManipulation {
+public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
+
     @Override
-    public void manipulate(NgramDocument doc) {
-        for (Ngram s : doc.getAllNgrams()) {
-            if (s.hasNoTags())
-                continue;
+    protected boolean isCandidate(Ngram ng) {
+        return ng.hasTags();
+    }
 
-            List<String> removedTags = new ArrayList<>();
-            for (String tag : s.getTags()) {
-                // get the text of the pasuk
-                JbsTanachIndex index = new JbsTanachIndex();
-                List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
-                String pasuk = docs.get(0).get("text");
+    @Override
+    protected void manipulate(NgramDocument doc, Ngram ng) {
+        List<String> removedTags = new ArrayList<>();
+        for (String tag : ng.getTags()) {
+            // get the text of the pasuk
+            JbsTanachIndex index = new JbsTanachIndex();
+            List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
+            String pasuk = docs.get(0).get("text");
 
-                String pasukSpan = getPasukSpanWithBestMatch(pasuk, s.getTextFormatted()); // note use of formatted text here.
+            String pasukSpan = getPasukSpanWithBestMatch(pasuk, ng.getTextFormatted()); // note use of formatted text here.
 
-                String adnutText = s.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT);
+            String adnutText = ng.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT);
 
-                if (adnutText == null) {
-                    if (!HebrewUtils.isEheviDiff(s.getTextFormatted(), pasukSpan)) {
-                        removedTags.add(tag);
-                        //System.out.println(s.text());
-                    }
-                } else {
-                    if (!HebrewUtils.isEheviDiff(s.getTextFormatted(), pasukSpan) && !HebrewUtils.isEheviDiff(adnutText, pasukSpan)) {
-                        removedTags.add(tag);
-                    }
+            if (adnutText == null) {
+                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukSpan)) {
+                    removedTags.add(tag);
+                }
+            } else {
+                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukSpan) && !HebrewUtils.isEheviDiff(adnutText, pasukSpan)) {
+                    removedTags.add(tag);
                 }
             }
-            s.removeTags(removedTags);
         }
+        ng.removeTags(removedTags);
     }
 
     /**

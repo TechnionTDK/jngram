@@ -3,6 +3,7 @@ package apps.jbsmekorot.manipulations;
 import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.NgramDocumentManipulation;
+import jngram.NgramManipulation;
 
 /**
  * In the texts where we search for quotations, "shem hashem" is mentioned a lot,
@@ -15,16 +16,16 @@ import jngram.NgramDocumentManipulation;
  * Created by omishali on 08/01/2018.
  *
  */
-    public class AddTextWithShemAdnut implements NgramDocumentManipulation {
+    public class AddTextWithShemAdnut extends NgramManipulation {
         public static final String ADNUT_TEXT = "adnut_text";
-        @Override
-        public void manipulate(NgramDocument doc) {
-            // we used to cover spans of size 2 since only these spans
-            // are get tagged however the manipulation RemoveNonSequentialTags requires
-            // larger spans as well.
-            for (Ngram s : doc.getAllNgrams()) {
-                if (s.getTextFormatted().contains("יהוה"))
-                    s.putExtra(ADNUT_TEXT, s.getTextFormatted().replace("יהוה", "אדני"));
-            }
-        }
+
+    @Override
+    protected boolean isCandidate(Ngram ng) {
+        return ng.getTextFormatted().contains("יהוה");
+    }
+
+    @Override
+    protected void manipulate(NgramDocument doc, Ngram ng) {
+        ng.putExtra(ADNUT_TEXT, ng.getTextFormatted().replace("יהוה", "אדני"));
+    }
 }

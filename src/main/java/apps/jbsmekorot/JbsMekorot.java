@@ -1,7 +1,7 @@
 package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.*;
-import jngram.manipulations.MergeNgramsGoUp;
+import jngram.manipulations.MergeToMaximalNgrams;
 import org.apache.commons.lang3.time.StopWatch;
 import jngram.NgramDocument;
 import jngram.Ngram;
@@ -113,7 +113,7 @@ public class JbsMekorot {
         doc.add(new PsukimTagger()).tag();
 
         // going bottom-up to maximal ngram matches:
-        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new MergeToMaximalNgrams()).manipulate();
         doc.add(new RemoveTagsInContainedNgrams()).manipulate();
         doc.add(new ResolveOverlappingNgramsWithDifferentTags()).manipulate();
 
@@ -132,10 +132,10 @@ public class JbsMekorot {
         doc.add(new RemoveNonEheviFuzzyMatches()).manipulate();
 
         // DEBUG
-//        System.out.println("=== DEBUG INFO ===");
-//        for (Ngram ng : doc.getAllNgramsWithTags())
-//            ng.printDebugInfo();
-//        System.out.println("=== DEBUG INFO ===");
+        System.out.println("=== DEBUG INFO ===");
+        for (Ngram ng : doc.getAllNgramsWithTags())
+            ng.printDebugInfo();
+        System.out.println("=== DEBUG INFO ===");
 
     }
 
@@ -162,9 +162,9 @@ public class JbsMekorot {
                 outputJson.addTaggedSubject(taggedSubject);
             }
 
-            //System.out.println(outputJson.toString());
-            //System.out.println(subjects.get(0).getUri());
-            //System.out.println(subjects.get(0).getText());
+            System.out.println(outputJson.toString());
+            System.out.println(subjects.get(0).getUri());
+            System.out.println(subjects.get(0).getText());
         }
         return outputJson;
     }

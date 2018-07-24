@@ -17,10 +17,11 @@ import java.util.Map;
  * process, there should not be overlapping ngrams that share the same tag.
  * Created by omishali on 07/09/2017.
  */
-public class MergeNgramsGoUp implements NgramDocumentManipulation {
+public class MergeToMaximalNgrams extends NgramDocumentManipulation {
 
     private Map<Ngram,List<String>> tagsToBeRemoved = new HashMap<>();
 
+    @Override
     public void manipulate(NgramDocument doc) {
         int spanOffset = doc.getMinimalNgramSize();
         int maximalSpanSize = doc.getMaximalNgramSize();

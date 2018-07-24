@@ -1,10 +1,10 @@
 package apps.jbsmekorot;
 
+import jngram.manipulations.MergeToMaximalNgrams;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import jngram.NgramDocument;
-import jngram.manipulations.MergeNgramsGoUp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ public class TestFindPsukimMitzvot_1_1 {
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new MergeToMaximalNgrams()).manipulate();
 
         //assertEquals(getList("jbr:text-tanach-4-24-1"), doc.getNgram(68, 76).getSortedTags());
     }

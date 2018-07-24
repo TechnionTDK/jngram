@@ -3,10 +3,13 @@ package jngram;
 /**
  * Created by omishali on 04/09/2017.
  */
-public interface NgramDocumentManipulation {
+public abstract class NgramDocumentManipulation {
     /**
      * Performs a manipulation on the given NgramDocument.
      * @param doc
      */
-    public void manipulate(NgramDocument doc);
+    public abstract void manipulate(NgramDocument doc);
+    public String getName() {
+        return getClass().toString();
+    }
 }

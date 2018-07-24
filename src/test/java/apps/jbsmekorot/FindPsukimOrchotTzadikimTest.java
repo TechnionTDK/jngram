@@ -2,7 +2,7 @@ package apps.jbsmekorot;
 
 import org.junit.*;
 import jngram.NgramDocument;
-import jngram.manipulations.MergeNgramsGoUp;
+import jngram.manipulations.MergeToMaximalNgrams;
 import jngram.manipulations.RemoveTagsInContainedNgrams;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class FindPsukimOrchotTzadikimTest {
     public void testTagsAfterMerge() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new MergeToMaximalNgrams()).manipulate();
 
         assertEquals(getList("jbr:text-tanach-1-2-7"), doc.getNgram(10, 13).getSortedTags());
         assertEquals(getEmptyList(), doc.getNgram(11, 12).getSortedTags());
@@ -105,7 +105,7 @@ public class FindPsukimOrchotTzadikimTest {
     public void testRemoveMatchesInContainedSpans() {
         doc.format(new JbsNgramFormatter());
         doc.add(new PsukimTagger()).tag();
-        doc.add(new MergeNgramsGoUp()).manipulate();
+        doc.add(new MergeToMaximalNgrams()).manipulate();
         doc.add(new RemoveTagsInContainedNgrams()).manipulate();
 
         // after applying the Remove manipulation we expext the URIs matched

@@ -5,6 +5,7 @@ import apps.jbsmekorot.JbsTanachIndex;
 import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.NgramDocumentManipulation;
+import jngram.NgramManipulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,63 +19,63 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * remove tags based on several related strategies.
  * The goal is to prevent edit distance to accumulate to a too big value.
  */
-public class CalcAndFilterByEditDistance implements NgramDocumentManipulation {
+public class CalcAndFilterByEditDistance extends NgramManipulation {
     private static final String DISTANCE_KEY = "dist_key::";
     private static final double MAXIMAL_DISTANCE_LENGTH_RATIO = 0.15;
 
     @Override
-    public void manipulate(NgramDocument doc) {
-        for (Ngram s : doc.getAllNgrams()) {
-            if (s.hasNoTags())
-                continue;
-
-            for (String tag : s.getTags()) {
-                // get the text of the pasuk
-                JbsTanachIndex index = new JbsTanachIndex();
-                List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
-                String pasuk = docs.get(0).get("text");
-
-                int minDistance = getMinimalDistance(pasuk, s.getTextFormatted());
-                s.putExtra(DISTANCE_KEY + tag, minDistance);
-            }
-
-            // now that we have added distance to all tags we apply filtering
-            filterTagsBasedOnDistanceLengthRatio(s);
-            filterTagsWithDistanceHigherThanMinimalDistance(s);
-        }
+    protected boolean isCandidate(Ngram ng) {
+        return ng.hasTags();
     }
 
-    private void filterTagsWithDistanceHigherThanMinimalDistance(Ngram s) {
+    @Override
+    protected void manipulate(NgramDocument doc, Ngram ng) {
+        for (String tag : ng.getTags()) {
+            // get the text of the pasuk
+            JbsTanachIndex index = new JbsTanachIndex();
+            List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
+            String pasuk = docs.get(0).get("text");
+
+            int minDistance = getMinimalDistance(pasuk, ng.getTextFormatted());
+            ng.putExtra(DISTANCE_KEY + tag, minDistance);
+        }
+
+        // now that we have added distance to all tags we apply filtering
+        filterTagsBasedOnDistanceLengthRatio(ng);
+        filterTagsWithDistanceHigherThanMinimalDistance(ng);
+    }
+
+    private void filterTagsWithDistanceHigherThanMinimalDistance(Ngram ng) {
         List<String> removedTags = new ArrayList<>();
 
-        int min = getMinimalEditDistance(s);
+        int min = getMinimalEditDistance(ng);
 
-        for (String tag : s.getTags())
-            if (getDistance(s, tag) > min)
+        for (String tag : ng.getTags())
+            if (getDistance(ng, tag) > min)
                 removedTags.add(tag);
 
-        s.removeTags(removedTags);
+        ng.removeTags(removedTags);
     }
 
-    private int getMinimalEditDistance(Ngram s) {
+    private int getMinimalEditDistance(Ngram ng) {
         int min = 1000;
-        for (String tag : s.getTags())
-            if (getDistance(s, tag) < min)
-                min = getDistance(s, tag);
+        for (String tag : ng.getTags())
+            if (getDistance(ng, tag) < min)
+                min = getDistance(ng, tag);
 
         return min;
     }
 
-    private void filterTagsBasedOnDistanceLengthRatio(Ngram s) {
+    private void filterTagsBasedOnDistanceLengthRatio(Ngram ng) {
         List<String> removedTags = new ArrayList<>();
 
-        for (String tag : s.getTags()) {
-            double distance = getDistance(s, tag);
-            double length = s.getTextFormatted().length();
+        for (String tag : ng.getTags()) {
+            double distance = getDistance(ng, tag);
+            double length = ng.getTextFormatted().length();
             if (distance / length > MAXIMAL_DISTANCE_LENGTH_RATIO)
                 removedTags.add(tag);
         }
-        s.removeTags(removedTags);
+        ng.removeTags(removedTags);
     }
 
     /**
@@ -96,7 +97,7 @@ public class CalcAndFilterByEditDistance implements NgramDocumentManipulation {
         return minDistance;
     }
 
-    public static Integer getDistance(Ngram s, String tag) {
-        return  s.getIntExtra(DISTANCE_KEY + tag);
+    public static Integer getDistance(Ngram ng, String tag) {
+        return  ng.getIntExtra(DISTANCE_KEY + tag);
     }
 }
