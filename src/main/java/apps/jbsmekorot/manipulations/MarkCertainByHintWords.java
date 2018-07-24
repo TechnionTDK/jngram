@@ -1,6 +1,7 @@
 package apps.jbsmekorot.manipulations;
 
 import apps.jbsmekorot.JbsMekorot;
+import apps.jbsmekorot.JbsNgramFormatter;
 import jngram.*;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -16,10 +17,12 @@ import java.util.List;
  */
 public class MarkCertainByHintWords extends NgramManipulation {
     private List<String> HINT_WORDS_BEFORE = Arrays.asList("אומר", "שאמר", "באמרו", "ואומר", "שנאמר", "שאמרו", "ואמר", "אמר",
-            "הכתוב", "אמרו", "שאמרה");
-    private List<String> HINTS_WORDS_AFTER = Arrays.asList("וגו", "וכו");
+            "הכתוב", "אמרו", "שאמרה", "כתיב", "ויאמרו", "נאמר", "התורה", "נאמרו", "ומקרא");
+    private List<String> HINTS_WORDS_AFTER = HINT_WORDS_BEFORE;
     public static final String MARK_BEFORE = "mark_before";
     public static final String MARK_AFTER = "mark_after";
+    private static final int NUM_WORDS_TO_LOOK_BEFORE = 8;
+    private static final int NUM_WORDS_TO_LOOK_AFTER = 5;
 
     @Override
     protected boolean isCandidate(Ngram ng) {
@@ -60,14 +63,14 @@ public class MarkCertainByHintWords extends NgramManipulation {
 
         List<String> result = Arrays.asList(text.split("\\s+"));
         // get 5 last words
-        if (result.size() > 5)
-            result = result.subList(0, 5);
+        if (result.size() > NUM_WORDS_TO_LOOK_AFTER)
+            result = result.subList(0, NUM_WORDS_TO_LOOK_AFTER);
 
         return result;
     }
 
     /**
-     * Return the 5 words before the provided ngram. How it works?
+     * Return the NUM_WORDS_TO_LOOK_BEFORE words before the provided ngram. How it works?
      * We take N words before, where N is maximal ngram size in the document.
             * Then we take the formatted text and remove all "(*)", that is, any indication
      * of references. From the text left we return last 5 words.
@@ -82,21 +85,22 @@ public class MarkCertainByHintWords extends NgramManipulation {
             return new ArrayList<>();;
 
         // note: ngBefore is not neccessarily in size MaximalNgramSize, it may be shorter (see getNgramBefore implementation).
-        String text = ngBefore.getTextFormatted();
+        String text = ngBefore.getText(); // not text formatted yet since we want the parentheses for reference removal.
         text = removeReferences(text);
+        text = new JbsNgramFormatter().format(text);
 
         List<String> result = Arrays.asList(text.split("\\s+"));
         // get 5 last words
-        if (result.size() > 5)
-            result = result.subList(result.size() - 5, result.size());
+        if (result.size() > NUM_WORDS_TO_LOOK_BEFORE)
+            result = result.subList(result.size() - NUM_WORDS_TO_LOOK_BEFORE, result.size());
 
-//        System.out.println("ngram: " + ng);
-//        System.out.println("ngram before: " + result);
+//        System.out.println(ng);
+//        System.out.println(result);
 
         return result;
     }
 
-    private String removeReferences(String text) {
-        return text.replaceAll("\\(.*\\)", "");
+    public String removeReferences(String text) {
+        return text.replaceAll("\\([^()]*\\)", "");
     }
 }

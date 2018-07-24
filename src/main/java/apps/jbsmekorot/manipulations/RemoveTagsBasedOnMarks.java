@@ -27,8 +27,8 @@ public class RemoveTagsBasedOnMarks extends NgramManipulation {
         else if (hasMark(ng, MarkCertainByProximity.MARK)) {
             ng.clearTags();
             ng.addTags(ng.getListExtra(MarkCertainByProximity.TAGS_TO_KEEP));
-        } else if (ng.size() == 3 && hasMark(ng, MarkCertainByHintWords.MARK_BEFORE)
-                    || hasMark(ng, MarkCertainByHintWords.MARK_AFTER)) {
+        } else if (ng.size() == 3 && (hasMark(ng, MarkCertainByHintWords.MARK_BEFORE)
+                    || hasMark(ng, MarkCertainByHintWords.MARK_AFTER))) {
             return;
         } else {
             ng.clearTags();

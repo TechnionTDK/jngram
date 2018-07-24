@@ -10,6 +10,7 @@ public class HebrewUtilsTest {
         assertTrue(HebrewUtils.isEheviDiff("ארן", "אורן"));
         assertTrue(HebrewUtils.isEheviDiff("בראשית ברא", "ברשית בר"));
         assertTrue(HebrewUtils.isEheviDiff("בראשית ברא", "ברשת ברווה"));
+        assertTrue(HebrewUtils.isEheviDiff("וחי", "חיה"));
 
         assertTrue(HebrewUtils.isEheviDiff("לא תשיג גבול רעך", "לא תסיג גבול רעך"));
         assertTrue(HebrewUtils.isEheviDiff("במה מדליקים", "במה מדליקין"));

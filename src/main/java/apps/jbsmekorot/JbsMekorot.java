@@ -132,10 +132,10 @@ public class JbsMekorot {
         doc.add(new RemoveNonEheviFuzzyMatches()).manipulate();
 
         // DEBUG
-        System.out.println("=== DEBUG INFO ===");
-        for (Ngram ng : doc.getAllNgramsWithTags())
-            ng.printDebugInfo();
-        System.out.println("=== DEBUG INFO ===");
+//        System.out.println("=== DEBUG INFO ===");
+//        for (Ngram ng : doc.getAllNgramsWithTags())
+//            ng.printDebugInfo();
+//        System.out.println("=== DEBUG INFO ===");
 
     }
 

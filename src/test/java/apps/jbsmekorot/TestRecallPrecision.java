@@ -26,7 +26,7 @@ public class TestRecallPrecision {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(21));
+        NgramDocument sd = JbsMekorot.findPsukimInSubject(subjects.get(11));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();

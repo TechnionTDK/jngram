@@ -2,6 +2,8 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.AddTextWithShemAdnut;
 import apps.jbsmekorot.manipulations.CalcAndFilterByEditDistance;
+import apps.jbsmekorot.manipulations.MarkCertainByHintWords;
+import jngram.NgramManipulation;
 import org.junit.*;
 import jngram.NgramDocument;
 import jngram.Ngram;
@@ -167,6 +169,16 @@ public class TestJbsManipulations {
         // the letter "ayin" is replaced with "alef"
         assertTrue(!doc.getNgram(0,3).getTags().contains("jbr:text-tanach-5-27-14"));
         assertTrue(!doc.getNgram(0,3).getTags().contains("jbr:text-tanach-6-10-24"));
+    }
+
+    @Test
+    public void testMarkCertainByHintWords() {
+        MarkCertainByHintWords m = new MarkCertainByHintWords();
+        String before = "וכן אמרו זכרונם לברכה (אבות ו, ג) אין כבוד אלא תורה, שנאמר (משלי ג, לה)";
+        assertEquals("וכן אמרו זכרונם לברכה  אין כבוד אלא תורה, שנאמר ", m.removeReferences(before));
+
+        before = "ויאמרו על כל זה (פסחים נ, ב), יש זריז ונשכר";
+        assertEquals("ויאמרו על כל זה , יש זריז ונשכר", m.removeReferences(before));
     }
 
     /**
