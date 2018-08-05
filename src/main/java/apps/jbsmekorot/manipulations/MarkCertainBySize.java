@@ -20,6 +20,7 @@ public class MarkCertainBySize extends NgramManipulation {
 
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
+        ng.addToHistory(getName(), "Marked as certain by size");
         ng.putExtra(MarkCertainBySize.MARK, true);
     }
 }

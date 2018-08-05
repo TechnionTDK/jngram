@@ -26,6 +26,7 @@ import jngram.NgramManipulation;
 
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
+        ng.addToHistory(getName(), "Added extra text with shem adnut");
         ng.putExtra(ADNUT_TEXT, ng.getTextFormatted().replace("יהוה", "אדני"));
     }
 }

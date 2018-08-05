@@ -11,6 +11,7 @@ public class Ngram {
     private Map<String, Integer> intExtras = new HashMap<>();
     private Map<String, Boolean> booleanExtras = new HashMap<>();
     private Map<String, List<String>> listExtras = new HashMap<>();
+    private List<String> history = new ArrayList<>();
     private String textFormatted;
     private NgramDocument doc;
     private int start, end;
@@ -133,6 +134,10 @@ public class Ngram {
         this.tags.remove(tag);
     }
 
+    public void addToHistory(String source, String message) {
+        history.add(message + " (" + source + ")");
+    }
+
     @Override
     public String toString() {
         StringBuffer result = new StringBuffer();
@@ -179,10 +184,13 @@ public class Ngram {
 
     public void printDebugInfo() {
         System.out.println(toString());
-        System.out.println("Extras:");
-        System.out.println("String: " + stringExtras);
-        System.out.println("Int: " + intExtras);
-        System.out.println("Boolean: " + booleanExtras);
-        System.out.println("List: " + listExtras);
+//        System.out.println("Extras:");
+//        System.out.println("String: " + stringExtras);
+//        System.out.println("Int: " + intExtras);
+//        System.out.println("Boolean: " + booleanExtras);
+//        System.out.println("List: " + listExtras);
+        System.out.println("History:");
+        for (String item : history)
+            System.out.println(item);
     }
 }

@@ -22,15 +22,19 @@ public class RemoveTagsBasedOnMarks extends NgramManipulation {
      */
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
-        if (hasMark(ng, MarkCertainBySize.MARK))
+        if (hasMark(ng, MarkCertainBySize.MARK)) {
+            ng.addToHistory(getName(), "Keep all tags (certain by size).");
             return;
-        else if (hasMark(ng, MarkCertainByProximity.MARK)) {
+        } else if (hasMark(ng, MarkCertainByProximity.MARK)) {
+            ng.addToHistory(getName(), "Certain by proximity, retain only tags to keep.");
             ng.clearTags();
             ng.addTags(ng.getListExtra(MarkCertainByProximity.TAGS_TO_KEEP));
-        } else if (ng.size() == 3 && (hasMark(ng, MarkCertainByHintWords.MARK_BEFORE)
+        } else if (ng.size() >= 3 && (hasMark(ng, MarkCertainByHintWords.MARK_BEFORE)
                     || hasMark(ng, MarkCertainByHintWords.MARK_AFTER))) {
+            ng.addToHistory(getName(), "Keep all tags (trigram, certain by hint words).");
             return;
         } else {
+            ng.addToHistory(getName(), "Remove all tags.");
             ng.clearTags();
         }
     }

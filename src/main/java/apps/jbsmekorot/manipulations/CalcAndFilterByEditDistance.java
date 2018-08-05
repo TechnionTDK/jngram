@@ -54,7 +54,10 @@ public class CalcAndFilterByEditDistance extends NgramManipulation {
             if (getDistance(ng, tag) > min)
                 removedTags.add(tag);
 
-        ng.removeTags(removedTags);
+        if (removedTags.size() > 0) {
+            ng.addToHistory(getName(), "Removed some tags.");
+            ng.removeTags(removedTags);
+        }
     }
 
     private int getMinimalEditDistance(Ngram ng) {
@@ -75,7 +78,11 @@ public class CalcAndFilterByEditDistance extends NgramManipulation {
             if (distance / length > MAXIMAL_DISTANCE_LENGTH_RATIO)
                 removedTags.add(tag);
         }
-        ng.removeTags(removedTags);
+
+        if (removedTags.size() > 0) {
+            ng.addToHistory(getName(), "Removed some tags.");
+            ng.removeTags(removedTags);
+        }
     }
 
     /**

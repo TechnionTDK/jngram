@@ -36,6 +36,7 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
                 tagsToBeRemoved.add(currTag);
 
         // if we use s.removeTag(tag) we get a java.util.ConcurrentModificationException
+        ng.addToHistory(getName(), "Removed some tags.");
         ng.removeTags(tagsToBeRemoved);
     }
 }

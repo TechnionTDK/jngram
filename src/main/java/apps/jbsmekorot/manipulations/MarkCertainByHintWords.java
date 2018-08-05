@@ -38,10 +38,12 @@ public class MarkCertainByHintWords extends NgramManipulation {
         List<String> hintsFoundAfter = (List<String>) CollectionUtils.intersection(wordsAfter, HINTS_WORDS_AFTER);
 
         if (hintsFoundBefore.size() > 0) {
+            ng.addToHistory(getName(), "Mark certain by hint words (before)");
             ng.putExtra(MARK_BEFORE, true);
             ng.putExtra(MARK_BEFORE, wordsBefore);
         }
         if (hintsFoundAfter.size() > 0) {
+            ng.addToHistory(getName(), "Mark certain by hint words (after)");
             ng.putExtra(MARK_AFTER, true);
             ng.putExtra(MARK_AFTER, wordsAfter);
         }

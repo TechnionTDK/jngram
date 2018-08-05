@@ -29,10 +29,13 @@ import java.util.List;
             if (ng2.hasNoTags())
                 continue;
             // remove tags from smaller ngram
-            if (ng1.size() < ng2.size())
+            if (ng1.size() < ng2.size()) {
+                ng1.addToHistory(getName(), "Removed all tags");
                 ng1.clearTags();
-            else if (ng2.size() < ng1.size())
+            } else if (ng2.size() < ng1.size()) {
+                ng2.addToHistory(getName(), "Removed all tags");
                 ng2.clearTags();
+            }
         }
     }
 }

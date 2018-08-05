@@ -402,4 +402,5 @@ public class NgramDocument {
     public List<Ngram> getAdjacentNgrams(Ngram ng, int maxDistance) {
         return null;
     }
+
 }

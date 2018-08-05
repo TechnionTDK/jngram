@@ -49,17 +49,19 @@ public class MarkCertainByProximity extends NgramManipulation {
                 continue;
 
             // we keep the tag only if it also appears in a CERTAIN_SIZE ngram
-            if (nearbyCertainSpan(ng, ngramsWithSameTag))
+            if (nearbyCertainNgram(ng, ngramsWithSameTag)) {
                 tagsToKeep.add(tag);
+            }
         }
 
         if (tagsToKeep.size() > 0) {
+            ng.addToHistory(getName(), "Mark certain by proximity");
             ng.putExtra(MARK, true);
             ng.putExtra(TAGS_TO_KEEP, tagsToKeep);
         }
     }
 
-    private boolean nearbyCertainSpan(Ngram thisNgram, List<Ngram> ngramsWithSameTag) {
+    private boolean nearbyCertainNgram(Ngram thisNgram, List<Ngram> ngramsWithSameTag) {
         for (Ngram otherNgram : ngramsWithSameTag) {
             if (thisNgram.equals(otherNgram))
                 continue;
@@ -73,8 +75,9 @@ public class MarkCertainByProximity extends NgramManipulation {
             else
                 distance = otherNgram.getStart() - thisNgram.getEnd();
 
-            if (distance <= JbsMekorot.MAXIMAL_DISTANCE_FROM_CERTAIN_NGRAM + 1)
+            if (distance <= JbsMekorot.MAXIMAL_DISTANCE_FROM_CERTAIN_NGRAM + 1) {
                 return true;
+            }
         }
 
         return false;

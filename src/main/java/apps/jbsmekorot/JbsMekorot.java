@@ -7,6 +7,7 @@ import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.io.*;
 import jngram.manipulations.RemoveTagsInContainedNgrams;
+import org.junit.rules.Stopwatch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -108,34 +109,60 @@ public class JbsMekorot {
     }
 
     public static void findPsukim(NgramDocument doc) {
+        StopWatch timer = new StopWatch();
+        timer.start();
+        System.out.println("START " + timer.toString());
         doc.format(new JbsNgramFormatter());
+        System.out.println("AFTER JbsNgramFormatter " + timer.toString());
         doc.add(new AddTextWithShemAdnut()); // should appear before PsukimTagger & after JbsNgramFormatter
+        System.out.println("AFTER AddTextWithShemAdnut " + timer.toString());
         doc.add(new PsukimTagger());
+        System.out.println("AFTER PsukimTagger " + timer.toString());
 
         // going bottom-up to maximal ngram matches:
         doc.add(new MergeToMaximalNgrams());
+        System.out.println("AFTER MergeToMaximalNgrams " + timer.toString());
         doc.add(new RemoveTagsInContainedNgrams());
-        doc.add(new ResolveOverlappingNgramsWithDifferentTags());
+        System.out.println("AFTER RemoveTagsInContainedNgrams " + timer.toString());
+        doc.add(new  ResolveOverlappingNgramsWithDifferentTags());
+        System.out.println("AFTER ResolveOverlappingNgramsWithDifferentTags " + timer.toString());
 
-        // Mark "certain" tags. We have different levels of certainty (see class Certain).
-        doc.add(new MarkCertainBySize());
-        doc.add(new MarkCertainByProximity());
-        doc.add(new MarkCertainByHintWords());
-
-        // Remove tags based on previous marks
-        doc.add(new RemoveTagsBasedOnMarks());
 
         // closure operations. It was reasonable to apply them earlier
         // but because of performance issues they are applied here (work with index).
         doc.add(new RemoveNonSequentialTags());
-        doc.add(new CalcAndFilterByEditDistance());
-        doc.add(new RemoveNonEheviFuzzyMatches());
+        System.out.println("AFTER RemoveNonSequentialTags " + timer.toString());
+//        we placed this block before since we found that we mark ngrams
+//                with certain size and then we remove them, what causes false
+//                proximity ngrams. but we have a significant performance issue here...
+//        these are the heaviest methods, can we do something here????
+//        doc.add(new CalcAndFilterByEditDistance());
+//        System.out.println("AFTER CalcAndFilterByEditDistance " + timer.toString());
+//        doc.add(new RemoveNonEheviFuzzyMatches());
+//        System.out.println("AFTER RemoveNonEheviFuzzyMatches " + timer.toString());
+
+        // Mark "certain" tags. We have different levels of certainty (see class Certain).
+        doc.add(new MarkCertainBySize());
+        System.out.println("AFTER MarkCertainBySize " + timer.toString());
+        doc.add(new MarkCertainByProximity());
+        System.out.println("AFTER MarkCertainByProximity " + timer.toString());
+        doc.add(new MarkCertainByHintWords());
+        System.out.println("AFTER MarkCertainByHintWords " + timer.toString());
+
+        // Remove tags based on previous marks
+        doc.add(new RemoveTagsBasedOnMarks());
+        System.out.println("AFTER RemoveTagsBasedOnMarks " + timer.toString());
+        timer.stop();
+        System.out.println("TOTAL " + timer.toString());
 
         // DEBUG
-//        System.out.println("=== DEBUG INFO ===");
+        System.out.println("=== DEBUG INFO ===");
+//        in proximity do we consider only certain size ngrams??
+//       doc.getNgram(121, 124).printDebugInfo();
+//        doc.getNgram(227, 229).printDebugInfo();
 //        for (Ngram ng : doc.getAllNgramsWithTags())
 //            ng.printDebugInfo();
-//        System.out.println("=== DEBUG INFO ===");
+        System.out.println("=== DEBUG INFO ===");
     }
 
      /**

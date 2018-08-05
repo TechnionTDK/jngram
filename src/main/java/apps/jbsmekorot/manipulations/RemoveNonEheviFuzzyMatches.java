@@ -47,7 +47,10 @@ public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
                 }
             }
         }
-        ng.removeTags(removedTags);
+        if (removedTags.size() > 0) {
+            ng.addToHistory(getName(), "Removed some tags.");
+            ng.removeTags(removedTags);
+        }
     }
 
     /**

@@ -10,6 +10,6 @@ public abstract class NgramDocumentManipulation {
      */
     public abstract void manipulate(NgramDocument doc);
     public String getName() {
-        return getClass().toString();
+        return getClass().getSimpleName();
     }
 }

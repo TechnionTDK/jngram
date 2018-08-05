@@ -29,6 +29,7 @@ public class RemoveTagsInContainedNgrams extends NgramManipulation {
         List<Ngram> containingNgrams = doc.getContainingNgrams(ng1);
         for (Ngram ng2 : containingNgrams) {
             if (ng2.getTags().size() != 0) {
+                ng1.addToHistory(getName(), "Removed all tags");
                 ng1.clearTags();
                 break;
             }
