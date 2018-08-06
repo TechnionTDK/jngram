@@ -136,10 +136,10 @@ public class JbsMekorot {
 //                with certain size and then we remove them, what causes false
 //                proximity ngrams. but we have a significant performance issue here...
 //        these are the heaviest methods, can we do something here????
-//        doc.add(new CalcAndFilterByEditDistance());
-//        System.out.println("AFTER CalcAndFilterByEditDistance " + timer.toString());
-//        doc.add(new RemoveNonEheviFuzzyMatches());
-//        System.out.println("AFTER RemoveNonEheviFuzzyMatches " + timer.toString());
+        doc.add(new CalcAndFilterByEditDistance());
+        System.out.println("AFTER CalcAndFilterByEditDistance " + timer.toString());
+        doc.add(new RemoveNonEheviFuzzyMatches());
+        System.out.println("AFTER RemoveNonEheviFuzzyMatches " + timer.toString());
 
         // Mark "certain" tags. We have different levels of certainty (see class Certain).
         doc.add(new MarkCertainBySize());
