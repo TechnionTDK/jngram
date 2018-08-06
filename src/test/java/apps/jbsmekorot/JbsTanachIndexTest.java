@@ -15,7 +15,7 @@ public class JbsTanachIndexTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        index = new JbsTanachIndex();
+        index = JbsTanachIndex.instance();
     }
 
     @Test
@@ -73,7 +73,7 @@ public class JbsTanachIndexTest {
         //assertEquals(1, res.size());
         //assertEquals("jbr:text-tanach-27-73-28", res.get(0).get("uri"));
         //assertEquals("ואני קרבת אלהים לי טוב שתי באדני יהוה מחסי לספר כל מלאכותיך", res.get(0).get("text"));
-        index.printDocs(res);
+        //index.printDocs(res);
     }
 
     @Test
@@ -94,13 +94,13 @@ public class JbsTanachIndexTest {
     @Test
     public void testPasuk3() throws IOException {
         List<Document> result = index.searchExactInText("וקוץ ודרדר");
-        index.printDocs(result);
+        //index.printDocs(result);
         assertEquals(1, result.size());
         assertEquals("jbr:text-tanach-1-3-18", result.get(0).get("uri"));
     }
 
     @Test
     public void test_getSearchSpans() throws IOException {
-        index.printSpans();
+        //index.printSpans();
     }
 }

@@ -30,7 +30,7 @@ public class PsukimTaggerTopDown implements NgramTagger {
         contextFinder = new ContextFinder();
         textCoveredBySpans = new Boolean[documentLength];
         Arrays.fill(textCoveredBySpans, false);
-        tanach = new JbsTanachIndex();
+        tanach = JbsTanachIndex.instance();
 
     }
 

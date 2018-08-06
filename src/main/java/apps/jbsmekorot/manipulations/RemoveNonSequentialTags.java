@@ -17,7 +17,9 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * made of different parts of the pasuk.
  * Here we detect and remove such tags.
  */
-    public class RemoveNonSequentialTags extends NgramManipulation {
+public class RemoveNonSequentialTags extends NgramManipulation {
+    private PsukimTagger tagger = new PsukimTagger();
+
     @Override
     protected boolean isCandidate(Ngram ng) {
         return ng.size() > 2 && ng.hasTags();
@@ -25,7 +27,6 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
 
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
-        PsukimTagger tagger = new PsukimTagger();
         List<String> foundTags = tagger.tag(ng);
         List<String> tagsToBeRemoved = new ArrayList<>();
 
