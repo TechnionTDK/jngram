@@ -128,8 +128,8 @@ public class JbsMekorot {
         System.out.println("AFTER ResolveOverlappingNgramsWithDifferentTags " + timer.toString());
 
 
-        // closure operations. It was reasonable to apply them earlier
-        // but because of performance issues they are applied here (work with index).
+        // cleaning operations. At first we applied them at the end
+        // because of performance issues, but then we got incorrect results and they are applied here.
         doc.add(new RemoveNonSequentialTags());
         System.out.println("AFTER RemoveNonSequentialTags " + timer.toString());
 //        we placed this block before since we found that we mark ngrams

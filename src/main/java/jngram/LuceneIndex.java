@@ -48,8 +48,9 @@ public abstract class LuceneIndex {
         try {
             timer.start();
             System.out.println("START BUILDING INDEX " + timer.toString());
-            //directory = FSDirectory.open(indexPath);
-            directory = new RAMDirectory();
+            directory = FSDirectory.open(indexPath);
+            // didn't see significant improvement...
+            //directory = new RAMDirectory();
             reader = DirectoryReader.open(directory);
         } catch (Exception e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());

@@ -5,7 +5,6 @@ import apps.jbsmekorot.JbsMekorot;
 import apps.jbsmekorot.JbsTanachIndex;
 import jngram.NgramDocument;
 import jngram.Ngram;
-import jngram.NgramDocumentManipulation;
 import jngram.NgramManipulation;
 
 import java.util.ArrayList;
@@ -33,16 +32,16 @@ public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
             List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
             String pasuk = docs.get(0).get("text");
 
-            String pasukSpan = getPasukSpanWithBestMatch(pasuk, ng.getTextFormatted()); // note use of formatted text here.
+            String pasukNgram = getPasukNgramWithBestMatch(pasuk, ng.getTextFormatted()); // note use of formatted text here.
 
             String adnutText = ng.getStringExtra(AddTextWithShemAdnut.ADNUT_TEXT);
 
             if (adnutText == null) {
-                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukSpan)) {
+                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukNgram)) {
                     removedTags.add(tag);
                 }
             } else {
-                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukSpan) && !HebrewUtils.isEheviDiff(adnutText, pasukSpan)) {
+                if (!HebrewUtils.isEheviDiff(ng.getTextFormatted(), pasukNgram) && !HebrewUtils.isEheviDiff(adnutText, pasukNgram)) {
                     removedTags.add(tag);
                 }
             }
@@ -60,7 +59,7 @@ public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
      * @param text
      * @return
      */
-    private String getPasukSpanWithBestMatch(String pasuk, String text) {
+    private String getPasukNgramWithBestMatch(String pasuk, String text) {
         NgramDocument sd = new NgramDocument(pasuk, JbsMekorot.MINIMAL_PASUK_LENGTH, JbsMekorot.MAXIMAL_PASUK_LENGTH);
 
         int minDistance = 1000;
