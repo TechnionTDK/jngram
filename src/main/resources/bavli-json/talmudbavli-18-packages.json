@@ -1,0 +1,64 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-18",
+      "rdfs:label": "מסכת גיטין",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-1",
+      "rdfs:label": "פרק ראשון - המביא גט",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-2",
+      "rdfs:label": "פרק שני - המביא גט",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-3",
+      "rdfs:label": "פרק שלישי - כל הגט",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-4",
+      "rdfs:label": "פרק רביעי - השולח",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-5",
+      "rdfs:label": "פרק חמישי - הניזקין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-6",
+      "rdfs:label": "פרק שישי - האומר",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-7",
+      "rdfs:label": "פרק שביעי - מי שאחזו",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-8",
+      "rdfs:label": "פרק שמיני - הזורק",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-18-9",
+      "rdfs:label": "פרק תשיעי - המגרש",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-12",
+      "rdfs:label": "מסכת חגיגה",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-12-1",
+      "rdfs:label": "פרק ראשון - הכל חייבין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-12-2",
+      "rdfs:label": "פרק שני - אין דורשין",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-12-3",
+      "rdfs:label": "פרק שלישי - חומר בקודש",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

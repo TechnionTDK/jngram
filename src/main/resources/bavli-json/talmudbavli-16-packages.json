@@ -1,0 +1,64 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-16",
+      "rdfs:label": "מסכת נזיר",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-1",
+      "rdfs:label": "פרק ראשון - כל כינויי נזירות",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-2",
+      "rdfs:label": "פרק שני - הריני נזיר",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-3",
+      "rdfs:label": "פרק שלישי - מי שאמר",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-4",
+      "rdfs:label": "פרק רביעי - מי שאמר",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-5",
+      "rdfs:label": "פרק חמישי - בית שמאי",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-6",
+      "rdfs:label": "פרק שישי - שלשה מינין",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-7",
+      "rdfs:label": "פרק שביעי - כהן גדול",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-8",
+      "rdfs:label": "פרק שמיני - שני נזירים",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-16-9",
+      "rdfs:label": "פרק תשיעי - הכותים אין להם",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

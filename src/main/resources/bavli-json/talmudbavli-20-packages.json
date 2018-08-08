@@ -1,0 +1,70 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-20",
+      "rdfs:label": "מסכת בבא קמא",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-1",
+      "rdfs:label": "פרק ראשון - ארבעה אבות",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-2",
+      "rdfs:label": "פרק שני - כיצד הרגל",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-3",
+      "rdfs:label": "פרק שלישי - המניח",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-4",
+      "rdfs:label": "פרק רביעי - שור שנגח ד' וה'",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-5",
+      "rdfs:label": "פרק חמישי - שור שנגח את הפרה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-6",
+      "rdfs:label": "פרק שישי - הכונס",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-7",
+      "rdfs:label": "פרק שביעי - מרובה",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-8",
+      "rdfs:label": "פרק שמיני - החובל",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-9",
+      "rdfs:label": "פרק תשיעי - הגוזל עצים",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-20-10",
+      "rdfs:label": "פרק עשירי - הגוזל ומאכיל",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

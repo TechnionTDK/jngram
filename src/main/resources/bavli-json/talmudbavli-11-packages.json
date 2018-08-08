@@ -1,0 +1,28 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-11",
+      "rdfs:label": "מסכת מועד קטן",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-11-1",
+      "rdfs:label": "פרק ראשון - משקין בית השלחין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-11-2",
+      "rdfs:label": "פרק שני - מי שהפך",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-11-3",
+      "rdfs:label": "פרק שלישי - אלו מגלחין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

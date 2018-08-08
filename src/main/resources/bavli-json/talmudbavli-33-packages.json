@@ -1,0 +1,52 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-33",
+      "rdfs:label": "מסכת תמורה",
+      "jbo:position": "33",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-1",
+      "rdfs:label": "פרק ראשון - הכל ממירין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-2",
+      "rdfs:label": "פרק שני - יש בקרבנות",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-3",
+      "rdfs:label": "פרק שלישי - אלו קדשים",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-4",
+      "rdfs:label": "פרק רביעי - ולד חטאת",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-5",
+      "rdfs:label": "פרק חמישי - כיצד מערימין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-6",
+      "rdfs:label": "פרק שישי - כל האסורין",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-33-7",
+      "rdfs:label": "פרק שביעי - יש בקדשי מזבח",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

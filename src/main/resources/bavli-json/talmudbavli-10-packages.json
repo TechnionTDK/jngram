@@ -1,0 +1,34 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-10",
+      "rdfs:label": "מסכת מגילה",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-10-1",
+      "rdfs:label": "פרק ראשון - מגילה נקראת",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-10-2",
+      "rdfs:label": "פרק שני - הקורא למפרע",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-10-3",
+      "rdfs:label": "פרק שלישי - הקורא עומד",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-10-4",
+      "rdfs:label": "פרק רביעי - בני העיר",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

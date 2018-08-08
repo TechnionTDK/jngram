@@ -1,0 +1,28 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-27",
+      "rdfs:label": "מסכת הוריות",
+      "jbo:position": "27",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-27-1",
+      "rdfs:label": "פרק ראשון - הורו בית דין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-27-2",
+      "rdfs:label": "פרק שני - הורה כהן משיח",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-27-3",
+      "rdfs:label": "פרק שלישי - כהן משיח",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

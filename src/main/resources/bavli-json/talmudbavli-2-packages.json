@@ -1,0 +1,154 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-2",
+      "rdfs:label": "מסכת שבת",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-1",
+      "rdfs:label": "פרק ראשון - יציאות השבת",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-2",
+      "rdfs:label": "פרק שני - במה מדליקין",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-3",
+      "rdfs:label": "פרק שלישי - כירה",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-4",
+      "rdfs:label": "פרק רביעי - במה טומנין",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-5",
+      "rdfs:label": "פרק חמישי - במה בהמה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-6",
+      "rdfs:label": "פרק שישי - במה אשה",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-7",
+      "rdfs:label": "פרק שביעי - כלל גדול",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-8",
+      "rdfs:label": "פרק שמיני - המוציא יין",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-9",
+      "rdfs:label": "פרק תשיעי - אמר רבי עקיבא",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-10",
+      "rdfs:label": "פרק עשירי - המצניע",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-11",
+      "rdfs:label": "פרק אחד עשרה - הזורק",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-12",
+      "rdfs:label": "פרק שנים עשרה - הבונה",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-13",
+      "rdfs:label": "פרק שלוש עשרה - האורג",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-14",
+      "rdfs:label": "פרק ארבע עשרה - שמנה שרצים",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-15",
+      "rdfs:label": "פרק חמש עשרה - ואלו קשרים",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-16",
+      "rdfs:label": "פרק שש עשרה - כל כתבי",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-17",
+      "rdfs:label": "פרק שבע עשרה - כל הכלים",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-18",
+      "rdfs:label": "פרק שמונה עשרה - מפנין",
+      "jbo:position": "18",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-19",
+      "rdfs:label": "פרק תשע עשרה - רבי אליעזר דמילה",
+      "jbo:position": "19",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-20",
+      "rdfs:label": "פרק עשרים - תולין",
+      "jbo:position": "20",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-21",
+      "rdfs:label": "פרק עשרים ואחת - נוטל",
+      "jbo:position": "21",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-22",
+      "rdfs:label": "פרק עשרים ושתים - חבית",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-23",
+      "rdfs:label": "פרק עשרים ושלוש - שואל",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-2-24",
+      "rdfs:label": "פרק עשרים וארבע - מי שהחשיך",
+      "jbo:position": "24",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

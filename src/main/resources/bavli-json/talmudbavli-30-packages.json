@@ -1,0 +1,82 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-30",
+      "rdfs:label": "מסכת חולין",
+      "jbo:position": "30",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-1",
+      "rdfs:label": "פרק ראשון - הכל שוחטין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-2",
+      "rdfs:label": "פרק שני - השוחט",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-3",
+      "rdfs:label": "פרק שלישי - אלו טרפות",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-4",
+      "rdfs:label": "פרק רביעי - בהמה המקשה",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-5",
+      "rdfs:label": "פרק חמישי - אותו ואת בנו",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-6",
+      "rdfs:label": "פרק שישי - כסוי הדם",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-7",
+      "rdfs:label": "פרק שביעי - גיד הנשה",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-8",
+      "rdfs:label": "פרק שמיני - כל הבשר",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-9",
+      "rdfs:label": "פרק תשיעי - העור והרוטב",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-10",
+      "rdfs:label": "פרק עשירי - הזרוע והלחיים",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-11",
+      "rdfs:label": "פרק אחד עשרה - ראשית הגז",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-30-12",
+      "rdfs:label": "פרק שנים עשרה - שילוח הקן",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

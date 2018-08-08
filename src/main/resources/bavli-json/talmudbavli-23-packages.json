@@ -1,0 +1,76 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-23",
+      "rdfs:label": "מסכת סנהדרין",
+      "jbo:position": "23",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-1",
+      "rdfs:label": "פרק ראשון - דיני ממונות בשלשה",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-2",
+      "rdfs:label": "פרק שני - כהן גדול",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-3",
+      "rdfs:label": "פרק שלישי - זה בורר",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-4",
+      "rdfs:label": "פרק רביעי - אחד דיני ממונות",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-5",
+      "rdfs:label": "פרק חמישי - היו בודקין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-6",
+      "rdfs:label": "פרק שישי - נגמר הדין",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-7",
+      "rdfs:label": "פרק שביעי - ארבע מיתות",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-8",
+      "rdfs:label": "פרק שמיני - בן סורר ומורה",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-9",
+      "rdfs:label": "פרק תשיעי - הנשרפין",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-10",
+      "rdfs:label": "פרק עשירי - אלו הן הנחנקין",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-23-11",
+      "rdfs:label": "פרק אחד עשר - חלק",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

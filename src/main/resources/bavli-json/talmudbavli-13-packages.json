@@ -1,0 +1,106 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-13",
+      "rdfs:label": "מסכת יבמות",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-1",
+      "rdfs:label": "פרק ראשון - חמש עשרה נשים",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-2",
+      "rdfs:label": "פרק שני - כיצד",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-3",
+      "rdfs:label": "פרק שלישי - ארבעה אחין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-4",
+      "rdfs:label": "פרק רביעי - החולץ",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-5",
+      "rdfs:label": "פרק חמישי - רבן גמליאל",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-6",
+      "rdfs:label": "פרק שישי - הבא על יבמתו",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-7",
+      "rdfs:label": "פרק שביעי - אלמנה לכהן גדול",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-8",
+      "rdfs:label": "פרק שמיני - הערל",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-9",
+      "rdfs:label": "פרק תשיעי - יש מותרות",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-10",
+      "rdfs:label": "פרק עשירי - האשה רבה",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-11",
+      "rdfs:label": "פרק אחד עשרה - נושאין על האנוסה",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-12",
+      "rdfs:label": "פרק שנים עשרה - מצות חליצה",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-13",
+      "rdfs:label": "פרק שלוש עשרה - בית שמאי",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-14",
+      "rdfs:label": "פרק ארבע עשרה - חרש שנשא",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-15",
+      "rdfs:label": "פרק חמש עשרה - האשה שלום",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-13-16",
+      "rdfs:label": "פרק שש עשרה - האשה בתרא",
+      "jbo:position": "16",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

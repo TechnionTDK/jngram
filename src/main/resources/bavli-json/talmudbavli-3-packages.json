@@ -1,0 +1,70 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-3",
+      "rdfs:label": "מסכת עירובין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-1",
+      "rdfs:label": "פרק ראשון - מבוי שהוא גבוה",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-2",
+      "rdfs:label": "פרק שני - עושין פסים",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-3",
+      "rdfs:label": "פרק שלישי - בכל מערבין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-4",
+      "rdfs:label": "פרק רביעי - מי שהוציאוהו",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-5",
+      "rdfs:label": "פרק חמישי - כיצד מעברין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-6",
+      "rdfs:label": "פרק שישי - הדר",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-7",
+      "rdfs:label": "פרק שביעי - חלון",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-8",
+      "rdfs:label": "פרק שמיני - כיצד משתתפין",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-9",
+      "rdfs:label": "פרק תשיעי - כל גגות",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-3-10",
+      "rdfs:label": "פרק עשירי - המוצא תפילין",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

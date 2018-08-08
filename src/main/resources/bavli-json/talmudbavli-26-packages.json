@@ -1,0 +1,40 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-26",
+      "rdfs:label": "מסכת עבודה זרה",
+      "jbo:position": "26",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-26-1",
+      "rdfs:label": "פרק ראשון - לפני אידיהן",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-26-2",
+      "rdfs:label": "פרק שני - אין מעמידין",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-26-3",
+      "rdfs:label": "פרק שלישי - כל הצלמים",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-26-4",
+      "rdfs:label": "פרק רביעי - רבי ישמעאל",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-26-5",
+      "rdfs:label": "פרק חמישי - השוכר את הפועל",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}
