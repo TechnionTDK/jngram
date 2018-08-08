@@ -1,0 +1,94 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-28",
+      "rdfs:label": "מסכת זבחים",
+      "jbo:position": "28",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-1",
+      "rdfs:label": "פרק ראשון - כל הזבחים",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-2",
+      "rdfs:label": "פרק שני - כל הזבחים שקבלו דמן",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-3",
+      "rdfs:label": "פרק שלישי - כל הפסולין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-4",
+      "rdfs:label": "פרק רביעי - בית שמאי",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-5",
+      "rdfs:label": "פרק חמישי - איזהו מקומן",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-6",
+      "rdfs:label": "פרק שישי - קדשי קדשים",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-7",
+      "rdfs:label": "פרק שביעי - חטאת העוף",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-8",
+      "rdfs:label": "פרק שמיני - כל הזבחים",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-9",
+      "rdfs:label": "פרק תשיעי - המזבח מקדש",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-10",
+      "rdfs:label": "פרק עשירי - כל התדיר",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-11",
+      "rdfs:label": "פרק אחד עשרה - דם חטאת",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-12",
+      "rdfs:label": "פרק שנים עשרה - טבול יום",
+      "jbo:position": "12",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-13",
+      "rdfs:label": "פרק שלוש עשרה - השוחט והמעלה",
+      "jbo:position": "13",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-28-14",
+      "rdfs:label": "פרק ארבע עשרה - פרת חטאת",
+      "jbo:position": "14",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

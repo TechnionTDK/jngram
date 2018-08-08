@@ -1,0 +1,58 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-25",
+      "rdfs:label": "מסכת שבועות",
+      "jbo:position": "25",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-1",
+      "rdfs:label": "פרק ראשון - שבועות שתים",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-2",
+      "rdfs:label": "פרק שני - ידיעות הטומאה",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-3",
+      "rdfs:label": "פרק שלישי - שבועות שתים",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-4",
+      "rdfs:label": "פרק רביעי - שבועת העדות",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-5",
+      "rdfs:label": "פרק חמישי - שבועת הפקדון",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-6",
+      "rdfs:label": "פרק שישי - שבועת הדיינין",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-7",
+      "rdfs:label": "פרק שביעי - כל הנשבעים",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-25-8",
+      "rdfs:label": "פרק שמיני - ארבעה שומרין",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-1",
+      "rdfs:label": "מסכת ברכות",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-1",
+      "rdfs:label": "פרק ראשון - מאימתי",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-2",
+      "rdfs:label": "פרק שני - היה קורא",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-3",
+      "rdfs:label": "פרק שלישי - מי שמתו",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-4",
+      "rdfs:label": "פרק רביעי - תפלת השחר",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-5",
+      "rdfs:label": "פרק חמישי - אין עומדין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-6",
+      "rdfs:label": "פרק שישי - כיצד מברכין",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-7",
+      "rdfs:label": "פרק שביעי - שלושה שאכלו",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-8",
+      "rdfs:label": "פרק שמיני - אלו דברים",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-1-9",
+      "rdfs:label": "פרק תשיעי - הרואה",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

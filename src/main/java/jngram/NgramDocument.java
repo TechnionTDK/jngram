@@ -399,8 +399,34 @@ public class NgramDocument {
         return getNgram(resStart, resEnd);
     }
 
-    public List<Ngram> getAdjacentNgrams(Ngram ng, int maxDistance) {
-        return null;
+    /**
+     * Returns a list of all ngrams that are adjacent to a given ngram. In more detail, if the given ngram starts at
+     * word WS and ends at word WE, the function returns all ngrams that start between WS-maxDistance to WE+maxDistance.
+     * @param ng the given ngram.
+            * @param maxDistance the maximum distance as explained.
+            * @return List<Ngram> of the adjacent ngrams.
+     */
+    public List<Ngram> getAdjacentNgrams(Ngram ng, int maxDistance)
+    {
+        List<Ngram> adjacentNgrams = new ArrayList<>();
+        int ngStart = ng.getStart();
+        int ngEnd = ng.getEnd();
+        int currStart, currLen;
+        for(currStart = ngStart - maxDistance; currStart <= ngEnd + maxDistance; currStart++) {
+            for(currLen = minimalNgramSize; currLen <= maximalNgramSize; currLen++) {
+                boolean isSameNg = currStart == ngStart && currStart + currLen - 1 == ngEnd;
+                if(isSameNg) {
+                    continue;
+                }
+                try {
+                    adjacentNgrams.add(getNgram(currStart, currStart + currLen - 1));
+                }
+                catch (DocumentException de) {
+                    continue;
+                }
+            }
+        }
+        return adjacentNgrams;
     }
 
 }

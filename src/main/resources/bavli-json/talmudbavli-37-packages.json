@@ -1,0 +1,70 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-37",
+      "rdfs:label": "מסכת נדה",
+      "jbo:position": "37",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-1",
+      "rdfs:label": "פרק ראשון - שמאי",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-2",
+      "rdfs:label": "פרק שני - כל היד",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-3",
+      "rdfs:label": "פרק שלישי - המפלת חתיכה",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-4",
+      "rdfs:label": "פרק רביעי - בנות כותים",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-5",
+      "rdfs:label": "פרק חמישי - יוצא דופן",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-6",
+      "rdfs:label": "פרק שישי - בא סימן",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-7",
+      "rdfs:label": "פרק שביעי - דם הנדה",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-8",
+      "rdfs:label": "פרק שמיני - הרואה כתם",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-9",
+      "rdfs:label": "פרק תשיעי - האשה שהיא עושה",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-37-10",
+      "rdfs:label": "פרק עשירי - תינוקת",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

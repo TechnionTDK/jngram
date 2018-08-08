@@ -1,0 +1,70 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-22",
+      "rdfs:label": "מסכת בבא בתרא",
+      "jbo:position": "22",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-1",
+      "rdfs:label": "פרק ראשון - השותפין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-2",
+      "rdfs:label": "פרק שני - לא יחפור",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-3",
+      "rdfs:label": "פרק שלישי - חזקת הבתים",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-4",
+      "rdfs:label": "פרק רביעי - המוכר את הבית",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-5",
+      "rdfs:label": "פרק חמישי - המוכר את הספינה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-6",
+      "rdfs:label": "פרק שישי - המוכר פירות",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-7",
+      "rdfs:label": "פרק שביעי - בית כור",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-8",
+      "rdfs:label": "פרק שמיני - יש נוחלין",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-9",
+      "rdfs:label": "פרק תשיעי - מי שמת",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-22-10",
+      "rdfs:label": "פרק עשירי - גט פשוט",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

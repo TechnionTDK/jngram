@@ -1,0 +1,76 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-15",
+      "rdfs:label": "מסכת נדרים",
+      "jbo:position": "15",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-1",
+      "rdfs:label": "פרק ראשון - כל כינויי",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-2",
+      "rdfs:label": "פרק שני - ואלו מותרים",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-3",
+      "rdfs:label": "פרק שלישי - ארבעה נדרים",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-4",
+      "rdfs:label": "פרק רביעי - אין בין המודר",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-5",
+      "rdfs:label": "פרק חמישי - השותפין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-6",
+      "rdfs:label": "פרק שישי - הנודר מן המבושל",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-7",
+      "rdfs:label": "פרק שביעי - הנודר מן הירק",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-8",
+      "rdfs:label": "פרק שמיני - קונם יין",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-9",
+      "rdfs:label": "פרק תשיעי - רבי אליעזר",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-10",
+      "rdfs:label": "פרק עשירי - נערה המאורסה",
+      "jbo:position": "10",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-15-11",
+      "rdfs:label": "פרק אחד עשרה - ואלו נדרים",
+      "jbo:position": "11",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

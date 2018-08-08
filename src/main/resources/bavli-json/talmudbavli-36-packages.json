@@ -1,0 +1,52 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-36",
+      "rdfs:label": "מסכת תמיד",
+      "jbo:position": "36",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-1",
+      "rdfs:label": "פרק ראשון - בשלשה מקומות",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-2",
+      "rdfs:label": "פרק שני - ראוהו אחיו",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-3",
+      "rdfs:label": "פרק שלישי - אמר להם הממונה",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-4",
+      "rdfs:label": "פרק רביעי - לא היו כופתין",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-5",
+      "rdfs:label": "פרק חמישי - אמר להם הממונה",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-6",
+      "rdfs:label": "פרק שישי - החלו עולים",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-36-7",
+      "rdfs:label": "פרק שביעי - בזמן שכהן גדול",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

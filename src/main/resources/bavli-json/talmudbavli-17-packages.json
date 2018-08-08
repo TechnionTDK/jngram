@@ -1,0 +1,64 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-17",
+      "rdfs:label": "מסכת סוטה",
+      "jbo:position": "17",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-1",
+      "rdfs:label": "פרק ראשון - המקנא",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-2",
+      "rdfs:label": "פרק שני - היה מביא",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-3",
+      "rdfs:label": "פרק שלישי - היה נוטל",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-4",
+      "rdfs:label": "פרק רביעי - ארוסה",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-5",
+      "rdfs:label": "פרק חמישי - כשם שהמים",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-6",
+      "rdfs:label": "פרק שישי - מי שקינא",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-7",
+      "rdfs:label": "פרק שביעי - אלו נאמרין",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-8",
+      "rdfs:label": "פרק שמיני - משוח מלחמה",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-17-9",
+      "rdfs:label": "פרק תשיעי - עגלה ערופה",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-32",
+      "rdfs:label": "מסכת ערכין",
+      "jbo:position": "32",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-1",
+      "rdfs:label": "פרק ראשון - הכל מעריכין",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-2",
+      "rdfs:label": "פרק שני - אין נערכין",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-3",
+      "rdfs:label": "פרק שלישי - יש בערכין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-4",
+      "rdfs:label": "פרק רביעי - השג יד",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-5",
+      "rdfs:label": "פרק חמישי - האומר משקלי עלי",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-6",
+      "rdfs:label": "פרק שישי - שום היתומים",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-7",
+      "rdfs:label": "פרק שביעי - אין מקדישין",
+      "jbo:position": "7",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-8",
+      "rdfs:label": "פרק שמיני - המקדיש שדהו",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-32-9",
+      "rdfs:label": "פרק תשיעי - המוכר שדהו",
+      "jbo:position": "9",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

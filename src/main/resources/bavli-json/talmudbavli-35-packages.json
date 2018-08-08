@@ -1,0 +1,46 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-35",
+      "rdfs:label": "מסכת מעילה",
+      "jbo:position": "35",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-1",
+      "rdfs:label": "פרק ראשון - קדשי קדשים",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-2",
+      "rdfs:label": "פרק שני - חטאת העוף",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-3",
+      "rdfs:label": "פרק שלישי - ולד חטאת",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-4",
+      "rdfs:label": "פרק רביעי - קדשי מזבח",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-5",
+      "rdfs:label": "פרק חמישי - הנהנה מן ההקדש",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-35-6",
+      "rdfs:label": "פרק שישי - השליח שעשה",
+      "jbo:position": "6",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}

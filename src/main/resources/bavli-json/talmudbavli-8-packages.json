@@ -1,0 +1,40 @@
+{
+  "subjects": [
+    {
+      "uri": "jbr:section-bavli-8",
+      "rdfs:label": "מסכת ביצה",
+      "jbo:position": "8",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-8-1",
+      "rdfs:label": "פרק ראשון - ביצה",
+      "jbo:position": "1",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-8-2",
+      "rdfs:label": "פרק שני - יום טוב",
+      "jbo:position": "2",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-8-3",
+      "rdfs:label": "פרק שלישי - אין צדין",
+      "jbo:position": "3",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-8-4",
+      "rdfs:label": "פרק רביעי - המביא",
+      "jbo:position": "4",
+      "jbo:book": "jbr:book-talmudbavli"
+    },
+    {
+      "uri": "jbr:section-bavli-perek-8-5",
+      "rdfs:label": "פרק חמישי - משילין",
+      "jbo:position": "5",
+      "jbo:book": "jbr:book-talmudbavli"
+    }
+  ]
+}
