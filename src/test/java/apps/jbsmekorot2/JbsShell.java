@@ -36,7 +36,7 @@ public class JbsShell {
 
     @Before
     public void before() throws Exception {
-        index = new JbsTanachIndex();
+        index = JbsTanachIndex.instance();
         madad = new RecallPrecision();
     }
 

@@ -1,5 +1,6 @@
 package jngram;
 
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.*;
@@ -7,6 +8,7 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,47 +19,50 @@ import java.util.List;
 public abstract class LuceneIndex {
 
     private static final int NUM_OF_RESULTS = 1500;
-    private Directory index;
+    private Directory directory;
     private IndexSearcher indexSearcher;
     private IndexWriter writer;
-    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/"; //"/home/orasraf/gitprojects/jngram/tools/luceneIndex/";//
+    private static final String ROOT_DIRECTORY = "./tools/luceneIndex/";
 
     abstract protected String getOutputIndexDirectory();
     abstract protected void createIndex() throws Exception;
     /**
-     * To clean the index, just remove its directory. If the directory
-     * exists, the index is not recreated.
+     * To clean the directory, just remove its directory. If the directory
+     * exists, the directory is not recreated.
      * @throws Exception
      */
     public LuceneIndex() {
-
-        Path indexPath =Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory());
-        InitializeSearcher(indexPath);
+        Path indexPath = Paths.get(ROOT_DIRECTORY + getOutputIndexDirectory());
+        initializeSearcher(indexPath);
     }
 
-    //To use when the index is already exist and not solution relative (example- spark)
-    public LuceneIndex(String indexPathString)
-    {
+    //To use when the directory is already exist and not solution relative (example- spark)
+    public LuceneIndex(String indexPathString) {
         Path indexPath= Paths.get(indexPathString);
-        InitializeSearcher(indexPath);
+        initializeSearcher(indexPath);
     }
 
-    private void InitializeSearcher(Path indexPath) {
+    private void initializeSearcher(Path indexPath) {
         IndexReader reader = null;
+        StopWatch timer = new StopWatch();
         try {
-            index = FSDirectory.open(indexPath);
-            reader = DirectoryReader.open(index);
+            timer.start();
+            System.out.println("START BUILDING INDEX " + timer.toString());
+            //directory = FSDirectory.open(indexPath);
+            directory = new RAMDirectory();
+            reader = DirectoryReader.open(directory);
         } catch (Exception e) {
             IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
             try {
-                writer = new IndexWriter(index, config);
+                writer = new IndexWriter(directory, config);
                 createIndex();
-                reader = DirectoryReader.open(index);
+                reader = DirectoryReader.open(directory);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
         indexSearcher = new IndexSearcher(reader);
+        System.out.println("FINISH BUILDING INDEX " + timer.toString());
     }
 
 

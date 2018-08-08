@@ -17,7 +17,7 @@ public class PsukimTagger implements NgramTagger {
     private JbsTanachIndex tanach;
 
     public PsukimTagger() {
-        tanach = new JbsTanachIndex();
+        tanach = JbsTanachIndex.instance();
     }
 
     public List<String> tag(Ngram ng) {

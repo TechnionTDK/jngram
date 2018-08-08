@@ -18,6 +18,7 @@ import static org.apache.commons.lang3.StringUtils.getLevenshteinDistance;
  * such matches.
  */
 public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
+    private JbsTanachIndex index = JbsTanachIndex.instance();
 
     @Override
     protected boolean isCandidate(Ngram ng) {
@@ -29,7 +30,6 @@ public class RemoveNonEheviFuzzyMatches extends NgramManipulation {
         List<String> removedTags = new ArrayList<>();
         for (String tag : ng.getTags()) {
             // get the text of the pasuk
-            JbsTanachIndex index = new JbsTanachIndex();
             List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
             String pasuk = docs.get(0).get("text");
 

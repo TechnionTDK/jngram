@@ -27,12 +27,12 @@ public class CalcAndFilterByEditDistance extends NgramManipulation {
     protected boolean isCandidate(Ngram ng) {
         return ng.hasTags();
     }
+    private JbsTanachIndex index = JbsTanachIndex.instance();
 
     @Override
     protected void manipulate(NgramDocument doc, Ngram ng) {
         for (String tag : ng.getTags()) {
             // get the text of the pasuk
-            JbsTanachIndex index = new JbsTanachIndex();
             List<org.apache.lucene.document.Document> docs = index.searchExactInUri(tag);
             String pasuk = docs.get(0).get("text");
 
