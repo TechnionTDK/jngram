@@ -12,8 +12,8 @@ import java.io.*;
 
 
 public class BavliMekorot {
-    private static final int MINIMAL_NGRAM_LENGTH = 2;
-    private static final int MAXIMAL_NGRAM_LENGTH = 20;
+    public static final int MINIMAL_NGRAM_LENGTH = 2;
+    public static final int MAXIMAL_NGRAM_LENGTH = 20;
     private static final int MAXIMAL_HOLE_SIZE = 8;
     private static int quoteProbablyNoisyThreshold = 5;
 
@@ -94,6 +94,7 @@ public class BavliMekorot {
         doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
         doc.add(new EliminateNoise(quoteProbablyNoisyThreshold));
         doc.add(new EliminateDuplicateNgrams());
+        doc.add(new BavliRemoveNonEhevi());
         return doc;
     }
 }

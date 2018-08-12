@@ -2,12 +2,12 @@ package apps.jbsmekorot;
 
 import apps.jbsmekorot.manipulations.*;
 import jngram.manipulations.MergeToMaximalNgrams;
+import jngram.manipulations.RemoveNonEheviFuzzyMatches;
 import org.apache.commons.lang3.time.StopWatch;
 import jngram.NgramDocument;
 import jngram.Ngram;
 import jngram.io.*;
 import jngram.manipulations.RemoveTagsInContainedNgrams;
-import org.junit.rules.Stopwatch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -138,8 +138,8 @@ public class JbsMekorot {
 //        these are the heaviest methods, can we do something here????
         doc.add(new CalcAndFilterByEditDistance());
         System.out.println("AFTER CalcAndFilterByEditDistance " + timer.toString());
-        doc.add(new RemoveNonEheviFuzzyMatches());
-        System.out.println("AFTER RemoveNonEheviFuzzyMatches " + timer.toString());
+        doc.add(new PsukimRemoveNonEhevy());
+        System.out.println("AFTER PsukimRemoveNonEhevy " + timer.toString());
 
         // Mark "certain" tags. We have different levels of certainty (see class Certain).
         doc.add(new MarkCertainBySize());
