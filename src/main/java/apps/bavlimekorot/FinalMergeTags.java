@@ -5,6 +5,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import jngram.Ngram;
 import jngram.NgramDocument;
 import jngram.NgramDocumentManipulation;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class FinalMergeTags extends NgramDocumentManipulation {
     public void manipulate(NgramDocument doc) {
         Iterator iter = doc.getAllNgrams().iterator();
         int mergedStart, mergedEnd;
+        List<String> mergedNgTags, tagsToAdd;
         while(true) {
             Ngram ngram;
             do {
@@ -37,7 +40,18 @@ public class FinalMergeTags extends NgramDocumentManipulation {
                 mergedEnd = Math.max(ngram.getEnd(), adjNg.getEnd());
                 try {
                     Ngram mergedNg = doc.getNgram(mergedStart, mergedEnd);
-                    mergedNg.addTags(sharedTags);
+                    mergedNgTags = mergedNg.getTags();
+                    tagsToAdd = new ArrayList<>(sharedTags);
+                    for(String tag : sharedTags) {
+                        if(mergedNgTags.contains(tag)) {
+                            tagsToAdd.remove(tag);
+                        }
+                    }
+                    if(!tagsToAdd.isEmpty()) {
+                        mergedNg.addTags(tagsToAdd);
+                        ngram.removeTags(tagsToAdd);
+                        adjNg.removeTags(tagsToAdd);
+                    }
                 }
                 catch(DocumentException de) {
                     continue;

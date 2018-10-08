@@ -13,9 +13,9 @@ import java.io.*;
 
 public class BavliMekorot {
     public static final int MINIMAL_NGRAM_LENGTH = 2;
-    public static final int MAXIMAL_NGRAM_LENGTH = 20;
+    public static final int MAXIMAL_NGRAM_LENGTH = 25;
     private static final int MAXIMAL_HOLE_SIZE = 8;
-    private static int quoteProbablyNoisyThreshold = 5;
+    private static int quoteProbablyNoisyThreshold = 4;
 
     public BavliMekorot() {}
 
@@ -91,10 +91,9 @@ public class BavliMekorot {
         doc.add(new EliminateRashiAndTosafot());
         doc.add(new MergeToMaximalNgrams());
         doc.add(new RemoveTagsInContainedNgrams());
+        doc.add(new BavliRemoveNonEhevi());
         doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
         doc.add(new EliminateNoise(quoteProbablyNoisyThreshold));
-        doc.add(new EliminateDuplicateNgrams());
-        doc.add(new BavliRemoveNonEhevi());
         return doc;
     }
 }

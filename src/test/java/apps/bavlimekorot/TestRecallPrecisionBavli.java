@@ -8,16 +8,16 @@ import jngram.NgramDocument;
 import jngram.io.SpantheraIO;
 import jngram.io.Subject;
 import jngram.io.TaggerInput;
-
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class TestRecallPrecisionBavli {
 
-    private static final String LABELED = "src/main/resources/labeledPsukimData/" + "mesilatyesharim-labeled-bavli.json";
+    private static final String LABELED = "src/main/resources/labeledPsukimData/" + "mishnetorah-2-labeled.json";
 
     @Test
-    public void testMesilatYesharimPerek() {
+    public void testMishneTorahPerek() {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED);
         assertNotNull(inputJson);
         List<Subject> subjects = inputJson.getSubjects();
@@ -25,7 +25,7 @@ public class TestRecallPrecisionBavli {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(0));
+        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(1));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();
@@ -35,7 +35,7 @@ public class TestRecallPrecisionBavli {
     }
 
 //    @Test
-//    public void testMesilatYesharimAll() {
+//    public void testMishneTorahAll() {
 //        TaggerInput inputJson = SpantheraIO.readInputJson(LABELED);
 //        assertNotNull(inputJson);
 //        List<Subject> subjects = inputJson.getSubjects();
