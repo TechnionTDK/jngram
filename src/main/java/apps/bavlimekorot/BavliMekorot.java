@@ -88,12 +88,13 @@ public class BavliMekorot {
     public static NgramDocument primaryManipulations(NgramDocument doc) {
         doc.format(new BavliNgramFormatter());
         doc.add(new BavliTagger());
-        doc.add(new EliminateRashiAndTosafot());
-        doc.add(new MergeToMaximalNgrams());
-        doc.add(new RemoveTagsInContainedNgrams());
-        doc.add(new BavliRemoveNonEhevi());
-        doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
-        doc.add(new EliminateNoise(quoteProbablyNoisyThreshold));
+//        doc.add(new EliminateRashiAndTosafot());
+//        doc.add(new MergeToMaximalNgrams());
+//        doc.add(new RemoveTagsInContainedNgrams());
+//        doc.add(new BavliRemoveNonEhevi());
+//        doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
+//        doc.add(new EliminateNoise(quoteProbablyNoisyThreshold));
+//        doc.add(new RemoveTagsInContainedNgrams());
         return doc;
     }
 }
