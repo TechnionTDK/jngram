@@ -10,9 +10,15 @@ import jngram.NgramTagger;
 import org.apache.lucene.document.Document;
 
 public class BavliTagger implements NgramTagger {
+
     private JbsBavliIndex index = new JbsBavliIndex();
+    private int candidateSize;
 
     public BavliTagger() {}
+
+    public BavliTagger(int candidateSize) {
+        this.candidateSize = candidateSize;
+    }
 
     public List<String> tag(Ngram s) {
         String text = s.getTextFormatted();
@@ -52,6 +58,6 @@ public class BavliTagger implements NgramTagger {
     }
 
     public boolean isCandidate(Ngram ngram) {
-        return ngram.size() == 2;
+        return ngram.size() == candidateSize;
     }
 }

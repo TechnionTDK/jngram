@@ -1,6 +1,7 @@
 package apps.bavlimekorot;
 
 import apps.jbsmekorot.JbsMekorot;
+import apps.jbsmekorot.manipulations.ResolveOverlappingNgramsWithDifferentTags;
 import jngram.NgramDocument;
 import jngram.io.TaggedSubject;
 import jngram.manipulations.MergeToMaximalNgrams;
@@ -12,17 +13,22 @@ import java.io.*;
 
 
 public class BavliMekorot {
-    public static final int MINIMAL_NGRAM_LENGTH = 2;
-    public static final int MAXIMAL_NGRAM_LENGTH = 25;
-    private static final int MAXIMAL_HOLE_SIZE = 8;
+    public static final int MINIMAL_NGRAM_LENGTH = 3;
+    public static int MAXIMAL_NGRAM_LENGTH = 40;
+    private static final int MAXIMAL_HOLE_SIZE = 10;
     private static int quoteProbablyNoisyThreshold = 4;
 
     public BavliMekorot() {}
 
     public static List<Tag> findTextMekorot(String text, boolean printMatches) {
         quoteProbablyNoisyThreshold = Math.min(quoteProbablyNoisyThreshold, text.split(" ").length - 1);
+        MAXIMAL_NGRAM_LENGTH = Math.max(MAXIMAL_NGRAM_LENGTH, text.split("\\s+").length / 10);
         NgramDocument doc = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
-        primaryManipulations(doc);
+        primaryManipulations(doc, quoteProbablyNoisyThreshold, true);
+        if(doc.getAllNgramsWithTags().isEmpty()) {
+            doc = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
+            primaryManipulations(doc, quoteProbablyNoisyThreshold * 4, false);
+        }
         TaggedSubject taggedSubject = JbsMekorot.getTaggedSubject(doc, text);
         if(printMatches) {
             printTaggedSubject(taggedSubject);
@@ -33,9 +39,14 @@ public class BavliMekorot {
     public static NgramDocument findSubjectMekorot(Subject s) {
         String text = s.getText();
         String uri = s.getUri();
+        MAXIMAL_NGRAM_LENGTH = Math.max(MAXIMAL_NGRAM_LENGTH, text.split("\\s+").length / 5);
         if (text != null && uri != null) {
             NgramDocument document = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
-            primaryManipulations(document);
+            primaryManipulations(document, quoteProbablyNoisyThreshold, true);
+            if(document.getAllNgramsWithTags().isEmpty()) {
+                document = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
+                primaryManipulations(document, quoteProbablyNoisyThreshold * 4, false);
+            }
             return document;
         } else {
             System.out.println("Subject " + s.getUri() + " has not text or uri");
@@ -85,16 +96,33 @@ public class BavliMekorot {
     }
 
 
-    public static NgramDocument primaryManipulations(NgramDocument doc) {
+    public static NgramDocument primaryManipulations(NgramDocument doc, int quoteNoisyThreshold,  boolean removeNonEheviMode) {
+        // Problematics:
+        // 6 - really hard to deal with
+        // 7 - Is there a quotation there? neither me nor the algorithm found anyting.
+        // 10 - A pretty good catch, but still a problem. suggestion to solve the problem: remove non ehevi fuzzy to before the remove in contained. problem is it's super pricy in terms of run time.
+        // 11 - many marginal findings.
+        // 13 - too memory heavy, but seems OK.
+        // 15 - difficult to know where to put %s.
+        // 16 - 1 noisy quote I don't know what to do with.
+        // 17 - marginal as well.
+        // 21-24 - difficult and marginal.
+        //Oren, why does the replacements of Bet Shamai and Rabbi in the formatter don't work?
         doc.format(new BavliNgramFormatter());
-        doc.add(new BavliTagger());
-//        doc.add(new EliminateRashiAndTosafot());
-//        doc.add(new MergeToMaximalNgrams());
-//        doc.add(new RemoveTagsInContainedNgrams());
-//        doc.add(new BavliRemoveNonEhevi());
-//        doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
-//        doc.add(new EliminateNoise(quoteProbablyNoisyThreshold));
-//        doc.add(new RemoveTagsInContainedNgrams());
+        //Oren, why does it not recognize the % in many of the examples?
+        doc.add(new BavliTagger(MINIMAL_NGRAM_LENGTH));
+        doc.add(new EliminateRashiTosafotRashbam());
+        doc.add(new MergeToMaximalNgrams());
+        doc.add(new RemoveTagsInContainedNgrams());
+        if(removeNonEheviMode) {
+            doc.add(new BavliRemoveNonEhevi());
+        }
+        doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
+        doc.add(new removeLowLengthMatches(quoteNoisyThreshold));
+        doc.add(new removeMarginalLengthMatches(quoteNoisyThreshold * 2));
+        doc.add(new removeMatchBlankMatchTags(MINIMAL_NGRAM_LENGTH));
+        //Oren, the following manipulation doesn't work when starting with 3-grams.
+//        doc.add(new ResolveOverlappingNgramsWithDifferentTags());
         return doc;
     }
 }

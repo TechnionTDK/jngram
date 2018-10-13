@@ -5,11 +5,11 @@ import jngram.NgramDocument;
 import jngram.NgramDocumentManipulation;
 import java.util.Iterator;
 
-public class EliminateNoise extends NgramDocumentManipulation {
+public class removeLowLengthMatches extends NgramDocumentManipulation {
 
     private static int QUOTE_PROBABLY_NOISY_THRESHOLD;
 
-    public EliminateNoise(int threshold) {
+    public removeLowLengthMatches(int threshold) {
         QUOTE_PROBABLY_NOISY_THRESHOLD = threshold;
     }
 

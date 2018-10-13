@@ -6,7 +6,10 @@ import jngram.NgramTagger;
 import jngram.manipulations.RemoveNonEheviFuzzyMatches;
 
 public class BavliRemoveNonEhevi extends RemoveNonEheviFuzzyMatches {
+
     private JbsIndex index = new JbsBavliIndex();
+    private static int MAXIMAL_NGRAM_LENGTH;
+
     @Override
     protected JbsIndex getIndex() {
         return index;

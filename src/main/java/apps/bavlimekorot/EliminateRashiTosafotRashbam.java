@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class EliminateRashiAndTosafot extends NgramDocumentManipulation {
+public class EliminateRashiTosafotRashbam extends NgramDocumentManipulation {
 
-    public EliminateRashiAndTosafot() {}
+    public EliminateRashiTosafotRashbam() {}
 
     public void manipulate(NgramDocument doc) {
         Iterator iter = doc.getAllNgrams().iterator();
@@ -28,7 +28,8 @@ public class EliminateRashiAndTosafot extends NgramDocumentManipulation {
             for(String tag : ngram.getTags()) {
                 boolean isTagRashi = tag.startsWith("jbr:text-bavli-rashi");
                 boolean isTagTosafot = tag.startsWith("jbr:text-bavli-tosafot");
-                if(isTagRashi || isTagTosafot) {
+                boolean isTagRashbam = tag.startsWith("jbr:text-bavli-rashbam");
+                if(isTagRashi || isTagTosafot || isTagRashbam) {
                     tagsToRemove.add(tag);
                 }
             }
