@@ -8,20 +8,21 @@ import jngram.manipulations.RemoveNonEheviFuzzyMatches;
 public class BavliRemoveNonEhevi extends RemoveNonEheviFuzzyMatches {
 
     private JbsIndex index = new JbsBavliIndex();
-    private static int MAXIMAL_NGRAM_LENGTH;
 
     @Override
     protected JbsIndex getIndex() {
         return index;
     }
 
+    // We don't want to remove tags from very long fuzzy matches because they are probably correct.
+    // So we only remove short non Ehevy fuzzy matches
     @Override
     protected int getMaximalNgramSize() {
-        return BavliMekorot.MAXIMAL_NGRAM_LENGTH;
+        return BavliMekorot.MINIMAL_NGRAM_LENGTH * 4;
     }
 
     @Override
     protected int getMinimalNgramSize() {
-        return BavliMekorot.MINIMAL_NGRAM_LENGTH;
+        return BavliMekorot.MINIMAL_NGRAM_LENGTH * 4;
     }
 }

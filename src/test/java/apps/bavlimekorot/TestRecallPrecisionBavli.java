@@ -37,7 +37,7 @@ public class TestRecallPrecisionBavli {
         RecallPrecision calc = new RecallPrecision();
 
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(22));
+        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(2));
 
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();
