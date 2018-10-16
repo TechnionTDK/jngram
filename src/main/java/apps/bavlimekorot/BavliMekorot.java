@@ -15,7 +15,7 @@ import java.io.*;
 public class BavliMekorot {
     public static final int MINIMAL_NGRAM_LENGTH = 3;
     public static int MAXIMAL_NGRAM_LENGTH = 100;
-    private static final int MAXIMAL_HOLE_SIZE = 10;
+    private static final int MAXIMAL_HOLE_SIZE = 3;
     private static int quoteProbablyNoisyThreshold = 4;
 
     public BavliMekorot() {}
