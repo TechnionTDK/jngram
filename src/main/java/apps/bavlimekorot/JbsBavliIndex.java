@@ -18,6 +18,7 @@ public class JbsBavliIndex extends JbsIndex implements Serializable {
      */
     public JbsBavliIndex() {
         super();
+        NUM_OF_RESULTS = 2500;
     }
 
     public JbsBavliIndex(String pathToIndex){

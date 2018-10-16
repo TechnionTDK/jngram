@@ -9,6 +9,7 @@ import jngram.io.SpantheraIO;
 import jngram.io.Subject;
 import jngram.io.TaggerInput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jngram.io.Tag;
 
@@ -26,6 +27,25 @@ public class TestRecallPrecisionBavli {
 //        // In the next line the assertion fails although the string is definitely a quote from 1-9-2.
 //        assertTrue(results.contains(new Tag("0-1", "jbr:text-bavli-1-9-2")));
 //        return;
+//    }
+
+    @Test
+    public void bug1() {
+        NgramDocument doc;
+        doc = new NgramDocument("יהושע אומר כל מיני דברים", 2, 2);
+        doc.format(new BavliNgramFormatter());
+        doc.add(new BavliTagger(2));
+        assertTrue(doc.getNgram(0, 1).getSortedTags().contains("jbr:text-bavli-13-108-1"));
+        assertTrue(doc.getNgram(0, 1).getSortedTags().contains("jbr:text-bavli-1-9-2"));
+    }
+
+//    @Test
+//    public void getDocumentByText() {
+//        JbsBavliIndex index = new JbsBavliIndex();
+//        //Arrays.asList(new Integer[]{2, 1})
+//        List<org.apache.lucene.document.Document> result = index.searchFuzzyInText("יהושע אומר", 2);
+//        System.out.println(result.size() + " results:");
+//        index.printDocs(result);
 //    }
 
     @Test

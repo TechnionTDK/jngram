@@ -18,7 +18,7 @@ import java.util.List;
 
 public abstract class LuceneIndex {
 
-    private static final int NUM_OF_RESULTS = 1500;
+    protected static int NUM_OF_RESULTS = 1500;
     private Directory directory;
     private IndexSearcher indexSearcher;
     private IndexWriter writer;
