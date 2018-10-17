@@ -11,9 +11,6 @@ import apps.jbsmekorot.JbsIndex;
 
 public class JbsBavliIndex extends JbsIndex implements Serializable {
     /**
-     * To clean the index, just remove its directory. If the directory
-     * exists, the index is not recreated.
-     *
      * @throws Exception
      */
     public JbsBavliIndex() {

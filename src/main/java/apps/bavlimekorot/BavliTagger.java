@@ -26,11 +26,7 @@ public class BavliTagger implements NgramTagger {
             return new ArrayList();
 
         List<Integer> maxEdits = this.getMaxEdits(s);
-//        List<Document> docs2 = new ArrayList();
         List<Document> docs = this.index.searchFuzzyInText(text, maxEdits);
-//        if (s.getStringExtra("adnut_text") != null) {
-//            docs2 = this.index.searchFuzzyInText(s.getStringExtra("adnut_text"), maxEdits);
-//        }
 
         Set<String> result = new HashSet();
         for (Document doc : docs)

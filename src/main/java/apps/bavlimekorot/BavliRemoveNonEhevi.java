@@ -23,6 +23,6 @@ public class BavliRemoveNonEhevi extends RemoveNonEheviFuzzyMatches {
 
     @Override
     protected int getMinimalNgramSize() {
-        return BavliMekorot.MINIMAL_NGRAM_LENGTH * 4;
+        return BavliMekorot.MINIMAL_NGRAM_LENGTH;
     }
 }
