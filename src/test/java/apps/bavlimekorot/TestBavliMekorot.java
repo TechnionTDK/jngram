@@ -23,7 +23,7 @@ public class TestBavliMekorot {
     public void testMishneTorahPerek() {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED_MISHNE_TORAH);
         assertNotNull(inputJson);
-        _testPerekAux(inputJson);
+        _testPerekAux(inputJson, 15);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TestBavliMekorot {
     public void testMesilatYesharimPerek() {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED_MESILAT_YESHARIM);
         assertNotNull(inputJson);
-        _testPerekAux(inputJson);
+        _testPerekAux(inputJson, 0);
     }
 
     @Test
@@ -47,11 +47,11 @@ public class TestBavliMekorot {
         _testAllAux(inputJson);
     }
 
-    public void _testPerekAux(TaggerInput inputJson) {
+    public void _testPerekAux(TaggerInput inputJson, int whichText) {
         List<Subject> subjects = inputJson.getSubjects();
         RecallPrecision calc = new RecallPrecision();
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(0));
+        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(whichText));
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();
         RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sd);

@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class removeMarginalLengthTagsIfManyMatches extends NgramDocumentManipulation {
 
     private static int LENGTH_THRESHOLD;
-    private static final int MATCHES_THRESHOLD = 2;
+    private static final int MATCHES_THRESHOLD = 4;
 
     public removeMarginalLengthTagsIfManyMatches(int threshold) {
         LENGTH_THRESHOLD = threshold;
