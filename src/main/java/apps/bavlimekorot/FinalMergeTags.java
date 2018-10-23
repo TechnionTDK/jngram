@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+/**
+ * In order to perform the Bavli quotation recognition task well, it is not enough to merge small overlapping
+ * quotes into their maximal counterparts. We all need to merge quotes of the same Bavli chapter that has a few
+ * spaces (irrelevant words) between them. So, for example, if the two quotes "a b c" and "d e f" appear in
+ * Bavli-1-9-2, and in a jewish source the text "a b c *a few words* d e f" appears, we would like to tag the entire
+ * text as a quote from Bavli-1-9-2. This manipulation does exactly that. It allows for MAXIMUM_HOLE_SIZE words
+ * between two quotes and, if they have shared tags, merges them so the overarching n-gram contains the shared tags.
+ */
 public class FinalMergeTags extends NgramDocumentManipulation {
 
     private static int MAXIMUM_HOLE_SIZE;

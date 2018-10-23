@@ -6,7 +6,7 @@ import jngram.NgramDocument;
 import jngram.NgramDocumentManipulation;
 import java.util.List;
 
-/*
+/**
 This manipulation deals with the following (pretty common) scenario of the algorihm:
 Assume the 3 word quote: "aaa bbb ccc" appears in the Talmud Bavli.
 Now assume a jewish source has a text that says: "aaa bbb ccc *some words* aaa bbb ccc".
@@ -30,6 +30,10 @@ public class removeMatchBlankMatchTags extends NgramDocumentManipulation {
                 try {
                     startNg = doc.getNgram(ngram.getStart(), ngram.getStart() + i - 1);
                     endNg = doc.getNgram(ngram.getEnd() - i + 1, ngram.getEnd());
+                    boolean isSameNgram = startNg.getStart() == endNg.getStart() && startNg.getEnd() == endNg.getEnd();
+                    if(isSameNgram) {
+                        continue;
+                    }
                     if(startNg.getTextFormatted().equals(endNg.getTextFormatted())) {
                         ngram.clearTags();
                     }

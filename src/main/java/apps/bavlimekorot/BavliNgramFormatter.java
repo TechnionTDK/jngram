@@ -3,6 +3,10 @@ package apps.bavlimekorot;
 import jngram.Ngram;
 import jngram.NgramFormatter;
 
+/**
+ * Here we format the text in order to get rid of unwanted characters that don't appear in the
+ * original Talmud Bavli.
+ */
 public class BavliNgramFormatter implements NgramFormatter{
 
     public BavliNgramFormatter() {}

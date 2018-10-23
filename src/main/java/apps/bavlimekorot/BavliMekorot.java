@@ -9,20 +9,22 @@ import jngram.io.Subject;
 public class BavliMekorot {
 
     public static final int MINIMAL_NGRAM_LENGTH = 3;
-    public static int MAXIMAL_NGRAM_LENGTH = 100;
+    public static final int MAXIMAL_NGRAM_LENGTH = 50;
     private static final int MAXIMAL_HOLE_SIZE = 3;
-    private static int quoteProbablyNoisyThreshold = 4;
+    private static int QUOTE_PROBABLY_TOO_SHORT_VALUE = 4;
+    private static final int NUM_MATCHES_THRESHOLD_FOR_MARGINAL_LENGTH_QUOTES = 4;
+
 
     public BavliMekorot() {}
 
-    public static NgramDocument findTextMekorot(String text) {
-        quoteProbablyNoisyThreshold = Math.min(quoteProbablyNoisyThreshold, text.split(" ").length - 1);
+    public static NgramDocument findSubjectMekorot(String text) {
+        QUOTE_PROBABLY_TOO_SHORT_VALUE = Math.min(QUOTE_PROBABLY_TOO_SHORT_VALUE, text.split(" ").length - 1);
         NgramDocument doc = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
-        primaryManipulations(doc, quoteProbablyNoisyThreshold, true);
-        if(doc.getAllNgramsWithTags().isEmpty()) {
-            doc = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
-            primaryManipulations(doc, quoteProbablyNoisyThreshold * 2, false);
-        }
+        primaryManipulations(doc, QUOTE_PROBABLY_TOO_SHORT_VALUE, true);
+//        if(doc.getAllNgramsWithTags().isEmpty()) {
+//            doc = new NgramDocument(text, MINIMAL_NGRAM_LENGTH, MAXIMAL_NGRAM_LENGTH);
+//            primaryManipulations(doc, quoteProbablyNoisyThreshold * 2, false);
+//        }
         return doc;
     }
 
@@ -30,7 +32,7 @@ public class BavliMekorot {
         String text = s.getText();
         String uri = s.getUri();
         if (text != null && uri != null) {
-            return findTextMekorot(text);
+            return findSubjectMekorot(text);
         } else {
             System.out.println("Subject " + s.getUri() + " has not text or uri");
             return null;
@@ -43,13 +45,14 @@ public class BavliMekorot {
         doc.add(new BavliTagger(MINIMAL_NGRAM_LENGTH));
         doc.add(new EliminateRashiTosafotRashbam());
         doc.add(new MergeToMaximalNgrams());
-        doc.add(new RemoveTagsInContainedNgrams());
         doc.add(new FinalMergeTags(MAXIMAL_HOLE_SIZE));
-        if(removeNonEheviMode) {
-            doc.add(new BavliRemoveNonEhevi());
-        }
+        doc.add(new RemoveTagsInContainedNgrams());
+//        if(removeNonEheviMode) {
+            // BavliRemoveNonEhevy should be moved here in case the mechanism of removeNonEhevyMode is being uncommented.
+//        }
+        doc.add(new BavliRemoveNonEhevi());
         doc.add(new removeLowLengthMatches(quoteNoisyThreshold));
-        doc.add(new removeMarginalLengthTagsIfManyMatches(quoteNoisyThreshold * 2));
+        doc.add(new removeMarginalLengthTagsIfManyMatches(quoteNoisyThreshold * 2, NUM_MATCHES_THRESHOLD_FOR_MARGINAL_LENGTH_QUOTES));
         doc.add(new removeMatchBlankMatchTags(MINIMAL_NGRAM_LENGTH));
         return doc;
     }
