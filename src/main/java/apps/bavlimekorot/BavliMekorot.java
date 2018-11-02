@@ -51,9 +51,9 @@ public class BavliMekorot {
             // BavliRemoveNonEhevy should be moved here in case the mechanism of removeNonEhevyMode is being uncommented.
 //        }
         doc.add(new BavliRemoveNonEhevi());
-        doc.add(new removeLowLengthMatches(quoteNoisyThreshold));
-        doc.add(new removeMarginalLengthTagsIfManyMatches(quoteNoisyThreshold * 2, NUM_MATCHES_THRESHOLD_FOR_MARGINAL_LENGTH_QUOTES));
-        doc.add(new removeMatchBlankMatchTags(MINIMAL_NGRAM_LENGTH));
+        doc.add(new RemoveLowLengthMatches(quoteNoisyThreshold));
+        doc.add(new RemoveMarginalLengthTagsIfManyMatches(quoteNoisyThreshold * 2, NUM_MATCHES_THRESHOLD_FOR_MARGINAL_LENGTH_QUOTES));
+        doc.add(new RemoveMatchBlankMatchTags(MINIMAL_NGRAM_LENGTH));
         return doc;
     }
 }
