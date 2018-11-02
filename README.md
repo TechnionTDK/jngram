@@ -152,3 +152,15 @@ java -cp target/jngram-1.0-jar-with-dependencies.jar apps.jbsmekorot.JbsMekorot 
 ```
 
 The output (in json format) will be sent to the standard output.
+
+## Using The Bavli Quotation Recognition System
+The jngram module allows not only recognizing biblical quotes in a text,
+but also quotes from the Talmud Bavli.
+
+The corresponding class is BavliMekorot, and in order to use its algorithm one needs to call one of the static methods:
+1. BavliMekorot.findTextMekorot(String text)
+2. BavliMekorot.findSubjectMekorot(Subject s)
+
+Both work the same way, and the overloaing is used only to differentiate the type of input.
+
+Both methods return an NgramDocument, formatted tagged and manipulated in order to perform the given task.
