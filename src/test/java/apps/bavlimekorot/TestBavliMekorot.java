@@ -1,7 +1,6 @@
 package apps.bavlimekorot;
 
 import apps.jbsmekorot.RecallPrecision;
-import apps.bavlimekorot.BavliMekorot;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import jngram.NgramDocument;
@@ -9,9 +8,7 @@ import jngram.io.SpantheraIO;
 import jngram.io.Subject;
 import jngram.io.TaggerInput;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import jngram.io.Tag;
 
 
 public class TestBavliMekorot {
@@ -51,7 +48,7 @@ public class TestBavliMekorot {
         List<Subject> subjects = inputJson.getSubjects();
         RecallPrecision calc = new RecallPrecision();
         // find psukim in first subject and calculate recall & precision
-        NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(whichText));
+        NgramDocument sd = BavliMekorot.findBavliMekorot(subjects.get(whichText));
         RecallPrecision.RecallResult recallResult = calc.getRecall(sd);
         recallResult.printReport();
         RecallPrecision.PrecisionlResult precisionResult = calc.getPrecision(sd);
@@ -63,7 +60,7 @@ public class TestBavliMekorot {
         RecallPrecision calc = new RecallPrecision();
         List<NgramDocument> sds = new ArrayList<>();
         for (int i=0; i<subjects.size(); i++) {
-            NgramDocument sd = BavliMekorot.findSubjectMekorot(subjects.get(i));
+            NgramDocument sd = BavliMekorot.findBavliMekorot(subjects.get(i));
             sds.add(sd);
         }
         RecallPrecision.MultPrecisionResult multPrecisionResult = calc.getPrecision(sds);
