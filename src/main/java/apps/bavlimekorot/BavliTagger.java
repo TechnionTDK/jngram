@@ -9,6 +9,11 @@ import jngram.Ngram;
 import jngram.NgramTagger;
 import org.apache.lucene.document.Document;
 
+
+/**
+ * Here we iterate over all 3-grams, and tag them accordingly
+ * using the Lucene index.
+ */
 public class BavliTagger implements NgramTagger {
 
     private JbsBavliIndex index = new JbsBavliIndex();

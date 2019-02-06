@@ -5,6 +5,13 @@ import jngram.NgramDocument;
 import jngram.NgramDocumentManipulation;
 import java.util.Iterator;
 
+
+/**
+ * This manipulation deals with very short quotes (3 or 4 words long or so) that are probably noise.
+ * The Bavli quotation recognition algorithm assumes that n-grams this short are simply too unreliable
+ * to take into account. Thus, we simply remove all tags from n-grams with length of up to
+ * and including QUOTE_PROBABLY_NOISY_THRESHOLD
+ */
 public class RemoveLowLengthMatches extends NgramDocumentManipulation {
 
     private static int QUOTE_PROBABLY_NOISY_THRESHOLD;

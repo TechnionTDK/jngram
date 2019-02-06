@@ -20,7 +20,7 @@ public class TestBavliMekorot {
     public void testMishneTorahPerek() {
         TaggerInput inputJson = SpantheraIO.readInputJson(LABELED_MISHNE_TORAH);
         assertNotNull(inputJson);
-        _testPerekAux(inputJson, 15);
+        _testPerekAux(inputJson, 0);
     }
 
     @Test

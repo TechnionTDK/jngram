@@ -30,6 +30,10 @@ public class RemoveMatchBlankMatchTags extends NgramDocumentManipulation {
                 try {
                     startNg = doc.getNgram(ngram.getStart(), ngram.getStart() + i - 1);
                     endNg = doc.getNgram(ngram.getEnd() - i + 1, ngram.getEnd());
+                    boolean isSameNgram = startNg.getStart() == endNg.getStart() && startNg.getEnd() == endNg.getEnd();
+                    if(isSameNgram) {
+                        continue;
+                    }
                     if(startNg.getTextFormatted().equals(endNg.getTextFormatted())) {
                         ngram.clearTags();
                     }

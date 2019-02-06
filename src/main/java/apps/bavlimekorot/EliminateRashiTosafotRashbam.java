@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+/**
+ * Currently, the Bavli JSON file contains, in addition to the relevant bavli source quotes,
+ * the entire Bavli-Tosafot, Bavli-Rashi-Tosafot, and also parts of the Rashbam-Tosafot.
+ * The lucene index ia created out of all of these texts, and when we search the index for a match,
+ * we also find results from these unwanted sources. This manipulation simply removes all tags that
+ * are not from the proper original Bavli Talmud.
+ */
 public class EliminateRashiTosafotRashbam extends NgramDocumentManipulation {
 
     public EliminateRashiTosafotRashbam() {}
